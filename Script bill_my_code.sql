@@ -1,0 +1,1 @@
+CREATE SCHEMA `bill_my_code` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
