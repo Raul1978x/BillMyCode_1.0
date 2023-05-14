@@ -14,12 +14,15 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author agust
  */
-@Data
+@Getter
+@Setter
 @Entity
 public class Empresa {
 
