@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,26 +21,56 @@ public class DeveloperServicio {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    /**
+     * Metodo listDevelopers() devuelve la lista de todos los Developers.
+     * @return List<Developers>
+     */
     @Transactional(readOnly = true)
-    public List<Developer> listaDevelopers() {
+    public List<Developer> listDevelopers() {
         return repositorio.findAll();
     }
 
+    /**
+     * Metodo searchDeveloperById(id) devuelve el Developer según su id.
+     * @param id
+     * @return Developer
+     */
     @Transactional(readOnly = true)
-    public Developer developerById(Long id) {
+    public Developer seachDeveloperById(Long id) {
         return repositorio.findById(id).get();
     }
 
+    /**
+     * Método deleteDeveloperById(id) borra Developer según su id.
+     * @param id
+     */
     @Transactional
-    public void borrarDeveloperById(Long id) {
+    public void deleteDeveloperById(Long id) {
         repositorio.deleteById(id);
     }
 
+    /**
+     * Método createDeveloper(params) crea un nuevo Developers
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param password
+     * @param fechaNac
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     * @param empresas
+     * @param contador
+     * @throws MiException
+     */
     @Transactional
-    public void crearDeveloper(MultipartFile archivo, String nombre, String apellido, String email, String password,
-                               LocalDate fechaNac, Double salario, String seniority, String especialidad,
-                               String descripcion, Comentario comentario, List<Empresa> empresas, Contador contador) throws MiException {
-        validar(nombre, apellido, email, password, fechaNac);
+    public void createDeveloper(MultipartFile archivo, String nombre, String apellido, String email, String password,
+                                Date fechaNac, Double salario, String seniority, String especialidad,
+                                String descripcion, Comentario comentario, List<Empresa> empresas, Contador contador) throws MiException {
+        validate(nombre, apellido, email, password, fechaNac);
 
         Developer developer = new Developer();
 
@@ -49,6 +79,7 @@ public class DeveloperServicio {
         developer.setEmail(email);
         developer.setPassword(password);
         developer.setSalario(salario);
+        developer.setFechaNacimiento(fechaNac);
         developer.setSeniority(seniority);
         developer.setEspecialidad(especialidad);
         developer.setDescripcion(descripcion);
@@ -64,30 +95,28 @@ public class DeveloperServicio {
         repositorio.save(developer);
     }
 
+    /**
+     * getDeveloperBySeniority(seniority) busca la lista de todos los
+     * Developers con el mismo grado de seniority
+     * @param seniority
+     * @return List<Developer>
+     */
     @Transactional(readOnly = true)
     public List<Developer> getDevelopersBySeniority(String seniority) {
         return repositorio.searchBySeniority(seniority);
     }
 
-    /*  public Developer crearDeveloper (MultipartFile archivo, Developer developer)
-      throws MiException {
-
-            developer.setNombre(developer.getNombre());
-            developer.setApellido(developer.getApellido());
-            developer.setEmail(developer.getEmail());
-            developer.setPassword(developer.getPassword());
-            developer.setRol(Rol.GUEST);
-            developer.setFechaNacimiento(developer.getFechaNacimiento());
-
-            Imagen imagen = imagenServicio.guardar(archivo);
-
-            developer.setImagen(imagen);
-
-            repositorio.save(developer);
-            return developer;
-        }*/
-    public void validar(String nombre, String apellido, String email, String password,
-                        LocalDate fechaNacimiento) {
+    /**
+     * validate(params) valida que los valores ingresados se cargen conforme a las
+     * necesidades de la aplicacion
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param password
+     * @param fechaNacimiento
+     */
+    public void validate(String nombre, String apellido, String email, String password,
+                        Date fechaNacimiento) {
 
         if (nombre.isEmpty() || nombre == "") {
             System.out.println("El nombre no puede ser nulo o estar vacio");
