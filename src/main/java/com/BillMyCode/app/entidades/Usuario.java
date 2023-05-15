@@ -6,25 +6,23 @@
 package com.BillMyCode.app.entidades;
 
 import com.BillMyCode.app.enumeraciones.Rol;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import lombok.Data;
 
 
 /**
- *
  * @author agust
  */
-@Data
-@Entity
+@Getter
+@Setter
+@MappedSuperclass
 public class Usuario {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String apellido;
@@ -33,6 +31,7 @@ public class Usuario {
     private LocalDate fechaNacimiento;
     @OneToOne
     private Imagen imagen;
-    private  Rol rol;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 }
