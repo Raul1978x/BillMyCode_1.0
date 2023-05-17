@@ -5,10 +5,13 @@
  */
 package com.BillMyCode.app.enumeraciones;
 
+import jakarta.persistence.Entity;
+
 /**
  *
  * @author agust
  */
+
 public enum Rol {
-    ADMIN,DEV,ACCOUNTER;
+    GUEST,ADMIN,DEV,ACCOUNTER;
 }

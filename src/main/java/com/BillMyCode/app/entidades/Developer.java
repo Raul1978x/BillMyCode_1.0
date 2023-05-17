@@ -6,20 +6,22 @@
 package com.BillMyCode.app.entidades;
 
 import java.util.List;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author agust
  */
-@Data
+@Getter
+@Setter
 @Entity
 public class Developer extends Usuario{
-    
+
+
     private Double salario;
     private String seniority;
     private String especialidad;

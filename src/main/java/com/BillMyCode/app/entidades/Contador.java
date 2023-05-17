@@ -5,18 +5,23 @@
  */
 package com.BillMyCode.app.entidades;
 
-import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 /**
  *
 */
-@Data
+@Getter
+@Setter
 @Entity
 public class Contador extends Usuario {
-    
+
     private Double reputacion; 
     @OneToMany
     private List<Comentario> comentario;
