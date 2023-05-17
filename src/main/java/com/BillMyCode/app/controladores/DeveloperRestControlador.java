@@ -5,7 +5,6 @@ import com.BillMyCode.app.excepciones.MiException;
 import com.BillMyCode.app.servicios.DeveloperServicio;
 import com.BillMyCode.app.servicios.ImagenServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,19 +23,19 @@ public class DeveloperRestControlador {
 
     @GetMapping("/developers")
     public ResponseEntity<List<Developer>> listaDevelopers() {
-        return ResponseEntity.ok(servicio.listaDevelopers());
+        return ResponseEntity.ok(servicio.listDevelopers());
     }
 
     @GetMapping("/developers/{id}")
     public Developer developerById(@PathVariable  Long id) {
-        return servicio.developerById(id);
+        return servicio.seachDeveloperById(id);
     }
 
     @PostMapping("/developers")
     public void registrarDeveloper(@RequestBody Developer developer) throws MiException {
         MultipartFile archivo = (MultipartFile) developer.getImagen();
 
-        servicio.crearDeveloper( archivo, developer.getNombre(), developer.getApellido(), developer.getEmail(),
+        servicio.createDeveloper( archivo, developer.getNombre(), developer.getApellido(), developer.getEmail(),
                 developer.getPassword(), developer.getFechaNacimiento(), developer.getSalario(), developer.getSeniority(),
                 developer.getEspecialidad(), developer.getDescripcion(), developer.getComentario(), developer.getEmpresa(),
                 developer.getContador());
@@ -45,7 +44,7 @@ public class DeveloperRestControlador {
 
     @DeleteMapping("/developers/{id}")
     public void eliminarDeveloper(@PathVariable Long id){
-        servicio.borrarDeveloperById(id);
+        servicio.deleteDeveloperById(id);
     }
 
 

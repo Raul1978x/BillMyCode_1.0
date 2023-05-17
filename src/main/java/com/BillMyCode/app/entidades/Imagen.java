@@ -6,7 +6,6 @@
 package com.BillMyCode.app.entidades;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +27,7 @@ public class Imagen {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(name = "contenido", columnDefinition = "LONGBLOB")
     private byte[] contenido;
 }
 

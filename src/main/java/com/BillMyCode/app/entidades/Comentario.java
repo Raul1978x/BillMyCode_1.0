@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @author agust
@@ -25,7 +26,7 @@ public class Comentario {
     private Long id;
     @Lob
     private String comentario;
-    //    @Temporal(TemporalType.DATE)
-//    private LocalDate fecha;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
 }
