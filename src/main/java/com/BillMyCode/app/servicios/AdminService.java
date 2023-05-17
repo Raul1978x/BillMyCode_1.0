@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 @Service
 public class AdminService {
 
@@ -29,15 +30,18 @@ public class AdminService {
         repositorio.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<Admin> listAdmins() {
+        return repositorio.findAll();
+    }
+
     /**
      * Metodo (param) busca un admin por "ID"
      * @param id
      * @return Admin
      */
     @Transactional(readOnly = true)
-    public Admin seachAdminById(Long id) {
-        return repositorio.findById(id).get();
-    }
+    public Admin searchAdminById(Long id) {return repositorio.findById(id).get();}
 
     /**
      * Método createDeveloper(params) crea un nuevo Developers
@@ -95,6 +99,5 @@ public class AdminService {
             System.out.printf("Error, fecha incorrecta");
         }
     }
-
 
 }
