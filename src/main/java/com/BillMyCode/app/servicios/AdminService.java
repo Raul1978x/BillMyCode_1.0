@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AdminService {
 
@@ -73,6 +75,26 @@ public class AdminService {
 
         repositorio.save(admin);
     }
+    @Transactional
+    public void actualizar(MultipartFile archivo, Long id, String apellido, String nombre, String email,
+                           String password, String newpassword) throws MiException {
+
+        validate2(nombre, apellido, email, password, newpassword); //Revisar si es posible reutilizar la otra validacion
+                                                        // El problema es la segunda contraseña
+        Optional<Admin> result = Optional.of(repositorio.findById(id).get());
+        if (result.isPresent()) {
+
+            Admin admin = result.get();
+            admin.setNombre(nombre);
+            admin.setEmail(email);
+            admin.setPassword(newpassword);
+
+            Imagen imagen = imagenServicio.actualizar(archivo); //Añadir metodo "acualizar" a la entidad "Imagen"???
+            admin.setImagen(imagen);
+            repositorio.save(admin);
+        }
+
+    }
 
     /**
      * Metodo validate(param) Valida los datos del en el metodo "createAdmin" y devuelve un mensaje en caso de error
@@ -86,7 +108,7 @@ public class AdminService {
         if (nombre.isEmpty() || nombre.equals(" ")){
             System.out.println("Error, el campo Nombre no puede estar vacio");
         }
-        if (nombre.isEmpty() || nombre.equals(" ")){
+        if (apellido.isEmpty() || apellido.equals(" ")){
             System.out.println("Error, el campo Apellido no puede estar vacio");
         }
         if (email.isEmpty() || email.equals(" ") || !email.contains("@") || !email.contains(".")){
@@ -100,4 +122,23 @@ public class AdminService {
         }
     }
 
+    public void validate2 (String nombre, String apellido, String email, String password, String newpassword){
+        if (nombre.isEmpty() || nombre.equals(" ")){
+            System.out.println("Error, el campo Nombre no puede estar vacio");
+        }
+        if (apellido.isEmpty() || apellido.equals(" ")){
+            System.out.println("Error, el campo Apellido no puede estar vacio");
+        }
+        if (email.isEmpty() || email.equals(" ") || !email.contains("@") || !email.contains(".")){
+            System.out.println("Error, el campo Email debe tener ingresado un correo valido");
+        }
+        if (password.isEmpty() || password.equals(" ")){
+            System.out.println("Error, el campo Contrasela no puede estar vacio");
+        }
+        if (newpassword.isEmpty() || newpassword.equals(" ")){
+            System.out.println("Error, el campo Contrasela no puede estar vacio");
+        }
+    }
+
 }
+
