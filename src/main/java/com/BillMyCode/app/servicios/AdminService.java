@@ -75,7 +75,35 @@ public class AdminService {
 
         repositorio.save(admin);
     }
+
     @Transactional
+    public void updateAdmin (Long id, String nombre, String apellido, String email, String password, Date fechaNac,
+                             String telefono, MultipartFile archivo) throws MiException {
+
+        Admin admin = repositorio.findById(id).get();
+
+        if (admin != null) {
+
+            validate(nombre, apellido, email, password, fechaNac);
+
+            Imagen imagen = imagenServicio.guardar(archivo);
+
+            admin.setImagen(imagen);
+            admin.setNombre(nombre);
+            admin.setApellido(apellido);
+            admin.setEmail(email);
+            admin.setPassword(password);
+            admin.setFechaNacimiento(fechaNac);
+            admin.setRol(Rol.ADMIN);
+            admin.setTelefono(telefono);
+
+            repositorio.save(admin);
+        }else{
+            System.out.println("No se encontro al usuario");
+        }
+    }
+
+/*    @Transactional
     public void actualizar(MultipartFile archivo, Long id, String apellido, String nombre, String email,
                            String password, String newpassword) throws MiException {
 
@@ -94,7 +122,7 @@ public class AdminService {
             repositorio.save(admin);
         }
 
-    }
+    }*/
 
     /**
      * Metodo validate(param) Valida los datos del en el metodo "createAdmin" y devuelve un mensaje en caso de error
