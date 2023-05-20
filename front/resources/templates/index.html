@@ -1,26 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+  <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" href="./estilo.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <title>Bill My Code</title>
-  <link rel="shortcut icon" href="./imagenes/billmycodelogosimp.png">
+  <link rel="shortcut icon" href="images/billmycodelogosimp.png">
+  <link rel="stylesheet" href="../static/css/index.css">
+
 </head>
 
 <body>
   <header>
     <div class="logo-container">
-      <img src="./imagenes/billmycodelogo.png" alt="logo de empresa">
+      <img src="/static/images/billmycodelogo.png" alt="logo de empresa">
     </div>
     <nav class="header-nav">
       <a href="#seccion-2">Sobre la Empresa</a>
@@ -31,17 +27,17 @@
   </header>
 
   <section id="seccion-1" class="section-container seccion-1">
-    <img src="./imagenes/pngegg.png" alt="Imagen 1">
+    <img src="/static/images/pngegg.png" alt="Imagen 1">
     <div class="l-section--col">
       <h1 class="c-section__title">Conectamos el mundo con el empleo.</h1>
       <p class="c-section__paragraph l-center--paragraph">
       <h5 class="c-section__title"> Te ayudamos a conseguir asesoria personalizada.</h5>
       </p>
       <button class="button">
-        <a href="login.html">Iniciar Sesión </a>
+        <a href="/templates/login.html">INICIAR SESIÓN</a>
       </button>
       <button class="button">
-        <a href='crear-cuenta-user.html'>Crear Cuenta</a>
+        <a href='/templates/crear-cuenta-user2.html'>CREAR CUENTA</a>
       </button>
     </div>
   </section>
@@ -53,13 +49,13 @@
   </div>
 
   <section id="seccion-2" class="section-container seccion-2">
-    <img src="./imagenes/las-mejores-herramientas-para-un-fullstack-web-developer-blog.png" alt="Imagen 2">
+    <img src="/static/images/las-mejores-herramientas-para-un-fullstack-web-developer-blog.png" alt="Imagen 2">
     <div class="equipo2 caja-equipo">
       <h2>Bill My Code</h2>
       <h3 class="t-empresa2">En nuestro proyecto, estamos comprometidos a brindar las herramientas y la información
         necesarias para que los desarrolladores en Argentina puedan trabajar sin preocupaciones tributarias y con
         justicia salarial. Queremos conectarlos con contadores experimentados en el rubro y proporcionarles información
-        precisa para negociar su sueldo y facilitar cambios a otras companies..</h3>
+        precisa para negociar su sueldo y facilitar cambios a otras empresas..</h3>
     </div>
   </section>
 
@@ -70,11 +66,11 @@
         contadores y asesores financieros, que te guiarán en todo el proceso de declaración de impuestos.
         ¡Pero eso no es todo! Si lo prefieres, ellos pueden encargarse de TODO por ti.</h3>
     </div>
-    <img src="./imagenes/Cumplimiento-Normativo-y-Proteccion-de-la-confidencialidad-header.png" alt="Imagen 3">
+    <img src="/static/images/Cumplimiento-Normativo-y-Proteccion-de-la-confidencialidad-header.png" alt="Imagen 3">
   </section>
 
   <section id="seccion-4" class="section-container seccion-4">
-    <img src="./imagenes/tasas-e-impuestos.png" alt="Imagen 3">
+    <img src="/static/images/tasas-e-impuestos.png" alt="Imagen 3">
     <div class="equipo4 caja-equipo">
       <h2>Impuestos</h2>
       <h3 class="t-empresa4">¿Abrumado por los 167 impuestos que existen en Argentina? ¡No te preocupes más! Te traemos
@@ -93,7 +89,7 @@
       <h3 class="t-empresa5">Imagina una comunidad donde los desarrolladores pueden enfocarse en su trabajo y no
         preocuparse por temas tributarios. Un lugar donde pueden encontrar asesoramiento de calidad y comparar salarios
         con otros en su posición. En este futuro, nuestro sistema web se ha convertido en la herramienta indispensable
-        para cualquier desarrollador en Argentina, gracias a la colaboración de los contadores y companies que comparten
+        para cualquier desarrollador en Argentina, gracias a la colaboración de los contadores y empresas que comparten
         sus conocimientos y experiencias en nuestra plataforma. Únete a nosotros en este viaje y hagamos que esta visión
         sea una realidad juntos.
       </h3>
@@ -106,11 +102,11 @@
     </div>
     <div class="div-button">
       <button class="button">
-        <a href='crear-cuenta.html'>Crear Cuenta</a> 
+        <a href='/templates/crear-cuenta-user2.html'>CREAR CUENTA</a>
       </button>
     </div>
     <div class="logo-container2">
-      <img src="./imagenes/billmycodelogo.png" alt="logo de empresa">
+      <img src="/static/images/billmycodelogo.png" alt="logo de empresa">
     </div>
   </section>
 
@@ -123,25 +119,22 @@
       <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="imagenes/carrusel/Imagen de WhatsApp 2023-05-15 a las 21.15.23.jpg" class="d-block w-100" alt="...">
+            <img src="/static/images/Imagen1.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <p></p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="imagenes/carrusel/Salary-post-20.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+            <img src="/static/images/Imagen2.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <p></p>
+            </div>
           </div>
           <div class="carousel-item">
-            <img src="imagenes/carrusel/software-engineering-salaries.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+            <img src="/static/images/Imagen3.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <p></p>
+            </div>
           </div>
         </div>
         <button class="carousel-control-prev boton-carrusel" type="button" data-bs-target="#carouselExample"
@@ -161,18 +154,18 @@
   <footer>
     <div class="caja_footer div-icono_container">
       <div class="iconos_redes">
-        <a href="https://www.instagram.com/" target="_blank"><img class="icono-container"
-            src="./imagenes/Instagram-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-        <a href="https://www.facebook.com/" target="_blank"><img class="icono-container"
-            src="./imagenes/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-        <a href="https://www.twitter.com" target="_blank"><img class="icono-container"
-            src="./imagenes/Twitter-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-        <a href="https://www.linkedin.com/" target="_blank"><img class="icono-container"
-            src="./imagenes/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-        <a href="https://www.youtube.com/" target="_blank"><img class="icono-container"
-            src="./imagenes/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+        <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
+            src="/static/images/Instagram-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+        <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img class="icono-container"
+            src="/static/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+        <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
+            src="/static/images/Twitter-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+        <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img class="icono-container"
+            src="/static/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+        <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img class="icono-container"
+            src="/static/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
         <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
-            src="./imagenes/WhatsApp-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            src="/static/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
       </div>
     </div>
   </footer>
