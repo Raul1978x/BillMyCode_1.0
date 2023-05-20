@@ -5,19 +5,19 @@
  */
 package com.BillMyCode.app.entidades;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @author agust
  */
-@Data
+@Getter
+@Setter
 @Entity
 public class Comentario {
 
@@ -26,7 +26,7 @@ public class Comentario {
     private Long id;
     @Lob
     private String comentario;
-    //    @Temporal(TemporalType.DATE)
-//    private LocalDate fecha;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
 }
