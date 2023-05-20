@@ -1,0 +1,230 @@
+body {
+  font-family: helvetica;
+  font-weight: normal;
+  color: #013b73;
+  margin: 0;
+  background-color: #1F2430;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  background-color: #080808;
+  z-index: 2;
+  padding: 16px;
+}
+
+.logo-container {
+  text-align: center;
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50px;
+}
+
+nav a {
+  text-decoration: none;
+  margin: 0 20px;
+  color: white;
+  font-weight: bold;
+  font-style: inherit;
+  font-family: helvetica;
+  letter-spacing: 2px;
+}
+
+nav a:hover {
+  color: #255faa;
+}
+
+/* efectos para el contenedor de pantalla completa */
+#contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+}
+
+/* contenedor del login a la izquierda */
+#contenedorcentrado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  min-width: 380px;
+  max-width: 900px;
+  width: 90%;
+  background-color: #5f6769;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 0px 5px 5px rgba(44, 75, 100, 0.15);
+  padding: 30px;
+}
+
+
+/* formulario de login */
+
+.titulo {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#login {
+  padding: 32px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pie-form a {
+  text-decoration: none;
+  color: white;
+}
+
+.pie-form a:hover {
+  color: #bbe1fa;
+}
+
+.inferior {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.inferior a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.inferior a:hover {
+  color: #bbe1fa;
+}
+
+/* formulario de crear cuenta */
+
+#accounts {
+  width: 100%;
+  padding: 30px 30px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-top: 100px;
+}
+
+#accounts a {
+  text-decoration: none;
+  color: white;
+}
+
+#accounts input::placeholder {
+  font-family: helvetica;
+  color: grey;
+}
+
+form input {
+  font-family: helvetica;
+  color: #1b262c;
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+}
+
+#accounts select::placeholder {
+  font-family: helvetica;
+  color: grey;
+}
+
+form button {
+  font-family: helvetica;
+  border: 2px solid white;
+  color: #fff;
+  width: 250px;
+  height: 40px;
+  background-color: inherit;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #0f4c75;
+  color: #bbe1fa;
+}
+
+.pie-form {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* recuperar cuenta */
+
+.titulo img {
+  width: 100px;
+  height: 100px;
+}
+
+#resetpass {
+  width: 110%;
+  padding: 50px 30px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.3rem;
+}
+
+.div-button {
+  text-align: center;
+}
+
+.div-button p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.text-area {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.form-control {
+  margin: 16px 0;
+}
+
+.developer-boton {
+  font-size: 12px;
+}
+
+#accountsform {
+  text-align: center;
+}
+
+.pie-form ul {
+  padding: 0;
+  list-style-type: none;
+}
