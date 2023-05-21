@@ -38,10 +38,18 @@ public class UserController {
         return "crear-cuenta-desarrollador.html";
     }
 
-    @GetMapping("/principalaccounter")
-    public String viewAccounter() {
-        return "principalaccounter";
+    @GetMapping("/crear-cuenta-contador")
+    public String createAccounter() {
+        return "crear-cuenta-contador";
     }
 
+    @GetMapping("/principaldevelopers")
+    public String viewDevelopers() {
+        return "principaldevelopers";
+    }
 
+    @GetMapping("/principalaccounters")
+    public String viewAccounters() {
+        return "principalaccounter";
+    }
 }

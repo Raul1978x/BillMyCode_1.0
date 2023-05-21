@@ -97,14 +97,14 @@ button {
   border: 2px solid white;
   border-radius: 8px;
   color: #255faa;
-  background-color: #6441a5;
+  background-color: orange;
   margin: 0 4px;
   font-weight: bold;
   width: 150px;
 
 
   &:hover {
-    background-color: #503484;
+    background-color: rgb(182, 131, 37);
   }
 }
 
