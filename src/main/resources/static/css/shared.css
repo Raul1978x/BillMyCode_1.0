@@ -194,6 +194,7 @@ button {
   color: #fff;
   font-weight: bold;
   letter-spacing: 0.3rem;
+
 }
 
 .div-button {
@@ -204,6 +205,11 @@ button {
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 .text-area {
@@ -263,3 +269,4 @@ footer {
   width: 100%;
   padding: 8px;
 }
+
