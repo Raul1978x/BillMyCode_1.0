@@ -3,58 +3,6 @@
   padding: 16px 0 0 0;
 }
 
-.seccion-1 {
-  position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  height: 700px;
-  margin-top: 0;
-}
-
-.seccion-1 img {
-  width: 50%;
-  max-width: 500px;
-  padding: 0 16px;
-}
-
-
-footer {
-  width: 100%;
-  height: 150px;
-}
-
-.caja_footer>a {
-  text-decoration: none;
-  color: #000;
-}
-
-.iconos_redes {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.icono-container {
-  width: 48px;
-  height: 48px;
-  margin: 8px;
-}
-
-.icono-container:hover {
-  transform: scale(1.2);
-}
-
-.copyright {
-  color: white;
-  text-align: center;
-  width: 100%;
-  padding: 8px;
-}
-
-
 a {
   text-decoration: none;
   color: white;
@@ -65,7 +13,148 @@ a {
 }
 
 
+/* BARRA BUSCARDOR */
+.container {
+	position: absolute;
+	left: 75%;
+	top: 45%;
+	transform: translate(-50%,-50%);
+	padding: 16px;
+}
+
+.btn i {
+	font-size: 25px;
+	color: orange;
+	line-height: 80px;
+	transition: all .7s ease;
+}
+
+.container:hover input {
+	width: 250px;
+}
+
+.container:hover i{
+	transform: rotate(-360deg);
+}
+/* FIN  BARRA BUSCADOR */
+
+
+/* 
+TARJETAS */
 
 
 
+.container__card{
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    perspective: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: monospace;
+    top: 120px;
+}
 
+.card__father{
+    margin: 10px;
+    perspective: 500px;
+    /* -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0,0,0,0.2)); */
+}
+
+.card__father:hover .card{
+    transform: rotateY(180deg);
+}
+
+
+.card {
+    width: 280px;
+    height: 280px;
+    transform-style: preserve-3d;
+    transition: all 600ms;
+}
+
+.card__front{
+    background-size: cover;
+    background-position: center;
+}
+
+
+.card__front,
+.card__back{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform-style: flat;
+    border-radius: 6px;
+}
+
+.card__back{
+    transform: rotateY(180deg);
+	background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+	color:  white;
+
+}
+
+.body__card_front{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    color: white;
+    transform: translateZ(60px);
+    background-color: inherit;
+}
+
+.bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.4);
+    border-radius:6px;
+}
+
+.body__card_back{
+    padding: 10px;
+    text-align: center;
+    transform: translateZ(60px);
+    height: 100%;
+}
+
+
+.body__card_back p{
+    /* margin-top: 20px; */
+    font-size: 16px;
+
+}
+
+.body__card_back input{
+    padding: 10px 40px;
+    margin-top: 16px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background: orange;
+    box-shadow: 1px 1px 30px -5px white;
+    border-radius: 10px;
+    transition: box-shadow 600ms;
+    margin-bottom: 0;
+}
+
+.body__card_back input:hover{
+    box-shadow: 1px 1px 30px 0px #449de6;
+}
+
+footer {
+  position: relative;
+  top: 120px;
+}
