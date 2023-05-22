@@ -32,7 +32,7 @@ import java.util.Optional;
 
 @Service
 public class DeveloperService implements UserDetailsService{
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Crea la ver para encriptar la contraseña 
 
     @Autowired
     private  CommentService commentService;
@@ -109,8 +109,10 @@ public class DeveloperService implements UserDetailsService{
         developer.setEmail(email);
         developer.setNacionalidad(nacionalidad);
         developer.setFechaNacimiento(fechaNacimiento);
+        //Agarra la password, la encripta y la setea
         String encodedPassword = passwordEncoder.encode(password);
         developer.setPassword(encodedPassword);
+        
         developer.setGenero(genero);
         developer.setTelefono(telefono);
         developer.setSalario(salario);
