@@ -156,7 +156,8 @@ public class DeveloperService implements UserDetailsService{
             result.setEmail(email);
             result.setNacionalidad(nacionalidad);
             result.setFechaNacimiento(fechaNacimiento);
-            result.setPassword(password);
+            String encodedPassword = passwordEncoder.encode(password);
+            result.setPassword(encodedPassword);
             result.setGenero(genero);
             result.setTelefono(telefono);
             result.setSalario(salario);
@@ -203,7 +204,8 @@ public class DeveloperService implements UserDetailsService{
         developer.setEmail(email);
         developer.setNacionalidad(nacionalidad);
         developer.setFechaNacimiento(fechaNacimiento);
-        developer.setPassword(password);
+        String encodedPassword = passwordEncoder.encode(password);
+        developer.setPassword(encodedPassword);
         developer.setGenero(genero);
         developer.setTelefono(telefono);
         developer.setRol(Rol.DEV);
@@ -333,7 +335,6 @@ public class DeveloperService implements UserDetailsService{
         // Obtener los roles o permisos del usuario
         List<GrantedAuthority> permisos = new ArrayList<>();
         permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
-        System.out.println(permisos);
         // Crear y devolver los detalles del usuario
         return User.builder()
                 .username(usuario.getEmail())

@@ -7,6 +7,8 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 public class AccountantService {
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAccountantRepository repositorio;
 
@@ -61,7 +64,8 @@ public class AccountantService {
         contador.setEspecializaciones(especializaciones);
         contador.setMatricula(matricula);
         contador.setHonorarios(honorarios);
-        contador.setPassword(password);
+        String encodedPassword = passwordEncoder.encode(password);
+        contador.setPassword(encodedPassword);
         contador.setStatus(true);
         contador.setRol(Rol.ACCOUNTER);
         repositorio.save(contador);

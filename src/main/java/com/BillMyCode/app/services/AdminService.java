@@ -6,6 +6,8 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 public class AdminService {
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAdminRepository repositorio;
 
@@ -67,7 +70,8 @@ public class AdminService {
         admin.setNombre(nombre);
         admin.setApellido(apellido);
         admin.setEmail(email);
-        admin.setPassword(password);
+        String encodedPassword = passwordEncoder.encode(password);
+        admin.setPassword(encodedPassword);
         admin.setFechaNacimiento(fechaNac);
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
@@ -91,7 +95,8 @@ public class AdminService {
             admin.setNombre(nombre);
             admin.setApellido(apellido);
             admin.setEmail(email);
-            admin.setPassword(password);
+            String encodedPassword = passwordEncoder.encode(password);
+            admin.setPassword(encodedPassword);
             admin.setFechaNacimiento(fechaNac);
             admin.setRol(Rol.ADMIN);
             admin.setTelefono(telefono);
