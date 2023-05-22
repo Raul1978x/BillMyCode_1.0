@@ -40,8 +40,8 @@
             <form id="loginform" th:action="@{/logincheck}" method="POST">
                 <input type="text" name="usuario" placeholder="Usuario" required>
                 <input type="password" placeholder="Contraseña" name="password" required>
-                <button class="button">
-                  <a th:href="@{/thymeleaf/principaldevelopers}">INICIAR SESIÓN</a>
+                <button class="button" type="submit">
+               INICIAR SESIÓN
               </button>
             </form>
             <div class="pie-form">

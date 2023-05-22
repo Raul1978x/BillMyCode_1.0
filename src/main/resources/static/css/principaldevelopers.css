@@ -158,3 +158,11 @@ footer {
   position: relative;
   top: 120px;
 }
+.seccion-4 {
+    position: relative;
+    display: flex;
+    margin-left: 500px;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+}

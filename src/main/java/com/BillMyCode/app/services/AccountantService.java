@@ -24,7 +24,7 @@ import java.util.List;
 
 
 @Service
-public class AccountantService implements UserDetailsService {
+public class AccountantService  {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
@@ -93,7 +93,6 @@ public class AccountantService implements UserDetailsService {
         contador.setEspecializaciones(especializaciones);
         contador.setMatricula(matricula);
         contador.setHonorarios(honorarios);
-        contador.setPassword(password);
         contador.setStatus(true);
         contador.setRol(Rol.ACCOUNTANT);
         Image image = imageService.save(archivo);
@@ -139,8 +138,6 @@ public class AccountantService implements UserDetailsService {
             contador.setMatricula(matricula);
             contador.setHonorarios(honorarios);
             contador.setEspecializaciones(especializaciones);
-
-            contador.setPassword(password);
             contador.setStatus(true);
             contador.setRol(Rol.ACCOUNTANT);
             Image image = imageService.save(archivo);
@@ -180,7 +177,7 @@ public class AccountantService implements UserDetailsService {
                 throw new MiException("El contacto no puede estar vacío.");
             }*/
     }
-    @Override
+ /*   @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Accountant usuario = repositorio.seachByEmail(email);
         if (usuario == null) {
@@ -194,6 +191,6 @@ public class AccountantService implements UserDetailsService {
                 .password(usuario.getPassword())
                 .authorities(permisos)
                 .build();
-    }
+    }*/
 }
 
