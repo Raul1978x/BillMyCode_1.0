@@ -43,7 +43,7 @@ public class AccountantController {
         return accountantService.searchAccounterById(id);
     }
 
-    @PostMapping("/accountants")
+    @PostMapping("/create-accountants")
     public String createAccountant(@RequestParam MultipartFile archivo,
                                    @RequestParam String nombre,
                                    @RequestParam String apellido,

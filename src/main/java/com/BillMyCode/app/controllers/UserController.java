@@ -23,10 +23,10 @@ public class UserController {
         return "index";
     }
 
-    /*@GetMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "login.html";
-    }*/
+    }
 
     @GetMapping("/select-user")
     public String selectUser() {

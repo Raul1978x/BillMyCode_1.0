@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,20 @@ public class CommentService {
         comment.setComentario(comentario);
         comment.setFecha(new Date());
         return commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void deleteCommentById(Long id){
+        commentRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Comment> searchAllComment(){
+        return commentRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Comment searchCommentById(long id){
+        return commentRepository.findById(id).get();
     }
 }

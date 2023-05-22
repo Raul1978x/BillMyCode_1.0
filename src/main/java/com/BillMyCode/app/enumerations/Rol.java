@@ -11,5 +11,5 @@ package com.BillMyCode.app.enumerations;
  */
 
 public enum Rol {
-    GUEST,ADMIN,DEV,ACCOUNTER
+    GUEST,ADMIN,DEV,ACCOUNTANT
 }

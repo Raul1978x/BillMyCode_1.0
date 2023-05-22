@@ -27,6 +27,7 @@ public class User {
     protected String password;
     protected String telefono;
     @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_nacimiento")
     protected Date fechaNacimiento;
     @OneToOne
     protected Image image;

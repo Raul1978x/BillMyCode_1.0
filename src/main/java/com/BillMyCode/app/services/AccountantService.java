@@ -1,25 +1,32 @@
 package com.BillMyCode.app.services;
 
-import com.BillMyCode.app.entities.Accountant;
-import com.BillMyCode.app.entities.Comment;
-import com.BillMyCode.app.entities.Image;
-import com.BillMyCode.app.entities.User;
+import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 @Service
-public class AccountantService {
+public class AccountantService implements UserDetailsService {
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAccountantRepository repositorio;
     @Autowired
@@ -71,12 +78,8 @@ public class AccountantService {
                               Double honorarios
     ) throws MiException {
 
-        /*Date fechaNacimiento = null;
-        if (fechaNacStr != "") {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            fechaNacimiento = format.parse(fechaNacStr);
-        }*/
         validate(nombre, email, especializaciones);
+        String cryptPassword = passwordEncoder.encode(password);
 
         Accountant contador = new Accountant();
         contador.setNombre(nombre);
@@ -84,7 +87,7 @@ public class AccountantService {
         contador.setEmail(email);
         contador.setNacionalidad(nacionalidad);
         contador.setFechaNacimiento(fechaNacimiento);
-        contador.setPassword(password);
+        contador.setPassword(cryptPassword);
         contador.setGenero(genero);
         contador.setTelefono(telefono);
         contador.setEspecializaciones(especializaciones);
@@ -92,7 +95,7 @@ public class AccountantService {
         contador.setHonorarios(honorarios);
         contador.setPassword(password);
         contador.setStatus(true);
-        contador.setRol(Rol.ACCOUNTER);
+        contador.setRol(Rol.ACCOUNTANT);
         Image image = imageService.save(archivo);
 
         contador.setImage(image);
@@ -116,7 +119,10 @@ public class AccountantService {
                                  String especializaciones,
                                  String matricula,
                                  Double honorarios) throws MiException {
+
         Accountant contador = searchAccounterById(id);
+        String cryptPassword = passwordEncoder.encode(password);
+
         if (contador != null && contador.getId().equals(id)) {
             validate(nombre, email, especializaciones);
 
@@ -127,7 +133,7 @@ public class AccountantService {
             contador.setEmail(email);
             contador.setNacionalidad(nacionalidad);
             contador.setFechaNacimiento(fechaNacimiento);
-            contador.setPassword(password);
+            contador.setPassword(cryptPassword);
             contador.setGenero(genero);
             contador.setTelefono(telefono);
             contador.setMatricula(matricula);
@@ -136,7 +142,7 @@ public class AccountantService {
 
             contador.setPassword(password);
             contador.setStatus(true);
-            contador.setRol(Rol.ACCOUNTER);
+            contador.setRol(Rol.ACCOUNTANT);
             Image image = imageService.save(archivo);
 
             contador.setImage(image);
@@ -173,6 +179,21 @@ public class AccountantService {
            /* if (contacto.isEmpty() || contacto.isBlank()) {
                 throw new MiException("El contacto no puede estar vacío.");
             }*/
+    }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Accountant usuario = repositorio.seachByEmail(email);
+        if (usuario == null) {
+            throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
+        }
+        List<GrantedAuthority> permisos = new ArrayList<>();
+        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
+        System.out.println(permisos);
+        return User.builder()
+                .username(usuario.getEmail())
+                .password(usuario.getPassword())
+                .authorities(permisos)
+                .build();
     }
 }
 
