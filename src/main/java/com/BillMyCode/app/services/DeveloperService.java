@@ -6,31 +6,22 @@ import com.BillMyCode.app.entities.Image;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DeveloperService implements UserDetailsService{
+public class DeveloperService {
 
     @Autowired
-    private  CommentService commentService;
+    private CommentService commentService;
     @Autowired
     private IDeveloperRepository repositorio;
 
@@ -74,7 +65,7 @@ public class DeveloperService implements UserDetailsService{
                                 String apellido,
                                 String email,
                                 String nacionalidad,
-                                String fechaNacStr,
+                                Date fechaNacimiento,
                                 String password,
                                 String genero,
                                 String telefono,
@@ -85,11 +76,7 @@ public class DeveloperService implements UserDetailsService{
                                 Comment comentario
     ) throws MiException, ParseException {
 
-        Date fechaNacimiento= null;
-        if (fechaNacStr!="") {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            fechaNacimiento = format.parse(fechaNacStr);
-        }
+
         validate(nombre, apellido, email, nacionalidad, fechaNacimiento, password, genero, telefono,
                 salario, seniority, especialidad, descripcion, comentario);
 
@@ -123,7 +110,7 @@ public class DeveloperService implements UserDetailsService{
                                 String apellido,
                                 String email,
                                 String nacionalidad,
-                                String fechaNacStr,
+                                Date fechaNacimiento,
                                 String password,
                                 String genero,
                                 String telefono,
@@ -131,11 +118,10 @@ public class DeveloperService implements UserDetailsService{
                                 String seniority,
                                 String especialidad,
                                 String descripcion,
-                                String comentario,
-                                Date fechaNacimiento) throws MiException, ParseException {
+                                String comentario
+                                ) throws MiException, ParseException {
 
         Optional<Developer> respuesta = repositorio.findById(id);
-
         if (respuesta.isPresent()) {
             Developer result = respuesta.get();
 
@@ -165,70 +151,6 @@ public class DeveloperService implements UserDetailsService{
         }
     }
 
-
-    @Transactional
-    public Developer createPart1Developer(MultipartFile archivo,
-                                          String nombre,
-                                          String apellido,
-                                          String email,
-                                          String nacionalidad,
-                                          String fechaNacStr,
-                                          String password,
-                                          String genero,
-                                          String telefono
-    ) throws MiException, ParseException {
-/*
-        validate(nombre, apellido, email, nacionalidad, fechaNacimiento, password, genero, telefono);
-*/
-
-        Date fechaNacimiento= new Date();
-        if (fechaNacStr!="") {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            fechaNacimiento = format.parse(fechaNacStr);
-        }
-        Developer developer = new Developer();
-
-        developer.setNombre(nombre);
-        developer.setApellido(apellido);
-        developer.setEmail(email);
-        developer.setNacionalidad(nacionalidad);
-        developer.setFechaNacimiento(fechaNacimiento);
-        developer.setPassword(password);
-        developer.setGenero(genero);
-        developer.setTelefono(telefono);
-        developer.setRol(Rol.DEV);
-        Image image = imageService.save(archivo);
-
-        developer.setImage(image);
-
-        repositorio.save(developer);
-        return developer;
-    }
-
-    @Transactional
-    public Developer createPart2Developer(
-            Double salario,
-            String seniority,
-            String especialidad,
-            String descripcion,
-            Comment comentario
-    ) throws MiException {
-/*
-        validate(salario, seniority, especialidad, descripcion, comentario);
-*/
-
-        Developer developer = new Developer();
-
-        developer.setSalario(salario);
-        developer.setSeniority(seniority);
-        developer.setEspecialidad(especialidad);
-        developer.setDescripcion(descripcion);
-        developer.setComentario(comentario);
-        developer.setRol(Rol.DEV);
-
-        repositorio.save(developer);
-        return developer;
-    }
 
     /**
      * getDeveloperBySeniority(seniority) busca la lista de todos los
@@ -312,21 +234,6 @@ public class DeveloperService implements UserDetailsService{
         if (comentario == null) {
             System.out.println("El comentario no puede ser nulo");
         }
-    }
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Developer developer = repositorio.seachByEmail(email);
-        if (developer != null) {
-
-            List<GrantedAuthority> permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + developer.getRol().toString());
-            permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", developer);
-        }
-        return (UserDetails) developer;
     }
 
 }

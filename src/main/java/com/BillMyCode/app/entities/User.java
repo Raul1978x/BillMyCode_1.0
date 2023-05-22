@@ -5,13 +5,11 @@ package com.BillMyCode.app.entities;
  */
 
 import com.BillMyCode.app.enumerations.Rol;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
+import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +33,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     protected Rol rol;
 
-    }
+}

@@ -8,13 +8,13 @@ import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
 import com.BillMyCode.app.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class DeveloperRestControlador {
                                    @RequestParam String apellido,
                                    @RequestParam String email,
                                    @RequestParam String nacionalidad,
-                                   @RequestParam String fechaNacStr,
+                                   @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                    @RequestParam String password,
                                    @RequestParam String genero,
                                    @RequestParam String telefono,
@@ -61,7 +61,7 @@ public class DeveloperRestControlador {
 
         Comment comment = commentService.createComment(comentario);
 
-        developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacStr,
+        developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                 password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
 
     }
@@ -71,32 +71,6 @@ public class DeveloperRestControlador {
         developerService.deleteDeveloperById(id);
     }
 
-
-    @PostMapping("/createUser")
-    public ResponseEntity<Developer> registerPart1Developer(@RequestParam MultipartFile archivo,
-                                                            @RequestParam String nombre,
-                                                            @RequestParam String apellido,
-                                                            @RequestParam String email,
-                                                            @RequestParam String nacionalidad,
-                                                            @RequestParam String fechaNacStr,
-                                                            @RequestParam String password,
-                                                            @RequestParam String genero,
-                                                            @RequestParam String telefono,
-                                                            ModelMap model)
-            throws MiException {
-
-        try {
-            return ResponseEntity.ok(developerService.createPart1Developer(archivo, nombre, apellido, email, nacionalidad, fechaNacStr, password,
-                    genero, telefono));
-
-        } catch (MiException e) {
-            model.put("error", e.getMessage());
-            return null;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @PutMapping("/updateDeveloper/{id}")
     public void updateDeveloper(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,
@@ -104,7 +78,7 @@ public class DeveloperRestControlador {
                                 @RequestParam(required = false) String apellido,
                                 @RequestParam(required = false) String email,
                                 @RequestParam(required = false) String nacionalidad,
-                                @RequestParam(required = false) String fechaNacStr,
+                                @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                 @RequestParam(required = false) String password,
                                 @RequestParam(required = false) String genero,
                                 @RequestParam(required = false) String telefono,
@@ -119,15 +93,8 @@ public class DeveloperRestControlador {
         try {
             model.put("exito", "el developer fue creado exitosamente");
 
-            Date fechaNacimiento = null; // Inicializar la variable fechaNacimiento como null
-
-            if (fechaNacStr != null && !fechaNacStr.isEmpty()) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                fechaNacimiento = format.parse(fechaNacStr);
-            }
-
-            developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacStr,
-                    password, genero, telefono, salario, seniority, especialidad, descripcion, comentario, fechaNacimiento);
+            developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
+                    password, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

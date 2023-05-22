@@ -146,22 +146,5 @@ public class UserService {
         }
     }
 
-    /* @Override
-     public UserDetails loadUserByUsername(String email)throws UsernameNotFoundException{
-         User user = userRepository.seachByEmail(email);
-         if (user != null){
-             List<GrantedAuthority> permisos = new ArrayList<>();
-             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+user.getRol().toString());
-             permisos.add(p);
-
-             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-             HttpSession session = attr.getRequest().getSession(true);
-             session.setAttribute("usersession", user);
-
-           new User(user.getEmail(), user.getPassword(), permisos);
-
-         }
-         return null;
-     }*/
 
 }

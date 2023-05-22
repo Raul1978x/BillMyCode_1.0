@@ -374,7 +374,7 @@
             <input
               type="date"
               id="start"
-              name="fechaNacStr"
+              name="fechaNacimiento"
               value="fecha"
               min="1920-01-01"
               max="2005-12-31"
@@ -455,7 +455,7 @@
               placeholder="Comentario de la Empresa"
               name="comentario"
             ></textarea>
-            <input type="text" name="empresa" placeholder="Empresa" required />
+            <input type="text" name="empresa" placeholder="Empresa"  />
 
             <!-- <select id="econt" name="contador" class="form-control">
             <option value="">Elija un Contador</option>
@@ -475,8 +475,8 @@
               name="archivo"
             />
 
-            <button class="button">
-              <a th:href="@{/thymeleaf/login}">CREAR CUENTA</a>
+            <button class="button" type="submit">
+            CREAR CUENTA
             </button>
           </form>
         </div>
