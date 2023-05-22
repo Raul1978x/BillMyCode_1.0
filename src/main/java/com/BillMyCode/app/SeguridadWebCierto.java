@@ -10,9 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SeguridadWebCierto {
 
     @Bean
@@ -20,38 +21,25 @@ public class SeguridadWebCierto {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/admin").hasAnyRole("ADMIN","DEV","GUEST")
                     .requestMatchers("/index").permitAll()
-                    .requestMatchers("/users").hasRole("ADMIN")
                 .and().formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .loginProcessingUrl("/logincheck")
-                                .defaultSuccessUrl("/user")
+                                .usernameParameter("usuario") // Nombre del campo del correo electrónico
+                                .passwordParameter("password") // Nombre del campo de la contraseña
+                                .loginProcessingUrl("/logincheck") // Redirige a loadUserByUsername en DeveloperService
+                                .defaultSuccessUrl("/thymeleaf/principal-developers") // POORQUE NO ENTRA ACAAAAAAAAAHH, si lo antrior esta bien
+                                .failureUrl("/thymeleaf/index")
                                 .permitAll()
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
-                        /*logout -> {
-                            try {
-                                logout
-                                        .logoutUrl("/logout")
-                                        .logoutSuccessUrl("/login")
-                                        .permitAll()
-                                        .and()
-                                        .csrf()
-                                        .disable();
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }*/
-
                 );
         return http.build();
     }

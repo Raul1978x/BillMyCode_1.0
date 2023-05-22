@@ -27,4 +27,5 @@ public class Developer extends User {
     protected List<Company> empresas;
     @OneToOne
     protected Accountant contador;
+
 }

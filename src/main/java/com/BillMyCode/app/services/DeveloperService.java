@@ -10,11 +10,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,6 +58,10 @@ public class DeveloperService implements UserDetailsService{
     @Transactional(readOnly = true)
     public Developer seachDeveloperById(Long id) {
         return repositorio.findById(id).get();
+    }
+
+    public Developer seachDeveloperByEmail(String email) {
+        return repositorio.seachByEmail(email);
     }
 
     /**
@@ -313,20 +319,26 @@ public class DeveloperService implements UserDetailsService{
             System.out.println("El comentario no puede ser nulo");
         }
     }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Developer developer = repositorio.seachByEmail(email);
-        if (developer != null) {
-
-            List<GrantedAuthority> permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + developer.getRol().toString());
-            permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", developer);
+        Developer usuario = repositorio.seachByEmail(email);
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado con el correo electrónico: " + email);
         }
-        return (UserDetails) developer;
+        System.out.println("HOOOOOOOOOOOOOLA");
+        // Obtener los roles o permisos del usuario
+        List<GrantedAuthority> permisos = new ArrayList<>();
+        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
+        System.out.println(permisos);
+        // Crear y devolver los detalles del usuario
+        UserDetails aux = User.builder()
+                .username(usuario.getEmail())
+                .password(usuario.getPassword())
+                .authorities(permisos)
+                .build();
+        System.out.println(aux);
+        return aux;
     }
 
 }

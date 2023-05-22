@@ -44,13 +44,13 @@
 
           <input type="text" name="apellido" placeholder="Apellido" required>
 
-          <select id="sex" name="sexo" class="form-control">
+          <select id="sex" name="genero" class="form-control">
             <option value="">Seleccione Género</option>
-            <option value="masculino">Masculino</option>
-            <option value="femenino">Femenino</option>
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
             <option value="otro">Otro</option>
           </select>
-          
+
           <select id="country" name="nacinalidad" class="form-control">
             <option value="">Seleccione Pais</option>
             <option value="Afghanistan">Afghanistan</option>
@@ -338,12 +338,12 @@
 
 
           <button class="button">
-            <a th:href="@{/thymeleaf/login}">CREAR CUENTA</a>
+            <a href='/templates/principaldevelopers.html'>CREAR CUENTA</a>
           </button>
         </form>
       </div>
       <div class="inferior">
-        <a th:href="@{/thymeleaf/select-user}">VOLVER</a>
+        <a href='/templates/crear-cuenta-user.html'>VOLVER</a>
       </div>
     </div>
   </div>

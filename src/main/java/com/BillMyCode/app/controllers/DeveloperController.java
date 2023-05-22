@@ -2,12 +2,14 @@ package com.BillMyCode.app.controllers;
 
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Company;
+import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.User;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
 import com.BillMyCode.app.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +36,17 @@ public class DeveloperController {
 
     @GetMapping("/principal-developers")
     public String getViewCreateDeveloper() {
-        return "principaldevelopers";
+        return "principaldevelopers.html";
     }
 
     @GetMapping("/login")
     public String login() {
         return "login.html";
+    }
+
+    @GetMapping("/index")
+    public String index() {
+        return "index.html";
     }
 
     @PostMapping("/create-developers")
@@ -71,7 +78,7 @@ public class DeveloperController {
             model.put("error", e.getMessage());
             return "redirect:/";
         }
-        return "redirect:/thymeleaf/create-developers";
+        return "redirect:/thymeleaf/principal-developers";
     }
     /**
      * Método getDevelopersBySeniority(seniority) retorna el o los Developer/s segun el grado de seniority buscado y
@@ -83,5 +90,10 @@ public class DeveloperController {
     public String getDevelopersBySeniority(@PathVariable String seniority) {
                 developerService.getDevelopersBySeniority(seniority);
         return "developers"; //vista de la lista de developer donde se cumple la query
+    }
+
+    @GetMapping("/developerEmail/{email}")
+    public Developer getDevelopersByEmail(@PathVariable String email) {
+        return developerService.seachDeveloperByEmail(email);
     }
 }
