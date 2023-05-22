@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="/images/billmycodelogosimp.png">
     <link rel="stylesheet" href="/css/shared.css">
 
+
 </head>
 <body>
   <header>
@@ -40,12 +41,11 @@
                 <input type="text" name="usuario" placeholder="Usuario" required>
                 <input type="password" placeholder="Contraseña" name="password" required>
                 <button type="submit" title="Ingresar" name="Ingresar">INICIAR SESIÓN</button>
-           <div class="btn btn-warning"> <a th:href="@{/thymeleaf/principaldevelopers}"> hola</a></div>
-                <button th:href="@{/thymeleaf/principalaccounters}"   type="button" title="Ingresar" name="Ingresar">Con</button>
+              </button>
             </form>
             <div class="pie-form">
               <ul>
-                <li><a href='resetpass.html'>¿Perdiste tu contraseña?</a></li>
+                <li><a th:href='@{/thymeleaf/resetpass}'>¿Perdiste tu contraseña?</a></li>
                 <li><a th:href='@{/thymeleaf/select-user}'>¿No tienes cuenta? Registrate</a></li>
               </ul>
             </div>

@@ -33,8 +33,8 @@ public class SeguridadWebCierto {
                                 .usernameParameter("usuario") // Nombre del campo del correo electrónico
                                 .passwordParameter("password") // Nombre del campo de la contraseña
                                 .loginProcessingUrl("/logincheck") // Redirige a loadUserByUsername en DeveloperService
-                                .defaultSuccessUrl("/thymeleaf/principal-developers") // POORQUE NO ENTRA ACAAAAAAAAAHH, si lo antrior esta bien
-                                .failureUrl("/thymeleaf/index")
+                                .defaultSuccessUrl("/thymeleaf/principal-developers") // Alfin ANDA, redirige a prinDev
+                                .failureUrl("/thymeleaf/login")
                                 .permitAll()
                 ).logout(
                         logout -> logout

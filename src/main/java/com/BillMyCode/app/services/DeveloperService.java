@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +32,7 @@ import java.util.Optional;
 
 @Service
 public class DeveloperService implements UserDetailsService{
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private  CommentService commentService;
@@ -106,7 +109,8 @@ public class DeveloperService implements UserDetailsService{
         developer.setEmail(email);
         developer.setNacionalidad(nacionalidad);
         developer.setFechaNacimiento(fechaNacimiento);
-        developer.setPassword(password);
+        String encodedPassword = passwordEncoder.encode(password);
+        developer.setPassword(encodedPassword);
         developer.setGenero(genero);
         developer.setTelefono(telefono);
         developer.setSalario(salario);
@@ -326,19 +330,16 @@ public class DeveloperService implements UserDetailsService{
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado con el correo electrónico: " + email);
         }
-        System.out.println("HOOOOOOOOOOOOOLA");
         // Obtener los roles o permisos del usuario
         List<GrantedAuthority> permisos = new ArrayList<>();
         permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
         System.out.println(permisos);
         // Crear y devolver los detalles del usuario
-        UserDetails aux = User.builder()
+        return User.builder()
                 .username(usuario.getEmail())
                 .password(usuario.getPassword())
                 .authorities(permisos)
                 .build();
-        System.out.println(aux);
-        return aux;
     }
 
 }
