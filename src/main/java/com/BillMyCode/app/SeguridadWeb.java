@@ -51,7 +51,7 @@ public class SeguridadWeb {
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/thymeleaf/login") // Hay que modificar los html para que el boton si sea para salir
+                                .logoutSuccessUrl("/thymeleaf/login") // A donde redirige cuando cierro sesion
                                 .permitAll()
                 ).exceptionHandling()
                  .accessDeniedPage("/thymeleaf/accesoD");
