@@ -7,12 +7,6 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,13 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DeveloperService implements UserDetailsService {
+public class DeveloperService{
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
@@ -248,20 +241,4 @@ public class DeveloperService implements UserDetailsService {
         }
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Developer usuario = repositorio.seachByEmail(email);
-        if (usuario == null) {
-            throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
-        }
-        List<GrantedAuthority> permisos = new ArrayList<>();
-        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
-        System.out.println(permisos);
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getPassword())
-                .authorities(permisos)
-                .build();
-    }
 }

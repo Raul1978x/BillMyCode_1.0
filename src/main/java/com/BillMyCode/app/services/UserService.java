@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
 @Service
-public class UserService {
+public class UserService{
 
     @Autowired
     private IUserRepository userRepository;
@@ -145,6 +145,5 @@ public class UserService {
             System.out.println("El telefono no puede ser nulo o estar vacio");
         }
     }
-
 
 }
