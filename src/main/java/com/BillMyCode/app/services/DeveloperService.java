@@ -26,12 +26,11 @@ public class DeveloperService{
     private CommentService commentService;
     @Autowired
     private IDeveloperRepository repositorio;
-
     @Autowired
     private ImageService imageService;
 
     /**
-     * Metodo listDevelopers() devuelve la lista de todos los Developers.
+     * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
      *
      * @return List<Developers>
      */
@@ -41,7 +40,7 @@ public class DeveloperService{
     }
 
     /**
-     * Metodo searchDeveloperById(id) devuelve el Developer según su id.
+     * Metodo searchDeveloperById(id): Devuelve el Developer según una id.
      *
      * @param id
      * @return Developer
@@ -52,7 +51,7 @@ public class DeveloperService{
     }
 
     /**
-     * Método deleteDeveloperById(id) borra Developer según su id.
+     * Método deleteDeveloperById(id): Borra Developer según una id.
      *
      * @param id
      */
@@ -61,6 +60,27 @@ public class DeveloperService{
         repositorio.deleteById(id);
     }
 
+    /**
+     * Metodo createDeveloper: Crea un developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void createDeveloper(MultipartFile archivo,
                                 String nombre,
@@ -106,6 +126,28 @@ public class DeveloperService{
         repositorio.save(developer);
     }
 
+    /**
+     * Metodo updateDeveloper: Actualiza los datos de un developer
+     *
+     * @param id
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void updateDeveloper(Long id,
                                 MultipartFile archivo,
@@ -158,7 +200,7 @@ public class DeveloperService{
 
 
     /**
-     * getDeveloperBySeniority(seniority) busca la lista de todos los
+     * getDeveloperBySeniority(seniority): Busca la lista de todos los
      * Developers con el mismo grado de seniority
      *
      * @param seniority
@@ -170,7 +212,7 @@ public class DeveloperService{
     }
 
     /**
-     * validate(params) valida que los valores ingresados se cargen conforme a las
+     * Metodo validate: valida que los valores ingresados se cargen conforme a las
      * necesidades de la aplicacion
      *
      * @param salario

@@ -14,9 +14,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SeguridadWeb {
 
     /**
-     * Metodo passwordEncoder: Devuelve un objeto PasswordEncoder que utiliza la implementación BCryptPasswordEncoder.
+     * Metodo passwordEncoder: Devuelve un objeto PasswordEncoder que utiliza la encriptacion BCryptPasswordEncoder.
      *
-     * @return el objeto PasswordEncoder configurado con la implementación BCryptPasswordEncoder
+     * @return el objeto PasswordEncoder configurado con la encriptacion BCryptPasswordEncoder
      */
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -27,14 +27,16 @@ public class SeguridadWeb {
      * Metodo filterChain: Configura y devuelve un objeto SecurityFilterChain para la configuración de seguridad de la aplicación.
      *
      * @param http el objeto HttpSecurity utilizado para configurar la seguridad
+     *
      * @return el objeto SecurityFilterChain configurado
-     * @throws Exception Si ocurre algun error salta la excepcion
+     *
+     * @throws: Exception Si ocurre algun error salta la excepcion
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeRequests()
-                    .requestMatchers("/thymeleaf/principaldevelopers").hasAnyRole("DEV","ADMIN") // Controla quien puede acceder a principaldevelopers
+                    .requestMatchers("/thymeleaf/principaldevelopers").hasAnyRole("DEV","ADMIN")// Controla quien puede acceder a principaldevelopers
                     .requestMatchers("/thymeleaf/principalaccounters").hasAnyRole("ACCOUNTANT","ADMIN")  // Controla quien puede acceder a principalaccounters
                     .requestMatchers("index").permitAll() // Controla quien puede acceder al index, en este caso todos
                 .and().formLogin(
@@ -49,9 +51,10 @@ public class SeguridadWeb {
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/thymeleaf")
+                                .logoutSuccessUrl("/thymeleaf/login") // Hay que modificar los html para que el boton si sea para salir
                                 .permitAll()
-                );
+                ).exceptionHandling()
+                 .accessDeniedPage("/thymeleaf/accesoD");
         return http.build();
     }
 

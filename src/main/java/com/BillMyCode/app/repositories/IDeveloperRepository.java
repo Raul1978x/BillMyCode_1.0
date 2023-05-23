@@ -11,9 +11,23 @@ import java.util.List;
 @Repository
 public interface IDeveloperRepository extends JpaRepository<Developer, Long> {
 
+    /**
+     * Metodo searchBySeniority: Busca developers segun un nivel de seniority
+     *
+     * @param seniority
+     *
+     * @return Lista de Developer
+     */
     @Query("SELECT d FROM Developer d WHERE d.seniority = :seniority")
     List<Developer> searchBySeniority(@Param("seniority") String seniority);
 
+    /**
+     * Metodo seachByEmail: Busca un developer segun un email
+     *
+     * @param email
+     *
+     * @return Un Developer
+     */
     @Query("SELECT d FROM Developer d WHERE d.email = :email")
     public Developer seachByEmail(@Param("email") String email);
 

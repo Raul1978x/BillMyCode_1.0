@@ -17,6 +17,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/thymeleaf")
 public class LoginController {
 
+    /**
+     * Metodo loginSuccess: En caso de una validacion correcta redirige al Usuario dependiendo de su rol
+     *
+     * @param request
+     *
+     * @return: redirect:/thymeleaf/principaldevelopers Si el rol del Usuario es DEV,
+     * redirect:/thymeleaf/principalaccounters Si el rol del Usuario es Accounter,
+     * redirect:/padmin Si el rol del Usuario es Admin
+     */
     @PostMapping("/redilogin")
     public String loginSuccess(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -30,5 +39,15 @@ public class LoginController {
         } else {
             return "redirect:/thymeleaf/principalaccounters";
         }
+    }
+
+    /**
+     * Metodo accessDenied: En caso de una validacion incorrecta redirige al Usuario
+     *
+     * @return: acceso-denegado.html
+     */
+    @GetMapping("/accesoD")
+    public String accessDenied() {
+        return "acceso-denegado";
     }
 }

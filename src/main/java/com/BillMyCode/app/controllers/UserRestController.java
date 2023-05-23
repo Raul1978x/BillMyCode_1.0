@@ -21,17 +21,44 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * Metodo listUser: Trae los usuarios de la base de datos, pero solo para lectura.
+     *
+     * @return Lista de Usuarios (User)
+     */
     @GetMapping("api/users")
     public ResponseEntity<List<User>> listUser() {
         return ResponseEntity.ok(userService.searchUsers());
     }
 
+    /**
+     * Metodo searchUserById: Trae al usuario que coincida con la ID pasada por parametro, pero solo para lectura.
+     *
+     * @param id
+     *
+     * @return: User
+     */
     @GetMapping("api/users/{id}")
     public ResponseEntity<User> searchUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.searchUserById(id));
     }
 
+    /**
+     * Metodo createUser: Crea un usario nuevo
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param password
+     * @param fechaNacStr
+     * @param telefono
+     * @param genero
+     * @param nacionalidad
+     * @param model
+     *
+     * @throws: MiException
+     */
     @PostMapping("api/users")
     public void createUser(@RequestParam MultipartFile archivo,
                                      @RequestParam String nombre,
@@ -56,6 +83,11 @@ public class UserRestController {
         }
     }
 
+    /**
+     * Metodo deleteUserById: Elimina al usuario que coincida con la ID
+     *
+     * @param id
+     */
     @DeleteMapping("api/users/{id}")
     public void deleteUserById(@PathVariable Long id){
         userService.deleteById(id);

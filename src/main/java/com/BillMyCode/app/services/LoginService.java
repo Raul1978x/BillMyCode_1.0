@@ -24,13 +24,21 @@ public class LoginService implements UserDetailsService {
     @Autowired
     private IAccountantRepository accountantRepository;
 
+    /**
+     * Metodo loadUserByUsername: Busca y carga un developer o accounter para su autenticación
+     *
+     * @param email: Correo ingresado por el usuario
+     *
+     * @return: Un UserDetails con el correo,contraseña y rol para la autenticacion;
+     *
+     * @throws : Tira una excepcion UsernameNotFoundException si no encontro a nadie con el email
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Developer developer = developerRepository.seachByEmail(email);
         if (developer != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
             permisos.add(new SimpleGrantedAuthority("ROLE_" + developer.getRol().toString()));
-            System.out.println(permisos);
             return org.springframework.security.core.userdetails.User.builder()
                     .username(developer.getEmail())
                     .password(developer.getPassword())

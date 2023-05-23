@@ -28,16 +28,38 @@ public class DeveloperController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/principal-developers")
+
+    /*@GetMapping("/principal-developers")
     public String getViewCreateDeveloper() {
         return "principaldevelopers";
-    }
+    }*/
 
-    @GetMapping("/login-bmc")
+    /*@GetMapping("/login-bmc")
     public String login() {
         return "login.html";
-    }
+    }*/
 
+    /**
+     * Metodo registrarDeveloper: Crea un nuevo developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @PostMapping("/create-developers")
     public String registrarDeveloper(@RequestParam MultipartFile archivo,
                                      @RequestParam String nombre,
@@ -73,6 +95,7 @@ public class DeveloperController {
      * luego con el String devuelto linkea con el HTML especificado
      *
      * @param seniority
+     *
      * @return String "developers.html"
      */
     @GetMapping("/developer/{seniority}")

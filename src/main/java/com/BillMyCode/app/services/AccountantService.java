@@ -35,7 +35,7 @@ public class AccountantService  {
     }
 
     /**
-     * Metodo searchAccounterById(id) devuelve el Contador según su id.
+     * Metodo searchAccounterById(id) devuelve el Contador según una id.
      *
      * @param id
      * @return Developer
@@ -46,7 +46,7 @@ public class AccountantService  {
     }
 
     /**
-     * Método deleteAccounterById(id) borra el Contador según su id.
+     * Método deleteAccounterById(id) borra un Contador según una id.
      *
      * @param id
      */
@@ -55,6 +55,24 @@ public class AccountantService  {
         repositorio.deleteById(id);
     }
 
+    /**
+     * Metodo crearContador: Crea un Contador
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param genero
+     * @param telefono
+     * @param password
+     * @param especializaciones
+     * @param matricula
+     * @param honorarios
+     *
+     * @throws: MiException
+     */
     @Transactional
     public void crearContador(MultipartFile archivo,
                               String nombre,
@@ -95,7 +113,25 @@ public class AccountantService  {
 
     }
 
-
+    /**
+     * Metodo updateAccountant: Actualiza los datos de un Contador
+     *
+     * @param id
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param genero
+     * @param telefono
+     * @param password
+     * @param especializaciones
+     * @param matricula
+     * @param honorarios
+     *
+     * @throws: MiException
+     */
     @Transactional
     public void updateAccountant(Long id,
                                  MultipartFile archivo,
@@ -143,6 +179,15 @@ public class AccountantService  {
         }
     }
 
+    /**
+     * Metodo agregarReputacion: Añade una calificacion (reputacion) a un contador
+     *
+     * @param id
+     * @param reputacion
+     * @param comentario
+     *
+     * @throws: MiException
+     */
     @Transactional
     public void agregarReputacion(Long id, Double reputacion, List<Comment> comentario) throws MiException {
         Accountant contador = searchAccounterById(id);
@@ -155,6 +200,16 @@ public class AccountantService  {
         }
     }
 
+    /**
+     * Metodo validate: valida que los valores ingresados se cargen conforme a las
+     * necesidades de la aplicacion
+     *
+     * @param nombre
+     * @param email
+     * @param especializacion
+     *
+     * @throws: MiException
+     */
     public void validate(String nombre, String email, String especializacion) throws MiException {
         if (nombre.isEmpty() || nombre.isBlank()) {
             throw new MiException("El nombre no puede estar vacío.");
