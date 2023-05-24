@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head>
@@ -24,6 +24,18 @@
     <nav>
       <a href="#seccion-2">BIENVENIDO A BILL MY CODE</a>
     </nav>
+      <div th:if="${error != null}" id="errorCard" class="card text-white bg-danger mb-3 mensajeError">
+          <div class="card-body">
+              <h5 class="card-title">Error!</h5>
+              <p class="card-text" th:text="${error}"></p>
+          </div>
+      </div>
+      <div th:if="${exito != null}" id="successCard" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+          <div class="card-body">
+              <h5 class="card-title">Éxito!</h5>
+              <p class="card-text" th:text="${exito}"></p>
+          </div>
+      </div>
   </header>
   <div id="contenedor">
     <div id="central">

@@ -96,11 +96,11 @@ public class AccountantController {
         accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                 genero, telefono, password, especializaciones, matricula, honorarios);
 
-            model.put("exito", "el developer fue creado exitosamente");
-            return "redirect:/thymeleaf/login-bmc";
+            model.put("exito", "El Contador fue creado exitosamente");
+            return "login.html";
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            return "redirect:/thymeleaf/crear-cuenta-contador";
+            return "crear-cuenta-contador.html";
         }
 
     }

@@ -82,11 +82,12 @@ public class DeveloperController {
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
-            model.put("exito", "el developer fue creado exitosamente");
-            return "redirect:/thymeleaf/login-bmc";
+            model.put("exito","El Developer fue creado exitosamente");
+            System.out.println(model);
+            return "login.html";
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            return "redirect:/thymeleaf/create-developers";
+            return "crear-cuenta-desarrollador.html";
         }
     }
 
