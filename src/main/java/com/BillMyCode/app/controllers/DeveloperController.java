@@ -8,6 +8,7 @@ import com.BillMyCode.app.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,7 +53,7 @@ public class DeveloperController {
                                      @RequestParam String especialidad,
                                      @RequestParam String descripcion,
                                      @RequestParam(required = false) String comentario,
-                                     ModelMap model
+                                     ModelMap modelo
     ) throws MiException, ParseException {
         try {
 
@@ -60,10 +61,11 @@ public class DeveloperController {
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
-            model.put("exito", "el developer fue creado exitosamente");
+            modelo.put("exito", "Usuario registrado correctamente!");
+
             return "redirect:/thymeleaf/login-bmc";
         } catch (MiException e) {
-            model.put("error", e.getMessage());
+            modelo.put("error", "Usuario registrado correctamente!");
             return "redirect:/thymeleaf/create-developers";
         }
     }
