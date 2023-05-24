@@ -15,35 +15,16 @@ public class ImageService {
     @Autowired
     private IImageRepository repository;
 
-    /**
-     * Metodo buscarImagenById: Trae una imagen segun un ID, solo para lectura
-     *
-     * @param id: id pasado por parametro
-     *
-     * @return El archivo Image
-     */
     @Transactional(readOnly = true)
     public Image buscarImagenById(Long id){
         return repository.findById(id).get();
     }
 
-    /**
-     * Metodo buscarImagenById: Borra una imagen segun un ID
-     *
-     * @param id: id pasado por parametro
-     */
     @Transactional
     public void borrarImagenById(long id){
         repository.deleteById(id);
     }
 
-    /**
-     * Metodo save: Crea un objeto image con el archivo pasado por parametro
-     *
-     * @param archivo: Imagen cargada por el usuario
-     *
-     * @return null si archivo==null si no un objeto image
-     */
     @Transactional
     public Image save(MultipartFile archivo){
         if (archivo != null){

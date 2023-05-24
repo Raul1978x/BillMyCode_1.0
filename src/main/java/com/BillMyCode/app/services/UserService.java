@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 @Service
-public class UserService{
+public class UserService {
 
     @Autowired
     private IUserRepository userRepository;
@@ -21,54 +21,21 @@ public class UserService{
     @Autowired
     private ImageService imageService;
 
-    /**
-     * Metodo searchUsers: Trae los usuarios de la base de datos, pero solo para lectura.
-     *
-     * @return Una lista de Usuarios (User)
-     */
     @Transactional(readOnly = true)
     public List<User> searchUsers() {
         return userRepository.findAll();
     }
 
-    /**
-     * Metodo searchUserById: Trae al usuario que coincida con la ID pasada por parametro, pero solo para lectura.
-     *
-     * @param id: id pasada por por parametro
-     *
-     * @return Un Usuario (User)
-     */
     @Transactional(readOnly = true)
     public User searchUserById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(null);
     }
-
-    /**
-     * Metodo searchUserById: Elimina al usuario que coincida con la ID
-     *
-     * @param id: id pasada por por parametro
-     */
 
     @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
-    /**
-     * Metodo createUser: Crea un usario
-     *
-     * @param archivo: Imagen
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param genero
-     * @param nacionalidad
-     * @param password
-     * @param telefono
-     * @param fechaNacimento
-     *
-     * @return
-     */
     @Transactional
     public User createUser(MultipartFile archivo,
                            String nombre,
@@ -77,10 +44,11 @@ public class UserService{
                            String genero,
                            String nacionalidad,
                            String password,
+                           String password2,
                            String telefono,
-                           Date fechaNacimento
-    ) {
+                           Date fechaNacimiento) {
 
+        validate(nombre, apellido, email, password, password2, fechaNacimiento);
 
         User user = new User();
         user.setNombre(nombre);
@@ -89,8 +57,9 @@ public class UserService{
         user.setGenero(genero);
         user.setNacionalidad(nacionalidad);
         user.setPassword(password);
+        user.setPassword2(password2);
         user.setTelefono(telefono);
-        user.setFechaNacimiento(fechaNacimento);
+        user.setFechaNacimiento(fechaNacimiento);
         user.setRol(Rol.GUEST);
 
         Image image = imageService.save(archivo);
@@ -102,22 +71,6 @@ public class UserService{
         return user;
     }
 
-    /**
-     * Metodo updateUser: Actualiza los datos de un Usuario
-     *
-     * @param id
-     * @param archivo: Imagen
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param genero
-     * @param nacionalidad
-     * @param password
-     * @param telefono
-     * @param fechaNacimento
-     * @param rol
-     */
-
     @Transactional
     public void updateUser(Long id,
                            MultipartFile archivo,
@@ -127,23 +80,25 @@ public class UserService{
                            String genero,
                            String nacionalidad,
                            String password,
+                           String password2,
                            String telefono,
-                           Date fechaNacimento,
+                           Date fechaNacimiento,
                            Rol rol) {
 
-        validate(nombre, apellido, email, password, fechaNacimento, genero, telefono, nacionalidad);
+        validate(nombre, apellido, email, password, password2, fechaNacimiento);
 
-        if (!id.equals(null)) {
-            User user = searchUserById(id);
+        User user = userRepository.findById(id).orElse(null);
 
+        if (user != null) {
             user.setNombre(nombre);
             user.setApellido(apellido);
             user.setEmail(email);
             user.setGenero(genero);
             user.setNacionalidad(nacionalidad);
             user.setPassword(password);
+            user.setPassword2(password2);
             user.setTelefono(telefono);
-            user.setFechaNacimiento(fechaNacimento);
+            user.setFechaNacimiento(fechaNacimiento);
             user.setRol(rol);
 
             Image image = imageService.save(archivo);
@@ -154,58 +109,29 @@ public class UserService{
         }
     }
 
-    /**
-     * Metodo validate: valida que los valores ingresados se cargen conforme a las
-     * necesidades de la aplicacion, se llama en createUser y updateUser
-     *
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param password
-     * @param fechaNacimiento
-     * @param genero
-     * @param telefono
-     * @param nacionalidad
-     */
     public void validate(String nombre,
                          String apellido,
                          String email,
                          String password,
-                         Date fechaNacimiento,
-                         String genero,
-                         String telefono,
-                         String nacionalidad) {
-
-        if (nombre.isEmpty() || nombre == "") {
-            System.out.println("El nombre no puede ser nulo o estar vacio");
+                         String password2,
+                         Date fechaNacimiento) {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede ser nulo o estar vacío");
         }
-        if (apellido.isEmpty() || apellido == "") {
-            System.out.println("El apellido no puede ser nulo o estar vacio");
+        if (apellido == null || apellido.isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede ser nulo o estar vacío");
         }
-        if (email.isEmpty() || email == "") {
-            System.out.println("El email no puede ser nulo o estar vacio");
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("El email no puede ser nulo o estar vacío");
         }
-        if (password.isEmpty() || password == "") {
-            System.out.println("La contraseÃ±a no puede ser nula o estar vacia");
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede ser nula o estar vacía");
         }
-        /*
-         * if (password2.isEmpty() || (!password2.equals(password))) {
-         * System.out.
-         * println("La contraseÃ±a no puede estar vacia o ser distinta a la anterior");
-         * }
-         */
+        if (password2 == null || !password2.equals(password)) {
+            throw new IllegalArgumentException("Las contraseñas no coinciden");
+        }
         if (fechaNacimiento == null) {
-            System.out.println("La fecha de nacimiento no puede estar vacia");
-        }
-        if (genero.isEmpty() || genero == "") {
-            System.out.println("El genero no puede ser nulo o estar vacio");
-        }
-        if (nacionalidad.isEmpty() || nacionalidad == "") {
-            System.out.println("La nacionalidad no puede ser nula o estar vacia");
-        }
-        if (telefono.isEmpty() || telefono == "") {
-            System.out.println("El telefono no puede ser nulo o estar vacio");
+            throw new IllegalArgumentException("La fecha de nacimiento no puede ser nula");
         }
     }
-
 }

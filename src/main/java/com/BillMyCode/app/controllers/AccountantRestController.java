@@ -30,48 +30,16 @@ public class AccountantRestController {
     @Autowired
     private CommentService commentService;
 
-    /**
-     * Metodo searchAllAccountants: Devuelve la lista de todos los Contadores
-     *
-     * @return: List<Accountant>
-     */
     @GetMapping("/accountants")
     public ResponseEntity<List<Accountant>> searchAllAccountants() {
         return ResponseEntity.ok(accountantService.searchAllAccounters());
     }
 
-    /**
-     * Metodo searchAccountantById: Devuelve el Contador según una id
-     *
-     * @param id
-     *
-     * @return: Accountant
-     */
     @GetMapping("/accountant/{id}")
     public Accountant searchAccountantById(@PathVariable Long id) {
         return accountantService.searchAccounterById(id);
     }
 
-    /**
-     * Metodo registrarDeveloper: Crea un nuevo usuario Contador
-     *
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacimiento
-     * @param password
-     * @param genero
-     * @param telefono
-     * @param honorarios
-     * @param matricula
-     * @param especializaciones
-     * @param developers
-     *
-     * @throws: MiException
-     * @throws: ParseException
-     */
     @PostMapping("/accountants")
     public void registrarDeveloper(@RequestParam MultipartFile archivo,
                                    @RequestParam String nombre,
@@ -93,38 +61,11 @@ public class AccountantRestController {
                 genero, telefono, password, especializaciones, matricula, honorarios);
     }
 
-    /**
-     * Metodo deleteAccountantById: Borra un Contador según una id
-     *
-     * @param id
-     */
     @DeleteMapping("/accountant/{id}")
     public void deleteAccountantById(@PathVariable Long id) {
         accountantService.deleteAccounterById(id);
     }
 
-    /**
-     * Metodo updateDeveloper: Actualiza los datos de un usuario Contador
-     *
-     * @param id
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacimiento
-     * @param password
-     * @param genero
-     * @param telefono
-     * @param honorarios
-     * @param matricula
-     * @param especializaciones
-     * @param developers
-     * @param model
-     *
-     * @throws: MiException
-     * @throws: ParseException
-     */
     @PutMapping("/accountant/{id}")
     public void updateDeveloper(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,

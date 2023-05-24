@@ -28,7 +28,6 @@ public class DeveloperController {
     @Autowired
     private CommentService commentService;
 
-
     @GetMapping("/principal-developers")
     public String getViewCreateDeveloper() {
         return "principaldevelopers";
@@ -39,27 +38,6 @@ public class DeveloperController {
         return "login.html";
     }
 
-    /**
-     * Metodo registrarDeveloper: Crea un nuevo developer
-     *
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacimiento
-     * @param password
-     * @param genero
-     * @param telefono
-     * @param salario
-     * @param seniority
-     * @param especialidad
-     * @param descripcion
-     * @param comentario
-     *
-     * @throws: MiException
-     * @throws: ParseException
-     */
     @PostMapping("/create-developers")
     public String registrarDeveloper(@RequestParam MultipartFile archivo,
                                      @RequestParam String nombre,
@@ -82,12 +60,11 @@ public class DeveloperController {
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
-            model.put("exito","El Developer fue creado exitosamente");
-            System.out.println(model);
-            return "login.html";
+            model.put("exito", "el developer fue creado exitosamente");
+            return "redirect:/thymeleaf/login-bmc";
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            return "crear-cuenta-desarrollador.html";
+            return "redirect:/thymeleaf/create-developers";
         }
     }
 
@@ -96,7 +73,6 @@ public class DeveloperController {
      * luego con el String devuelto linkea con el HTML especificado
      *
      * @param seniority
-     *
      * @return String "developers.html"
      */
     @GetMapping("/developer/{seniority}")

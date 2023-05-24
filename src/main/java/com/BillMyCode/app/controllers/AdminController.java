@@ -1,56 +1,37 @@
-package com.BillMyCode.app.controllers;
-
-import com.BillMyCode.app.entities.Developer;
+import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.exceptions.MiException;
+import com.BillMyCode.app.services.AdminService;
+import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
 
-    /**
-     * Metodo registerPart1Developer: Actualmente, nada pero deberia crear un nuevo usuario administrador
-     *
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacStr
-     * @param password
-     * @param genero
-     * @param telefono
-     * @param model
-     *
-     * @return: ResponseEntity<Developer>
-     *
-     * @throws: MiException
-     */
+    @Autowired
+    private AdminService adminService;
+
     @PostMapping("/createAdmin")
-    public ResponseEntity<Developer> registerPart1Developer(@RequestParam MultipartFile archivo,
-                                                            @RequestParam String nombre,
-                                                            @RequestParam String apellido,
-                                                            @RequestParam String email,
-                                                            @RequestParam String nacionalidad,
-                                                            @RequestParam String fechaNacStr,
-                                                            @RequestParam String password,
-                                                            @RequestParam String genero,
-                                                            @RequestParam String telefono,
-                                                            ModelMap model)
-            throws MiException {
+    public ResponseEntity<Admin> createAdmin(@RequestParam MultipartFile archivo,
+                                             @RequestParam String nombre,
+                                             @RequestParam String apellido,
+                                             @RequestParam String email,
+                                             @RequestParam String password,
+                                             @RequestParam Date fechaNac,
+                                             @RequestParam String telefono,
+                                             ModelMap model) throws MiException {
 
-      /*  try {
-            return ResponseEntity.ok(developerService.createPart1Developer(archivo, nombre, apellido, email, nacionalidad, fechaNacStr, password,
-                    genero, telefono));
-
+        try {
+            adminService.createAdmin(nombre, apellido, email, password, fechaNac, telefono, archivo);
+            return ResponseEntity.ok().build();
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            return null;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
-         return null;
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
