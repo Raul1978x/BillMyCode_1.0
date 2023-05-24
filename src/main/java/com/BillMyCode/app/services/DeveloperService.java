@@ -7,12 +7,6 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,25 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DeveloperService implements UserDetailsService {
+public class DeveloperService{
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private CommentService commentService;
     @Autowired
     private IDeveloperRepository repositorio;
-
     @Autowired
     private ImageService imageService;
 
     /**
-     * Metodo listDevelopers() devuelve la lista de todos los Developers.
+     * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
      *
      * @return List<Developers>
      */
@@ -48,7 +40,7 @@ public class DeveloperService implements UserDetailsService {
     }
 
     /**
-     * Metodo searchDeveloperById(id) devuelve el Developer según su id.
+     * Metodo searchDeveloperById(id): Devuelve el Developer según una id.
      *
      * @param id
      * @return Developer
@@ -59,7 +51,7 @@ public class DeveloperService implements UserDetailsService {
     }
 
     /**
-     * Método deleteDeveloperById(id) borra Developer según su id.
+     * Método deleteDeveloperById(id): Borra Developer según una id.
      *
      * @param id
      */
@@ -68,6 +60,27 @@ public class DeveloperService implements UserDetailsService {
         repositorio.deleteById(id);
     }
 
+    /**
+     * Metodo createDeveloper: Crea un developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void createDeveloper(MultipartFile archivo,
                                 String nombre,
@@ -113,6 +126,28 @@ public class DeveloperService implements UserDetailsService {
         repositorio.save(developer);
     }
 
+    /**
+     * Metodo updateDeveloper: Actualiza los datos de un developer
+     *
+     * @param id
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void updateDeveloper(Long id,
                                 MultipartFile archivo,
@@ -165,7 +200,7 @@ public class DeveloperService implements UserDetailsService {
 
 
     /**
-     * getDeveloperBySeniority(seniority) busca la lista de todos los
+     * getDeveloperBySeniority(seniority): Busca la lista de todos los
      * Developers con el mismo grado de seniority
      *
      * @param seniority
@@ -177,7 +212,7 @@ public class DeveloperService implements UserDetailsService {
     }
 
     /**
-     * validate(params) valida que los valores ingresados se cargen conforme a las
+     * Metodo validate: valida que los valores ingresados se cargen conforme a las
      * necesidades de la aplicacion
      *
      * @param salario
@@ -248,20 +283,4 @@ public class DeveloperService implements UserDetailsService {
         }
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Developer usuario = repositorio.seachByEmail(email);
-        if (usuario == null) {
-            throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
-        }
-        List<GrantedAuthority> permisos = new ArrayList<>();
-        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
-        System.out.println(permisos);
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getPassword())
-                .authorities(permisos)
-                .build();
-    }
 }

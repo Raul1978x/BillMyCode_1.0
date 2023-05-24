@@ -8,7 +8,6 @@ import com.BillMyCode.app.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +28,7 @@ public class DeveloperController {
     @Autowired
     private CommentService commentService;
 
+
     @GetMapping("/principal-developers")
     public String getViewCreateDeveloper() {
         return "principaldevelopers";
@@ -39,6 +39,27 @@ public class DeveloperController {
         return "login.html";
     }
 
+    /**
+     * Metodo registrarDeveloper: Crea un nuevo developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @PostMapping("/create-developers")
     public String registrarDeveloper(@RequestParam MultipartFile archivo,
                                      @RequestParam String nombre,
@@ -53,7 +74,7 @@ public class DeveloperController {
                                      @RequestParam String especialidad,
                                      @RequestParam String descripcion,
                                      @RequestParam(required = false) String comentario,
-                                     ModelMap modelo
+                                     ModelMap model
     ) throws MiException, ParseException {
         try {
 
@@ -61,12 +82,12 @@ public class DeveloperController {
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
-            modelo.put("exito", "Usuario registrado correctamente!");
-
-            return "redirect:/thymeleaf/login-bmc";
+            model.put("exito","El Developer fue creado exitosamente");
+            System.out.println(model);
+            return "login.html";
         } catch (MiException e) {
-            modelo.put("error", "Usuario registrado correctamente!");
-            return "redirect:/thymeleaf/create-developers";
+            model.put("error", e.getMessage());
+            return "crear-cuenta-desarrollador.html";
         }
     }
 
@@ -75,6 +96,7 @@ public class DeveloperController {
      * luego con el String devuelto linkea con el HTML especificado
      *
      * @param seniority
+     *
      * @return String "developers.html"
      */
     @GetMapping("/developer/{seniority}")
