@@ -14,40 +14,70 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Método formDeveloper() retorna el HTML del formulario de carga de Developers
+     * Metodo index(): Redirige a index.html
      *
-     * @return String formDev.html
+     * @return: index
      */
     @GetMapping("")
     public String index() {
         return "index";
     }
 
+    /**
+     * Metodo login(): Redirige a login.html
+     *
+     * @return: login.html
+     */
     @GetMapping("/login")
     public String login() {
         return "login.html";
     }
 
+    /**
+     * Metodo selectUser: Redirige a crear-cuenta-user2.html
+     *
+     * @return: crear-cuenta-user2.html
+     */
     @GetMapping("/select-user")
     public String selectUser() {
         return "crear-cuenta-user2.html";
     }
 
+    /**
+     * Metodo developer: Redirige a crear-cuenta-desarrollador.html
+     *
+     * @return: crear-cuenta-desarrollador.html
+     */
     @GetMapping("/developer")
     public String developer() {
         return "crear-cuenta-desarrollador.html";
     }
 
+    /**
+     * Metodo createAccounter: Redirige a crear-cuenta-contador.html
+     *
+     * @return: crear-cuenta-contador
+     */
     @GetMapping("/crear-cuenta-contador")
     public String createAccounter() {
         return "crear-cuenta-contador";
     }
 
+    /**
+     * Metodo viewDevelopers: Redirige a principaldevelopers.html
+     *
+     * @return: principaldevelopers
+     */
     @GetMapping("/principaldevelopers")
     public String viewDevelopers() {
         return "principaldevelopers";
     }
 
+    /**
+     * Metodo viewAccounters: Redirige a principalaccounter.html
+     *
+     * @return: principalaccounter
+     */
     @GetMapping("/principalaccounters")
     public String viewAccounters() {
         return "principalaccounter";

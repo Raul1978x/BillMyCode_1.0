@@ -16,6 +16,14 @@ public class CommentService {
     @Autowired
     private ICommentRepository commentRepository;
 
+    /**
+     * Metodo Comment: Actualiza un comentario de algun usuario segun la id
+     *
+     * @param id
+     * @param comentario: Comentario nuevo
+     *
+     * @return
+     */
     @Transactional
     public Comment updateComment(Long id, String comentario) {
         Optional<Comment> respuesta = commentRepository.findById(id);
@@ -28,6 +36,14 @@ public class CommentService {
         }
         return null;
     }
+
+    /**
+     * Metodo createComment: Crea un objeto Comment a partir de un comentario pasado por parametro
+     *
+     * @param comentario
+     *
+     * @return
+     */
     @Transactional
     public Comment createComment(String comentario) {
         Comment comment = new Comment();
@@ -36,16 +52,31 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    /**
+     * Método deleteCommentById: Borra un comentario segun una id
+     *
+     * @param id
+     */
     @Transactional
     public void deleteCommentById(Long id){
         commentRepository.deleteById(id);
     }
 
+    /**
+     * Metodo searchAllComment: Devuelve una lista de todos los comentarios en el repositorio ICommentRepository
+     *
+     * @return: Lista de Comment
+     */
     @Transactional(readOnly = true)
     public List<Comment> searchAllComment(){
         return commentRepository.findAll();
     }
 
+    /**
+     * Método deleteCommentById: Busca un comentario segun una id
+     *
+     * @param id
+     */
     @Transactional(readOnly = true)
     public Comment searchCommentById(long id){
         return commentRepository.findById(id).get();
