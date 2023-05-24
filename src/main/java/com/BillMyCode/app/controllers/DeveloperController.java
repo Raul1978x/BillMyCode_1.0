@@ -29,15 +29,15 @@ public class DeveloperController {
     private CommentService commentService;
 
 
-    /*@GetMapping("/principal-developers")
+    @GetMapping("/principal-developers")
     public String getViewCreateDeveloper() {
         return "principaldevelopers";
-    }*/
+    }
 
-    /*@GetMapping("/login-bmc")
+    @GetMapping("/login-bmc")
     public String login() {
         return "login.html";
-    }*/
+    }
 
     /**
      * Metodo registrarDeveloper: Crea un nuevo developer
