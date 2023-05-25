@@ -146,16 +146,16 @@ public class AdminService {
      * @param fechaNacimiento
      */
     public void validate (String nombre, String apellido, String email, String password, Date fechaNacimiento){
-        if (nombre.isEmpty() || nombre.equals("")){
+        if (nombre.isBlank() || nombre.equals("")){
             System.out.println("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isEmpty() || apellido.equals("")){
+        if (apellido.isBlank() || apellido.equals("")){
             System.out.println("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isEmpty() || email.equals("") || !email.contains("@") || !email.contains(".")){
+        if (email.isBlank() || email.equals("") || !email.contains("@") || !email.contains(".")){
             System.out.println("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isEmpty() || password.equals("")){ //Preguntar: hay que validar la cantirdad de caracteres de la contraseña?
+        if (password.isBlank() || password.equals("")){ //Preguntar: hay que validar la cantirdad de caracteres de la contraseña?
             System.out.println("Error, el campo Contrasela no puede estar vacio");
         }
         if (fechaNacimiento==null){
@@ -174,16 +174,16 @@ public class AdminService {
      * @param newpassword
      */
     public void validate2 (String nombre, String apellido, String email, String password, String newpassword,Date fechaNacimiento) throws MiException {
-        if (nombre.isEmpty() || nombre.equals("")){
+        if (nombre.isEmpty() || nombre.isBlank()){
             throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isEmpty() || apellido.equals("")){
+        if (apellido.isEmpty() || apellido.isBlank()){
             throw new MiException("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isEmpty() || email.equals("") || !email.contains("@") || !email.contains(".")){
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
             throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isEmpty() || password.equals("")){
+        if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
         if (!newpassword.equals(password)){

@@ -1,6 +1,7 @@
 package com.BillMyCode.app.services;
 
 import com.BillMyCode.app.entities.Image;
+import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class ImageService {
@@ -63,5 +65,27 @@ public class ImageService {
         }
         return null;
     }
+    @Transactional
+    public Image modificarImagen(Long id, MultipartFile archivo) {
+        if (archivo != null) {
+            try {
+                Optional<Image> optionalImage = repository.findById(id);
+                if (optionalImage.isPresent()) {
+                    Image image = optionalImage.get();
 
+                    image.setMime(archivo.getContentType());
+                    image.setNombre(archivo.getName());
+                    image.setContenido(archivo.getBytes());
+
+                    return repository.save(image);
+                } else {
+                    throw new RuntimeException("No se encontró una imagen con el ID proporcionado");
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            throw new RuntimeException("El archivo de imagen es nulo");
+        }
+    }
 }

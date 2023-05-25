@@ -199,7 +199,7 @@ public class AccountantService  {
         if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
-        if (!newpassword.equals(password) || newpassword.isEmpty()){
+        if (!newpassword.equals(password) || newpassword.isBlank()){
             throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña o estar vacío");
         }
         if (fechaNacimiento==null){
