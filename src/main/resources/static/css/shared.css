@@ -286,7 +286,7 @@ footer {
 }
 
 /* Estilo inicial de los carteles */
-.card {
+.borrarcarta {
     animation: hideCard 7s forwards;
 }
 
