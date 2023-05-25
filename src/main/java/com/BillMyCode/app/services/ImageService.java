@@ -66,7 +66,7 @@ public class ImageService {
         return null;
     }
     @Transactional
-    public Image modificarImagen(Long id, MultipartFile archivo) {
+    public Image update(Long id, MultipartFile archivo) {
         if (archivo != null) {
             try {
                 Optional<Image> optionalImage = repository.findById(id);

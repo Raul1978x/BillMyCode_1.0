@@ -66,13 +66,15 @@ public class DeveloperController {
                                      @RequestParam String apellido,
                                      @RequestParam String email,
                                      @RequestParam String nacionalidad,
-                                     @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, @RequestParam String password,
+                                     @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+                                     @RequestParam String password,
+                                     @RequestParam String newpassword,
                                      @RequestParam String genero,
                                      @RequestParam String telefono,
                                      @RequestParam Double salario,
                                      @RequestParam String seniority,
                                      @RequestParam String especialidad,
-                                     @RequestParam String descripcion,
+                                     @RequestParam(required = false) String descripcion,
                                      @RequestParam(required = false) String comentario,
                                      ModelMap model
     ) throws MiException, ParseException {
@@ -80,8 +82,7 @@ public class DeveloperController {
 
             Comment comment = commentService.createComment(comentario);
 
-            developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+            developerService.createDeveloper(archivo,nombre,apellido,email,nacionalidad,fechaNacimiento,password,newpassword,genero,telefono,salario,seniority,especialidad,descripcion,comment);
             model.put("exito","El Developer fue creado exitosamente");
             System.out.println(model);
             return "login.html";

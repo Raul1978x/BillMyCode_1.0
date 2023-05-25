@@ -73,7 +73,7 @@ public class AccountantRestController {
      * @throws: ParseException
      */
     @PostMapping("/accountants")
-    public void registrarDeveloper(@RequestParam MultipartFile archivo,
+    public void createAccountant(@RequestParam MultipartFile archivo,
                                    @RequestParam String nombre,
                                    @RequestParam String apellido,
                                    @RequestParam String email,
@@ -127,7 +127,7 @@ public class AccountantRestController {
      * @throws: ParseException
      */
     @PutMapping("/accountant/{id}")
-    public void updateDeveloper(@PathVariable Long id,
+    public void updateAccoutant(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,
                                 @RequestParam(required = false) String nombre,
                                 @RequestParam(required = false) String apellido,

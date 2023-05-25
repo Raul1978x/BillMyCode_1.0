@@ -83,6 +83,7 @@ public class DeveloperRestControlador {
                                    @RequestParam String nacionalidad,
                                    @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                    @RequestParam String password,
+                                   @RequestParam String newpassword,
                                    @RequestParam String genero,
                                    @RequestParam String telefono,
                                    @RequestParam Double salario,
@@ -95,7 +96,7 @@ public class DeveloperRestControlador {
         Comment comment = commentService.createComment(comentario);
 
         developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+                password,newpassword,genero,telefono,salario,seniority,especialidad,descripcion,comment);
 
     }
 
