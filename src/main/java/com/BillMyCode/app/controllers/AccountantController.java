@@ -47,7 +47,6 @@ public class AccountantController {
      * Metodo searchAccountantById: Devuelve el Contador según una id
      *
      * @param id
-     *
      * @return: Accountant
      */
     @GetMapping("/accountant/{id}")
@@ -71,7 +70,6 @@ public class AccountantController {
      * @param matricula
      * @param especializaciones
      * @param developers
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -93,8 +91,8 @@ public class AccountantController {
     ) throws MiException, ParseException {
         try {
 
-        accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                genero, telefono, password, especializaciones, matricula, honorarios);
+            accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
+                    genero, telefono, password, especializaciones, matricula, honorarios);
 
             model.put("exito", "El Contador fue creado exitosamente");
             return "login.html";
@@ -133,7 +131,6 @@ public class AccountantController {
      * @param especializaciones
      * @param developers
      * @param model
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -155,21 +152,11 @@ public class AccountantController {
                                 ModelMap model
     ) throws MiException, ParseException {
 
-        /* try {*/
         model.put("exito", "el developer fue creado exitosamente");
 
-           /* Date fechaNacimiento = null; // Inicializar la variable fechaNacimiento como null
-
-            if (fechaNacStr != null && !fechaNacStr.isEmpty()) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                fechaNacimiento = format.parse(fechaNacStr);
-            }*/
-
         accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                genero, telefono, password,especializaciones,  matricula, honorarios);
-      /*  } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
+                genero, telefono, password, especializaciones, matricula, honorarios);
+
     }
 
 }
