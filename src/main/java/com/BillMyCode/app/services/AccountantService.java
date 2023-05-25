@@ -187,16 +187,16 @@ public class AccountantService  {
      */
     public void validate (String nombre, String apellido, String email, String password,
                            String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
-        if (nombre.isBlank() || nombre.isBlank()){
+        if (nombre.isEmpty() || nombre.isBlank()){
             throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isBlank() || apellido.isBlank()){
+        if (apellido.isEmpty() || apellido.isBlank()){
             throw new MiException("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isBlank() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
             throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isBlank() || password.isBlank()){
+        if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
         if (!newpassword.equals(password) || newpassword.isBlank()){

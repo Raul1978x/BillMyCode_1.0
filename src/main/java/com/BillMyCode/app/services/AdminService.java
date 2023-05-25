@@ -174,16 +174,16 @@ public class AdminService {
      * @param newpassword
      */
     public void validate2 (String nombre, String apellido, String email, String password, String newpassword,Date fechaNacimiento) throws MiException {
-        if (nombre.isBlank() || nombre.equals("")){
+        if (nombre.isEmpty() || nombre.isBlank()){
             throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isBlank() || apellido.equals("")){
+        if (apellido.isEmpty() || apellido.isBlank()){
             throw new MiException("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isBlank() || email.equals("") || !email.contains("@") || !email.contains(".")){
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
             throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isBlank() || password.equals("")){
+        if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
         if (!newpassword.equals(password)){
