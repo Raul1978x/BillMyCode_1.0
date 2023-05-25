@@ -197,7 +197,7 @@ public class UserService{
         if (fechaNacimiento == null) {
             System.out.println("La fecha de nacimiento no puede estar vacia");
         }
-        if (genero.isEmpty() || genero == "") {
+        if (genero.isEmpty() || genero.isBlank()) {
             System.out.println("El genero no puede ser nulo o estar vacio");
         }
         if (nacionalidad.isEmpty() || nacionalidad == "") {

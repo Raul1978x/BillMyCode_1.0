@@ -47,7 +47,6 @@ public class AccountantController {
      * Metodo searchAccountantById: Devuelve el Contador según una id
      *
      * @param id
-     *
      * @return: Accountant
      */
     @GetMapping("/accountant/{id}")
@@ -71,7 +70,6 @@ public class AccountantController {
      * @param matricula
      * @param especializaciones
      * @param developers
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -83,6 +81,7 @@ public class AccountantController {
                                    @RequestParam String nacionalidad,
                                    @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                    @RequestParam String password,
+                                   @RequestParam String newpassword,
                                    @RequestParam String genero,
                                    @RequestParam String telefono,
                                    @RequestParam Double honorarios,
@@ -93,8 +92,8 @@ public class AccountantController {
     ) throws MiException, ParseException {
         try {
 
-        accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                genero, telefono, password, especializaciones, matricula, honorarios);
+            accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
+                    genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
 
             model.put("exito", "El Contador fue creado exitosamente");
             return "login.html";
@@ -133,12 +132,11 @@ public class AccountantController {
      * @param especializaciones
      * @param developers
      * @param model
-     *
      * @throws: MiException
      * @throws: ParseException
      */
     @PutMapping("/accountant/{id}")
-    public void updateDeveloper(@PathVariable Long id,
+    public String updateDeveloper(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,
                                 @RequestParam(required = false) String nombre,
                                 @RequestParam(required = false) String apellido,
@@ -146,6 +144,7 @@ public class AccountantController {
                                 @RequestParam(required = false) String nacionalidad,
                                 @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                 @RequestParam(required = false) String password,
+                                @RequestParam(required = false) String newpassword,
                                 @RequestParam(required = false) String genero,
                                 @RequestParam(required = false) String telefono,
                                 @RequestParam Double honorarios,
@@ -153,23 +152,17 @@ public class AccountantController {
                                 @RequestParam(required = false) String especializaciones,
                                 @RequestParam(required = false) List<Developer> developers,
                                 ModelMap model
-    ) throws MiException, ParseException {
+    ) throws ParseException {
 
-        /* try {*/
-        model.put("exito", "el developer fue creado exitosamente");
+        try {
+            accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
+                    genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
+            model.put("exito", "El Contador fue creado exitosamente");
+            return "login.html";
+        } catch (MiException e) {
+            model.put("error", e.getMessage());
+            return "crear-cuenta-contador.html";
+        }
 
-           /* Date fechaNacimiento = null; // Inicializar la variable fechaNacimiento como null
-
-            if (fechaNacStr != null && !fechaNacStr.isEmpty()) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                fechaNacimiento = format.parse(fechaNacStr);
-            }*/
-
-        accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                genero, telefono, password,especializaciones,  matricula, honorarios);
-      /*  } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
     }
-
 }

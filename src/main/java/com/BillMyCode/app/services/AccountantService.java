@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Service
 public class AccountantService  {
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAccountantRepository repositorio;
     @Autowired
@@ -37,7 +38,6 @@ public class AccountantService  {
     /**
      * Metodo searchAccounterById(id) devuelve el Contador según una id.
      *
-     * @param id
      * @return Developer
      */
     @Transactional(readOnly = true)
@@ -48,7 +48,6 @@ public class AccountantService  {
     /**
      * Método deleteAccounterById(id) borra un Contador según una id.
      *
-     * @param id
      */
     @Transactional
     public void deleteAccounterById(Long id) {
@@ -57,19 +56,6 @@ public class AccountantService  {
 
     /**
      * Metodo crearContador: Crea un Contador
-     *
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacimiento
-     * @param genero
-     * @param telefono
-     * @param password
-     * @param especializaciones
-     * @param matricula
-     * @param honorarios
      *
      * @throws: MiException
      */
@@ -83,12 +69,14 @@ public class AccountantService  {
                               String genero,
                               String telefono,
                               String password,
+                              String newpassword,
                               String especializaciones,
                               String matricula,
                               Double honorarios
     ) throws MiException {
 
-        validate(nombre, email, especializaciones);
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializaciones);
+
         String cryptPassword = passwordEncoder.encode(password);
 
         Accountant contador = new Accountant();
@@ -116,20 +104,6 @@ public class AccountantService  {
     /**
      * Metodo updateAccountant: Actualiza los datos de un Contador
      *
-     * @param id
-     * @param archivo
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param nacionalidad
-     * @param fechaNacimiento
-     * @param genero
-     * @param telefono
-     * @param password
-     * @param especializaciones
-     * @param matricula
-     * @param honorarios
-     *
      * @throws: MiException
      */
     @Transactional
@@ -143,6 +117,7 @@ public class AccountantService  {
                                  String genero,
                                  String telefono,
                                  String password,
+                                 String newpassword,
                                  String especializaciones,
                                  String matricula,
                                  Double honorarios) throws MiException {
@@ -151,7 +126,7 @@ public class AccountantService  {
         String cryptPassword = passwordEncoder.encode(password);
 
         if (contador != null && contador.getId().equals(id)) {
-            validate(nombre, email, especializaciones);
+            validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializaciones);
 
 
 
@@ -182,18 +157,17 @@ public class AccountantService  {
     /**
      * Metodo agregarReputacion: Añade una calificacion (reputacion) a un contador
      *
-     * @param id
-     * @param reputacion
-     * @param comentario
-     *
      * @throws: MiException
      */
     @Transactional
-    public void agregarReputacion(Long id, Double reputacion, List<Comment> comentario) throws MiException {
+    public void agregarReputacion(Long id, Double reputacion, Comment comentario) throws MiException {
         Accountant contador = searchAccounterById(id);
         if (contador != null && contador.getId().equals(id)) {
             contador.setReputacion(reputacion);
-            /*contador.setComments(comentario);*/
+            List<Comment> comentarios = new ArrayList<>();
+            comentarios.add(comentario);
+            contador.setComentario(comentarios);
+
             repositorio.save(contador);
         } else {
             throw new MiException("No se puede agregar la calificación al contador.");
@@ -203,26 +177,37 @@ public class AccountantService  {
     /**
      * Metodo validate: valida que los valores ingresados se cargen conforme a las
      * necesidades de la aplicacion
-     *
      * @param nombre
+     * @param apellido
      * @param email
-     * @param especializacion
-     *
-     * @throws: MiException
+     * @param password
+     * @param newpassword
+     * @param fechaNacimiento
+     * * @throws: MiException
      */
-    public void validate(String nombre, String email, String especializacion) throws MiException {
-        if (nombre.isEmpty() || nombre.isBlank()) {
-            throw new MiException("El nombre no puede estar vacío.");
+    public void validate (String nombre, String apellido, String email, String password,
+                           String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
+        if (nombre.isEmpty() || nombre.isBlank()){
+            throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (email.isEmpty() || email.isBlank()) {
-            throw new MiException("El email no puede estar vacío.");
+        if (apellido.isEmpty() || apellido.isBlank()){
+            throw new MiException("Error, el campo Apellido no puede estar vacio");
+        }
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
+        }
+        if (password.isEmpty() || password.isBlank()){
+            throw new MiException("Error, el campo Contrasela no puede estar vacio");
+        }
+        if (!newpassword.equals(password) || newpassword.isEmpty()){
+            throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña o estar vacío");
+        }
+        if (fechaNacimiento==null){
+            throw new MiException("Error, fecha incorrecta");
         }
         if (especializacion == null) {
             throw new MiException("La especialización no puede estar vacía.");
         }
-           /* if (contacto.isEmpty() || contacto.isBlank()) {
-                throw new MiException("El contacto no puede estar vacío.");
-            }*/
     }
 
 }
