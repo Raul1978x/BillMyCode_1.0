@@ -187,19 +187,19 @@ public class AccountantService  {
      */
     public void validate (String nombre, String apellido, String email, String password,
                            String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
-        if (nombre.isEmpty() || nombre.isBlank()){
+        if (nombre.isBlank() || nombre.isBlank()){
             throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isEmpty() || apellido.isBlank()){
+        if (apellido.isBlank() || apellido.isBlank()){
             throw new MiException("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+        if (email.isBlank() || email.isBlank() || !email.contains("@") || !email.contains(".")){
             throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isEmpty() || password.isBlank()){
+        if (password.isBlank() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
-        if (!newpassword.equals(password) || newpassword.isEmpty()){
+        if (!newpassword.equals(password) || newpassword.isBlank()){
             throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña o estar vacío");
         }
         if (fechaNacimiento==null){

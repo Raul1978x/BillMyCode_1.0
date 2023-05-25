@@ -176,16 +176,16 @@ public class UserService{
                          String telefono,
                          String nacionalidad) {
 
-        if (nombre.isEmpty() || nombre == "") {
+        if (nombre.isBlank() || nombre == "") {
             System.out.println("El nombre no puede ser nulo o estar vacio");
         }
-        if (apellido.isEmpty() || apellido == "") {
+        if (apellido.isBlank() || apellido == "") {
             System.out.println("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isEmpty() || email == "") {
+        if (email.isBlank() || email == "") {
             System.out.println("El email no puede ser nulo o estar vacio");
         }
-        if (password.isEmpty() || password == "") {
+        if (password.isBlank() || password == "") {
             System.out.println("La contraseña no puede ser nula o estar vacia");
         }
         /*
@@ -197,13 +197,13 @@ public class UserService{
         if (fechaNacimiento == null) {
             System.out.println("La fecha de nacimiento no puede estar vacia");
         }
-        if (genero.isEmpty() || genero.isBlank()) {
+        if (genero.isBlank() || genero.isBlank()) {
             System.out.println("El genero no puede ser nulo o estar vacio");
         }
-        if (nacionalidad.isEmpty() || nacionalidad == "") {
+        if (nacionalidad.isBlank() || nacionalidad == "") {
             System.out.println("La nacionalidad no puede ser nula o estar vacia");
         }
-        if (telefono.isEmpty() || telefono == "") {
+        if (telefono.isBlank() || telefono == "") {
             System.out.println("El telefono no puede ser nulo o estar vacio");
         }
     }
