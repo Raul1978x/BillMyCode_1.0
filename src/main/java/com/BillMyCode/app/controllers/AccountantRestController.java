@@ -80,6 +80,7 @@ public class AccountantRestController {
                                    @RequestParam String nacionalidad,
                                    @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                    @RequestParam String password,
+                                   @RequestParam String newpassword,
                                    @RequestParam String genero,
                                    @RequestParam String telefono,
                                    @RequestParam Double honorarios,
@@ -90,7 +91,7 @@ public class AccountantRestController {
 
 
         accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                genero, telefono, password, especializaciones, matricula, honorarios);
+                genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
     }
 
     /**
@@ -134,6 +135,7 @@ public class AccountantRestController {
                                 @RequestParam(required = false) String nacionalidad,
                                 @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                 @RequestParam(required = false) String password,
+                                @RequestParam(required = false) String newpassword,
                                 @RequestParam(required = false) String genero,
                                 @RequestParam(required = false) String telefono,
                                 @RequestParam Double honorarios,
@@ -143,21 +145,18 @@ public class AccountantRestController {
                                 ModelMap model
     ) throws MiException, ParseException {
 
-       /* try {*/
+        try {
             model.put("exito", "el developer fue creado exitosamente");
 
-           /* Date fechaNacimiento = null; // Inicializar la variable fechaNacimiento como null
 
-            if (fechaNacStr != null && !fechaNacStr.isEmpty()) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                fechaNacimiento = format.parse(fechaNacStr);
-            }*/
 
             accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    genero, telefono, password, especializaciones, matricula, honorarios);
-      /*  } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
+                    genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
+        } catch (MiException e) {
+            model.put("error", "error al crear el developer");
+
+            throw new MiException("error al crear el developer");
+        }
     }
 
 }

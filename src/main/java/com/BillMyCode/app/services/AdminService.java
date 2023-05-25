@@ -62,16 +62,19 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param fechaNac
+     * @param newpassword
+     * @param fechaNacimiento
      * @param telefono
      * @param archivo
      *
      * @throws: MiException
      */
     @Transactional
-    public void createAdmin (String nombre, String apellido, String email, String password, Date fechaNac,
+    public void createAdmin (String nombre, String apellido, String email, String password,String newpassword, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException{
-        validate(nombre, apellido, email, password, fechaNac);
+
+        validate2(nombre, apellido, email, password, newpassword, fechaNacimiento);
+
         String cryptPassword = passwordEncoder.encode(password);
 
         Image imagen = imagenServicio.save(archivo);
@@ -82,7 +85,7 @@ public class AdminService {
         admin.setApellido(apellido);
         admin.setEmail(email);
         admin.setPassword(cryptPassword);
-        admin.setFechaNacimiento(fechaNac);
+        admin.setFechaNacimiento(fechaNacimiento);
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
 
@@ -97,21 +100,21 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param fechaNac
+     * @param fechaNacimiento
      * @param telefono
      * @param archivo
      *
      * @throws: MiException
      */
     @Transactional
-    public void updateAdmin (Long id, String nombre, String apellido, String email, String password, Date fechaNac,
+    public void updateAdmin (Long id, String nombre, String apellido, String email, String password,String newpassword, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException {
 
         Admin admin = repositorio.findById(id).get();
 
         if (admin != null) {
 
-            validate(nombre, apellido, email, password, fechaNac);
+            validate2(nombre, apellido, email, password,newpassword, fechaNacimiento);
             String cryptPassword = passwordEncoder.encode(password);
 
             Image imagen = imagenServicio.save(archivo);
@@ -121,7 +124,7 @@ public class AdminService {
             admin.setApellido(apellido);
             admin.setEmail(email);
             admin.setPassword(cryptPassword);
-            admin.setFechaNacimiento(fechaNac);
+            admin.setFechaNacimiento(fechaNacimiento);
             admin.setRol(Rol.ADMIN);
             admin.setTelefono(telefono);
 
@@ -139,22 +142,23 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param fechaNac
+     * @param newpassword
+     * @param fechaNacimiento
      */
-    public void validate (String nombre, String apellido, String email, String password, Date fechaNac){
-        if (nombre.isEmpty() || nombre.equals(" ")){
+    public void validate (String nombre, String apellido, String email, String password, Date fechaNacimiento){
+        if (nombre.isEmpty() || nombre.equals("")){
             System.out.println("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isEmpty() || apellido.equals(" ")){
+        if (apellido.isEmpty() || apellido.equals("")){
             System.out.println("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isEmpty() || email.equals(" ") || !email.contains("@") || !email.contains(".")){
+        if (email.isEmpty() || email.equals("") || !email.contains("@") || !email.contains(".")){
             System.out.println("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isEmpty() || password.equals(" ")){ //Preguntar: hay que validar la cantirdad de caracteres de la contraseña?
+        if (password.isEmpty() || password.equals("")){ //Preguntar: hay que validar la cantirdad de caracteres de la contraseña?
             System.out.println("Error, el campo Contrasela no puede estar vacio");
         }
-        if (fechaNac==null){
+        if (fechaNacimiento==null){
             System.out.print("Error, fecha incorrecta");
         }
     }
@@ -169,21 +173,24 @@ public class AdminService {
      * @param password
      * @param newpassword
      */
-    public void validate2 (String nombre, String apellido, String email, String password, String newpassword){
-        if (nombre.isEmpty() || nombre.equals(" ")){
-            System.out.println("Error, el campo Nombre no puede estar vacio");
+    public void validate2 (String nombre, String apellido, String email, String password, String newpassword,Date fechaNacimiento) throws MiException {
+        if (nombre.isEmpty() || nombre.equals("")){
+            throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (apellido.isEmpty() || apellido.equals(" ")){
-            System.out.println("Error, el campo Apellido no puede estar vacio");
+        if (apellido.isEmpty() || apellido.equals("")){
+            throw new MiException("Error, el campo Apellido no puede estar vacio");
         }
-        if (email.isEmpty() || email.equals(" ") || !email.contains("@") || !email.contains(".")){
-            System.out.println("Error, el campo Email debe tener ingresado un correo valido");
+        if (email.isEmpty() || email.equals("") || !email.contains("@") || !email.contains(".")){
+            throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
         }
-        if (password.isEmpty() || password.equals(" ")){
-            System.out.println("Error, el campo Contrasela no puede estar vacio");
+        if (password.isEmpty() || password.equals("")){
+            throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
-        if (newpassword.isEmpty() || newpassword.equals(" ")){
-            System.out.println("Error, el campo Contrasela no puede estar vacio");
+        if (!newpassword.equals(password)){
+            throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña");
+        }
+        if (fechaNacimiento==null){
+            throw new MiException("Error, fecha incorrecta");
         }
     }
 
