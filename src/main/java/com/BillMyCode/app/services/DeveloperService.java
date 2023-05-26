@@ -46,7 +46,7 @@ public class DeveloperService {
      * @return Developer
      */
     @Transactional(readOnly = true)
-    public Developer seachDeveloperById(Long id) {
+    public Developer searchDeveloperById(Long id) {
         return repositorio.findById(id).get();
     }
 

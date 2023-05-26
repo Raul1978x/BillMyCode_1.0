@@ -1,6 +1,7 @@
 package com.BillMyCode.app.controllers;
 
 import com.BillMyCode.app.entities.Comment;
+import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/thymeleaf")
@@ -56,7 +58,6 @@ public class DeveloperController {
      * @param especialidad
      * @param descripcion
      * @param comentario
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -82,8 +83,8 @@ public class DeveloperController {
 
             Comment comment = commentService.createComment(comentario);
 
-            developerService.createDeveloper(archivo,nombre,apellido,email,nacionalidad,fechaNacimiento,password,newpassword,genero,telefono,salario,seniority,especialidad,descripcion,comment);
-            model.put("exito","El Developer fue creado exitosamente");
+            developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento, password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+            model.put("exito", "El Developer fue creado exitosamente");
             System.out.println(model);
             return "login.html";
         } catch (MiException e) {
@@ -97,12 +98,65 @@ public class DeveloperController {
      * luego con el String devuelto linkea con el HTML especificado
      *
      * @param seniority
-     *
      * @return String "developers.html"
      */
     @GetMapping("/developer/{seniority}")
     public String getDevelopersBySeniority(@PathVariable String seniority) {
         developerService.getDevelopersBySeniority(seniority);
         return "developers"; //vista de la lista de developer donde se cumple la query
+    }
+
+    /**
+     * Metodo listaDevelopers: Devuelve la lista de todos los Developers
+     *
+     * @return: ResponseEntity<List < Developer>>
+     */
+    @GetMapping("/table-developers")
+    public String listaDevelopers(ModelMap model) {
+        List<Developer> developers = developerService.listDevelopers();
+        model.put("developers", developers);
+        return "listadedevelopers";
+    }
+
+    @GetMapping("/developers/delete/{id}")
+    public String deleteDeveloper(@PathVariable Long id) {
+        developerService.deleteDeveloperById(id);
+        return "redirect:/thymeleaf/table-developers";
+    }
+
+    @GetMapping("/developers/edit/{id}")
+    public String editDeveloper(@PathVariable Long id, ModelMap model) {
+        Developer result = developerService.searchDeveloperById(id);
+        model.put("developer", result);
+        return "editar-cuenta-desarrollador";
+    }
+
+    @PostMapping("/updateDeveloper/{id}")
+    public String updateDeveloper(@PathVariable Long id,
+                                  @RequestParam(required = false) MultipartFile archivo,
+                                  @RequestParam(required = false) String nombre,
+                                  @RequestParam(required = false) String apellido,
+                                  @RequestParam(required = false) String email,
+                                  @RequestParam(required = false) String nacionalidad,
+                                  @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+                                  @RequestParam(required = false) String password,
+                                  @RequestParam(required = false) String genero,
+                                  @RequestParam(required = false) String telefono,
+                                  @RequestParam(required = false) Double salario,
+                                  @RequestParam(required = false) String seniority,
+                                  @RequestParam(required = false) String especialidad,
+                                  @RequestParam(required = false) String descripcion,
+                                  @RequestParam(required = false) String comentario,
+                                  ModelMap model
+    ) throws MiException, ParseException {
+
+        try {
+            model.put("exito", "el developer fue editado exitosamente");
+            developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
+                    password, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
+            return "redirect:/thymeleaf/table-developers";
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

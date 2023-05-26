@@ -1,6 +1,5 @@
 package com.BillMyCode.app.entities;
 
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -16,13 +15,13 @@ import java.util.List;
 @Entity
 public class Accountant extends User {
 
+    private String matricula;
+    private String especializacion;
+    private Double honorarios;
+    private Boolean status;
     private Double reputacion;
     @OneToMany
     private List<Comment> comentario;
-    private String matricula;
-    private String especializaciones;
-    private Double honorarios;
-    private Boolean status;
     @OneToMany
     private List<Developer> developers;
 }

@@ -51,7 +51,7 @@ public class DeveloperRestControlador {
      */
     @GetMapping("/developers/{id}")
     public Developer developerById(@PathVariable Long id) {
-        return developerService.seachDeveloperById(id);
+        return developerService.searchDeveloperById(id);
     }
 
     /**
