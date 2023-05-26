@@ -70,12 +70,12 @@ public class AccountantService  {
                               String telefono,
                               String password,
                               String newpassword,
-                              String especializaciones,
+                              String especializacion,
                               String matricula,
                               Double honorarios
     ) throws MiException {
 
-        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializaciones);
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
 
         String cryptPassword = passwordEncoder.encode(password);
 
@@ -88,7 +88,7 @@ public class AccountantService  {
         contador.setPassword(cryptPassword);
         contador.setGenero(genero);
         contador.setTelefono(telefono);
-        contador.setEspecializaciones(especializaciones);
+        contador.setEspecializacion(especializacion);
         contador.setMatricula(matricula);
         contador.setHonorarios(honorarios);
         contador.setStatus(true);
@@ -118,15 +118,16 @@ public class AccountantService  {
                                  String telefono,
                                  String password,
                                  String newpassword,
-                                 String especializaciones,
+                                 String especializacion,
                                  String matricula,
-                                 Double honorarios) throws MiException {
+                                 Double honorarios
+    ) throws MiException {
 
         Accountant contador = searchAccounterById(id);
         String cryptPassword = passwordEncoder.encode(password);
 
         if (contador != null && contador.getId().equals(id)) {
-            validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializaciones);
+            validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
 
 
 
@@ -140,7 +141,7 @@ public class AccountantService  {
             contador.setTelefono(telefono);
             contador.setMatricula(matricula);
             contador.setHonorarios(honorarios);
-            contador.setEspecializaciones(especializaciones);
+            contador.setEspecializacion(especializacion);
             contador.setStatus(true);
             contador.setRol(Rol.ACCOUNTANT);
             Image image = imageService.save(archivo);

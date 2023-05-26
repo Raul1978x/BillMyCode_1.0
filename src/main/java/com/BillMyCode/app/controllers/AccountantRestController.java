@@ -73,7 +73,7 @@ public class AccountantRestController {
      * @throws: ParseException
      */
     @PostMapping("/accountants")
-    public void registrarDeveloper(@RequestParam MultipartFile archivo,
+    public void createAccountant(@RequestParam MultipartFile archivo,
                                    @RequestParam String nombre,
                                    @RequestParam String apellido,
                                    @RequestParam String email,
@@ -127,7 +127,7 @@ public class AccountantRestController {
      * @throws: ParseException
      */
     @PutMapping("/accountant/{id}")
-    public void updateDeveloper(@PathVariable Long id,
+    public void updateAccoutant(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,
                                 @RequestParam(required = false) String nombre,
                                 @RequestParam(required = false) String apellido,
@@ -143,19 +143,15 @@ public class AccountantRestController {
                                 @RequestParam(required = false) String especializaciones,
                                 @RequestParam(required = false) List<Developer> developers,
                                 ModelMap model
-    ) throws MiException, ParseException {
+    ) throws MiException {
 
         try {
             model.put("exito", "el developer fue creado exitosamente");
-
-
-
             accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
         } catch (MiException e) {
-            model.put("error", "error al crear el developer");
-
-            throw new MiException("error al crear el developer");
+            model.put("error", e.getMessage());
+            throw new MiException(e.getMessage());
         }
     }
 

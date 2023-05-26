@@ -86,14 +86,14 @@ public class AccountantController {
                                    @RequestParam String telefono,
                                    @RequestParam Double honorarios,
                                    @RequestParam String matricula,
-                                   @RequestParam(required = false) String especializaciones,
+                                   @RequestParam(required = false) String especializacion,
                                    @RequestParam(required = false) List<Developer> developers,
                                    ModelMap model
     ) throws MiException, ParseException {
         try {
 
             accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
+                    genero, telefono, password, newpassword, especializacion, matricula, honorarios);
 
             model.put("exito", "El Contador fue creado exitosamente");
             return "login.html";
@@ -129,7 +129,7 @@ public class AccountantController {
      * @param telefono
      * @param honorarios
      * @param matricula
-     * @param especializaciones
+     * @param especializacion
      * @param developers
      * @param model
      * @throws: MiException
@@ -137,26 +137,26 @@ public class AccountantController {
      */
     @PutMapping("/accountant/{id}")
     public String updateDeveloper(@PathVariable Long id,
-                                @RequestParam(required = false) MultipartFile archivo,
-                                @RequestParam(required = false) String nombre,
-                                @RequestParam(required = false) String apellido,
-                                @RequestParam(required = false) String email,
-                                @RequestParam(required = false) String nacionalidad,
-                                @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
-                                @RequestParam(required = false) String password,
-                                @RequestParam(required = false) String newpassword,
-                                @RequestParam(required = false) String genero,
-                                @RequestParam(required = false) String telefono,
-                                @RequestParam Double honorarios,
-                                @RequestParam String matricula,
-                                @RequestParam(required = false) String especializaciones,
-                                @RequestParam(required = false) List<Developer> developers,
-                                ModelMap model
+                                  @RequestParam(required = false) MultipartFile archivo,
+                                  @RequestParam(required = false) String nombre,
+                                  @RequestParam(required = false) String apellido,
+                                  @RequestParam(required = false) String email,
+                                  @RequestParam(required = false) String nacionalidad,
+                                  @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+                                  @RequestParam(required = false) String password,
+                                  @RequestParam(required = false) String newpassword,
+                                  @RequestParam(required = false) String genero,
+                                  @RequestParam(required = false) String telefono,
+                                  @RequestParam Double honorarios,
+                                  @RequestParam String matricula,
+                                  @RequestParam(required = false) String especializacion,
+                                  @RequestParam(required = false) List<Developer> developers,
+                                  ModelMap model
     ) throws ParseException {
 
         try {
             accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    genero, telefono, password, newpassword, especializaciones, matricula, honorarios);
+                    genero, telefono, password, newpassword, especializacion, matricula, honorarios);
             model.put("exito", "El Contador fue creado exitosamente");
             return "login.html";
         } catch (MiException e) {
@@ -164,5 +164,12 @@ public class AccountantController {
             return "crear-cuenta-contador.html";
         }
 
+    }
+
+    @GetMapping("/card-accountant")
+    public String callCardAccountant(ModelMap model) {
+        List<Accountant> accountants = accountantService.searchAllAccounters();
+        model.put("accountants", accountants);
+        return "contadorescard";
     }
 }

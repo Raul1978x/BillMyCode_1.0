@@ -1,6 +1,7 @@
 package com.BillMyCode.app.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
@@ -27,7 +28,8 @@ public class LoginController {
      * redirect:/padmin Si el rol del Usuario es Admin
      */
     @PostMapping("/redilogin")
-    public String loginSuccess(HttpServletRequest request) {
+    public String loginSuccess(HttpServletRequest request, ModelMap model) {
+        model.put("request", request);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DeveloperService{
+public class DeveloperService {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
@@ -46,7 +46,7 @@ public class DeveloperService{
      * @return Developer
      */
     @Transactional(readOnly = true)
-    public Developer seachDeveloperById(Long id) {
+    public Developer searchDeveloperById(Long id) {
         return repositorio.findById(id).get();
     }
 
@@ -77,7 +77,6 @@ public class DeveloperService{
      * @param especialidad
      * @param descripcion
      * @param comentario
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -89,6 +88,7 @@ public class DeveloperService{
                                 String nacionalidad,
                                 Date fechaNacimiento,
                                 String password,
+                                String newpassword,
                                 String genero,
                                 String telefono,
                                 Double salario,
@@ -99,8 +99,8 @@ public class DeveloperService{
     ) throws MiException {
 
 
-        validate(nombre, apellido, email, nacionalidad, fechaNacimiento, password, genero, telefono,
-                salario, seniority, especialidad, descripcion, comentario);
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
+
         String cryptPassword = passwordEncoder.encode(password);
 
         Developer developer = new Developer();
@@ -144,7 +144,6 @@ public class DeveloperService{
      * @param especialidad
      * @param descripcion
      * @param comentario
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -218,69 +217,58 @@ public class DeveloperService{
      * @param salario
      * @param seniority
      * @param especialidad
-     * @param descripcion
-     * @param comentario
      */
     public void validate(String nombre,
                          String apellido,
                          String email,
                          String password,
+                         String newpassword,
                          Date fechaNacimiento,
                          String genero,
                          String telefono,
                          String nacionalidad,
                          Double salario,
                          String seniority,
-                         String especialidad,
-                         String descripcion,
-                         Comment comentario) {
+                         String especialidad
+    ) throws MiException {
 
-        if (nombre.isBlank() || nombre == "") {
-            System.out.println("El nombre no puede ser nulo o estar vacio");
+        if (nombre.isBlank() || nombre.isEmpty()) {
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
         }
-        if (apellido.isBlank() || apellido == "") {
-            System.out.println("El apellido no puede ser nulo o estar vacio");
+        if (apellido.isBlank() || apellido.isEmpty()) {
+            throw new MiException("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isBlank() || email == "") {
-            System.out.println("El email no puede ser nulo o estar vacio");
+        if (email.isBlank() || email.isEmpty()) {
+            throw new MiException("El email no puede ser nulo o estar vacio");
         }
-        if (password.isBlank() || password == "") {
-            System.out.println("La contraseña no puede ser nula o estar vacia");
+        if (password.isBlank() || password.isEmpty()) {
+            throw new MiException("La contraseña no puede ser nula o estar vacia");
         }
-        /*
-         * if (password2.isEmpty() || (!password2.equals(password))) {
-         * System.out.
-         * println("La contraseña no puede estar vacia o ser distinta a la anterior");
-         * }
-         */
+
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("La contraseña no puede estar vacia o ser distinta a la anterior");
+        }
         if (fechaNacimiento == null) {
-            System.out.println("La fecha de nacimiento no puede estar vacia");
+            throw new MiException("La fecha de nacimiento no puede estar vacia");
         }
-        if (genero.isBlank() || genero == "") {
-            System.out.println("El genero no puede ser nulo o estar vacio");
+        if (genero.isBlank() || genero.isEmpty()) {
+            throw new MiException("El genero no puede ser nulo o estar vacio");
         }
-        if (nacionalidad.isBlank() || nacionalidad == "") {
-            System.out.println("La nacionalidad no puede ser nula o estar vacia");
+        if (nacionalidad.isBlank() || nacionalidad.isEmpty()) {
+            throw new MiException("La nacionalidad no puede ser nula o estar vacia");
         }
-        if (telefono.isBlank() || telefono == "") {
-            System.out.println("El telefono no puede ser nulo o estar vacio");
+        if (telefono.isBlank() || telefono.isEmpty()) {
+            throw new MiException("El telefono no puede ser nulo o estar vacio");
         }
 
         if (salario == null) {
-            System.out.println("El salario no puede ser nulo o estar vacio");
+            throw new MiException("El salario no puede ser nulo o estar vacio");
         }
         if (seniority.isBlank() || seniority == "") {
-            System.out.println("La seniority no puede ser nula o estar vacia");
+            throw new MiException("La seniority no puede ser nula o estar vacia");
         }
         if (especialidad.isBlank() || especialidad == "") {
-            System.out.println("La especialidad no puede ser nula o estar vacia");
-        }
-        if (descripcion == null) {
-            System.out.println("La descripcion no puede ser nula o estar vacia");
-        }
-        if (comentario == null) {
-            System.out.println("El comentario no puede ser nulo");
+            throw new MiException("La especialidad no puede ser nula o estar vacia");
         }
     }
-
-}
+};
