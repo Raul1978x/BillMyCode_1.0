@@ -36,6 +36,16 @@ public class DeveloperController {
         return "principaldevelopers";
     }
 
+    @GetMapping("/monotributo")
+    public String getViewMonotributo() {
+        return "monotributo";
+    }
+
+    @GetMapping("/faq")
+    public String getViewFaq() {
+        return "faq";
+    }
+
     @GetMapping("/login-bmc")
     public String login() {
         return "login.html";

@@ -23,6 +23,11 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/resetpass")
+    public String resetpass() {
+        return "resetpass";
+    }
+
     /**
      * Metodo login(): Redirige a login.html
      *
