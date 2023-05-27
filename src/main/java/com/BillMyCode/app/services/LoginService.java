@@ -4,6 +4,7 @@ import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,9 @@ public class LoginService implements UserDetailsService {
     @Autowired
     private IAccountantRepository accountantRepository;
 
+    @Autowired
+    private HttpSession httpSession;
+
     /**
      * Metodo loadUserByUsername: Busca y carga un developer o accounter para su autenticación
      *
@@ -39,6 +43,7 @@ public class LoginService implements UserDetailsService {
         if (developer != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
             permisos.add(new SimpleGrantedAuthority("ROLE_" + developer.getRol().toString()));
+            httpSession.setAttribute("sessionuser", developer);
             return org.springframework.security.core.userdetails.User.builder()
                     .username(developer.getEmail())
                     .password(developer.getPassword())
@@ -49,6 +54,7 @@ public class LoginService implements UserDetailsService {
             if (accountant != null){
                 List<GrantedAuthority> permisos = new ArrayList<>();
                 permisos.add(new SimpleGrantedAuthority("ROLE_" + accountant.getRol().toString()));
+                httpSession.setAttribute("sessionuser", accountant);
                 return org.springframework.security.core.userdetails.User.builder()
                         .username(accountant.getEmail())
                         .password(accountant.getPassword())

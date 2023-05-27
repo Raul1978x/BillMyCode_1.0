@@ -1,5 +1,10 @@
 package com.BillMyCode.app.controllers;
 
+import com.BillMyCode.app.entities.Accountant;
+import com.BillMyCode.app.entities.Developer;
+import com.BillMyCode.app.repositories.IDeveloperRepository;
+import com.BillMyCode.app.services.ImageService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +14,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +21,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/thymeleaf")
 public class LoginController {
+
+    private ImageService imageService;
 
     /**
      * Metodo loginSuccess: En caso de una validacion correcta redirige al Usuario dependiendo de su rol
@@ -28,7 +34,7 @@ public class LoginController {
      * redirect:/padmin Si el rol del Usuario es Admin
      */
     @PostMapping("/redilogin")
-    public String loginSuccess(HttpServletRequest request, ModelMap model) {
+    public String loginSuccess(HttpSession request, ModelMap model) {
         model.put("request", request);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
@@ -37,7 +43,7 @@ public class LoginController {
         if (roles.contains("ROLE_ADMIN")) {
             return "redirect:/padmin";
         } else if (roles.contains("ROLE_DEV")) {
-            return "redirect:/thymeleaf/principaldevelopers";
+            return "redirect:/thymeleaf/principal-developers";
         } else {
             return "redirect:/thymeleaf/principalaccounters";
         }

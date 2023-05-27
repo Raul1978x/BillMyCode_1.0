@@ -6,9 +6,11 @@ import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
 import com.BillMyCode.app.services.ImageService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +34,9 @@ public class DeveloperController {
 
 
     @GetMapping("/principal-developers")
-    public String getViewCreateDeveloper() {
+    public String getViewCreateDeveloper(HttpSession request, ModelMap model) {
+        Developer developer= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",developer);
         return "principaldevelopers";
     }
 
