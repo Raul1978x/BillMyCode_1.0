@@ -14,17 +14,62 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="/images/billmycodelogo.png" alt="logo de empresa">
-    </div>
-    <nav class="header-nav">
-      <a href="#seccion-2">Sobre la Empresa</a>
-      <a href="#seccion-3">Normativa</a>
-      <a href="#seccion-4">Impuestos</a>
-      <a href="#seccion-5">Contactanos</a>
+  <navbar>
+    <nav class="navbar bill_my_code" data-bs-theme="dark">
+      <div class="logo-container">
+        <img
+          class="bmcLogo"
+          src="/images/billmycodelogo.png"
+          alt="logo de empresa"
+        />
+      </div>
+      <nav class="header-nav centrar">
+        <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
+        <a class="titulo" href="#seccion-3">Normativa</a>
+        <a class="titulo" href="#seccion-4">Impuestos</a>
+        <a class="titulo" href="#seccion-5">Contactanos</a>
+        <div class="perfil-menu">
+          <img
+            class="perfil-foto"
+            src="/images/profile.png"
+            alt="foto de perfil"
+          />
+          <div class="dropdown">
+            <button class="dropdown-button">
+              <!-- <img
+                class="icono"
+                src="/img/billmycodelogosimp.png"
+                alt="icono menu"
+              /> -->
+              <div>Menu</div>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <img
+                    class="icono"
+                    src="/images/update.png"
+                    alt="icono volver"
+                  />
+                  Volver
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <img
+                    class="icono"
+                    src="/images/logout.png"
+                    alt="icono logout"
+                  />
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </nav>
-  </header>
+  </navbar>
 
   <section id="seccion-1" class="section-container seccion-1">
     <img src="/images/pngegg.png" alt="Imagen 1">

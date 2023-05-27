@@ -1,0 +1,78 @@
+.navbar {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #080808;
+  z-index: 2;
+  padding: 16px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50px;
+  }
+
+nav a {
+  text-decoration: none;
+  margin-right: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: medium;
+  font-style: inherit;
+  font-family: helvetica;
+  letter-spacing: 2px;
+}
+
+nav a:hover {
+  color: #255faa;
+}
+.profile {
+    height: 3rem;
+    width: auto;
+    cursor: pointer;
+  }
+
+  .notification {
+    height: 2rem;
+    width: auto;
+    cursor: pointer;
+  }
+
+  .sub-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.725rem;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .sub-item:hover {
+    background-color: orange;
+  }
+
+  .sub-item:hover .material-icons-outlined {
+    color: #ff9800;
+    transform: scale(1.08) translateY(-2px);
+    cursor: pointer;
+  }
+
+  .sub-item:hover p {
+    /*color: #ffffff;*/
+    cursor: pointer;
+  }
+
+  .sub-item p {
+    font-size: 0.85rem;
+   /* color: #ffffff;*/
+    font-weight: 500;
+    margin: 0.4rem 0;
+    flex: 1;
+  }
