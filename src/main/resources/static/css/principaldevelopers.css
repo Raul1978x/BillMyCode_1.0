@@ -305,7 +305,7 @@ footer {
       display: flex;
       justify-content: center;
       align-items: end;
-      color: rgb(0, 0, 0);
+      color: white;
       background-color: inherit;
     }
     .container__card{

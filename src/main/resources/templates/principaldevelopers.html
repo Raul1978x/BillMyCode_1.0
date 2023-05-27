@@ -34,7 +34,7 @@
             <a class="titulo" href="#seccion-4">Impuestos</a>
             <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
-                <div class="containers" >
+                <div class="containers me-3" >
                 <div class="nombres">
                     <span class="nombre" th:text="${developer.nombre}">Raúl</span>
                     <span class="apellido" th:text="${developer.apellido}">Gómez</span>
@@ -46,7 +46,7 @@
                 </div>
                 <img
                         class="perfil-foto"
-                        th:src="@{/api/imagen/perfil/__${developer.image.id}__}"
+                        th:src="@{/api/imagen/perfil/__${developer.id}__}"
                         alt="foto de perfil"
                 />
                 <div class="dropdown">
@@ -111,7 +111,7 @@
 
             <div class="card__father">
                 <div class="card">
-                    <div class="card__front" style="background-image: url(/images/pngwing.com.png);">
+                    <div class="card__front" style="background-image: url(/images/contadora.png);">
                         <div class="bg"></div>
                         <div class="body__card_front">
                             <h3>CONTADORES</h3>
@@ -131,7 +131,7 @@
 
             <div class="card__father">
                 <div class="card">
-                    <div class="card__front" style="background-image: url(/images/CALCULADORAIMPUES.png);">
+                    <div class="card__front" style="background-image: url(/images/calculadora1.png);">
                         <div class="bg"></div>
                         <div class="body__card_front">
                             <h4>CALCULADORA DE IMPUESTOS</h4>
@@ -150,7 +150,7 @@
 
             <div class="card__father">
                 <div class="card">
-                    <div class="card__front" style="background-image: url(/images/afiplogo.png);">
+                    <div class="card__front" style="background-image: url(/images/AFIP.png);">
                         <div class="bg"></div>
                         <div class="body__card_front">
                             <h3>SACAR MONOTRIBUTO</h3>
@@ -187,7 +187,7 @@
                         <div class="body__card_back">
                             <p>Navega el panorama fiscal con confianza: Mantente al día con las normativas y los
                                 impuestos que impactan en tu actividad.</p>
-                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Elige tu contador</a>
+                            <a class="button" th:href="@{/thymeleaf/normativa-impuestos}">Normativas e Impuestos</a>
 
                         </div>
                     </div>
@@ -196,7 +196,7 @@
 
             <div class="card__father">
                 <div class="card">
-                    <div class="card__front" style="background-image: url(/images/ULTIMASNOT.png);">
+                    <div class="card__front" style="background-image: url(/images/news.png);">
                         <div class="bg"></div>
                         <div class="body__card_front">
                             <h3>ULTIMAS NOTICIAS</h3>

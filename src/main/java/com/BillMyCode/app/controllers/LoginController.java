@@ -1,17 +1,14 @@
 package com.BillMyCode.app.controllers;
 
-import com.BillMyCode.app.entities.Accountant;
-import com.BillMyCode.app.entities.Developer;
-import com.BillMyCode.app.repositories.IDeveloperRepository;
 import com.BillMyCode.app.services.ImageService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -28,7 +25,6 @@ public class LoginController {
      * Metodo loginSuccess: En caso de una validacion correcta redirige al Usuario dependiendo de su rol
      *
      * @param request
-     *
      * @return: redirect:/thymeleaf/principaldevelopers Si el rol del Usuario es DEV,
      * redirect:/thymeleaf/principalaccounters Si el rol del Usuario es Accounter,
      * redirect:/padmin Si el rol del Usuario es Admin

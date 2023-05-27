@@ -30,20 +30,19 @@
             <a class="titulo" href="#seccion-4">Impuestos</a>
             <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
-                <div class="containers pe-3">
-
-                    <div class="nombres ">
-                        <span class="nombre">Raúl</span>
-                        <span class="apellido">Gómez</span>
+                <div class="containers me-3" >
+                    <div class="nombres">
+                        <span class="nombre" th:text="${developer.nombre}">Raúl</span>
+                        <span class="apellido" th:text="${developer.apellido}">Gómez</span>
                     </div>
                     <div class="formacion">
-                        <span class="especialidad">Full Stack</span>
-                        <span class="seniority">Junior</span>
+                        <span class="especialidad" th:text="${developer.especialidad}">Full Stack</span>
+                        <span class="seniority" th:text="${developer.seniority}">Junior</span>
                     </div>
                 </div>
                 <img
                         class="perfil-foto"
-                        src="/images/profile.png"
+                        th:src="@{/api/imagen/perfil/__${developer.id}__}"
                         alt="foto de perfil"
                 />
                 <div class="dropdown">
@@ -95,7 +94,7 @@
     <p>🟠 Obtén tu CUIT: Necesitarás contar con clave fiscal y solicitar tu CUIT. Puedes hacerlo ingresando al servicio
         de Inscripción Digital de AFIP.
         El trámite es completamente digital.<br>
-        ➡️<a href="https://serviciosweb.afip.gob.ar/publico/cuitOnline/default.aspx">CLICK AQUI</a> para obtener más
+        ➡️<a  class="linkear" href="https://serviciosweb.afip.gob.ar/publico/cuitOnline/default.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     <p>🟠 Inicia tu inscripción: Asegúrate de que cumples con los requisitos para realizar el trámite online en su
         totalidad. Si te encuentras en alguna de las
@@ -104,19 +103,19 @@
         la carga digital del formulario y solicitar un turno en la dependencia correspondiente a tu domicilio. </p><br>
     <p>🟠 Acepta los datos biométricos: Ingresa con tu clave fiscal al sistema "Aceptación de datos biométricos" y sigue
         las instrucciones para aceptar tus datos
-        biométricos.<br>➡️<a href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=146">CLICK
+        biométricos.<br>➡️<a  class="linkear" href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=146">CLICK
             AQUI</a> para obtener más información. </p><br>
     </p>
     <p>🟠 Declara tu Domicilio Fiscal Electrónico: Accede al servicio "Domicilio Fiscal Electrónico" desde la página
         principal de AFIP con tu clave fiscal para adherirte
         al servicio. También puedes realizar este trámite desde el portal correspondiente. <br>➡️<a
-                href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=81">CLICK AQUI</a> para
+                class="linkear"  href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=81">CLICK AQUI</a> para
         obtener más información. </p><br>
     </p>
     <p>🟠 Declara tus actividades económicas: Ingresa con tu clave fiscal al servicio "Sistema Registral" - "Registro
         Tributario" y elige la opción "Actividades".
         Indica la o las actividades que vas a desarrollar y consulta el Listado y buscador de actividades en caso de
-        dudas. <br>➡️<a href="https://servicios1.afip.gob.ar/genericos/nomencladorActividades/index.aspx">CLICK AQUI</a>
+        dudas. <br>➡️<a  class="linkear" href="https://servicios1.afip.gob.ar/genericos/nomencladorActividades/index.aspx">CLICK AQUI</a>
         para obtener más información. </p><br>
     </p>
 
@@ -124,30 +123,30 @@
     <h5>⚠️Alta de monotributo:</h5><br>
     <p>✅ Una vez completados estos pasos, podrás iniciar el alta en el monotributo. Aquí tienes los pasos adicionales
         que deberás seguir.<br>
-        ➡️<a href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Index.aspx">CLICK AQUI</a> para obtener más
+        ➡️<a  class="linkear" href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Index.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     <p>🟡 Tipo de monotributo: Selecciona el tipo de monotributo que corresponda a tu situación, dependiendo de si eres
         trabajador independiente, miembro de una cooperativa, trabajador independiente
         promovido, monotributo social, régimen simplificado especial o monotributo unificado.<br>➡️<a
-                href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso1.aspx">CLICK AQUI</a> para obtener más
+                class="linkear"   href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso1.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     </p>
     <p>🟡 Caracterización de actividades: Indica las actividades que vas a realizar, las fechas, los montos de
         facturación y los datos de tus locales. Asegúrate de tener previamente
         declaradas estas actividades en el Sistema Registral de AFIP. <br>➡️<a
-                href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso2.aspx">CLICK AQUI</a> para obtener más
+                class="linkear"   href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso2.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     </p>
     <p>🟡 DAportes jubilatorios: Indica si te corresponde pagar aportes jubilatorios y sigue las instrucciones según tu
         situación laboral (trabajador independiente, miembro de una cooperativa,
         trabajador independiente promovido, jubilado, etc.) <br>➡️<a
-                href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso3.aspx">CLICK AQUI</a> para obtener más
+                class="linkear"    href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso3.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     </p>
     <p>🟡 Obra social: Elige y paga tu obra social, si corresponde. Asegúrate de informarte sobre las coberturas y
         afiliación con centros médicos cercanos a tu domicilio. También puedes consultar
         el listado de obras sociales de la Superintendencia de Servicios de Salud <br>➡️<a
-                href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso4.aspx">CLICK AQUI</a> para obtener más
+                class="linkear"    href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso4.aspx">CLICK AQUI</a> para obtener más
         información. </p><br>
     </p>
     <p>🟡 Declaración jurada de salud: Completa y presenta la declaración jurada 300/97 en una oficina de ANSES. Esto es
@@ -174,7 +173,7 @@
     </p>
     <p>✅ Podés pagar hasta el día 20 de cada mes, generando un volante electrónico de pago (VEP) desde este mismo sitio.
         <br>
-        ➡️<a href="https://monotributo.afip.gob.ar/Public/Ayuda/Sitio/Pagos.aspx">CLICK AQUI</a> para obtener más
+        ➡️<a  class="linkear" href="https://monotributo.afip.gob.ar/Public/Ayuda/Sitio/Pagos.aspx">CLICK AQUI</a> para obtener más
         información. </p>
     </p><br>
 </div>

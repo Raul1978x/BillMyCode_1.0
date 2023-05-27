@@ -166,10 +166,5 @@ public class AccountantController {
 
     }
 
-    @GetMapping("/card-accountant")
-    public String callCardAccountant(ModelMap model) {
-        List<Accountant> accountants = accountantService.searchAllAccounters();
-        model.put("accountants", accountants);
-        return "contadorescard";
-    }
+
 }
