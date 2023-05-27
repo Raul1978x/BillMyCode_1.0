@@ -159,7 +159,7 @@ footer {
     color: #000000;
   }
 
-
+/*navbar*/
   .bill_my_code {
     color: white;
     width: 100%;
@@ -209,6 +209,13 @@ footer {
       right: 0;
       left: auto;
     }
+     .containers {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
   /*------------------------*/
 /* card */
   .card__father{
