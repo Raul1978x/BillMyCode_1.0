@@ -3,6 +3,7 @@ package com.BillMyCode.app.controllers;
 import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
+import com.BillMyCode.app.entities.User;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.CommentService;
@@ -11,6 +12,9 @@ import com.BillMyCode.app.services.ImageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/thymeleaf")
@@ -40,34 +45,35 @@ public class DeveloperController {
 
     @GetMapping("/principal-developers")
     public String getViewCreateDeveloper(HttpSession request, ModelMap model) {
-        Developer developer= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",developer);
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",logueado);
         return "principaldevelopers";
     }
 
     @GetMapping("/monotributo")
     public String getViewMonotributo(HttpSession request, ModelMap model) {
-        Developer developer= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",developer);
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",logueado);
         return "monotributo";
     }
 
     @GetMapping("/faq")
     public String getViewFaq(HttpSession request, ModelMap model) {
-        Developer developer= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",developer);
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",logueado);
         return "faq";
     }
     @GetMapping("/normativa-impuestos")
     public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
-        Developer developer= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",developer);
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",logueado);
         return "normativa-impuestos";
     }
     @GetMapping("/card-accountant")
     public String callCardAccountant(HttpSession request, ModelMap model) {
-        Developer developer= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",developer);
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",logueado);
+        System.out.println(logueado.getNombre()+"AAAAAAAAAAAAAAAAAAAAAAAAAA");
         List<Accountant> accountants = accountantService.searchAllAccounters();
         model.put("accountants", accountants);
         return "contadorescard";
@@ -177,14 +183,23 @@ public class DeveloperController {
                                   @RequestParam(required = false) String especialidad,
                                   @RequestParam(required = false) String descripcion,
                                   @RequestParam(required = false) String comentario,
-                                  ModelMap model
+                                  ModelMap model,
+                                  HttpSession request
     ) throws MiException, ParseException {
 
         try {
             model.put("exito", "el developer fue editado exitosamente");
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
-            return "redirect:/thymeleaf/table-developers";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List<String> roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            if (roles.contains("ROLE_ADMIN")) {
+                return "redirect:/thymeleaf/admin-lista-developer";
+            }else {
+                return "redirect:/thymeleaf/principal-developers";
+            }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

@@ -72,7 +72,7 @@ public class AccountantController {
      * @param telefono
      * @param honorarios
      * @param matricula
-     * @param especializaciones
+     * @param especializacion
      * @param developers
      * @throws: MiException
      * @throws: ParseException
@@ -140,7 +140,7 @@ public class AccountantController {
      * @throws: ParseException
      */
     @PutMapping("/accountant/{id}")
-    public String updateDeveloper(@PathVariable Long id,
+    public String updateAccountant(@PathVariable Long id,
                                   @RequestParam(required = false) MultipartFile archivo,
                                   @RequestParam(required = false) String nombre,
                                   @RequestParam(required = false) String apellido,
@@ -162,10 +162,10 @@ public class AccountantController {
             accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     genero, telefono, password, newpassword, especializacion, matricula, honorarios);
             model.put("exito", "El Contador fue creado exitosamente");
-            return "login.html";
+            return "redirect:/thymeleaf/principal-accountant";
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            return "crear-cuenta-contador.html";
+            throw new RuntimeException(e);
         }
 
     }
