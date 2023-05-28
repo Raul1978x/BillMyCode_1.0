@@ -30,21 +30,19 @@
             <a class="titulo" href="#seccion-4">Impuestos</a>
             <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
-                <div class="containers pe-3">
-
-                    <div class="nombres ">
-                        <span class="nombre">Raúl</span>
-                        <span class="apellido">Gómez</span>
+                <div class="containers me-3" >
+                    <div class="nombres">
+                        <span class="nombre" th:text="${developer.nombre}">Raúl</span>
+                        <span class="apellido" th:text="${developer.apellido}">Gómez</span>
                     </div>
                     <div class="formacion">
-                        <span class="especialidad">Full Stack</span>
-                        <span class="seniority">Junior</span>
+                        <span class="especialidad" th:text="${developer.especialidad}">Full Stack</span>
+                        <span class="seniority" th:text="${developer.seniority}">Junior</span>
                     </div>
                 </div>
-
                 <img
                         class="perfil-foto"
-                        src="/images/profile.png"
+                        th:src="@{/api/imagen/perfil/__${developer.id}__}"
                         alt="foto de perfil"
                 />
                 <div class="dropdown">

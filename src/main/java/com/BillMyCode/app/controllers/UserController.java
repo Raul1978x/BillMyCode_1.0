@@ -77,14 +77,5 @@ public class UserController {
     public String viewDevelopers() {
         return "principaldevelopers";
     }
-
-    /**
-     * Metodo viewAccounters: Redirige a principalaccounter.html
-     *
-     * @return: principalaccounter
-     */
-    @GetMapping("/principalaccounters")
-    public String viewAccounters() {
-        return "principalaccounter";
-    }
 }
+

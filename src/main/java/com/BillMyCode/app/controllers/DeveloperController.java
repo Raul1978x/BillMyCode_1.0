@@ -1,8 +1,10 @@
 package com.BillMyCode.app.controllers;
 
+import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.exceptions.MiException;
+import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
 import com.BillMyCode.app.services.ImageService;
@@ -27,6 +29,9 @@ public class DeveloperController {
     private DeveloperService developerService;
 
     @Autowired
+    private AccountantService accountantService;
+
+    @Autowired
     private ImageService imageService;
 
     @Autowired
@@ -41,15 +46,32 @@ public class DeveloperController {
     }
 
     @GetMapping("/monotributo")
-    public String getViewMonotributo() {
+    public String getViewMonotributo(HttpSession request, ModelMap model) {
+        Developer developer= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",developer);
         return "monotributo";
     }
 
     @GetMapping("/faq")
-    public String getViewFaq() {
+    public String getViewFaq(HttpSession request, ModelMap model) {
+        Developer developer= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",developer);
         return "faq";
     }
-
+    @GetMapping("/normativa-impuestos")
+    public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
+        Developer developer= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",developer);
+        return "normativa-impuestos";
+    }
+    @GetMapping("/card-accountant")
+    public String callCardAccountant(HttpSession request, ModelMap model) {
+        Developer developer= (Developer) request.getAttribute("sessionuser");
+        model.put("developer",developer);
+        List<Accountant> accountants = accountantService.searchAllAccounters();
+        model.put("accountants", accountants);
+        return "contadorescard";
+    }
     @GetMapping("/login-bmc")
     public String login() {
         return "login.html";
@@ -125,17 +147,11 @@ public class DeveloperController {
      *
      * @return: ResponseEntity<List < Developer>>
      */
-    @GetMapping("/table-developers")
-    public String listaDevelopers(ModelMap model) {
-        List<Developer> developers = developerService.listDevelopers();
-        model.put("developers", developers);
-        return "listadedevelopers";
-    }
 
     @GetMapping("/developers/delete/{id}")
     public String deleteDeveloper(@PathVariable Long id) {
         developerService.deleteDeveloperById(id);
-        return "redirect:/thymeleaf/table-developers";
+        return "redirect:/thymeleaf/lista-developers";
     }
 
     @GetMapping("/developers/edit/{id}")
@@ -173,4 +189,6 @@ public class DeveloperController {
             throw new RuntimeException(e);
         }
     }
+
+
 }
