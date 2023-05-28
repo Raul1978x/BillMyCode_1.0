@@ -41,7 +41,8 @@ public class Company {
     private Image logo;
     @OneToMany
     private List<Developer> developer;
-    private Double reputacion;
+    @OneToOne
+    private Reputacion reputacion;
     @OneToMany
     private List<Comment> comment;
     private Boolean status;

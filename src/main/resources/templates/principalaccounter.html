@@ -23,91 +23,9 @@
 </head>
 
 <body>
-<navbar>
-    <nav class="navbar bill_my_code" data-bs-theme="dark">
-        <div class="logo-container">
-            <a th:href="@{/thymeleaf/principal-accountant}">
-                <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
-            </a>
-        </div>
-        <nav class="header-nav centrar">
-            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
-            <a class="titulo" href="#seccion-3">Normativa</a>
-            <a class="titulo" href="#seccion-4">Impuestos</a>
-            <a class="titulo" href="#seccion-5">Contactanos</a> -->
-            <div class="perfil-menu">
-                <div class="perfil-menu">
-                    <div class="containers me-3">
-                        <div class="nombres">
-                            <span class="nombre" th:text="${accountant.nombre}">Raúl</span>
-                            <span class="apellido" th:text="${accountant.apellido}">Gómez</span>
-                        </div>
-                        <div class="formacion">
-                            <span class="especialidad" th:text="${accountant.especializacion}">Full Stack</span>
-                        </div>
-                    </div>
-                    <img
-                            class="perfil-foto"
-                            th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}"
-                            alt="foto de perfil"
-                    />
-                    <div class="dropdown">
-                        <button class="dropdown-button">
-                            <!-- <img
-                                     class="icono"
-                                     src="/images/billmycodelogosimp.png"
-                                     alt="icono menu"
-                             />-->
-                            <div>Menu</div>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
-                                    <a class="dropdown-item" th:href="@{/thymeleaf/accountant/edit/{id}(id=${accountant.id})}">
-                                    <!--
-                                                                    <input type="hidden" name="id" th:value="${developer.id}"/>
-                                    -->
-                                    <img
-                                            class="icono"
-                                            src="/images/update.png"
-                                            alt="icono volver"
-                                    />
-                                    Editar Perfil
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" th:href="@{/logout}">
-                                    <img
-                                            class="icono"
-                                            src="/images/logout.png"
-                                            alt="icono logout"
-                                    />
-                                    Cerrar Sesión
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </nav>
-</navbar>
-<section>
-    <nav class="navbar justify-content-center mb-0" data-bs-theme="dark">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dolar Blue ↗ $487,00 / $498,00</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dolar Oficial = $245,00 / 248.00</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dolar Tecno ↗ $490,00 / $495,00</a>
-            </li>
 
-        </ul>
-    </nav>
-</section>
+<nav th:replace = "/fragments/navbar.html :: navbar" ></nav>
+<nav th:replace = "/fragments/dolar.html :: dolar"></nav>
 
 <section class="section-container seccion-2 mt-0">
     <main class="seccion-1">
@@ -123,10 +41,9 @@
                     </div>
                     <div class="card__back">
                         <div class="body__card_back">
-                            <p>Aquí encontrarás ayuda experta y completa para una amplia gama de necesidades contables y
-                                financieras. Potencia tu éxito digital con nuestros servicios contables, confiables y
-                                adaptados a desarrolladores web</p>
-                            <a class="button" th:href="@{/thymeleaf/lista-developers}">Elige tu contador</a>
+                            <p>Aquí encontrarás la lista completa de todos nuestros clientes con algunos de sus datos
+                                para que puedas acesorarlos y responder a sus inquietudes</p>
+                            <a class="button" th:href="@{/thymeleaf/lista-developers}">Lista de Developers</a>
                         </div>
                     </div>
                 </div>
@@ -143,10 +60,9 @@
                     </div>
                     <div class="card__back">
                         <div class="body__card_back">
-                            <p>Calcula con precisión tu contribución. Utiliza nuestra calculadora del importe a
-                                pagar
-                                del monotributo y conoce el monto exacto que debes abonar.</p>
-                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Elige tu contador</a>
+                            <p>Responde todas las consultas de tus clientes, destácate sobre tus colegas y suma
+                                desarrolladores a tu cartera de clientes.</p>
+                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Responde</a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +80,7 @@
                         <div class="body__card_back">
                             <p>Mantente actualizado: Obtén las últimas novedades sobre políticas y eventos económicos
                                 que pueden impactar tu actividad</p>
-                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Elige tu contador</a>
+                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Ultimas Noticias</a>
                         </div>
                     </div>
                 </div>
@@ -182,7 +98,7 @@
                         <div class="body__card_back">
                             <p>Navega el panorama fiscal con confianza: Mantente al día con las normativas y los
                                 impuestos que impactan en tu actividad.</p>
-                            <a class="button" th:href="@{/thymeleaf/normativa-impuestos}">Normativas e Impuestos</a>
+                            <a class="button" th:href="@{/thymeleaf/accountant/normativa-impuestos}">Normativas e Impuestos</a>
 
                         </div>
                     </div>
@@ -202,7 +118,7 @@
                             <p>Calcula con precisión tu contribución. Utiliza nuestra calculadora del importe a
                                 pagar
                                 del monotributo y conoce el monto exacto que debes abonar.</p>
-                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Elige tu contador</a>
+                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Accede a la calculadora</a>
                         </div>
                     </div>
                 </div>
@@ -220,7 +136,7 @@
                         <div class="body__card_back">
                             <p>Monotributo a tu alcance: Pasos sencillos para la inscripción. Gana tranquilidad,
                                 seguridad y libertad para enfocarte en tu código.</p>
-                            <a class="button" th:href="@{/thymeleaf/monotributo}">Sacar Monotributo</a>
+                            <a class="button" th:href="@{/thymeleaf/accountant/monotributo}">Sacar Monotributo</a>
                         </div>
                     </div>
                 </div>
@@ -229,37 +145,37 @@
 
         </div>
     </main>
-
-    <footer class="mt-5">
-        <div class="caja_footer div-icono_container">
-            <div class="iconos_redes">
-                <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
-                                                                                     src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
-                                                                                     alt=""></a>
-                <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
-                        class="icono-container"
-                        src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
-                                                                              src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
-                                                                              alt=""></a>
-                <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
-                        class="icono-container"
-                        src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
-                        class="icono-container"
-                        src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
-                                                                         src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
-                                                                         alt=""></a>
-            </div>
+</section>
+<footer class="mt-5">
+    <div class="caja_footer div-icono_container">
+        <div class="iconos_redes">
+            <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
+                                                                                 src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
+                                                                                 alt=""></a>
+            <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
+                                                                          src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
+                                                                          alt=""></a>
+            <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
+                    class="icono-container"
+                    src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
+                                                                     src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
+                                                                     alt=""></a>
         </div>
-        <div class="caja_footer copyright">
-            <h7>Todos los derechos reservados. Copyright 2023</h7>
-        </div>
-    </footer>
+    </div>
+    <div class="caja_footer copyright">
+        <h7>Todos los derechos reservados. Copyright 2023</h7>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
 </html>

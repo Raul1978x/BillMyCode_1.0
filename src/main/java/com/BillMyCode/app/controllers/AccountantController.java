@@ -184,4 +184,18 @@ public class AccountantController {
         model.addAttribute("logueado",logueado);
         return "listadedevelopers";
     }
+
+    @GetMapping("accountant/normativa-impuestos")
+    public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
+        Accountant accountant= (Accountant) request.getAttribute("sessionuser");
+        model.put("accountant",accountant);
+        return "normativa-impuestos";
+    }
+
+    @GetMapping("accountant/monotributo")
+    public String getViewMonotributo(HttpSession request, ModelMap model) {
+        Accountant accountant= (Accountant) request.getAttribute("sessionuser");
+        model.put("accountant",accountant);
+        return "monotributo";
+    }
 }
