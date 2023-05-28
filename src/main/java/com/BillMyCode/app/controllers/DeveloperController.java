@@ -147,17 +147,11 @@ public class DeveloperController {
      *
      * @return: ResponseEntity<List < Developer>>
      */
-    @GetMapping("/table-developers")
-    public String listaDevelopers(ModelMap model) {
-        List<Developer> developers = developerService.listDevelopers();
-        model.put("developers", developers);
-        return "listadedevelopers";
-    }
 
     @GetMapping("/developers/delete/{id}")
     public String deleteDeveloper(@PathVariable Long id) {
         developerService.deleteDeveloperById(id);
-        return "redirect:/thymeleaf/table-developers";
+        return "redirect:/thymeleaf/lista-developers";
     }
 
     @GetMapping("/developers/edit/{id}")
@@ -195,4 +189,6 @@ public class DeveloperController {
             throw new RuntimeException(e);
         }
     }
+
+
 }

@@ -26,129 +26,160 @@
     />
     <title>Bill My Code</title>
     <link rel="shortcut icon" href="/images/billmycodelogosimp.png"/>
-    <link rel="stylesheet" href="/css/shared.css"/>
-    <link rel="stylesheet" href="/css/principaldevelopers.css"/>
+    <link rel="stylesheet" href="/css/tablas.css"/>
 </head>
 
 <body>
 <div class="d-flex flex-column min-vh-100">
-<header>
-    <div class="logo-container">
-        <a th:href="@{/}">
-            <img src="/images/billmycodelogo.png" alt="logo de empresa"/>
-        </a>
-    </div>
+    <navbar>
+        <nav class="navbar bill_my_code" data-bs-theme="dark">
+            <div class="logo-container">
+                <a th:href="@{/thymeleaf/principal-accountant}">
+                    <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
+                </a>
+            </div>
+            <nav class="header-nav centrar">
+                <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
+                <a class="titulo" href="#seccion-3">Normativa</a>
+                <a class="titulo" href="#seccion-4">Impuestos</a>
+                <a class="titulo" href="#seccion-5">Contactanos</a> -->
+                <div class="perfil-menu">
+                    <div class="perfil-menu">
+                        <div class="containers me-3">
+                            <div class="nombres">
+                                <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                                <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
+                            </div>
+                            <div class="formacion">
+                                <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
 
-    <nav class="header-nav">
-        <a href="#seccion-2">ACCOUNTER</a>
-        <button class="btn" type="button" th:href="@{/logout}">salir</button>
-    </nav>
-</header>
-    <main class="flex-grow-1">
-    <div class="container">
-        <div class=" bg-warning bg-opacity-50">
-            <div class="">
-                <table class="table-dark">
+                            </div>
+                        </div>
+                        <img
+                                class="perfil-foto"
+                                th:src="@{/api/imagen/perfil-accountant/__${logueado.id}__}"
+                                alt="foto de perfil"
+                        />
+                        <div class="dropdown">
+                            <button class="dropdown-button">
+                                <!-- <img
+                                         class="icono"
+                                         src="/images/billmycodelogosimp.png"
+                                         alt="icono menu"
+                                 />-->
+                                <div>Menu</div>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="/thymeleaf/developer/edit/{id}">
+                                        <!--
+                                                                        <input type="hidden" name="id" th:value="${developer.id}"/>
+                                        -->
+                                        <img
+                                                class="icono"
+                                                src="/images/update.png"
+                                                alt="icono volver"
+                                        />
+                                        Editar Perfil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/logout}">
+                                        <img
+                                                class="icono"
+                                                src="/images/logout.png"
+                                                alt="icono logout"
+                                        />
+                                        Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </nav>
+    </navbar>
+
+
+<h4>Tabla de Developers</h4>
+                <table class="table table-dark table-striped container my-5 caja-sombra">
                     <thead>
                     <tr class="table-dark">
+                        <th scope="col">Imagen</th>
+                        <th scope="col">email</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Imagen</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Seniority</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Salario</th>
+<!--                        <th scope="col">Acciones</th>-->
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr class="table-dark" th:each="developer: ${developers}">
-                        <td scope="row" th:text="${developer.nombre}">Nombre</td>
-                        <td scope="row" th:text="${developer.apellido}">Apellido</td>
-                        <td scope="row" th:text="${developer.rol}">Rol</td>
+                    <tbody class="">
+                    <tr class="table-dark" th:each="developer: ${developerList}">
                         <td scope="row">
                             <img width="50em" th:src="@{/api/imagen/perfil/__${developer.id}__}"/>
                         </td>
+                        <td scope="row" th:text="${developer.email}">Email</td>
+                        <td scope="row" th:text="${developer.nombre}">Nombre</td>
+                        <td scope="row" th:text="${developer.apellido}">Apellido</td>
                         <td scope="row" th:text="${developer.especialidad}">
                             Especialidad
                         </td>
                         <td scope="row" th:text="${developer.seniority}">Seniority</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li list-item>
-                                    <a th:href="@{/thymeleaf/developers/delete/__${developer.id}__}"
-                                       class="text-dark text-decoration-none">❌</a>
+                        <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
 
-                                    <a th:href="@{/thymeleaf/developers/edit/__${developer.id}__}"
-                                       class="text-dark text-decoration-none">🪶</a>
-                                </li>
-                            </ul>
-                        </td>
+<!--                        <td>-->
+<!--                           &lt;!&ndash; <ul class="list-unstyled">-->
+<!--                                <li list-item>-->
+<!--                                    <a th:href="@{/thymeleaf/developers/delete/__${developer.id}__}"-->
+<!--                                       class="text-dark text-decoration-none">❌</a>-->
+
+<!--                                    <a th:href="@{/thymeleaf/developers/edit/__${developer.id}__}"-->
+<!--                                       class="text-dark text-decoration-none">🪶</a>-->
+<!--                                </li>-->
+<!--                            </ul>&ndash;&gt;-->
+<!--                        </td>-->
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
-    </main>
 
-<footer class="mt-auto">
-    <div class="caja_footer div-icono_container mt-auto">
-        <div class="iconos_redes">
-            <a href="https://www.instagram.com/billmycode/" target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-            <a
-                    href="https://www.facebook.com/profile.php?id=100092744287858"
-                    target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-            <a href="https://twitter.com/Billmycode" target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-            <a
-                    href="https://www.linkedin.com/in/billmycode-argentina-24a260277/"
-                    target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-            <a
-                    href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA"
-                    target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-            <a href="https://www.whatsapp.com/" target="_blank"
-            ><img
-                    class="icono-container"
-                    src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
-                    alt=""
-            /></a>
-        </div>
+  <!--      </div>
     </div>
-</footer>
-<div class="caja_footer copyright">
-    <h7>Todos los derechos reservados. Copyright 2023</h7>
-</div>
-</div>
+    </main>-->
 
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"
-></script>
+    <footer class="mt-5">
+        <div class="caja_footer div-icono_container">
+            <div class="iconos_redes">
+                <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
+                                                                                     src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
+                                                                                     alt=""></a>
+                <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
+                        class="icono-container"
+                        src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+                <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
+                                                                              src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
+                                                                              alt=""></a>
+                <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
+                        class="icono-container"
+                        src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+                <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
+                        class="icono-container"
+                        src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
+                                                                         src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
+                                                                         alt=""></a>
+            </div>
+        </div>
+        <div class="caja_footer copyright">
+            <h7>Todos los derechos reservados. Copyright 2023</h7>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
 </body>
 </html>
-<script src="./funciones.js"></script>

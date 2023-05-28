@@ -7,6 +7,8 @@ import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IImageRepository;
 import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.CommentService;
+import com.BillMyCode.app.services.DeveloperService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ public class AccountantController {
 
     @Autowired
     private AccountantService accountantService;
+    @Autowired
+    private DeveloperService developerService;
 
     @Autowired
     private IImageRepository imageRepository;
@@ -166,5 +170,18 @@ public class AccountantController {
 
     }
 
-
+    @GetMapping("/principal-accountant")
+    public String viewAccounters(HttpSession request, ModelMap model) {
+        Accountant accountant= (Accountant) request.getAttribute("sessionuser");
+        model.put("accountant",accountant);
+        return "principalaccounter";
+    }
+    @GetMapping("/lista-developers")
+    public String listDeveloper(HttpSession request, ModelMap model){
+        List<Developer> developerList = developerService.listDevelopers();
+        model.put("developerList", developerList);
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.addAttribute("logueado",logueado);
+        return "listadedevelopers";
+    }
 }

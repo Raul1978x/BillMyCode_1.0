@@ -41,7 +41,7 @@ public class LoginController {
         } else if (roles.contains("ROLE_DEV")) {
             return "redirect:/thymeleaf/principal-developers";
         } else {
-            return "redirect:/thymeleaf/principalaccounters";
+            return "redirect:/thymeleaf/principal-accountant";
         }
     }
 
