@@ -7,12 +7,6 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,25 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DeveloperService implements UserDetailsService {
+public class DeveloperService {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private CommentService commentService;
     @Autowired
     private IDeveloperRepository repositorio;
-
     @Autowired
     private ImageService imageService;
 
     /**
-     * Metodo listDevelopers() devuelve la lista de todos los Developers.
+     * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
      *
      * @return List<Developers>
      */
@@ -48,18 +40,18 @@ public class DeveloperService implements UserDetailsService {
     }
 
     /**
-     * Metodo searchDeveloperById(id) devuelve el Developer según su id.
+     * Metodo searchDeveloperById(id): Devuelve el Developer según una id.
      *
      * @param id
      * @return Developer
      */
     @Transactional(readOnly = true)
-    public Developer seachDeveloperById(Long id) {
+    public Developer searchDeveloperById(Long id) {
         return repositorio.findById(id).get();
     }
 
     /**
-     * Método deleteDeveloperById(id) borra Developer según su id.
+     * Método deleteDeveloperById(id): Borra Developer según una id.
      *
      * @param id
      */
@@ -68,6 +60,26 @@ public class DeveloperService implements UserDetailsService {
         repositorio.deleteById(id);
     }
 
+    /**
+     * Metodo createDeveloper: Crea un developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void createDeveloper(MultipartFile archivo,
                                 String nombre,
@@ -76,6 +88,7 @@ public class DeveloperService implements UserDetailsService {
                                 String nacionalidad,
                                 Date fechaNacimiento,
                                 String password,
+                                String newpassword,
                                 String genero,
                                 String telefono,
                                 Double salario,
@@ -83,11 +96,11 @@ public class DeveloperService implements UserDetailsService {
                                 String especialidad,
                                 String descripcion,
                                 Comment comentario
-    ) throws MiException, ParseException {
+    ) throws MiException {
 
 
-        validate(nombre, apellido, email, nacionalidad, fechaNacimiento, password, genero, telefono,
-                salario, seniority, especialidad, descripcion, comentario);
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
+
         String cryptPassword = passwordEncoder.encode(password);
 
         Developer developer = new Developer();
@@ -113,6 +126,27 @@ public class DeveloperService implements UserDetailsService {
         repositorio.save(developer);
     }
 
+    /**
+     * Metodo updateDeveloper: Actualiza los datos de un developer
+     *
+     * @param id
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @Transactional
     public void updateDeveloper(Long id,
                                 MultipartFile archivo,
@@ -165,7 +199,7 @@ public class DeveloperService implements UserDetailsService {
 
 
     /**
-     * getDeveloperBySeniority(seniority) busca la lista de todos los
+     * getDeveloperBySeniority(seniority): Busca la lista de todos los
      * Developers con el mismo grado de seniority
      *
      * @param seniority
@@ -177,91 +211,64 @@ public class DeveloperService implements UserDetailsService {
     }
 
     /**
-     * validate(params) valida que los valores ingresados se cargen conforme a las
+     * Metodo validate: valida que los valores ingresados se cargen conforme a las
      * necesidades de la aplicacion
      *
      * @param salario
      * @param seniority
      * @param especialidad
-     * @param descripcion
-     * @param comentario
      */
     public void validate(String nombre,
                          String apellido,
                          String email,
                          String password,
+                         String newpassword,
                          Date fechaNacimiento,
                          String genero,
                          String telefono,
                          String nacionalidad,
                          Double salario,
                          String seniority,
-                         String especialidad,
-                         String descripcion,
-                         Comment comentario) {
+                         String especialidad
+    ) throws MiException {
 
-        if (nombre.isEmpty() || nombre == "") {
-            System.out.println("El nombre no puede ser nulo o estar vacio");
+        if (nombre.isBlank() || nombre.isEmpty()) {
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
         }
-        if (apellido.isEmpty() || apellido == "") {
-            System.out.println("El apellido no puede ser nulo o estar vacio");
+        if (apellido.isBlank() || apellido.isEmpty()) {
+            throw new MiException("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isEmpty() || email == "") {
-            System.out.println("El email no puede ser nulo o estar vacio");
+        if (email.isBlank() || email.isEmpty()) {
+            throw new MiException("El email no puede ser nulo o estar vacio");
         }
-        if (password.isEmpty() || password == "") {
-            System.out.println("La contraseña no puede ser nula o estar vacia");
+        if (password.isBlank() || password.isEmpty()) {
+            throw new MiException("La contraseña no puede ser nula o estar vacia");
         }
-        /*
-         * if (password2.isEmpty() || (!password2.equals(password))) {
-         * System.out.
-         * println("La contraseña no puede estar vacia o ser distinta a la anterior");
-         * }
-         */
+
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("La contraseña no puede estar vacia o ser distinta a la anterior");
+        }
         if (fechaNacimiento == null) {
-            System.out.println("La fecha de nacimiento no puede estar vacia");
+            throw new MiException("La fecha de nacimiento no puede estar vacia");
         }
-        if (genero.isEmpty() || genero == "") {
-            System.out.println("El genero no puede ser nulo o estar vacio");
+        if (genero.isBlank() || genero.isEmpty()) {
+            throw new MiException("El genero no puede ser nulo o estar vacio");
         }
-        if (nacionalidad.isEmpty() || nacionalidad == "") {
-            System.out.println("La nacionalidad no puede ser nula o estar vacia");
+        if (nacionalidad.isBlank() || nacionalidad.isEmpty()) {
+            throw new MiException("La nacionalidad no puede ser nula o estar vacia");
         }
-        if (telefono.isEmpty() || telefono == "") {
-            System.out.println("El telefono no puede ser nulo o estar vacio");
+        if (telefono.isBlank() || telefono.isEmpty()) {
+            throw new MiException("El telefono no puede ser nulo o estar vacio");
         }
 
         if (salario == null) {
-            System.out.println("El salario no puede ser nulo o estar vacio");
+            throw new MiException("El salario no puede ser nulo o estar vacio");
         }
-        if (seniority.isEmpty() || seniority == "") {
-            System.out.println("La seniority no puede ser nula o estar vacia");
+        if (seniority.isBlank() || seniority == "") {
+            throw new MiException("La seniority no puede ser nula o estar vacia");
         }
-        if (especialidad.isEmpty() || especialidad == "") {
-            System.out.println("La especialidad no puede ser nula o estar vacia");
-        }
-        if (descripcion == null) {
-            System.out.println("La descripcion no puede ser nula o estar vacia");
-        }
-        if (comentario == null) {
-            System.out.println("El comentario no puede ser nulo");
+        if (especialidad.isBlank() || especialidad == "") {
+            throw new MiException("La especialidad no puede ser nula o estar vacia");
         }
     }
-
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Developer usuario = repositorio.seachByEmail(email);
-        if (usuario == null) {
-            throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
-        }
-        List<GrantedAuthority> permisos = new ArrayList<>();
-        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
-        System.out.println(permisos);
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getPassword())
-                .authorities(permisos)
-                .build();
-    }
-}
+};

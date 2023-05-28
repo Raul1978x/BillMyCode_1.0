@@ -269,4 +269,24 @@ footer {
   width: 100%;
   padding: 8px;
 }
+/* Animación para ocultar los carteles después de 7 segundos (7000 ms) */
+@keyframes hideCard {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    99% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Estilo inicial de los carteles */
+.borrarcarta {
+    animation: hideCard 7s forwards;
+}
 

@@ -5,19 +5,12 @@ import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +19,7 @@ import java.util.List;
 @Service
 public class AccountantService  {
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAccountantRepository repositorio;
     @Autowired
@@ -43,9 +36,8 @@ public class AccountantService  {
     }
 
     /**
-     * Metodo searchAccounterById(id) devuelve el Contador según su id.
+     * Metodo searchAccounterById(id) devuelve el Contador según una id.
      *
-     * @param id
      * @return Developer
      */
     @Transactional(readOnly = true)
@@ -54,15 +46,19 @@ public class AccountantService  {
     }
 
     /**
-     * Método deleteAccounterById(id) borra el Contador según su id.
+     * Método deleteAccounterById(id) borra un Contador según una id.
      *
-     * @param id
      */
     @Transactional
     public void deleteAccounterById(Long id) {
         repositorio.deleteById(id);
     }
 
+    /**
+     * Metodo crearContador: Crea un Contador
+     *
+     * @throws: MiException
+     */
     @Transactional
     public void crearContador(MultipartFile archivo,
                               String nombre,
@@ -73,12 +69,14 @@ public class AccountantService  {
                               String genero,
                               String telefono,
                               String password,
-                              String especializaciones,
+                              String newpassword,
+                              String especializacion,
                               String matricula,
                               Double honorarios
     ) throws MiException {
 
-        validate(nombre, email, especializaciones);
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
+
         String cryptPassword = passwordEncoder.encode(password);
 
         Accountant contador = new Accountant();
@@ -90,7 +88,7 @@ public class AccountantService  {
         contador.setPassword(cryptPassword);
         contador.setGenero(genero);
         contador.setTelefono(telefono);
-        contador.setEspecializaciones(especializaciones);
+        contador.setEspecializacion(especializacion);
         contador.setMatricula(matricula);
         contador.setHonorarios(honorarios);
         contador.setStatus(true);
@@ -103,7 +101,11 @@ public class AccountantService  {
 
     }
 
-
+    /**
+     * Metodo updateAccountant: Actualiza los datos de un Contador
+     *
+     * @throws: MiException
+     */
     @Transactional
     public void updateAccountant(Long id,
                                  MultipartFile archivo,
@@ -115,15 +117,17 @@ public class AccountantService  {
                                  String genero,
                                  String telefono,
                                  String password,
-                                 String especializaciones,
+                                 String newpassword,
+                                 String especializacion,
                                  String matricula,
-                                 Double honorarios) throws MiException {
+                                 Double honorarios
+    ) throws MiException {
 
         Accountant contador = searchAccounterById(id);
         String cryptPassword = passwordEncoder.encode(password);
 
         if (contador != null && contador.getId().equals(id)) {
-            validate(nombre, email, especializaciones);
+            validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
 
 
 
@@ -137,7 +141,7 @@ public class AccountantService  {
             contador.setTelefono(telefono);
             contador.setMatricula(matricula);
             contador.setHonorarios(honorarios);
-            contador.setEspecializaciones(especializaciones);
+            contador.setEspecializacion(especializacion);
             contador.setStatus(true);
             contador.setRol(Rol.ACCOUNTANT);
             Image image = imageService.save(archivo);
@@ -151,46 +155,63 @@ public class AccountantService  {
         }
     }
 
+    /**
+     * Metodo agregarReputacion: Añade una calificacion (reputacion) a un contador
+     *
+     * @throws: MiException
+     */
     @Transactional
+
     public void agregarReputacion(Long id, Reputacion reputacion, List<Comment> comentario) throws MiException {
+
         Accountant contador = searchAccounterById(id);
         if (contador != null && contador.getId().equals(id)) {
             contador.setReputacion(reputacion);
-            /*contador.setComments(comentario);*/
+            List<Comment> comentarios = new ArrayList<>();
+            comentarios.add(comentario);
+            contador.setComentario(comentarios);
+
             repositorio.save(contador);
         } else {
             throw new MiException("No se puede agregar la calificación al contador.");
         }
     }
 
-    public void validate(String nombre, String email, String especializacion) throws MiException {
-        if (nombre.isEmpty() || nombre.isBlank()) {
-            throw new MiException("El nombre no puede estar vacío.");
+    /**
+     * Metodo validate: valida que los valores ingresados se cargen conforme a las
+     * necesidades de la aplicacion
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param password
+     * @param newpassword
+     * @param fechaNacimiento
+     * * @throws: MiException
+     */
+    public void validate (String nombre, String apellido, String email, String password,
+                           String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
+        if (nombre.isEmpty() || nombre.isBlank()){
+            throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
-        if (email.isEmpty() || email.isBlank()) {
-            throw new MiException("El email no puede estar vacío.");
+        if (apellido.isEmpty() || apellido.isBlank()){
+            throw new MiException("Error, el campo Apellido no puede estar vacio");
+        }
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
+        }
+        if (password.isEmpty() || password.isBlank()){
+            throw new MiException("Error, el campo Contrasela no puede estar vacio");
+        }
+        if (!newpassword.equals(password) || newpassword.isBlank()){
+            throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña o estar vacío");
+        }
+        if (fechaNacimiento==null){
+            throw new MiException("Error, fecha incorrecta");
         }
         if (especializacion == null) {
             throw new MiException("La especialización no puede estar vacía.");
         }
-           /* if (contacto.isEmpty() || contacto.isBlank()) {
-                throw new MiException("El contacto no puede estar vacío.");
-            }*/
     }
- /*   @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Accountant usuario = repositorio.seachByEmail(email);
-        if (usuario == null) {
-            throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
-        }
-        List<GrantedAuthority> permisos = new ArrayList<>();
-        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
-        System.out.println(permisos);
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getPassword())
-                .authorities(permisos)
-                .build();
-    }*/
+
 }
 

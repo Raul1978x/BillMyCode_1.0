@@ -9,7 +9,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AdminController {
-     @PostMapping("/createAdmin")
+
+    /**
+     * Metodo registerPart1Developer: Actualmente, nada pero deberia crear un nuevo usuario administrador
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacStr
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param model
+     *
+     * @return: ResponseEntity<Developer>
+     *
+     * @throws: MiException
+     */
+    @PostMapping("/createAdmin")
     public ResponseEntity<Developer> registerPart1Developer(@RequestParam MultipartFile archivo,
                                                             @RequestParam String nombre,
                                                             @RequestParam String apellido,

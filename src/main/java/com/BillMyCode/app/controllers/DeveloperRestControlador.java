@@ -32,16 +32,49 @@ public class DeveloperRestControlador {
     @Autowired
     private ImageService imageService;
 
+    /**
+     * Metodo listaDevelopers: Devuelve la lista de todos los Developers
+     *
+     * @return: ResponseEntity<List<Developer>>
+     */
     @GetMapping("/developers")
     public ResponseEntity<List<Developer>> listaDevelopers() {
         return ResponseEntity.ok(developerService.listDevelopers());
     }
 
+    /**
+     * Metodo developerById: Devuelve el Developer según una id
+     *
+     * @param id
+     *
+     * @return: Developer
+     */
     @GetMapping("/developers/{id}")
     public Developer developerById(@PathVariable Long id) {
-        return developerService.seachDeveloperById(id);
+        return developerService.searchDeveloperById(id);
     }
 
+    /**
+     * Metodo registrarDeveloper: Crea un nuevo developer
+     *
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @PostMapping("/developers")
     public void registrarDeveloper(@RequestParam MultipartFile archivo,
                                    @RequestParam String nombre,
@@ -50,6 +83,7 @@ public class DeveloperRestControlador {
                                    @RequestParam String nacionalidad,
                                    @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                    @RequestParam String password,
+                                   @RequestParam String newpassword,
                                    @RequestParam String genero,
                                    @RequestParam String telefono,
                                    @RequestParam Double salario,
@@ -62,15 +96,43 @@ public class DeveloperRestControlador {
         Comment comment = commentService.createComment(comentario);
 
         developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                password, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+                password,newpassword,genero,telefono,salario,seniority,especialidad,descripcion,comment);
 
     }
 
+    /**
+     * Metodo eliminarDeveloper: Borra Developer según una id
+     *
+     * @param id
+     */
     @DeleteMapping("/developers/{id}")
     public void eliminarDeveloper(@PathVariable Long id) {
         developerService.deleteDeveloperById(id);
     }
 
+    /**
+     * Metodo updateDeveloper: Actualiza los datos de un developer
+     *
+     * @param id
+     * @param archivo
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param nacionalidad
+     * @param fechaNacimiento
+     * @param password
+     * @param genero
+     * @param telefono
+     * @param salario
+     * @param seniority
+     * @param especialidad
+     * @param descripcion
+     * @param comentario
+     * @param model
+     *
+     * @throws: MiException
+     * @throws: ParseException
+     */
     @PutMapping("/updateDeveloper/{id}")
     public void updateDeveloper(@PathVariable Long id,
                                 @RequestParam(required = false) MultipartFile archivo,
@@ -100,12 +162,26 @@ public class DeveloperRestControlador {
         }
     }
 
-
+    /**
+     * Metodo getDevelopersBySeniority: Busca la lista de todos los
+     * developers con el mismo grado de seniority
+     *
+     * @param seniority
+     *
+     * @return: List<Developer>
+     */
     @GetMapping("/developer/{seniority}")
     public List<Developer> getDevelopersBySeniority(@PathVariable String seniority) {
         return developerService.getDevelopersBySeniority(seniority);
     }
 
+    /**
+     * Metodo getDevelopersByEmail: Busca un developer segun un email
+     *
+     * @param email
+     *
+     * @return: Developer
+     */
     @GetMapping("/developerEmail/{email}")
     public Developer getDevelopersByEmail(@PathVariable String email) {
         return repository.seachByEmail(email);

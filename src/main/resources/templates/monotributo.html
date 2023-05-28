@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/images/billmycodelogosimp.png">
+    <link rel="stylesheet" href="/css/monotributo.css">
+
+
+    <script type="text/javascript"
+            src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=BEz-uvHypC39yQz4PYIDoS2Vo3C7-2h4VC5yOqSAoqkDYJXWaEWXVb_14gBFi3miNiklxcH5O2YTRktWd3xv3e-2djrtjFKIJcWyC-CWE2O277t1d76Fk3O9fhEma8UKoQSaO0retrq3Gfj8yS-H2NnQzAdR_C68iAmxDvCaTvw"
+            charset="UTF-8"></script>
+</head>
+<body>
+<navbar>
+    <nav class="navbar bill_my_code" data-bs-theme="dark">
+        <div class="logo-container">
+            <a th:href="@{/thymeleaf/principal-developers}">
+                <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
+            </a>
+        </div>
+        <nav class="header-nav centrar">
+            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
+            <a class="titulo" href="#seccion-3">Normativa</a>
+            <a class="titulo" href="#seccion-4">Impuestos</a>
+            <a class="titulo" href="#seccion-5">Contactanos</a> -->
+            <div class="perfil-menu">
+                <div class="containers me-3" >
+                    <div class="nombres">
+                        <span class="nombre" th:text="${developer.nombre}">Raúl</span>
+                        <span class="apellido" th:text="${developer.apellido}">Gómez</span>
+                    </div>
+                    <div class="formacion">
+                        <span class="especialidad" th:text="${developer.especialidad}">Full Stack</span>
+                        <span class="seniority" th:text="${developer.seniority}">Junior</span>
+                    </div>
+                </div>
+                <img
+                        class="perfil-foto"
+                        th:src="@{/api/imagen/perfil/__${developer.id}__}"
+                        alt="foto de perfil"
+                />
+                <div class="dropdown">
+                    <button class="dropdown-button">
+                        <!-- <img
+                                 class="icono"
+                                 src="/images/billmycodelogosimp.png"
+                                 alt="icono menu"
+                         />-->
+                        <div>Menu</div>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">
+                                <!--
+                                                                <input type="hidden" name="id" th:value="${developer.id}"/>
+                                -->
+                                <img
+                                        class="icono"
+                                        src="/images/update.png"
+                                        alt="icono volver"
+                                />
+                                Editar Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">
+                                <img
+                                        class="icono"
+                                        src="/images/logout.png"
+                                        alt="icono logout"
+                                />
+                                Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </nav>
+</navbar>
+<div class="container mt-5">
+
+    <section id="" class=" section seccion-2"></section>
+    <h4>Para darte de alta en el monotributo, sigue estos pasos:</h4><br>
+<div class="equipo2">
+
+    <h5>⚠️Antes del alta, ¿qué necesito?:</h5><br>
+    <p>🟠 Obtén tu CUIT: Necesitarás contar con clave fiscal y solicitar tu CUIT. Puedes hacerlo ingresando al servicio
+        de Inscripción Digital de AFIP.
+        El trámite es completamente digital.<br>
+        ➡️<a  class="linkear" href="https://serviciosweb.afip.gob.ar/publico/cuitOnline/default.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    <p>🟠 Inicia tu inscripción: Asegúrate de que cumples con los requisitos para realizar el trámite online en su
+        totalidad. Si te encuentras en alguna de las
+        situaciones especiales mencionadas (residencia en trámite, inscripción de sucesión indivisa, DNI sin fecha de
+        vencimiento, menor de edad), deberás realizar
+        la carga digital del formulario y solicitar un turno en la dependencia correspondiente a tu domicilio. </p><br>
+    <p>🟠 Acepta los datos biométricos: Ingresa con tu clave fiscal al sistema "Aceptación de datos biométricos" y sigue
+        las instrucciones para aceptar tus datos
+        biométricos.<br>➡️<a  class="linkear" href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=146">CLICK
+            AQUI</a> para obtener más información. </p><br>
+    </p>
+    <p>🟠 Declara tu Domicilio Fiscal Electrónico: Accede al servicio "Domicilio Fiscal Electrónico" desde la página
+        principal de AFIP con tu clave fiscal para adherirte
+        al servicio. También puedes realizar este trámite desde el portal correspondiente. <br>➡️<a
+                class="linkear"  href="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=81">CLICK AQUI</a> para
+        obtener más información. </p><br>
+    </p>
+    <p>🟠 Declara tus actividades económicas: Ingresa con tu clave fiscal al servicio "Sistema Registral" - "Registro
+        Tributario" y elige la opción "Actividades".
+        Indica la o las actividades que vas a desarrollar y consulta el Listado y buscador de actividades en caso de
+        dudas. <br>➡️<a  class="linkear" href="https://servicios1.afip.gob.ar/genericos/nomencladorActividades/index.aspx">CLICK AQUI</a>
+        para obtener más información. </p><br>
+    </p>
+
+
+    <h5>⚠️Alta de monotributo:</h5><br>
+    <p>✅ Una vez completados estos pasos, podrás iniciar el alta en el monotributo. Aquí tienes los pasos adicionales
+        que deberás seguir.<br>
+        ➡️<a  class="linkear" href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Index.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    <p>🟡 Tipo de monotributo: Selecciona el tipo de monotributo que corresponda a tu situación, dependiendo de si eres
+        trabajador independiente, miembro de una cooperativa, trabajador independiente
+        promovido, monotributo social, régimen simplificado especial o monotributo unificado.<br>➡️<a
+                class="linkear"   href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso1.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    </p>
+    <p>🟡 Caracterización de actividades: Indica las actividades que vas a realizar, las fechas, los montos de
+        facturación y los datos de tus locales. Asegúrate de tener previamente
+        declaradas estas actividades en el Sistema Registral de AFIP. <br>➡️<a
+                class="linkear"   href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso2.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    </p>
+    <p>🟡 DAportes jubilatorios: Indica si te corresponde pagar aportes jubilatorios y sigue las instrucciones según tu
+        situación laboral (trabajador independiente, miembro de una cooperativa,
+        trabajador independiente promovido, jubilado, etc.) <br>➡️<a
+                class="linkear"    href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso3.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    </p>
+    <p>🟡 Obra social: Elige y paga tu obra social, si corresponde. Asegúrate de informarte sobre las coberturas y
+        afiliación con centros médicos cercanos a tu domicilio. También puedes consultar
+        el listado de obras sociales de la Superintendencia de Servicios de Salud <br>➡️<a
+                class="linkear"    href="https://monotributo.afip.gob.ar/Public/Ayuda/Alta/Paso4.aspx">CLICK AQUI</a> para obtener más
+        información. </p><br>
+    </p>
+    <p>🟡 Declaración jurada de salud: Completa y presenta la declaración jurada 300/97 en una oficina de ANSES. Esto es
+        necesario para que la obra social te pueda cubrir los gastos médicos en caso de un problema de salud.
+    </p><br>
+    <p>✅ Una vez completado el alta en el monotributo, tendrás que realizar algunas operaciones adicionales antes de
+        comenzar a desarrollar tu actividad, como habilitar los medios de facturación correspondientes.
+    </p><br>
+
+    <h5>⚠️Después del alta:</h5><br>
+    <h6>Habilitar medios de facturación:</h6>
+    <p>🟢 El sitio te va a indicar si te falta algún dato para poder hacer facturas electrónicas, comenzar a utilizar
+        controlador fiscal o solicitar talonarios para pedir facturas en papel en una imprenta.
+        En cualquier caso tenés que declarar el domicilio de tu o tus puntos de venta.
+        Para solicitar la impresión de facturas, notas de crédito, notas de débito, remitos, etcétera, antes de
+        concurrir a la imprenta, deberás solicitar el “Código de Autorización de Impresión” (CAI).
+    </p><br>
+    <h6>Consultar con el organismo de rentas tributarias de tu provincia</h6>
+    <p>🟢 Según la provincia en la que vivas y en la que trabajes, tenés que hacer un trámite para vincular el
+        monotributo de AFIP con los impuestos que tenés que pagar a nivel provincial
+    </p><br>
+    <h6>Además periódicamente tenés que cumplir con ciertas obligaciones:</h6>
+    <p>✅ Pagar el monotributo
+    </p>
+    <p>✅ Podés pagar hasta el día 20 de cada mes, generando un volante electrónico de pago (VEP) desde este mismo sitio.
+        <br>
+        ➡️<a  class="linkear" href="https://monotributo.afip.gob.ar/Public/Ayuda/Sitio/Pagos.aspx">CLICK AQUI</a> para obtener más
+        información. </p>
+    </p><br>
+</div>
+
+</div>
+<footer >
+    <div class="caja_footer div-icono_container mt-5">
+        <div class="iconos_redes">
+            <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
+                                                                                 src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
+                                                                                 alt=""></a>
+            <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
+                                                                          src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
+                                                                          alt=""></a>
+            <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
+                    class="icono-container"
+                    src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
+                                                                     src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
+                                                                     alt=""></a>
+        </div>
+    </div>
+    <div class="caja_footer copyright">
+        <h7>Todos los derechos reservados. Copyright 2023</h7>
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+</html>
