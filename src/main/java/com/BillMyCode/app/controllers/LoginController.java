@@ -37,7 +37,7 @@ public class LoginController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         if (roles.contains("ROLE_ADMIN")) {
-            return "redirect:/padmin";
+            return "redirect:/thymeleaf/admin-principal";
         } else if (roles.contains("ROLE_DEV")) {
             return "redirect:/thymeleaf/principal-developers";
         } else {

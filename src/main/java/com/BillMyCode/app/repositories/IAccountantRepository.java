@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface IAccountantRepository extends JpaRepository<Accountant, Long> {
 
     /**
-     * Metodo seachByEmail: Busca un Contador segun un email
+     * Query seachByEmail: Busca un Contador segun un email
      *
      * @param email
      *

@@ -178,7 +178,7 @@ public class DeveloperService {
             result.setEmail(email);
             result.setNacionalidad(nacionalidad);
             result.setFechaNacimiento(fechaNacimiento);
-            result.setPassword(password);
+            result.setPassword(cryptPassword);
             result.setGenero(genero);
             result.setTelefono(telefono);
             result.setSalario(salario);

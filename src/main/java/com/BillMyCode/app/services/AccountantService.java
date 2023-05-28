@@ -26,7 +26,7 @@ public class AccountantService  {
     private ImageService imageService;
 
     /**
-     * Metodo listAccounter() devuelve la lista de todos los Contadores.
+     * Metodo searchAllAccounters() devuelve la lista de todos los Contadores.
      *
      * @return List<Contador>
      */

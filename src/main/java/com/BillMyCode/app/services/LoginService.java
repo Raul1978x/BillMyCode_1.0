@@ -1,8 +1,10 @@
 package com.BillMyCode.app.services;
 
 import com.BillMyCode.app.entities.Accountant;
+import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.repositories.IAccountantRepository;
+import com.BillMyCode.app.repositories.IAdminRepository;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,14 @@ public class LoginService implements UserDetailsService {
     private IAccountantRepository accountantRepository;
 
     @Autowired
+    private IAdminRepository adminRepository;
+
+    @Autowired
     private HttpSession httpSession;
 
     /**
-     * Metodo loadUserByUsername: Busca y carga un developer o accounter para su autenticación
+     * Metodo loadUserByUsername: Busca y carga un developer, admin o accounter para su autenticación, tambien guarda la
+     * sesion iniciada
      *
      * @param email: Correo ingresado por el usuario
      *
@@ -60,8 +66,20 @@ public class LoginService implements UserDetailsService {
                         .password(accountant.getPassword())
                         .authorities(permisos)
                         .build();
-            }else{
-                throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
+            }else {
+                Admin admin = adminRepository.searchByEmail(email);
+                if (admin != null){
+                    List<GrantedAuthority> permisos = new ArrayList<>();
+                    permisos.add(new SimpleGrantedAuthority("ROLE_" + admin.getRol().toString()));
+                    httpSession.setAttribute("sessionuser", admin);
+                    return org.springframework.security.core.userdetails.User.builder()
+                            .username(admin.getEmail())
+                            .password(admin.getPassword())
+                            .authorities(permisos)
+                            .build();
+                }else {
+                    throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: " + email);
+                }
             }
         }
     }

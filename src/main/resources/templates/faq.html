@@ -59,7 +59,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">
+                            <a class="dropdown-item" th:href="@{/thymeleaf/developers/edit/{id}(id=${developer.id})}">
                                 <!--
                                                                 <input type="hidden" name="id" th:value="${developer.id}"/>
                                 -->

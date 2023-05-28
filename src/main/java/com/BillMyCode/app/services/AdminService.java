@@ -1,6 +1,7 @@
 package com.BillMyCode.app.services;
 
 import com.BillMyCode.app.entities.Admin;
+import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Image;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -24,6 +26,7 @@ public class AdminService {
 
     @Autowired
     private ImageService imagenServicio;
+
 
     /**
      * Metodo deleteAdminById(params) elimina un "Admin" segun "ID" que se pase por parametro.
@@ -62,7 +65,7 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param newpassword
+     * @param
      * @param fechaNacimiento
      * @param telefono
      * @param archivo
@@ -70,24 +73,27 @@ public class AdminService {
      * @throws: MiException
      */
     @Transactional
-    public void createAdmin (String nombre, String apellido, String email, String password,String newpassword, Date fechaNacimiento,
+    public void createAdmin (String nombre, String apellido, String email, String nacionalidad, String password, String genero, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException{
 
-        validate2(nombre, apellido, email, password, newpassword, fechaNacimiento);
+        validate2(nombre, apellido, email, password, fechaNacimiento);
 
         String cryptPassword = passwordEncoder.encode(password);
 
-        Image imagen = imagenServicio.save(archivo);
         Admin admin = new Admin();
 
-        admin.setImage(imagen);
         admin.setNombre(nombre);
         admin.setApellido(apellido);
         admin.setEmail(email);
+        admin.setNacionalidad(nacionalidad);
         admin.setPassword(cryptPassword);
+        admin.setGenero(genero);
         admin.setFechaNacimiento(fechaNacimiento);
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
+        Image image = imagenServicio.save(archivo);
+
+        admin.setImage(image);
 
         repositorio.save(admin);
     }
@@ -107,30 +113,34 @@ public class AdminService {
      * @throws: MiException
      */
     @Transactional
-    public void updateAdmin (Long id, String nombre, String apellido, String email, String password,String newpassword, Date fechaNacimiento,
+    public void updateAdmin (Long id, String nombre, String apellido, String email, String nacionalidad, String password,
+                             String genero, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException {
 
-        Admin admin = repositorio.findById(id).get();
+        Optional<Admin> respuesta = repositorio.findById(id);
+        String cryptPassword = passwordEncoder.encode(password);
 
-        if (admin != null) {
+        if (respuesta.isPresent()) {
+            Admin admin = respuesta.get();
 
-            validate2(nombre, apellido, email, password,newpassword, fechaNacimiento);
-            String cryptPassword = passwordEncoder.encode(password);
+            /*validate2(nombre, apellido, email, password, fechaNacimiento);*/
 
-            Image imagen = imagenServicio.save(archivo);
-
-            admin.setImage(imagen);
             admin.setNombre(nombre);
             admin.setApellido(apellido);
             admin.setEmail(email);
+            admin.setNacionalidad(nacionalidad);
             admin.setPassword(cryptPassword);
+            admin.setGenero(genero);
             admin.setFechaNacimiento(fechaNacimiento);
-            admin.setRol(Rol.ADMIN);
             admin.setTelefono(telefono);
+            admin.setRol(Rol.ADMIN);
+
+            if (archivo != null) {
+                Image image = imagenServicio.save(archivo);
+                admin.setImage(image);
+            }
 
             repositorio.save(admin);
-        }else{
-            System.out.println("No se encontro al usuario");
         }
     }
 
@@ -142,7 +152,7 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param newpassword
+     * @param
      * @param fechaNacimiento
      */
     public void validate (String nombre, String apellido, String email, String password, Date fechaNacimiento){
@@ -171,9 +181,9 @@ public class AdminService {
      * @param apellido
      * @param email
      * @param password
-     * @param newpassword
+     * @param
      */
-    public void validate2 (String nombre, String apellido, String email, String password, String newpassword,Date fechaNacimiento) throws MiException {
+    public void validate2 (String nombre, String apellido, String email, String password, Date fechaNacimiento) throws MiException {
         if (nombre.isEmpty() || nombre.isBlank()){
             throw new MiException("Error, el campo Nombre no puede estar vacio");
         }
@@ -186,9 +196,9 @@ public class AdminService {
         if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
-        if (!newpassword.equals(password)){
+        /*if (!newpassword.equals(password)){
             throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña");
-        }
+        }*/
         if (fechaNacimiento==null){
             throw new MiException("Error, fecha incorrecta");
         }

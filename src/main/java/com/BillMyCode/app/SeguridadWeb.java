@@ -36,8 +36,9 @@ public class SeguridadWeb {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeRequests()
-                    .requestMatchers("/thymeleaf/principaldevelopers").hasAnyRole("DEV","ADMIN")// Controla quien puede acceder a principaldevelopers
-                    .requestMatchers("/thymeleaf/principalaccounters").hasAnyRole("ACCOUNTANT","ADMIN")  // Controla quien puede acceder a principalaccounters
+                    .requestMatchers("/thymeleaf/principaldevelopers").hasRole("DEV")// Controla quien puede acceder a principaldevelopers
+                    .requestMatchers("/thymeleaf/principalaccounters").hasRole("ACCOUNTANT")  // Controla quien puede acceder a principalaccounters
+                    .requestMatchers("/thymeleaf/admin-vistaprincipal").hasRole("ADMIN")
                     .requestMatchers("index").permitAll() // Controla quien puede acceder al index, en este caso todos
                 .and().formLogin(
                         form-> form

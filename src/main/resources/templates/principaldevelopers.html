@@ -60,7 +60,8 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">
+                            <!--<a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">-->
+                                <a class="dropdown-item" th:href="@{/thymeleaf/developers/edit/{id}(id=${developer.id})}">
                                 <!--
                                                                 <input type="hidden" name="id" th:value="${developer.id}"/>
                                 -->
@@ -95,7 +96,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Dolar Blue ↗ $487,00 / $498,00</a>
             </li>
  <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dolar Oficial = $245,00 / 248.00
+                <a class="nav-link active" aria-current="page" href="#">Dolar Oficial = $245,00 / 248.00</a>
             </li>
  <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Dolar Tecno ↗ $490,00 / $495,00</a>
