@@ -1,4 +1,4 @@
-<navbar>
+<navbar xmlns:th="http://www.w3.org/1999/xhtml">
   <nav class="navbar bill_my_code" data-bs-theme="dark">
     <div class="logo-container">
       <a th:href="@{/thymeleaf/principal-accountant}">
@@ -14,16 +14,16 @@
         <div class="perfil-menu">
           <div class="containers me-3" >
             <div class="nombres">
-              <span class="nombre" th:text="${accountant.nombre}">Raúl</span>
-              <span class="apellido" th:text="${accountant.apellido}">Gómez</span>
+              <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+              <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
             </div>
             <div class="formacion">
-              <span class="especialidad" th:text="${accountant.especializacion}">Full Stack</span>
+              <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
             </div>
           </div>
           <img
                   class="perfil-foto"
-                  th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}"
+                  th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
                   alt="foto de perfil"
           />
           <div class="dropdown">
@@ -50,7 +50,7 @@
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" th:href="@{/logout}">
+                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                   <img
                           class="icono"
                           src="/images/logout.png"
