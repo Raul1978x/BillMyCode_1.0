@@ -161,7 +161,9 @@ public class AccountantService  {
      * @throws: MiException
      */
     @Transactional
-    public void agregarReputacion(Long id, Double reputacion, Comment comentario) throws MiException {
+
+    public void agregarReputacion(Long id, Reputacion reputacion, Comment comentario) throws MiException {
+
         Accountant contador = searchAccounterById(id);
         if (contador != null && contador.getId().equals(id)) {
             contador.setReputacion(reputacion);
