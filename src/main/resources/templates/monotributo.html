@@ -32,17 +32,17 @@
             <div class="perfil-menu">
                 <div class="containers me-3" >
                     <div class="nombres">
-                        <span class="nombre" th:text="${developer.nombre}">Raúl</span>
-                        <span class="apellido" th:text="${developer.apellido}">Gómez</span>
+                        <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                        <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                     </div>
                     <div class="formacion">
-                        <span class="especialidad" th:text="${developer.especialidad}">Full Stack</span>
-                        <span class="seniority" th:text="${developer.seniority}">Junior</span>
+                        <span class="especialidad" th:text="${logueado.especialidad}">Full Stack</span>
+                        <span class="seniority" th:text="${logueado.seniority}">Junior</span>
                     </div>
                 </div>
                 <img
                         class="perfil-foto"
-                        th:src="@{/api/imagen/perfil/__${developer.id}__}"
+                        th:src="@{/api/imagen/perfil/__${logueado.id}__}"
                         alt="foto de perfil"
                 />
                 <div class="dropdown">
@@ -56,7 +56,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" th:href="@{/thymeleaf/developers/edit/{id}(id=${developer.id})}">
+                            <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                 <!--
                                                                 <input type="hidden" name="id" th:value="${developer.id}"/>
                                 -->

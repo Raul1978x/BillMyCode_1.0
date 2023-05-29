@@ -24,7 +24,89 @@
 
 <body>
 
-<nav th:replace = "/fragments/navbar.html :: navbar" ></nav>
+<navbar>
+    <nav class="navbar bill_my_code" data-bs-theme="dark">
+        <div class="logo-container">
+            <a th:href="@{/thymeleaf/principal-accountant}">
+                <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
+            </a>
+        </div>
+        <nav class="header-nav centrar">
+            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
+            <a class="titulo" href="#seccion-3">Normativa</a>
+            <a class="titulo" href="#seccion-4">Impuestos</a>
+            <a class="titulo" href="#seccion-5">Contactanos</a> -->
+            <div class="perfil-menu">
+                <div class="perfil-menu">
+                    <div class="containers me-3">
+                        <div class="nombres">
+                            <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                            <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
+                        </div>
+                        <div class="formacion">
+                            <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
+                        </div>
+                    </div>
+                    <img
+                            class="perfil-foto"
+                            th:src="@{/api/imagen/perfil-accountant/__${logueado.id}__}"
+                            alt="foto de perfil"
+                    />
+                    <div class="dropdown">
+                        <button class="dropdown-button">
+                            <!-- <img
+                                     class="icono"
+                                     src="/images/billmycodelogosimp.png"
+                                     alt="icono menu"
+                             />-->
+                            <div>Menu</div>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
+                                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
+                                    <!--
+                                                                    <input type="hidden" name="id" th:value="${developer.id}"/>
+                                    -->
+                                    <img
+                                            class="icono"
+                                            src="/images/update.png"
+                                            alt="icono volver"
+                                    />
+                                    Editar Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <img
+                                            class="icono"
+                                            src="/images/logout.png"
+                                            alt="icono logout"
+                                    />
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </nav>
+</navbar>
+<section>
+    <nav class="navbar justify-content-center mb-0" data-bs-theme="dark">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dolar Blue ↗ $487,00 / $498,00</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dolar Oficial = $245,00 / 248.00</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dolar Tecno ↗ $490,00 / $495,00</a>
+            </li>
+
+/*<nav th:replace = "/fragments/navbar.html :: navbar" ></nav>*/
 <nav th:replace = "/fragments/dolar.html :: dolar"></nav>
 
 <section class="section-container seccion-2 mt-0">

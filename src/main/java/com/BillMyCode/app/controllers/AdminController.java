@@ -10,6 +10,9 @@ import com.BillMyCode.app.services.DeveloperService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/thymeleaf")
@@ -34,7 +38,7 @@ public class AdminController {
     @GetMapping("/admin-principal")
     public String getViewCreateDeveloper(HttpSession request, ModelMap model) {
         Admin logueado= (Admin) request.getAttribute("sessionuser");
-        model.put("admin",logueado);
+        model.put("logueado",logueado);
         return "admin-vistaprincipal";
     }
 
@@ -71,7 +75,6 @@ public class AdminController {
             adminService.createAdmin(nombre, apellido, email, nacionalidad, password, genero, fechaNacimiento,
                     telefono, archivo);
             model.put("exito","El Administrador fue creado exitosamente");
-            System.out.println(model);
             return "redirect:/thymeleaf/admin-principal"; // Cambiar a la pagina principal de administrador, ya que lo crea el admin
         } catch (MiException e) {
             model.put("error", "El Administrador no se puedo crear: "+e.getMessage());
@@ -96,7 +99,6 @@ public class AdminController {
             adminService.updateAdmin(id, nombre, apellido, email, nacionalidad, password, genero, fechaNacimiento,
                     telefono, archivo);
             model.put("exito","El Administrador fue creado exitosamente");
-            System.out.println(model);
             return "redirect:/thymeleaf/admin-principal"; // Cambiar a la pagina principal de administrador, ya que lo crea el admin
         } catch (MiException e) {
             model.put("error", "El Administrador no se puedo crear: "+e.getMessage());
@@ -106,8 +108,8 @@ public class AdminController {
 
     @GetMapping("/admin/edit/{id}")
     public String editAdmin(@PathVariable Long id, ModelMap model) {
-        Admin result = adminService.searchAdminById(id);
-        model.put("admin", result);
+        Admin logueado = adminService.searchAdminById(id);
+        model.put("logueado", logueado);
         return "admin-editarperfil";
     }
 
@@ -139,4 +141,9 @@ public class AdminController {
         return "admin-listaadmins";
     }
 
+    @GetMapping("/admin/delete/{id}")
+    public String deleteAdmin(@PathVariable Long id) {
+        adminService.deleteAdminById(id);
+        return "redirect:/thymeleaf/admin-lista-admin";
+    }
 }
