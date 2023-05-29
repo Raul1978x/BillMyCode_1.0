@@ -72,7 +72,7 @@ public class DeveloperController {
     @GetMapping("/card-accountant")
     public String callCardAccountant(HttpSession request, ModelMap model) {
         Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
+        model.put("logueado",logueado);
         System.out.println(logueado.getNombre()+"AAAAAAAAAAAAAAAAAAAAAAAAAA");
         List<Accountant> accountants = accountantService.searchAllAccounters();
         model.put("accountants", accountants);
