@@ -6,7 +6,6 @@ import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import com.BillMyCode.app.repositories.IAdminRepository;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
-import jakarta.servlet.ServletRequestAttributeEvent;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

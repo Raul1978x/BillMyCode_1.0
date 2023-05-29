@@ -1,8 +1,6 @@
 package com.BillMyCode.app.controllers;
 
 import com.BillMyCode.app.entities.Accountant;
-import com.BillMyCode.app.entities.Admin;
-import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IImageRepository;
