@@ -87,7 +87,13 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>6.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
     </dependencies>
+
 
 	<build>
 		<plugins>

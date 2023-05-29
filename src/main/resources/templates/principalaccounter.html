@@ -39,16 +39,16 @@
                 <div class="perfil-menu">
                     <div class="containers me-3">
                         <div class="nombres">
-                            <span class="nombre" th:text="${accountant.nombre}">Raúl</span>
-                            <span class="apellido" th:text="${accountant.apellido}">Gómez</span>
+                            <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                            <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                         </div>
                         <div class="formacion">
-                            <span class="especialidad" th:text="${accountant.especializacion}">Full Stack</span>
+                            <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
                         </div>
                     </div>
                     <img
                             class="perfil-foto"
-                            th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}"
+                            th:src="@{/api/imagen/perfil-accountant/__${logueado.id}__}"
                             alt="foto de perfil"
                     />
                     <div class="dropdown">
@@ -63,7 +63,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
-                                    <a class="dropdown-item" th:href="@{/thymeleaf/accountant/edit/{id}(id=${accountant.id})}">
+                                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                     <!--
                                                                     <input type="hidden" name="id" th:value="${developer.id}"/>
                                     -->

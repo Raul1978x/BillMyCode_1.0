@@ -17,7 +17,7 @@
 <body>
 <header>
     <div class="logo-container">
-        <a th:href="@{/}">
+        <a onclick="javascript:history.back()">
             <img src="/images/billmycodelogo.png" alt="logo de empresa"/>
         </a>
     </div>
@@ -58,16 +58,16 @@
                     <p class="card-text" th:text="${exito}"></p>
                 </div>
             </div>
-            <form id="accountsform" th:action="@{/thymeleaf/updateDeveloper/{id}(id=${developer.id})}" method="POST"
+            <form id="accountsform" th:action="@{/thymeleaf/updateDeveloper/{id}(id=${logueado.id})}" method="POST"
                   enctype="multipart/form-data">
-                <input type="hidden" name="id" th:value="${developer.id}"/>
-                <input type="text" name="nombre" placeholder="Nombres" th:value="${developer.nombre}" required/>
+                <input type="hidden" name="id" th:value="${logueado.id}"/>
+                <input type="text" name="nombre" placeholder="Nombres" th:value="${logueado.nombre}" required/>
 
                 <input
                         type="text"
                         name="apellido"
                         placeholder="Apellido"
-                        th:value="${developer.apellido}"
+                        th:value="${logueado.apellido}"
                         required
                 />
 
@@ -75,7 +75,7 @@
                         id="sex"
                         name="genero"
                         class="form-control"
-                        th:value="${developer.genero}"
+                        th:value="${logueado.genero}"
                         value="@{genero}"
                 >
                     <option value="" disabled selected>Seleccione Género</option>
@@ -87,7 +87,7 @@
                 <select
                         id="country"
                         name="nacionalidad"
-                        th:value="${developer.nacionalidad}"
+                        th:value="${logueado.nacionalidad}"
                         class="form-control"
                         value="${nacionalidad}"
                 >
@@ -406,7 +406,7 @@
                         type="text"
                         name="telefono"
                         placeholder="Telefono"
-                        th:value="${developer.telefono}"
+                        th:value="${logueado.telefono}"
                         required
                         class="form-control"
                 />
@@ -414,7 +414,7 @@
                 <input
                         type="text"
                         name="email"
-                        th:value="${developer.email}"
+                        th:value="${logueado.email}"
                         placeholder="E-Mail"
                         required
                         class="form-control"
@@ -423,7 +423,7 @@
 
                 <input
                         type="number"
-                        th:value="${developer.salario}"
+                        th:value="${logueado.salario}"
                         name="salario"
                         placeholder="Salario"
                         required
@@ -431,7 +431,7 @@
                 <select
                         id="gdes"
                         name="seniority"
-                        th:value="${developer.seniority}"
+                        th:value="${logueado.seniority}"
                         class="form-control"
                         value="${seniority}"
                 >
@@ -445,7 +445,7 @@
                         id="esp"
                         name="especialidad"
                         class="form-control"
-                        th:value="${developer.especialidad}"
+                        th:value="${logueado.especialidad}"
                         value="${especialidad}"
                 >
                     <option value="" disabled selected>Especialidad</option>
@@ -459,14 +459,14 @@
                         class="text-area"
                         placeholder="Descripción"
                         name="descripcion"
-                        th:value="${developer.descripcion}"
+                        th:value="${logueado.descripcion}"
                 ></textarea>
                 <textarea
                         rou="3"
                         class="text-area"
                         placeholder="Comentario de la Empresa"
                         name="comentario"
-                        th:value="${developer.comentario}"
+                        th:value="${logueado.comentario}"
                 ></textarea>
                 <input type="text" name="empresa" placeholder="Empresa"/>
 

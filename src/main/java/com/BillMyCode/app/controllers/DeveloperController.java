@@ -46,34 +46,51 @@ public class DeveloperController {
     @GetMapping("/principal-developers")
     public String getViewCreateDeveloper(HttpSession request, ModelMap model) {
         Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
+        model.put("logueado",logueado);
         return "principaldevelopers";
     }
 
     @GetMapping("/monotributo")
     public String getViewMonotributo(HttpSession request, ModelMap model) {
-        Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_DEV")) {
+            Developer logueado = (Developer) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        }else{
+            Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        }
         return "monotributo";
     }
 
     @GetMapping("/faq")
     public String getViewFaq(HttpSession request, ModelMap model) {
         Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
+        model.put("logueado",logueado);
         return "faq";
     }
     @GetMapping("/normativa-impuestos")
     public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
-        Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_DEV")) {
+            Developer logueado = (Developer) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        }else{
+            Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        };
         return "normativa-impuestos";
     }
     @GetMapping("/card-accountant")
     public String callCardAccountant(HttpSession request, ModelMap model) {
         Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("developer",logueado);
-        System.out.println(logueado.getNombre()+"AAAAAAAAAAAAAAAAAAAAAAAAAA");
+        model.put("logueado",logueado);
         List<Accountant> accountants = accountantService.searchAllAccounters();
         model.put("accountants", accountants);
         return "contadorescard";
@@ -157,13 +174,22 @@ public class DeveloperController {
     @GetMapping("/developers/delete/{id}")
     public String deleteDeveloper(@PathVariable Long id) {
         developerService.deleteDeveloperById(id);
-        return "redirect:/thymeleaf/lista-developers";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_ADMIN")) {
+            return "redirect:/thymeleaf/admin-lista-developer";
+        }else {
+            return "redirect:/thymeleaf/lista-developers";
+        }
+
     }
 
     @GetMapping("/developers/edit/{id}")
     public String editDeveloper(@PathVariable Long id, ModelMap model) {
-        Developer result = developerService.searchDeveloperById(id);
-        model.put("developer", result);
+        Developer logueado = developerService.searchDeveloperById(id);
+        model.put("logueado", logueado);
         return "editar-cuenta-desarrollador";
     }
 
@@ -183,8 +209,7 @@ public class DeveloperController {
                                   @RequestParam(required = false) String especialidad,
                                   @RequestParam(required = false) String descripcion,
                                   @RequestParam(required = false) String comentario,
-                                  ModelMap model,
-                                  HttpSession request
+                                  ModelMap model
     ) throws MiException, ParseException {
 
         try {
@@ -201,6 +226,7 @@ public class DeveloperController {
                 return "redirect:/thymeleaf/principal-developers";
             }
         } catch (ParseException e) {
+            model.put("error", e.getMessage());
             throw new RuntimeException(e);
         }
     }
