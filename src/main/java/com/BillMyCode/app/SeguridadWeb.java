@@ -1,13 +1,20 @@
 package com.BillMyCode.app;
 
+import com.BillMyCode.app.entities.User;
+import com.BillMyCode.app.services.LoginService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +51,7 @@ public class SeguridadWeb {
                         form-> form
                                 .loginPage("/login")
                                 .usernameParameter("usuario") // Atrapa la contraseña ingresada por el usuario
-                                .passwordParameter("password") // Atrapa el email ingresado por el usuario
+                                .passwordParameter("password")// Atrapa el email ingresado por el usuario
                                 .loginProcessingUrl("/logincheck")
                                 .successForwardUrl("/thymeleaf/redilogin") // En caso de una autenticacion correcta redirige a "/thymeleaf/redilogin" que esta en LoginController
                                 .failureUrl("/thymeleaf/login") // En caso de una autenticacion incorrecta redirige a /thymeleaf/login

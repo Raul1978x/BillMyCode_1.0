@@ -6,6 +6,7 @@ import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import com.BillMyCode.app.repositories.IAdminRepository;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
+import jakarta.servlet.ServletRequestAttributeEvent;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +33,8 @@ public class LoginService implements UserDetailsService {
     @Autowired
     private IAdminRepository adminRepository;
 
-    @Autowired
-    private HttpSession httpSession;
+    /*@Autowired
+    private HttpSession httpSession;*/
 
     /**
      * Metodo loadUserByUsername: Busca y carga un developer, admin o accounter para su autenticación, tambien guarda la
@@ -49,7 +52,13 @@ public class LoginService implements UserDetailsService {
         if (developer != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
             permisos.add(new SimpleGrantedAuthority("ROLE_" + developer.getRol().toString()));
-            httpSession.setAttribute("sessionuser", developer);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("sessionuser",developer);
+
+            /*httpSession.setAttribute("sessionuser", developer);*/
+
             return org.springframework.security.core.userdetails.User.builder()
                     .username(developer.getEmail())
                     .password(developer.getPassword())
@@ -60,7 +69,13 @@ public class LoginService implements UserDetailsService {
             if (accountant != null){
                 List<GrantedAuthority> permisos = new ArrayList<>();
                 permisos.add(new SimpleGrantedAuthority("ROLE_" + accountant.getRol().toString()));
-                httpSession.setAttribute("sessionuser", accountant);
+
+                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attr.getRequest().getSession(true);
+                session.setAttribute("sessionuser",accountant);
+
+                /*setAttribute("sessionuser", accountant);*/
+
                 return org.springframework.security.core.userdetails.User.builder()
                         .username(accountant.getEmail())
                         .password(accountant.getPassword())
@@ -71,7 +86,13 @@ public class LoginService implements UserDetailsService {
                 if (admin != null){
                     List<GrantedAuthority> permisos = new ArrayList<>();
                     permisos.add(new SimpleGrantedAuthority("ROLE_" + admin.getRol().toString()));
-                    httpSession.setAttribute("sessionuser", admin);
+
+                    ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                    HttpSession session = attr.getRequest().getSession(true);
+                    session.setAttribute("sessionuser",admin);
+
+                    /*httpSession.setAttribute("sessionuser", admin);*/
+
                     return org.springframework.security.core.userdetails.User.builder()
                             .username(admin.getEmail())
                             .password(admin.getPassword())

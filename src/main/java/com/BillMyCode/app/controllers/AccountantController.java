@@ -203,18 +203,19 @@ public class AccountantController {
         Accountant logueado = accountantService.searchAccounterById(id);
         model.put("logueado", logueado);
         return "editar-cuenta-contador";
+    }
 
     @GetMapping("accountant/normativa-impuestos")
     public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
-        Accountant accountant= (Accountant) request.getAttribute("sessionuser");
-        model.put("accountant",accountant);
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
         return "normativa-impuestos";
     }
 
     @GetMapping("accountant/monotributo")
     public String getViewMonotributo(HttpSession request, ModelMap model) {
-        Accountant accountant= (Accountant) request.getAttribute("sessionuser");
-        model.put("accountant",accountant);
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
         return "monotributo";
 
     }

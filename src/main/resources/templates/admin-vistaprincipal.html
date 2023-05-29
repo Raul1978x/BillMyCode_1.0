@@ -43,12 +43,12 @@
               <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
             </div>
             <div class="formacion">
-             <span class="especialidad" th:text="${admin.rol}">Full Stack</span>
+             <span class="especialidad" th:text="${logueado.rol}">Full Stack</span>
             </div>
           </div>
           <img
                   class="perfil-foto"
-                  th:src="@{/api/imagen/perfil-admin/__${logueado.id}__}"
+                  th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
                   alt="foto de perfil"
           />
           <div class="dropdown">
