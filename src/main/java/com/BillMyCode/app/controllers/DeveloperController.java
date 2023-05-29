@@ -157,7 +157,16 @@ public class DeveloperController {
     @GetMapping("/developers/delete/{id}")
     public String deleteDeveloper(@PathVariable Long id) {
         developerService.deleteDeveloperById(id);
-        return "redirect:/thymeleaf/lista-developers";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_ADMIN")) {
+            return "redirect:/thymeleaf/admin-lista-developer";
+        }else {
+            return "redirect:/thymeleaf/lista-developers";
+        }
+
     }
 
     @GetMapping("/developers/edit/{id}")
