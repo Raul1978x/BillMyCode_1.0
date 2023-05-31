@@ -113,7 +113,7 @@
       <th scope="col">Apellido</th>
       <th scope="col">Nacionalidad</th>
       <th scope="col">Telefono</th>
-      <!--<th scope="col">Salario</th>-->
+      <th scope="col">Status</th>
       <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -128,15 +128,15 @@
       <td scope="row" th:text="${admin.apellido}">Apellido</td>
       <td scope="row" th:text="${admin.nacionalidad}">nacionalidad</td>
       <td scope="row" th:text="${admin.telefono}">telefono</td>
-      <!--<td scope="row" th:text="'U$S ' + ${admin.salario}">Salario</td>-->
+      <td scope="row" th:text="${admin.status}">Status</td>
 
       <td>
         <ul class="list-unstyled">
           <li list-item>
-            <a th:href="@{/thymeleaf/admin/delete/__${admin.id}__}"
+            <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/delete/__${admin.id}__}"
                class="text-dark text-decoration-none">❌</a>
 
-            <a th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
+            <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
                class="text-dark text-decoration-none">🪶</a>
           </li>
         </ul>

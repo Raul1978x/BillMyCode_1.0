@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author agust
@@ -24,6 +25,8 @@ public class Comment {
     private Long id;
     @Lob
     private String comentario;
+    @OneToMany
+    private List<Answer> respuestas;
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
