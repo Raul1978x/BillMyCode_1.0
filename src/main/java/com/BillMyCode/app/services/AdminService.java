@@ -91,6 +91,7 @@ public class AdminService {
         admin.setFechaNacimiento(fechaNacimiento);
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
+        admin.setStatus(true);
         Image image = imagenServicio.save(archivo);
 
         admin.setImage(image);

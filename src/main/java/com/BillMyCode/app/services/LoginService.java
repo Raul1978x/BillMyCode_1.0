@@ -9,6 +9,7 @@ import com.BillMyCode.app.repositories.IDeveloperRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -75,11 +76,7 @@ public class LoginService implements UserDetailsService {
 
                 /*setAttribute("sessionuser", accountant);*/
 
-                return org.springframework.security.core.userdetails.User.builder()
-                        .username(accountant.getEmail())
-                        .password(accountant.getPassword())
-                        .authorities(permisos)
-                        .build();
+                return new User(accountant.getEmail(), accountant.getPassword(), permisos);
             }else {
                 Admin admin = adminRepository.searchByEmail(email);
                 if (admin != null){

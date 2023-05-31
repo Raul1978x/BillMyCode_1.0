@@ -114,6 +114,7 @@
       <th scope="col">Especialidad</th>
       <th scope="col">Seniority</th>
       <th scope="col">Salario</th>
+      <th scope="col">Status</th>
       <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -129,6 +130,7 @@
       <td scope="row" th:text="${developer.especialidad}">Especialidad</td>
       <td scope="row" th:text="${developer.seniority}">Seniority</td>
       <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
+      <td scope="row" th:text="${developer.status}">Status</td>
 
                               <td>
                                   <ul class="list-unstyled">

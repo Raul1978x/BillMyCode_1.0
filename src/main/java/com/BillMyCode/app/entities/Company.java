@@ -45,6 +45,5 @@ public class Company {
     private Reputacion reputacion;
     @OneToMany
     private List<Comment> comment;
-    private Boolean status;
 
 }

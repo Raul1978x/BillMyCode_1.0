@@ -119,6 +119,7 @@ public class DeveloperService {
         developer.setDescripcion(descripcion);
         developer.setComentario(comentario);
         developer.setRol(Rol.DEV);
+        developer.setStatus(true);
         Image image = imageService.save(archivo);
 
         developer.setImage(image);
