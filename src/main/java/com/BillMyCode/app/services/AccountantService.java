@@ -169,7 +169,7 @@ public class AccountantService  {
             contador.setReputacion(reputacion);
             List<Comment> comentarios = new ArrayList<>();
             comentarios.add(comentario);
-            contador.setComentario(comentarios);
+            contador.setComments(comentarios);
 
             repositorio.save(contador);
         } else {
