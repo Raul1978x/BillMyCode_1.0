@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ltpitt/java-spring-thymeleaf-chat/blob/master/LICENSE)
 [![Total Commits](https://img.shields.io/github/last-commit/Raul1978x/BillMyCode_1.0)](https://github.com/Raul1978x/BillMyCode_1.0/commits)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/4w/Raul1978x/BillMyCode_1.0?foo=bar)](https://github.com/Raul1978x/BillMyCode_1.0/commits)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/1w/Raul1978x/BillMyCode_1.0?foo=bar)](https://github.com/Raul1978x/BillMyCode_1.0/commits)
 # BillMyCode_1.0
 
 > Nuestro proyecto desarrollado en Java Spring se enfoca en proporcionar herramientas, comparaciones de salario y conocimientos legales necesarios para que los desarrolladores
