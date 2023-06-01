@@ -17,52 +17,6 @@ body {
   font-style: arial;
 }
 
-/* header {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  background-color: #080808;
-  z-index: 2;
-  padding: 16px;
-}
-
-.logo-container {
-  text-align: center;
-  width: 85px;
-  height: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.logo-container img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 50px;
-}
-
-nav {
-  display: block;
-} 
-
-nav a {
-  text-decoration: none;
-  margin-right: 20px;
-  color: white;
-  font-weight: 600;
-  font-size: medium;
-  font-style: inherit;
-  font-family: helvetica;
-  letter-spacing: 2px;
-}
-
-nav a:hover {
-  color: #255faa;
-} */
 /*Navbar*/
 
 .dropdown-button {
@@ -148,7 +102,7 @@ nav a:hover {
     right: 0;
     left: auto;
   }
-/*------------------------*/  
+/*------------------------*/
 
 .section-container {
   width: 70%;
@@ -238,7 +192,6 @@ button {
   box-shadow: 2px 2px 25px rgb(11, 121, 172);
   color: black;
   background-color: rgb(206, 202, 202);
- 
 }
 
 .t-empresa2 {
@@ -400,7 +353,7 @@ body {
 
 #carouselExample{
   max-width: 800px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .carousel-inner{
