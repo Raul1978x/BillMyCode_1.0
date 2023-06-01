@@ -54,6 +54,7 @@ public class AccountantService  {
         repositorio.deleteById(id);
     }
 
+
     /**
      * Metodo crearContador: Crea un Contador
      *
@@ -149,7 +150,6 @@ public class AccountantService  {
             contador.setImage(image);
             repositorio.save(contador);
 
-            repositorio.save(contador);
         } else {
             throw new MiException("No se puede modificar el contacto del contador.");
         }
@@ -169,7 +169,7 @@ public class AccountantService  {
             contador.setReputacion(reputacion);
             List<Comment> comentarios = new ArrayList<>();
             comentarios.add(comentario);
-            contador.setComentario(comentarios);
+            contador.setComments(comentarios);
 
             repositorio.save(contador);
         } else {
@@ -212,6 +212,11 @@ public class AccountantService  {
             throw new MiException("La especialización no puede estar vacía.");
         }
     }
-
+    @Transactional
+    public void bajaAccountant(Long id) {
+        Accountant contador = searchAccounterById(id);
+        contador.setStatus(false);
+        repositorio.save(contador);
+    }
 }
 

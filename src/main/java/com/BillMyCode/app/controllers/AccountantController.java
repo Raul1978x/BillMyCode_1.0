@@ -144,22 +144,22 @@ public class AccountantController {
      */
     @PostMapping("updateAccountant/{id}")
     public String updateAccountant(@PathVariable Long id,
-                                  @RequestParam(required = false) MultipartFile archivo,
-                                  @RequestParam(required = false) String nombre,
-                                  @RequestParam(required = false) String apellido,
-                                  @RequestParam(required = false) String email,
-                                  @RequestParam(required = false) String nacionalidad,
-                                  @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
-                                  @RequestParam(required = false) String password,
-                                  @RequestParam(required = false) String newpassword,
-                                  @RequestParam(required = false) String genero,
-                                  @RequestParam(required = false) String telefono,
-                                  @RequestParam Double honorarios,
-                                  @RequestParam String matricula,
-                                  @RequestParam(required = false) String especializacion,
-                                  @RequestParam(required = false) List<Developer> developers,
-                                  ModelMap model
-    ) throws MiException{
+                                   @RequestParam(required = false) MultipartFile archivo,
+                                   @RequestParam(required = false) String nombre,
+                                   @RequestParam(required = false) String apellido,
+                                   @RequestParam(required = false) String email,
+                                   @RequestParam(required = false) String nacionalidad,
+                                   @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+                                   @RequestParam(required = false) String password,
+                                   @RequestParam(required = false) String newpassword,
+                                   @RequestParam(required = false) String genero,
+                                   @RequestParam(required = false) String telefono,
+                                   @RequestParam Double honorarios,
+                                   @RequestParam String matricula,
+                                   @RequestParam(required = false) String especializacion,
+                                   @RequestParam(required = false) List<Developer> developers,
+                                   ModelMap model
+    ) throws MiException {
 
         try {
             accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
@@ -171,7 +171,7 @@ public class AccountantController {
                     .collect(Collectors.toList());
             if (roles.contains("ROLE_ADMIN")) {
                 return "redirect:/thymeleaf/admin-lista-accountant";
-            }else {
+            } else {
                 return "redirect:/thymeleaf/principal-accountant";
             }
         } catch (MiException e) {
@@ -183,10 +183,11 @@ public class AccountantController {
 
     @GetMapping("/principal-accountant")
     public String viewAccounters(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
         return "principalaccounter";
     }
+
     @GetMapping("/lista-developers")
     public String listDeveloper(HttpSession request, ModelMap model){
         List<Developer> developerList = developerService.listDevelopers();
@@ -218,10 +219,26 @@ public class AccountantController {
 
     }
 
+
     @GetMapping("/preguntasyrespuestas")
     public String viewAnswersAndQuest(HttpSession request, ModelMap model) {
         Accountant logueado= (Accountant) request.getAttribute("sessionuser");
         model.put("logueado",logueado);
         return "preguntasyrespuestas";
+
+    @GetMapping("/accountant/delete/{id}")
+    public String deleteAccountant(@PathVariable Long id) {
+        accountantService.deleteAccounterById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_ADMIN")) {
+            return "redirect:/thymeleaf/admin-lista-accountant";
+        }else {
+            return "redirect:/thymeleaf/lista-developers";
+        }
+
+
     }
 }

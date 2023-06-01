@@ -25,6 +25,7 @@ public class User {
     protected String genero;
     protected String nacionalidad;
     protected String password;
+    protected Boolean status;
     protected String telefono;
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento")

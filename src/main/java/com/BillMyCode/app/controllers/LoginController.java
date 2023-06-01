@@ -1,5 +1,6 @@
 package com.BillMyCode.app.controllers;
 
+import com.BillMyCode.app.entities.User;
 import com.BillMyCode.app.services.ImageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
@@ -31,18 +32,22 @@ public class LoginController {
      */
     @PostMapping("/redilogin")
     public String loginSuccess(HttpSession request, ModelMap model) {
-        model.put("request", request);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        if (roles.contains("ROLE_ADMIN")) {
-            return "redirect:/thymeleaf/admin-principal";
-        } else if (roles.contains("ROLE_DEV")) {
-            return "redirect:/thymeleaf/principal-developers";
-        } else {
-            return "redirect:/thymeleaf/principal-accountant";
+        User usuario = (User) request.getAttribute("sessionuser");
+        if (usuario.getStatus()) {
+            if (roles.contains("ROLE_ADMIN")) {
+                return "redirect:/thymeleaf/admin-principal";
+            } else if (roles.contains("ROLE_DEV")) {
+                return "redirect:/thymeleaf/principal-developers";
+            } else {
+                return "redirect:/thymeleaf/principal-accountant";
+            }
         }
+        model.put("error","La cuenta ingresada esta dada de baja");
+        return "login";
     }
 
     /**

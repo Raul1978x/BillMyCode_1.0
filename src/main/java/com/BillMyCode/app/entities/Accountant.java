@@ -21,9 +21,8 @@ public class Accountant extends User {
     private String matricula;
     private String especializacion;
     private Double honorarios;
-    private Boolean status;
     @OneToMany
-    private List<Comment> comentario;
+    private List<Comment> comments;
     @OneToMany
     private List<Developer> developers;
 }

@@ -38,6 +38,20 @@
           <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
         </a>
       </div>
+      <div>
+        <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
+          <div class="card-body">
+            <h5 class="card-title">Error!</h5>
+            <p class="card-text" th:text="${error}"></p>
+          </div>
+        </div>
+        <div th:if="${exito != null}" id="successCard" class="borrarcarta card text-white bg-success mb-3 mt-3 mensajeExito">
+          <div class="card-body">
+            <h5 class="card-title">Éxito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+          </div>
+        </div>
+      </div>
       <nav class="header-nav centrar">
         <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
         <a class="titulo" href="#seccion-3">Normativa</a>
@@ -70,6 +84,16 @@
                 <div>Menu</div>
               </button>
               <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-lista-admin')}">
+                    <img
+                            class="icono"
+                            src="/images/borrar-cuenta.png"
+                            alt="icono volver"
+                    />
+                    Dar de baja
+                  </a>
+                </li>
                 <li>
                   <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                     <!--
@@ -113,7 +137,7 @@
       <th scope="col">Apellido</th>
       <th scope="col">Nacionalidad</th>
       <th scope="col">Telefono</th>
-      <!--<th scope="col">Salario</th>-->
+      <th scope="col">Status</th>
       <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -128,15 +152,18 @@
       <td scope="row" th:text="${admin.apellido}">Apellido</td>
       <td scope="row" th:text="${admin.nacionalidad}">nacionalidad</td>
       <td scope="row" th:text="${admin.telefono}">telefono</td>
-      <!--<td scope="row" th:text="'U$S ' + ${admin.salario}">Salario</td>-->
+      <td scope="row" th:text="${admin.status}">Status</td>
 
       <td>
         <ul class="list-unstyled">
           <li list-item>
-            <a th:href="@{/thymeleaf/admin/delete/__${admin.id}__}"
+            <a th:if="${admin.status}" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${admin.id}, rol=${admin.rol}, dir='admin-lista-admin')}"
+               class="text-dark text-decoration-none">🗿</a>
+
+            <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/delete/__${admin.id}__}"
                class="text-dark text-decoration-none">❌</a>
 
-            <a th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
+            <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
                class="text-dark text-decoration-none">🪶</a>
           </li>
         </ul>
