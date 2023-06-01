@@ -128,7 +128,6 @@ public class AdminController {
         model.put("accountantList", accountantList);
         Admin logueado= (Admin) request.getAttribute("sessionuser");
         model.addAttribute("logueado",logueado);
-        System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA "+logueado.getEmail());
         return "admin-listaaccountants";
     }
 

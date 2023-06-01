@@ -3,10 +3,9 @@ package com.BillMyCode.app.controllers;
 import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Developer;
+import com.BillMyCode.app.entities.User;
+import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
-import com.BillMyCode.app.repositories.IAccountantRepository;
-import com.BillMyCode.app.repositories.IAdminRepository;
-import com.BillMyCode.app.repositories.IDeveloperRepository;
 import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.AdminService;
 import com.BillMyCode.app.services.DeveloperService;
@@ -15,19 +14,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -137,48 +130,61 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/baja/{id}")
-    public String bajaUser(@PathVariable Long id, ModelMap model) throws MiException {
+    @GetMapping ("/user/baja/{id}/{rol}/{dir}")
+    public String confirmarBaja(@PathVariable Long id,@PathVariable Rol rol ,@PathVariable String dir, ModelMap model){
+        model.addAttribute("id",id);
+        model.addAttribute("rol",rol);
+        model.addAttribute("dir",dir);
+        return "confirmar-baja";
+    }
+
+    @PostMapping ("/user/confirmarbaja")
+    public String confirmBaja(@RequestParam Long id, @RequestParam Rol rol, @RequestParam String dir,
+                              @RequestParam String password, ModelMap model, HttpSession request) throws MiException {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User usuario = (User) request.getAttribute("sessionuser");
 
-        Developer developer = developerService.searchDeveloperById(id);
-        if (developer != null) {
-
-            developer.setStatus(false);
-            if (roles.contains("ROLE_ADMIN")) {
-                return "redirect:/thymeleaf/admin-lista-developer";
-            }
-
-        } else {
-            Accountant accountant = accountantService.searchAccounterById(id);
-            if (accountant != null){
-
-                accountant.setStatus(false);
-                if (roles.contains("ROLE_ADMIN")) {
-                    return "redirect:/thymeleaf/admin-lista-accountant";
+        switch (rol.toString()) {
+            case "DEV":
+                if (passwordEncoder.matches(password, usuario.getPassword())) {
+                    developerService.bajaDeveloper(id);
+                    model.put("exito", "Usuario dado de baja exitosamente");
+                } else {
+                    model.put("error", "Contraseña incorrecta");
+                    return "redirect:/thymeleaf/"+dir;
                 }
-
-            }else {
-                Admin admin = adminService.searchAdminById(id);
-                if (admin != null){
-
-                    admin.setStatus(false);
-                    if (roles.contains("ROLE_ADMIN")) {
-                        return "redirect:/thymeleaf/admin-lista-admin";
-                    }
-
-                }else {
-
-                    model.put("error","Error al dar de baja al usuario");
-                    throw new UsernameNotFoundException("usuario no encontrado con el correo electronico: ");
-
+                break;
+            case "ACCOUNTANT":
+                if (passwordEncoder.matches(password, usuario.getPassword())) {
+                    accountantService.bajaAccountant(id);
+                    model.put("exito", "Usuario dado de baja exitosamente");
+                } else {
+                    model.put("error", "Contraseña incorrecta");
+                    return "redirect:/thymeleaf/"+dir;
                 }
+                break;
+            case "ADMIN":
+                if (passwordEncoder.matches(password, usuario.getPassword())) {
+                    adminService.bajaAdmin(id);
+                    model.put("exito", "Usuario dado de baja exitosamente");
+                } else {
+                    model.put("error", "Contraseña incorrecta");
+                    return "redirect:/thymeleaf/"+dir;
+                }
+                break;
+        }
+        if (roles.contains("ROLE_ADMIN")) {
+            if (!usuario.getId().equals(id)){
+                return "redirect:/thymeleaf/"+dir;
             }
         }
         return "index";
     }
+
 }
 

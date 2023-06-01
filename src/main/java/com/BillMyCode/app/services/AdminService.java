@@ -1,5 +1,6 @@
 package com.BillMyCode.app.services;
 
+import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Image;
@@ -204,5 +205,10 @@ public class AdminService {
             throw new MiException("Error, fecha incorrecta");
         }
     }
-
+    @Transactional
+    public void bajaAdmin(Long id){
+        Admin admin = searchAdminById(id);
+        admin.setStatus(false);
+        repositorio.save(admin);
+    }
 }

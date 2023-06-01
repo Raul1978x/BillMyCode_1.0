@@ -1,5 +1,6 @@
 package com.BillMyCode.app.services;
 
+import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Image;
@@ -272,4 +273,10 @@ public class DeveloperService {
             throw new MiException("La especialidad no puede ser nula o estar vacia");
         }
     }
-};
+    @Transactional
+    public void bajaDeveloper(Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setStatus(false);
+        repositorio.save(developer);
+    }
+}
