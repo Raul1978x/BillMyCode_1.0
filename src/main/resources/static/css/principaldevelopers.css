@@ -30,64 +30,6 @@ a {
 }
 
 
-/* BARRA BUSCARDOR *//*
-.container {
-	position: absolute;
-	left: 75%;
-	top: 45%;
-	transform: translate(-50%,-50%);
-	padding: 16px;
-}
-
-.btn i {
-	font-size: 25px;
-	color: orange;
-	line-height: 80px;
-	transition: all .7s ease;
-}
-
-.container:hover input {
-	width: 250px;
-}
-
-.container:hover i{
-	transform: rotate(-360deg);
-}
-*//* FIN  BARRA BUSCADOR *//*
-
-
-*//*
-TARJETAS *//*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*//*footer {
-  position: relative;
-  top: 120px;
-}*//*
-.seccion-1 {
-    position: relative;
-    display: flex;
-    margin-left: 500px;
-    justify-content: center;
-    align-items: center;
-    text-align: start;
-}
-
 /*footer*/
 footer {
     width: 100%;

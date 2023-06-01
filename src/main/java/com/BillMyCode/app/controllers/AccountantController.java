@@ -217,4 +217,11 @@ public class AccountantController {
         return "monotributo";
 
     }
+
+    @GetMapping("/preguntasyrespuestas")
+    public String viewAnswersAndQuest(HttpSession request, ModelMap model) {
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+        return "preguntasyrespuestas";
+    }
 }
