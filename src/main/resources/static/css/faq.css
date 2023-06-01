@@ -9,14 +9,6 @@ body {
   background-color: #1f2430;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-.text-area {
-  width: max-content;
-}
 
  section{
     width: 1070px;
@@ -195,5 +187,37 @@ a {
    width: 100%;
    padding: 8px;
  }
+
+ /*--------------------*/
+/* 
+ VISTA PREGUNTA Y RESPUESTAS */
+.respuesta{
+  width: 100%;
+  background:  #ffffff;
+  color: black;
+  padding: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+
+}
+
+button {
+  padding: 8px;
+  /* border: 2px solid white; */
+  border-radius: 8px;
+  color: white;
+  background-color: orange;
+  margin: 0 4px;
+  font-weight: bold;
+  width: 150px;
+  text-align: center;
+
+
+  &:hover {
+    background-color: rgb(182, 131, 37);
+  }
+}
+
 
  /*--------------------*/
