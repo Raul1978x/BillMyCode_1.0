@@ -44,19 +44,22 @@ public class SeguridadWeb {
                 .and().formLogin(
                         form-> form
                                 .loginPage("/login")
-                                .usernameParameter("usuario") // Atrapa el email ingresado por el usuario
-                                .passwordParameter("password") // Atrapa la contraseña ingresada por el usuario
-                                .loginProcessingUrl("/logincheck")
-                                .successForwardUrl("/thymeleaf/redilogin") // En caso de una autenticacion correcta redirige a "/thymeleaf/redilogin" que esta en LoginController
-                                .failureUrl("/thymeleaf/login") // En caso de una autenticacion incorrecta redirige a /thymeleaf/login
                                 .permitAll()
+                               // .usernameParameter("usuario") // Atrapa el email ingresado por el usuario
+                               // .passwordParameter("password") // Atrapa la contraseña ingresada por el usuario
+                               // .loginProcessingUrl("/logincheck")
+                                .successForwardUrl("/login/redilogin") // En caso de una autenticacion correcta redirige a "/thymeleaf/redilogin" que esta en LoginController
+                               // .failureUrl("/thymeleaf/login") // En caso de una autenticacion incorrecta redirige a /thymeleaf/login
+
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/thymeleaf/login") // A donde redirige cuando cierro sesion
+                                .logoutSuccessUrl("/login") // A donde redirige cuando cierro sesion
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID")
                                 .permitAll()
                 ).exceptionHandling()
-                 .accessDeniedPage("/thymeleaf/accesoD");
+                 .accessDeniedPage("/login/accesoD");
         return http.build();
     }
 

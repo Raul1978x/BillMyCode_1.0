@@ -65,7 +65,7 @@
                 <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
               </div>
               <div class="formacion">
-                <!--<span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>-->
+                <span class="especialidad" th:text="${logueado.rol}">Rol</span>
 
               </div>
             </div>
@@ -152,7 +152,8 @@
       <td scope="row" th:text="${admin.apellido}">Apellido</td>
       <td scope="row" th:text="${admin.nacionalidad}">nacionalidad</td>
       <td scope="row" th:text="${admin.telefono}">telefono</td>
-      <td scope="row" th:text="${admin.status}">Status</td>
+      <td th:if="${admin.status}" scope="row"  class="text-dark text-decoration-none">🟢</td>
+      <td th:if="${!admin.status}" scope="row"  class="text-dark text-decoration-none">🔴</td>
 
       <td>
         <ul class="list-unstyled">
