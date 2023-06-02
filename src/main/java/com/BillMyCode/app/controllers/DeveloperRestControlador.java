@@ -142,6 +142,7 @@ public class DeveloperRestControlador {
                                 @RequestParam(required = false) String nacionalidad,
                                 @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                 @RequestParam(required = false) String password,
+                                @RequestParam(required = false) String newpassword,
                                 @RequestParam(required = false) String genero,
                                 @RequestParam(required = false) String telefono,
                                 @RequestParam(required = false) Double salario,
@@ -156,7 +157,7 @@ public class DeveloperRestControlador {
             model.put("exito", "el developer fue creado exitosamente");
 
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    password, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
+                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

@@ -120,6 +120,12 @@
     <table class="table table-dark table-striped container my-5 caja-sombra">
         <thead>
         <tr class="table-dark">
+            <th scope="col"><a class="button" th:href="@{/thymeleaf/crear-cuenta-contador}"><img
+                    class="icono"
+                    src="/images/crear-cuenta.png"
+                    alt="icono volver"
+            />
+            </a></th>
             <th scope="col">Imagen</th>
             <th scope="col">Id</th>
             <th scope="col">Email</th>
@@ -133,6 +139,7 @@
         </thead>
         <tbody class="">
         <tr class="table-dark" th:each="accountant: ${accountantList}">
+            <td scope="col" class="text-dark text-decoration-none">️</td>
             <td scope="row">
                 <img width="50em" th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}"/>
             </td>
