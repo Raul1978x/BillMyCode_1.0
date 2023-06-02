@@ -74,10 +74,10 @@ public class AdminService {
      * @throws: MiException
      */
     @Transactional
-    public void createAdmin (String nombre, String apellido, String email, String nacionalidad, String password, String genero, Date fechaNacimiento,
+    public void createAdmin (String nombre, String apellido, String email, String nacionalidad, String password, String newpassword, String genero, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException{
 
-        validate2(nombre, apellido, email, password, fechaNacimiento);
+        validate(nombre, apellido, email, password, newpassword, fechaNacimiento, genero, telefono, nacionalidad);
 
         String cryptPassword = passwordEncoder.encode(password);
 
@@ -116,7 +116,7 @@ public class AdminService {
      */
     @Transactional
     public void updateAdmin (Long id, String nombre, String apellido, String email, String nacionalidad, String password,
-                             String genero, Date fechaNacimiento,
+                             String newpassword, String genero, Date fechaNacimiento,
                              String telefono, MultipartFile archivo) throws MiException {
 
         Optional<Admin> respuesta = repositorio.findById(id);
@@ -125,7 +125,7 @@ public class AdminService {
         if (respuesta.isPresent()) {
             Admin admin = respuesta.get();
 
-            /*validate2(nombre, apellido, email, password, fechaNacimiento);*/
+            validate(nombre, apellido, email, password, newpassword, fechaNacimiento, genero, telefono, nacionalidad);
 
             admin.setNombre(nombre);
             admin.setApellido(apellido);
@@ -157,58 +157,57 @@ public class AdminService {
      * @param
      * @param fechaNacimiento
      */
-    public void validate (String nombre, String apellido, String email, String password, Date fechaNacimiento){
-        if (nombre.isBlank() || nombre.equals("")){
-            System.out.println("Error, el campo Nombre no puede estar vacio");
-        }
-        if (apellido.isBlank() || apellido.equals("")){
-            System.out.println("Error, el campo Apellido no puede estar vacio");
-        }
-        if (email.isBlank() || email.equals("") || !email.contains("@") || !email.contains(".")){
-            System.out.println("Error, el campo Email debe tener ingresado un correo valido");
-        }
-        if (password.isBlank() || password.equals("")){ //Preguntar: hay que validar la cantirdad de caracteres de la contraseña?
-            System.out.println("Error, el campo Contrasela no puede estar vacio");
-        }
-        if (fechaNacimiento==null){
-            System.out.print("Error, fecha incorrecta");
-        }
-    }
+    public void validate(String nombre,
+                         String apellido,
+                         String email,
+                         String password,
+                         String newpassword,
+                         Date fechaNacimiento,
+                         String genero,
+                         String telefono,
+                         String nacionalidad
+    ) throws MiException {
 
-    /**
-     * Metodo validate2: valida que los valores ingresados se cargen conforme a las
-     * necesidades de la aplicacion
-     *
-     * @param nombre
-     * @param apellido
-     * @param email
-     * @param password
-     * @param
-     */
-    public void validate2 (String nombre, String apellido, String email, String password, Date fechaNacimiento) throws MiException {
-        if (nombre.isEmpty() || nombre.isBlank()){
-            throw new MiException("Error, el campo Nombre no puede estar vacio");
+        if (nombre.isBlank() || nombre.isEmpty()) {
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
         }
-        if (apellido.isEmpty() || apellido.isBlank()){
-            throw new MiException("Error, el campo Apellido no puede estar vacio");
+        if (apellido.isBlank() || apellido.isEmpty()) {
+            throw new MiException("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
-            throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
+        if (email.isBlank() || email.isEmpty()) {
+            throw new MiException("El email no puede ser nulo o estar vacio");
         }
-        if (password.isEmpty() || password.isBlank()){
-            throw new MiException("Error, el campo Contrasela no puede estar vacio");
+        if (password.isBlank() || password.isEmpty()) {
+            throw new MiException("La contraseña no puede ser nula o estar vacia");
         }
-        /*if (!newpassword.equals(password)){
-            throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña");
-        }*/
-        if (fechaNacimiento==null){
-            throw new MiException("Error, fecha incorrecta");
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("Las contraseñas no coinciden");
         }
+        if (fechaNacimiento == null) {
+            throw new MiException("La fecha de nacimiento no puede estar vacia");
+        }
+        if (genero.isBlank() || genero.isEmpty()) {
+            throw new MiException("El genero no puede ser nulo o estar vacio");
+        }
+        if (nacionalidad.isBlank() || nacionalidad.isEmpty()) {
+            throw new MiException("La nacionalidad no puede ser nula o estar vacia");
+        }
+        if (telefono.isBlank() || telefono.isEmpty()) {
+            throw new MiException("El telefono no puede ser nulo o estar vacio");
+        }
+
     }
     @Transactional
     public void bajaAdmin(Long id){
         Admin admin = searchAdminById(id);
         admin.setStatus(false);
+        repositorio.save(admin);
+    }
+
+    @Transactional
+    public void altaAdmin(Long id) {
+        Admin admin = searchAdminById(id);
+        admin.setStatus(true);
         repositorio.save(admin);
     }
 }

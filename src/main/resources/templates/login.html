@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 
 <head>
@@ -24,18 +24,6 @@
     <nav>
       <a href="#seccion-2">BIENVENIDO A BILL MY CODE</a>
     </nav>
-      <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
-          <div class="card-body">
-              <h5 class="card-title">Error!</h5>
-              <p class="card-text" th:text="${error}"></p>
-          </div>
-      </div>
-      <div th:if="${exito != null}" id="successCard" class="borrarcarta card text-white bg-success mb-3 mt-3 mensajeExito">
-          <div class="card-body">
-              <h5 class="card-title">Éxito!</h5>
-              <p class="card-text" th:text="${exito}"></p>
-          </div>
-      </div>
   </header>
   <div id="contenedor">
     <div id="central">
@@ -49,12 +37,21 @@
                   BIENVENIDO
                 </h2>
             </div>
-            <form id="loginform" th:action="@{/logincheck}" method="POST">
-                <input type="text" name="usuario" placeholder="Usuario" required>
-                <input type="password" placeholder="Contraseña" name="password" required>
-                <button class="button" type="submit">
-               INICIAR SESIÓN
-              </button>
+                <form action="#" method="POST" th:action="@{/login}">
+                <div class="alert alert-danger" id="error-msg" th:if="${param.error}">
+                    Email y/o Contraseña Invalidos
+                </div>
+                    <div class="alert alert-danger" id="errorCard" th:if="${error != null}" th:text="${error}">
+                    </div>
+                    <div class="alert alert-success" id="successCard" th:if="${exito != null}" th:text="${exito}">
+                    </div>
+
+                    <input class="form-control" id="inputUsername" name="username" placeholder="Ingresar Email"
+                           required type="input">
+                    <input class="form-control" id="inputPassword" maxlength="20" minlength="6" name="password" placeholder="Ingresar Contraseña"
+                           required type="password">
+
+                    <button class="button" id="submit-button" type="submit">INICIAR SESIÓN</button>
             </form>
             <div class="pie-form">
               <ul>

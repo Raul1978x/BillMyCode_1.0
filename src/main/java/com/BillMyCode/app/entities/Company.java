@@ -31,19 +31,23 @@ public class Company {
     private String nombre;
     @Lob
     private String descripcion;
-    private String contacto;
-    private String razonSocial;
-    private String email;
-    private String direccion;
-    private String telefono;
-    private String password;
     @OneToOne
     private Image logo;
-    @OneToMany
-    private List<Developer> developer;
     @OneToOne
     private Reputacion reputacion;
     @OneToMany
     private List<Comment> comment;
+  
+    private Double salarioPromedio;
+    private Double salarioHistorico;
+    private Boolean status;
+    private String password;
+
+    @OneToMany
+    private List<Developer> developer;
+
+    @OneToOne
+    private Contact contacto;
+
 
 }

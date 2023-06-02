@@ -65,7 +65,7 @@
                                 <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                             </div>
                             <div class="formacion">
-                                <!--<span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>-->
+                                <span class="especialidad" th:text="${logueado.rol}">Rol</span>
 
                             </div>
                         </div>
@@ -84,16 +84,6 @@
                                 <div>Menu</div>
                             </button>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-lista-accountant')}">
-                                        <img
-                                                class="icono"
-                                                src="/images/borrar-cuenta.png"
-                                                alt="icono volver"
-                                        />
-                                        Dar de baja
-                                    </a>
-                                </li>
                                 <li>
                                     <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                         <!--
@@ -130,6 +120,12 @@
     <table class="table table-dark table-striped container my-5 caja-sombra">
         <thead>
         <tr class="table-dark">
+            <th scope="col"><a class="button" th:href="@{/thymeleaf/crear-cuenta-contador}"><img
+                    class="icono"
+                    src="/images/crear-cuenta.png"
+                    alt="icono volver"
+            />
+            </a></th>
             <th scope="col">Imagen</th>
             <th scope="col">Id</th>
             <th scope="col">Email</th>
@@ -143,6 +139,7 @@
         </thead>
         <tbody class="">
         <tr class="table-dark" th:each="accountant: ${accountantList}">
+            <td scope="col" class="text-dark text-decoration-none">️</td>
             <td scope="row">
                 <img width="50em" th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}"/>
             </td>
@@ -152,13 +149,14 @@
             <td scope="row" th:text="${accountant.apellido}">Apellido</td>
             <td scope="row" th:text="${accountant.especializacion}">Especializacion</td>
             <td scope="row" th:text="'U$S ' + ${accountant.honorarios}">Honorarios</td>
-            <td scope="row" th:text="${accountant.status}">Status</td>
+            <td th:if="${accountant.status}" scope="row"   class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/baja/{id}/{rol}(id=${accountant.id}, rol=${accountant.rol})}"
+                                                                                                     class="text-dark text-decoration-none">🟢</a></td>
+            <td th:if="${!accountant.status}" scope="row"  class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/alta/{id}/{rol}(id=${accountant.id}, rol=${accountant.rol})}"
+                                                                                                           class="text-dark text-decoration-none">🔴</a></td>
 
             <td>
                 <ul class="list-unstyled">
                     <li list-item>
-                        <a th:if="${accountant.status}" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${accountant.id}, rol=${accountant.rol}, dir='admin-lista-accountant')}"
-                           class="text-dark text-decoration-none">🗿</a>
 
                         <a th:href="@{/thymeleaf/accountant/delete/__${accountant.id}__}"
                            class="text-dark text-decoration-none">❌</a>

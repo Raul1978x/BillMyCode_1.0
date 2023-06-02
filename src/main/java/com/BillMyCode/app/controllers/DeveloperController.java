@@ -144,7 +144,6 @@ public class DeveloperController {
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento, password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
             model.put("exito", "El Developer fue creado exitosamente");
-            System.out.println(model);
             return "login.html";
         } catch (MiException e) {
             model.put("error", e.getMessage());
@@ -190,6 +189,7 @@ public class DeveloperController {
     public String editDeveloper(@PathVariable Long id, ModelMap model) {
         Developer logueado = developerService.searchDeveloperById(id);
         model.put("logueado", logueado);
+        model.put("dir","admin-lista-developer");
         return "editar-cuenta-desarrollador";
     }
 
@@ -202,6 +202,7 @@ public class DeveloperController {
                                   @RequestParam(required = false) String nacionalidad,
                                   @RequestParam("fechaNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
                                   @RequestParam(required = false) String password,
+                                  @RequestParam(required = false) String newpassword,
                                   @RequestParam(required = false) String genero,
                                   @RequestParam(required = false) String telefono,
                                   @RequestParam(required = false) Double salario,
@@ -215,7 +216,7 @@ public class DeveloperController {
         try {
             model.put("exito", "el developer fue editado exitosamente");
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    password, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
+                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -227,7 +228,10 @@ public class DeveloperController {
             }
         } catch (ParseException e) {
             model.put("error", e.getMessage());
-            throw new RuntimeException(e);
+            Developer logueado = developerService.searchDeveloperById(id);
+            model.put("logueado", logueado);
+            return "editar-cuenta-desarrollador";
+
         }
     }
 

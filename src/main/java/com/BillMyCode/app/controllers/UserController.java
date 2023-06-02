@@ -85,6 +85,11 @@ public class UserController {
         return "crear-cuenta-desarrollador.html";
     }
 
+    @GetMapping("/admin-crear")
+    public String admin() {
+        return "crear-cuenta-administrador.html";
+    }
+
     /**
      * Metodo createAccounter: Redirige a crear-cuenta-contador.html
      *
@@ -114,7 +119,7 @@ public class UserController {
 
         if (roles.contains("ROLE_ADMIN")){
             Admin logueado = adminService.searchAdminById(id);
-            model.put("logueado", logueado);
+            model.addAttribute("logueado", logueado);
             return "admin-editarperfil";
         }else if (roles.contains("ROLE_DEV")){
             Developer logueado = developerService.searchDeveloperById(id);
@@ -142,10 +147,6 @@ public class UserController {
     public String confirmBaja(@RequestParam Long id, @RequestParam Rol rol, @RequestParam String dir,
                               @RequestParam String password, ModelMap model, HttpSession request) throws MiException {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<String> roles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User usuario = (User) request.getAttribute("sessionuser");
 
@@ -168,23 +169,11 @@ public class UserController {
                     return "redirect:/thymeleaf/"+dir;
                 }
                 break;
-            case "ADMIN":
-                if (passwordEncoder.matches(password, usuario.getPassword())) {
-                    adminService.bajaAdmin(id);
-                    model.put("exito", "Usuario dado de baja exitosamente");
-                } else {
-                    model.put("error", "Contraseña incorrecta");
-                    return "redirect:/thymeleaf/"+dir;
-                }
-                break;
         }
-        if (roles.contains("ROLE_ADMIN")) {
-            if (!usuario.getId().equals(id)){
-                return "redirect:/thymeleaf/"+dir;
-            }
+        if (request != null) {
+            request.invalidate();
         }
         return "index";
     }
-
 }
 
