@@ -23,11 +23,19 @@
           alt="logo de empresa"
         />
       </div>
+      <div>
+        <div th:if="${exito != null}" id="successCard" class="borrarcarta card text-white bg-success mensajeExito">
+          <div class="card-body">
+            <h5 class="card-title">Éxito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+          </div>
+        </div>
+      </div>
       <nav class="header-nav centrar">
         <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
         <a class="titulo" href="#seccion-3">Normativa</a>
         <a class="titulo" href="#seccion-4">Impuestos</a>
-        <a class="titulo" href="#seccion-5">Unite</a>
+        <a class="titulo" href="#seccion-5">Registrate</a>
         <a class="titulo" href="#seccion-6">Experiencias</a>
         <a class="titulo" href="#seccion-7">Contactanos</a>
     <!--    <div class="perfil-menu">
@@ -69,12 +77,13 @@
             </ul>
           </div>
         </div>-->
-
       </nav>
     </nav>
+
   </navbar>
 
   <section id="seccion-1" class="section-container seccion-1">
+
     <img src="/images/pngegg.png" alt="Imagen 1">
     <div class="l-section--col">
       <h1 class="c-section__title">Conectamos el mundo con el empleo.</h1>

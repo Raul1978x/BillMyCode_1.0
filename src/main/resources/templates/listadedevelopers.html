@@ -30,7 +30,7 @@
                         </div>
                         <img
                                 class="perfil-foto"
-                                th:src="@{/api/imagen/perfil-accountant/__${logueado.id}__}"
+                                th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
                                 alt="foto de perfil"
                         />
                         <div class="dropdown">
@@ -44,7 +44,17 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/thymeleaf/developer/edit/{id}">
+                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='lista-developers')}">
+                                        <img
+                                                class="icono"
+                                                src="/images/borrar-cuenta.png"
+                                                alt="icono volver"
+                                        />
+                                        Dar de baja
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                         <!--
                                                                         <input type="hidden" name="id" th:value="${developer.id}"/>
                                         -->

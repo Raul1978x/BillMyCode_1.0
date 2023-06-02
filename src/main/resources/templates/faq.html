@@ -9,15 +9,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="shortcut icon" href="/images/billmycodelogosimp.png">
-    <!--<link rel="stylesheet" href="/static/css/contadorescard.css">-->
     <link rel="stylesheet" href="/css/faq.css">
-<!--    <link rel="stylesheet" href="/css/monotributo.css">-->
 
 
- 
 
 
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=fCRAGnjIEItLtqFp2MfIwFvyrjHPY17xUzfypcHBKYlgeF7mVfl7_6XaYXdTB6kxwUwEZPwN5rzpFGc5NkGujzQC10LPerlvXLGbhFkaHOt733SKKlB4X1sMdiD1i4DKuWGsuZHa92i6mFVl7BlmqA" charset="UTF-8"></script></head>
 <body>
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
@@ -35,17 +31,17 @@
                 <div class="perfil-menu">
                     <div class="containers me-3" >
                         <div class="nombres">
-                            <span class="nombre" th:text="${developer.nombre}">Raúl</span>
-                            <span class="apellido" th:text="${developer.apellido}">Gómez</span>
+                            <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                            <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                         </div>
                         <div class="formacion">
-                            <span class="especialidad" th:text="${developer.especialidad}">Full Stack</span>
-                            <span class="seniority" th:text="${developer.seniority}">Junior</span>
+                            <span class="especialidad" th:text="${logueado.especialidad}">Full Stack</span>
+                            <span class="seniority" th:text="${logueado.seniority}">Junior</span>
                         </div>
                     </div>
                     <img
                             class="perfil-foto"
-                            th:src="@{/api/imagen/perfil/__${developer.id}__}"
+                            th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
                             alt="foto de perfil"
                     />
                 <div class="dropdown">
@@ -59,7 +55,17 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" th:href="@{/thymeleaf/developers/edit/{id}(id=${developer.id})}">
+                            <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='faq')}">
+                                <img
+                                        class="icono"
+                                        src="/images/borrar-cuenta.png"
+                                        alt="icono volver"
+                                />
+                                Dar de baja
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                 <!--
                                                                 <input type="hidden" name="id" th:value="${developer.id}"/>
                                 -->
@@ -97,59 +103,86 @@
 
         <details>
            <summary>¿Cómo puedo registrarme en la plataforma?</summary>
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-              vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-              cupiditate?</p>
+        <p> 1.	Accede a la página principal de la plataforma a través de tu navegador web o la aplicación correspondiente. <br>
+            2.	En la pantalla principal, busca y localiza el botón de "CREAR CUENTA". Por lo general, este botón se encuentra en una ubicación prominente.<br>
+            3.	Haz clic en el botón de "CREAR CUENTA" para iniciar el proceso de registro.<br>
+            4.	A continuación, se te redirigirá a una página de registro donde se te pedirá que elijas el tipo de cuenta que deseas crear. Puedes seleccionar entre las opciones disponibles, como "Developer" o "Contador". Selecciona la opción que mejor se ajuste a tus necesidades.<br>
+            5.	Una vez que hayas seleccionado el tipo de cuenta, se te solicitará que proporciones tus datos de usuario, como nombre, dirección de correo electrónico ,contraseña segura , etc . Asegúrate de completar todos los campos requeridos con la información correcta.<br>
+            6.	Por último, haz clic en el botón de "Crear Cuenta" para completar el proceso de registro. </p><br>
         </details>
   
         <details>
            <summary>¿Cómo puedo modificar mis datos personales y de contacto?</summary>
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-              vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-              cupiditate?</p>
+           <p> 1.	Inicia sesión en la plataforma o aplicación correspondiente utilizando tus credenciales de usuario. <br>
+            2.	Una vez dentro de tu sesión, dirígete a la esquina superior derecha de la pantalla. Allí verás un botón de "MENU". Haz clic en ese botón para desplegar el menú de opciones.<br>
+            3.	Dentro del menú desplegado, busca y selecciona la opción "EDITAR PERFIL"<br>
+            4.	Al hacer clic en "EDITAR PERFIL", serás redirigido a una página o formulario donde podrás modificar tus datos personales y de contacto.<br>
+            5.	Revisa la información existente y realiza las modificaciones necesarias en los campos correspondientes, como nombre, dirección, número de teléfono o dirección de correo electrónico.<br>
+            6.	Una vez que hayas realizado los cambios deseados, guarda los datos actualizados haciendo clic en el botón de "Editar Cuenta" para confirmar los cambios </p><br>
         </details>
   
         <details>
            <summary>¿Cómo puedo consultar mi situación tributaria?</summary>
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-              vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-              cupiditate?</p>
+           <p> 1.	Inicia sesión en la plataforma o aplicación correspondiente utilizando tus credenciales de usuario. <br>
+            2.	Una vez dentro de tu sesión, dirígete al apartado de "Contadores".Este apartado está diseñado para proporcionarte ayuda experta y completa en una amplia gama de necesidades contables y financieras.<br>
+            3.	Explora los servicios disponibles en el apartado de contadores. Busca aquellos servicios que se enfoquen en la asesoría tributaria o la consulta de situación tributaria.<br>
+            4.	Dentro de estos servicios, encontrarás expertos contadores y asesores tributarios que pueden brindarte la ayuda que necesitas. Puedes seleccionar un contador o asesor que se especialice en impuestos y tributación.<br>
+            5.	Una vez que hayas seleccionado al contador o asesor tributario, comunícate con él a través de la plataforma. Puedes presionar en "Contactar" para discutir tu situación tributaria específica.<br>
+            6.	Durante la consulta, proporciona la información relevante sobre tus ingresos, gastos y cualquier otro aspecto necesario para evaluar tu situación tributaria. El contador o asesor tributario utilizará esta información para brindarte una evaluación precisa y recomendaciones pertinentes.<br>
+            7.	Aprovecha la oportunidad para hacer todas las preguntas que tengas y aclarar cualquier duda relacionada con tu situación tributaria. El contador o asesor estará disponible para guiarte y proporcionarte la información que necesites. <br>
+        </p><br>
         </details>
 
         <details>
             <summary>¿Cómo puedo encontrar un contador que se especialice en el área que necesito?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
-         </details>
+            <p> 1.	Inicia sesión como developer en la plataforma o aplicación correspondiente. <br>
+                2.	Una vez dentro de tu sesión, busca el apartado dedicado a los contadores. Puede estar etiquetado como "Contadores".<br>
+                3.	Dentro de este apartado, encontrarás contadores disponibles en la plataforma. Explora y revisa las características y especialidades de cada contador. En ellos, encontrarás sobre sus áreas de especialización, matricula y horonarios<br>
+                4.	Examina los perfiles de los contadores que se ajusten a tus requerimientos. <br>
+                5.	Si es posible, comunícate directamente con los contadores que te interesen. Puedes presionar en "Contactar” para consulta inicial para discutir tus necesidades y evaluar si son la opción adecuada para ti.<br>
+                </p><br>
+            </details>
 
          <details>
             <summary>¿Cómo puedo calificar a un contador después de utilizar sus servicios?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
-         </details>
+            <p> 1.	Accede a la plataforma o aplicación correspondiente utilizando tus credenciales de usuario.<br>
+                2.	Una vez dentro de tu sesión, busca el apartado dedicado a los contadores. Puede estar etiquetado como "Contadores".<br>
+                3.	En las tarjetas, podras proporcionar una puntuación utilizando un sistema de estrellas, generalmente del 1 al 5, donde 1 representa la calificación más baja y 5 la calificación más alta.<br>
+                4.	Selecciona el número de estrellas que consideres apropiado para reflejar tu satisfacción con los servicios del contador. <br>
+                </p><br>
+            </details>
 
          <details>
             <summary>¿Cómo puedo buscar puestos de trabajo en mi área de especialización?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
-         </details>
+            <p> 1.	 Inicia sesión como developer en la plataforma o aplicación correspondiente. <br>
+                2.	Dentro de tu sesión, busca el apartado con el nombre de "SUELDOS PROMEDIO". Es probable que se encuentre en una sección dedicada a información salarial o análisis de mercado.<br>
+                3.	Haz clic en ese apartado para acceder a la funcionalidad que te permitirá descubrir cuánto deberías cobrar y comparar tu sueldo actual en tu sector y tecnología.<br>
+                4.	Utiliza las herramientas proporcionadas para ingresar la información necesaria como la Seniority y Especialidad. Estos detalles ayudarán a afinar la comparación salarial<br>
+                5.	Después de proporcionar los datos requeridos, la plataforma o aplicación debería generar resultados y mostrarte el promedio de sueldos en tu sector y tecnología específica.<br>
+                6.	Compara tu sueldo actual con el promedio obtenido. Si tu sueldo actual está por debajo del promedio, puedes considerar negociar un aumento salarial o explorar oportunidades en el mercado laboral. Si tu sueldo actual está por encima del promedio, podrías sentirte más confiado y satisfecho con tu situación salarial. </p><br>
+            </details>
 
          <details>
             <summary>¿Cómo puedo comparar mi sueldo actual con el promedio de sueldos en mi sector y tecnología?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
-         </details>
+            <p> 1.	Accede a la plataforma o aplicación correspondiente utilizando tus credenciales de usuario. <br>
+                2.	Una vez dentro de tu sesión, busca el apartado o sección dedicada a los comentarios o reseñas de empresas. Puede estar etiquetado como "Comentarios".<br>
+                3.	Busca y haz clic en el botón o enlace correspondiente a esta sección. Puede estar ubicado en la esquina de la pantalla o en algún lugar visible y accesible.<br>
+                4.	Al hacer clic en el botón o enlace de comentarios, se abrirá una ventana donde podrás redactar y enviar tu comentario sobre la empresa en la que has trabajado.<br>
+                5.	Escribe tu comentario de manera clara y concisa, compartiendo tu experiencia laboral y tus opiniones sobre la empresa. Puedes mencionar aspectos positivos, áreas de mejora, ambiente laboral, oportunidades de crecimiento, entre otros aspectos relevantes.<br>
+                6.	Una vez que hayas redactado tu comentario, revisa cuidadosamente su contenido para asegurarte de que refleje tu experiencia de manera precisa y respetuosa.<br>
+                7.	Después de revisar, haz clic en el botón de "Enviar" para publicar tu comentario en la plataforma. <br>
+            </p><br>
+            </details>
 
          <details>
             <summary>¿Cómo puedo dejar comentarios sobre una empresa donde he trabajado?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
-         </details>
+            <p> 1.	Inicia sesión como developer en la plataforma o aplicación correspondiente. <br>
+                2.	Una vez dentro de tu sesión, busca el apartado llamado "NORMATIVA E IMPUESTOS". Este apartado suele estar diseñado para mantener a los desarrolladores actualizados sobre las normativas y los impuestos que afectan a su actividad.<br>
+                3.	Haz clic en ese apartado para acceder a la sección dedicada a la información sobre impuestos y obligaciones tributarias.<br>
+                4.	Explora los recursos disponibles en esta sección. Es posible que encuentres documentos, guías o enlaces a fuentes de información externas relacionadas con los impuestos y las obligaciones tributarias para desarrolladores en tu país.<br>
+                5.	Utiliza los recursos proporcionados para obtener información detallada sobre los impuestos específicos que afectan a los desarrolladores, las tasas impositivas aplicables, los plazos de presentación de declaraciones y cualquier otro requisito tributario relevante<br>
+                6.	Mantente al día con las actualizaciones. La normativa tributaria puede cambiar con el tiempo, por lo que es importante revisar regularmente esta sección para asegurarte de tener la información más actualizada y cumplir adecuadamente con tus obligaciones tributarias. </p><br>
+            </details>
 
          <details>
             <summary>¿Cómo puedo buscar información sobre impuestos y obligaciones tributarias para desarrolladores en mi país?</summary>
@@ -160,9 +193,7 @@
 
          <details>
             <summary>¿Cómo puedo contactar al equipo de soporte si tengo algún problema o duda?</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-               vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-               cupiditate?</p>
+            <p>1. En la parte inferior de la pagina podras encontrar nuestras plataformas donde te invitamos a seguirnos en nuestras redes sociales para estar al tanto de nuevas actualizaciones e información relevante. Puedes contactarnos a través de mensajes directos en Instagram, Facebook, Twitter, LinkedIn . Tambien siguenos en YouTube. Estaremos atentos para responder tus consultas y brindarte la asistencia que necesites. </p><br>
          </details>
   
      </section>

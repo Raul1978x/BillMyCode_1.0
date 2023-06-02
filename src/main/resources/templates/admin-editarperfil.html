@@ -16,11 +16,13 @@
 
 <body>
 <header>
+
   <div class="logo-container">
-    <a th:href="@{/}">
+    <a onclick="javascript:history.back()">
       <img src="/images/billmycodelogo.png" alt="logo de empresa"/>
     </a>
   </div>
+
   <nav>
     <a href="#seccion-2">UNITE A BILL MY CODE</a>
   </nav>
@@ -58,16 +60,16 @@
           <p class="card-text" th:text="${exito}"></p>
         </div>
       </div>
-      <form id="accountsform" th:action="@{/thymeleaf/updateAdmin/{id}(id=${admin.id})}" method="POST"
+      <form id="accountsform" th:action="@{/thymeleaf/updateAdmin/{id}(id=${logueado.id})}" method="POST"
             enctype="multipart/form-data">
-        <input type="hidden" name="id" th:value="${admin.id}"/>
-        <input type="text" name="nombre" placeholder="Nombres" th:value="${admin.nombre}" required/>
+        <input type="hidden" name="id" th:value="${logueado.id}"/>
+        <input type="text" name="nombre" placeholder="Nombres" th:value="${logueado.nombre}" required/>
 
         <input
                 type="text"
                 name="apellido"
                 placeholder="Apellido"
-                th:value="${admin.apellido}"
+                th:value="${logueado.apellido}"
                 required
         />
 
@@ -75,7 +77,7 @@
                 id="sex"
                 name="genero"
                 class="form-control"
-                th:value="${admin.genero}"
+                th:value="${logueado.genero}"
                 value="@{genero}"
         >
           <option value="" disabled selected>Seleccione Género</option>
@@ -87,7 +89,7 @@
         <select
                 id="country"
                 name="nacionalidad"
-                th:value="${admin.nacionalidad}"
+                th:value="${logueado.nacionalidad}"
                 class="form-control"
                 value="${nacionalidad}"
         >
@@ -406,7 +408,7 @@
                 type="text"
                 name="telefono"
                 placeholder="Telefono"
-                th:value="${admin.telefono}"
+                th:value="${logueado.telefono}"
                 required
                 class="form-control"
         />
@@ -414,7 +416,7 @@
         <input
                 type="text"
                 name="email"
-                th:value="${admin.email}"
+                th:value="${logueado.email}"
                 placeholder="E-Mail"
                 required
                 class="form-control"
@@ -436,15 +438,7 @@
                 required
                 class="form-control"
         />
-
-        <!-- <select id="econt" name="contador" class="form-control">
-        <option value="">Elija un Contador</option>
-        <option value="">Raul</option>
-        <option value="">Alex</option>
-        <option value="">Agustina</option>
-        <option value="">Brian</option>
-      </select> -->
-
+        
         <label class="form-label" for="customFile"
         ><p style="color: rgb(255, 255, 255)">SUBA SU FOTO AQUI</p></label
         >

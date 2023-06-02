@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
 @EnableWebSecurity
 public class SeguridadWeb {
@@ -43,8 +44,8 @@ public class SeguridadWeb {
                 .and().formLogin(
                         form-> form
                                 .loginPage("/login")
-                                .usernameParameter("usuario") // Atrapa la contraseña ingresada por el usuario
-                                .passwordParameter("password") // Atrapa el email ingresado por el usuario
+                                .usernameParameter("usuario") // Atrapa el email ingresado por el usuario
+                                .passwordParameter("password") // Atrapa la contraseña ingresada por el usuario
                                 .loginProcessingUrl("/logincheck")
                                 .successForwardUrl("/thymeleaf/redilogin") // En caso de una autenticacion correcta redirige a "/thymeleaf/redilogin" que esta en LoginController
                                 .failureUrl("/thymeleaf/login") // En caso de una autenticacion incorrecta redirige a /thymeleaf/login

@@ -38,6 +38,20 @@
                     <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
                 </a>
             </div>
+            <div>
+                <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error!</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div th:if="${exito != null}" id="successCard" class="borrarcarta card text-white bg-success mb-3 mt-3 mensajeExito">
+                    <div class="card-body">
+                        <h5 class="card-title">Éxito!</h5>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+            </div>
             <nav class="header-nav centrar">
                 <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
                 <a class="titulo" href="#seccion-3">Normativa</a>
@@ -57,7 +71,7 @@
                         </div>
                         <img
                                 class="perfil-foto"
-                                th:src="@{/api/imagen/perfil-admin/__${logueado.id}__}"
+                                th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
                                 alt="foto de perfil"
                         />
                         <div class="dropdown">
@@ -71,7 +85,17 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" th:href="@{/thymeleaf/admin/edit/{id}(id=${logueado.id})}">
+                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-lista-accountant')}">
+                                        <img
+                                                class="icono"
+                                                src="/images/borrar-cuenta.png"
+                                                alt="icono volver"
+                                        />
+                                        Dar de baja
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                                         <!--
                                                                         <input type="hidden" name="id" th:value="${developer.id}"/>
                                         -->
@@ -113,7 +137,7 @@
             <th scope="col">Apellido</th>
             <th scope="col">Especializacion</th>
             <th scope="col">Honorarios</th>
-            <!--<th scope="col">Salario</th>-->
+            <th scope="col">Status</th>
             <th scope="col">Acciones</th>
         </tr>
         </thead>
@@ -127,12 +151,15 @@
             <td scope="row" th:text="${accountant.nombre}">Nombre</td>
             <td scope="row" th:text="${accountant.apellido}">Apellido</td>
             <td scope="row" th:text="${accountant.especializacion}">Especializacion</td>
-            <!--<td scope="row" th:text="${accountant.salario}">Salarios</td>-->
             <td scope="row" th:text="'U$S ' + ${accountant.honorarios}">Honorarios</td>
+            <td scope="row" th:text="${accountant.status}">Status</td>
 
             <td>
                 <ul class="list-unstyled">
                     <li list-item>
+                        <a th:if="${accountant.status}" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${accountant.id}, rol=${accountant.rol}, dir='admin-lista-accountant')}"
+                           class="text-dark text-decoration-none">🗿</a>
+
                         <a th:href="@{/thymeleaf/accountant/delete/__${accountant.id}__}"
                            class="text-dark text-decoration-none">❌</a>
 

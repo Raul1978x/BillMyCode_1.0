@@ -37,6 +37,7 @@ public class Company {
     private Reputacion reputacion;
     @OneToMany
     private List<Comment> comment;
+  
     private Double salarioPromedio;
     private Double salarioHistorico;
     private Boolean status;
@@ -47,11 +48,6 @@ public class Company {
 
     @OneToOne
     private Contact contacto;
-
-
-
-
-
 
 
 }
