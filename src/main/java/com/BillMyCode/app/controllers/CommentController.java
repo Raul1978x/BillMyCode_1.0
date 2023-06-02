@@ -50,8 +50,8 @@ public class CommentController {
         System.out.println(comentario.getComentario());
         System.out.println("---------------------------------------------------------------------------------");
         model.put("comentario", comentario);
-        Answer answer = answerService.createAnswer(respuesta);
-        model.put("answer", answer);
+       /* Answer answer = answerService.createAnswer(respuesta);
+        model.put("answer", answer);*/
         return "principalaccounter";
     }
 }

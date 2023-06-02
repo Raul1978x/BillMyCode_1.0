@@ -222,10 +222,10 @@ public class AccountantController {
 
     @GetMapping("/preguntasyrespuestas")
     public String viewAnswersAndQuest(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
         return "preguntasyrespuestas";
-
+    }
     @GetMapping("/accountant/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
         accountantService.deleteAccounterById(id);

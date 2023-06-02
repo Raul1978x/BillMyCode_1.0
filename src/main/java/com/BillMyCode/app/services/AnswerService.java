@@ -26,7 +26,7 @@ public class AnswerService {
         return answerRepository.findById(id).get();
     }
 
-    @Transactional
+/*    @Transactional
     public Answer createAnswer(String respuesta){
         Answer answer = new Answer();
         answer.setRespuesta(respuesta);
@@ -45,7 +45,7 @@ public class AnswerService {
            return result;
        }
        return null;
-    }
+    }*/
 
     @Transactional
     public void deleteAnswerById(Long id){
