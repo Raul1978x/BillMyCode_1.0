@@ -74,7 +74,7 @@
             <ul class="dropdown-menu">
               <li>
                 <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
-                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
+                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}/{dir}(id=${logueado.id})}">
                   <!--
                                                   <input type="hidden" name="id" th:value="${developer.id}"/>
                   -->
@@ -135,6 +135,8 @@
             <div class="body__card_back">
               <p>Acceder a la lista de developers guardados en la base de datos</p>
               <a class="button" th:href="@{/thymeleaf/admin-lista-developer}">Lista Developers</a>
+              <p>Crear un usuario developer</p>
+              <a class="button" th:href="@{/thymeleaf/developer}">Crear Developer</a>
             </div>
           </div>
         </div>
@@ -153,6 +155,8 @@
             <div class="body__card_back">
               <p>Acceder a la lista de contadores guardados en la base de datos</p>
               <a class="button" th:href="@{/thymeleaf/admin-lista-accountant}">Lista Contadores</a>
+              <p>Crear un usuario contador</p>
+              <a class="button" th:href="@{/thymeleaf/crear-cuenta-contador}">Crear Contador</a>
             </div>
           </div>
         </div>
@@ -170,6 +174,8 @@
             <div class="body__card_back">
               <p>Acceder a la lista de administradores guardados en la base de datos</p>
               <a class="button" th:href="@{/thymeleaf/admin-lista-admin}">Lista Administradores</a>
+              <p>Crear un usuario administrador</p>
+              <a class="button" th:href="@{/thymeleaf/admin-crear}">Crear Admin</a>
             </div>
           </div>
         </div>

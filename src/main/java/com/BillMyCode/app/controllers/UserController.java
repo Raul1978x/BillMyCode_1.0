@@ -85,6 +85,11 @@ public class UserController {
         return "crear-cuenta-desarrollador.html";
     }
 
+    @GetMapping("/admin-crear")
+    public String admin() {
+        return "crear-cuenta-administrador.html";
+    }
+
     /**
      * Metodo createAccounter: Redirige a crear-cuenta-contador.html
      *
@@ -114,7 +119,7 @@ public class UserController {
 
         if (roles.contains("ROLE_ADMIN")){
             Admin logueado = adminService.searchAdminById(id);
-            model.put("logueado", logueado);
+            model.addAttribute("logueado", logueado);
             return "admin-editarperfil";
         }else if (roles.contains("ROLE_DEV")){
             Developer logueado = developerService.searchDeveloperById(id);

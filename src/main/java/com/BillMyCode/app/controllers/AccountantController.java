@@ -176,7 +176,9 @@ public class AccountantController {
             }
         } catch (MiException e) {
             model.put("error", e.getMessage());
-            throw new RuntimeException(e);
+            Accountant logueado = accountantService.searchAccounterById(id);
+            model.put("logueado", logueado);
+            return "editar-cuenta-contador";
         }
 
     }
@@ -201,6 +203,7 @@ public class AccountantController {
     public String editAccountant(@PathVariable Long id, ModelMap model) {
         Accountant logueado = accountantService.searchAccounterById(id);
         model.put("logueado", logueado);
+        model.put("dir","admin-lista-developer");
         return "editar-cuenta-contador";
     }
 

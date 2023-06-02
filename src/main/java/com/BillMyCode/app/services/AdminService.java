@@ -180,7 +180,6 @@ public class AdminService {
         if (password.isBlank() || password.isEmpty()) {
             throw new MiException("La contraseña no puede ser nula o estar vacia");
         }
-
         if (newpassword.isEmpty() || (!newpassword.equals(password))) {
             throw new MiException("Las contraseñas no coinciden");
         }

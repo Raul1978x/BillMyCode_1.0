@@ -17,7 +17,7 @@
 <body>
 <header>
   <div class="logo-container">
-    <a th:href="@{/}">
+    <a onclick="javascript:history.back()">
       <img src="/images/billmycodelogo.png" alt="logo de empresa" />
     </a>
   </div>
@@ -37,7 +37,7 @@
       </div>
       <form
               id="accountsform"
-              th:action="@{/thymeleaf/create-developers}"
+              th:action="@{/thymeleaf/create-Admin}"
               method="POST"
               enctype="multipart/form-data"
       >
@@ -434,7 +434,8 @@
 
     </div>
     <div class="inferior">
-      <a th:href="@{/thymeleaf/select-user}">VOLVER</a>
+      <!--<a th:href="@{/thymeleaf/select-user}">VOLVER</a>-->
+      <a href="javascript:history.back()">VOLVER</a>
     </div>
   </div>
 </div>

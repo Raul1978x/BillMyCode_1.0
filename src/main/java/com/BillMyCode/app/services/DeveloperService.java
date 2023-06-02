@@ -158,6 +158,7 @@ public class DeveloperService {
                                 String nacionalidad,
                                 Date fechaNacimiento,
                                 String password,
+                                String newpassword,
                                 String genero,
                                 String telefono,
                                 Double salario,
@@ -169,6 +170,9 @@ public class DeveloperService {
 
         Optional<Developer> respuesta = repositorio.findById(id);
         String cryptPassword = passwordEncoder.encode(password);
+
+        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
+
 
         if (respuesta.isPresent()) {
             Developer result = respuesta.get();
