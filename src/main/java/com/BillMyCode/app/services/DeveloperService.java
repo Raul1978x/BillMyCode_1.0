@@ -248,7 +248,7 @@ public class DeveloperService {
         }
 
         if (newpassword.isEmpty() || (!newpassword.equals(password))) {
-            throw new MiException("La contraseña no puede estar vacia o ser distinta a la anterior");
+            throw new MiException("Las contraseñas no coinciden");
         }
         if (fechaNacimiento == null) {
             throw new MiException("La fecha de nacimiento no puede estar vacia");
@@ -277,6 +277,13 @@ public class DeveloperService {
     public void bajaDeveloper(Long id){
         Developer developer = searchDeveloperById(id);
         developer.setStatus(false);
+        repositorio.save(developer);
+    }
+
+    @Transactional
+    public void altaDeveloper(Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setStatus(true);
         repositorio.save(developer);
     }
 }

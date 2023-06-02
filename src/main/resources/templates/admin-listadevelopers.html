@@ -85,16 +85,6 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-lista-developer')}">
-                    <img
-                            class="icono"
-                            src="/images/borrar-cuenta.png"
-                            alt="icono volver"
-                    />
-                    Dar de baja
-                  </a>
-                </li>
-                <li>
                   <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                     <!--
                                                     <input type="hidden" name="id" th:value="${developer.id}"/>
@@ -154,15 +144,14 @@
       <td scope="row" th:text="${developer.especialidad}">Especialidad</td>
       <td scope="row" th:text="${developer.seniority}">Seniority</td>
       <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
-      <td th:if="${developer.status}" scope="row"  class="text-dark text-decoration-none">🟢</td>
-      <td th:if="${!developer.status}" scope="row"  class="text-dark text-decoration-none">🔴</td>
+      <td th:if="${developer.status}" scope="row"   class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/baja/{id}/{rol}(id=${developer.id}, rol=${developer.rol})}"
+                                                                                               class="text-dark text-decoration-none">🟢</a></td>
+      <td th:if="${!developer.status}" scope="row"  class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/alta/{id}/{rol}(id=${developer.id}, rol=${developer.rol})}"
+                                                                                                    class="text-dark text-decoration-none">🔴</a></td>
 
                               <td>
                                   <ul class="list-unstyled">
                                       <li list-item>
-                                        <a th:if="${developer.status}" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${developer.id}, rol=${developer.rol}, dir='admin-lista-developer')}"
-                                           class="text-dark text-decoration-none">🗿</a>
-
                                           <a th:href="@{/thymeleaf/developers/delete/__${developer.id}__}"
                                              class="text-dark text-decoration-none">❌</a>
 

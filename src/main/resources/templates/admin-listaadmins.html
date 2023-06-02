@@ -85,16 +85,6 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-lista-admin')}">
-                    <img
-                            class="icono"
-                            src="/images/borrar-cuenta.png"
-                            alt="icono volver"
-                    />
-                    Dar de baja
-                  </a>
-                </li>
-                <li>
                   <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
                     <!--
                                                     <input type="hidden" name="id" th:value="${developer.id}"/>
@@ -152,19 +142,21 @@
       <td scope="row" th:text="${admin.apellido}">Apellido</td>
       <td scope="row" th:text="${admin.nacionalidad}">nacionalidad</td>
       <td scope="row" th:text="${admin.telefono}">telefono</td>
-      <td th:if="${admin.status}" scope="row"  class="text-dark text-decoration-none">🟢</td>
-      <td th:if="${!admin.status}" scope="row"  class="text-dark text-decoration-none">🔴</td>
+      <td th:if="${admin.id != logueado.id && admin.status}" scope="row"   class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/baja/{id}/{rol}(id=${admin.id}, rol=${admin.rol})}"
+                                                                                               class="text-dark text-decoration-none">🟢</a></td>
+      <td th:if="${admin.id != logueado.id && !admin.status}" scope="row"   class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/alta/{id}/{rol}(id=${admin.id}, rol=${admin.rol})}"
+                                                                                                     class="text-dark text-decoration-none">🔴</a></td>
+      <td th:if="${admin.id == logueado.id && admin.status}" scope="row"  class="text-dark text-decoration-none">🟢</td>
+      <td th:if="${admin.id == logueado.id && !admin.status}" scope="row"  class="text-dark text-decoration-none">🔴</td>
 
       <td>
         <ul class="list-unstyled">
           <li list-item>
-            <a th:if="${admin.status}" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${admin.id}, rol=${admin.rol}, dir='admin-lista-admin')}"
-               class="text-dark text-decoration-none">🗿</a>
 
             <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/delete/__${admin.id}__}"
                class="text-dark text-decoration-none">❌</a>
 
-            <a th:if="${logueado.id != admin.id}" th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
+            <a th:href="@{/thymeleaf/admin/edit/__${admin.id}__}"
                class="text-dark text-decoration-none">🪶</a>
           </li>
         </ul>
