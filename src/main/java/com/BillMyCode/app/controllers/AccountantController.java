@@ -225,23 +225,24 @@ public class AccountantController {
 
     @GetMapping("/preguntasyrespuestas")
     public String viewAnswersAndQuest(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
         return "preguntasyrespuestas";
-
-    @GetMapping("/accountant/delete/{id}")
-    public String deleteAccountant(@PathVariable Long id) {
-        accountantService.deleteAccounterById(id);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<String> roles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-        if (roles.contains("ROLE_ADMIN")) {
-            return "redirect:/thymeleaf/admin-lista-accountant";
-        }else {
-            return "redirect:/thymeleaf/lista-developers";
-        }
-
-
     }
-}
+
+        @GetMapping("/accountant/delete/{id}")
+        public String deleteAccountant (@PathVariable Long id){
+            accountantService.deleteAccounterById(id);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List<String> roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            if (roles.contains("ROLE_ADMIN")) {
+                return "redirect:/thymeleaf/admin-lista-accountant";
+            } else {
+                return "redirect:/thymeleaf/lista-developers";
+            }
+
+
+        }
+    }
