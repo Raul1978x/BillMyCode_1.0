@@ -17,10 +17,15 @@ import java.util.stream.Collectors;
 
 
 @Controller
-@RequestMapping("/thymeleaf")
+@RequestMapping("/login")
 public class LoginController {
 
     private ImageService imageService;
+
+    @GetMapping()
+    public String loginView() {
+        return "login";
+    }
 
     /**
      * Metodo loginSuccess: En caso de una validacion correcta redirige al Usuario dependiendo de su rol

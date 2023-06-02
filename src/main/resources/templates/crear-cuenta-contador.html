@@ -24,18 +24,6 @@
     <nav>
         <a href="#seccion-2">UNITE A BILL MY CODE</a>
     </nav>
-    <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
-        <div class="card-body">
-            <h5 class="card-title">Error!</h5>
-            <p class="card-text" th:text="${error}"></p>
-        </div>
-    </div>
-    <div th:if="${exito != null}" id="successCard" class="borrarcarta card text-white bg-success mb-3 mt-3 mensajeExito">
-        <div class="card-body">
-            <h5 class="card-title">Éxito!</h5>
-            <p class="card-text" th:text="${exito}"></p>
-        </div>
-    </div>
 </header>
 
 <div id="contenedor">
@@ -52,6 +40,10 @@
                       th:action="@{/thymeleaf/create-accountants}"
                       method="POST"
                       enctype="multipart/form-data">
+                    <div class="alert alert-danger" id="errorCard" th:if="${error != null}" th:text="${error}">
+                    </div>
+                    <div class="alert alert-success" id="successCard" th:if="${exito != null}" th:text="${exito}">
+                    </div>
                     <input type="text" name="nombre" placeholder="Nombres" required>
 
                     <input type="text" name="apellido" placeholder="Apellido" required>
@@ -339,10 +331,23 @@
 
                     <input type="number" name="honorarios" placeholder="Honorarios" required>
 
-                    <input type="password" placeholder="Contraseña" name="password" required class="form-control">
+                    <input
+                            type="password"
+                            placeholder="Contraseña"
+                            name="password"
+                            required
+                            class="form-control"
+                            minlength="6"
+                    />
 
-                    <input type="password" placeholder="Confirmar Contraseña" name="newpassword" required
-                           class="form-control">
+                    <input
+                            type="password"
+                            placeholder="Confirmar Contraseña"
+                            name="newpassword"
+                            required
+                            class="form-control"
+                            minlength="6"
+                    />
                     <!--<textarea rou=3 class="text-area" name="comments" placeholder="Comentario"></textarea>-->
 
                     <!-- <input type="text" name="status" placeholder="Status" required> -->

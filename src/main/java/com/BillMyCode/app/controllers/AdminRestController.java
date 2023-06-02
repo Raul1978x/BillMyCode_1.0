@@ -27,12 +27,13 @@ public class AdminRestController {
                                          @RequestParam String nacionalidad,
                                          @RequestParam ("fechaNacStr") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacStr,
                                          @RequestParam String password,
+                                         @RequestParam String newpassword,
                                          @RequestParam String genero,
                                          @RequestParam String telefono,
                                          ModelMap model)
             throws MiException {
         try {
-            adminService.createAdmin(nombre, apellido, email, nacionalidad, password, genero, fechaNacStr,
+            adminService.createAdmin(nombre, apellido, email, nacionalidad, password, newpassword, genero, fechaNacStr,
                     telefono, archivo);
             model.put("exito","El Administrador fue creado exitosamente");
             System.out.println(model);

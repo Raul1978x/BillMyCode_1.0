@@ -202,8 +202,8 @@ public class AccountantService  {
         if (password.isEmpty() || password.isBlank()){
             throw new MiException("Error, el campo Contrasela no puede estar vacio");
         }
-        if (!newpassword.equals(password) || newpassword.isBlank()){
-            throw new MiException("Error, el campo Repetir Contrasela no puede distinto a Contraseña o estar vacío");
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("Las contraseñas no coinciden");
         }
         if (fechaNacimiento==null){
             throw new MiException("Error, fecha incorrecta");
@@ -216,6 +216,13 @@ public class AccountantService  {
     public void bajaAccountant(Long id) {
         Accountant contador = searchAccounterById(id);
         contador.setStatus(false);
+        repositorio.save(contador);
+    }
+
+    @Transactional
+    public void altaAccountant(Long id) {
+        Accountant contador = searchAccounterById(id);
+        contador.setStatus(true);
         repositorio.save(contador);
     }
 }

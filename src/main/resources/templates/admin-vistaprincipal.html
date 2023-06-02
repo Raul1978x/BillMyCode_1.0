@@ -54,7 +54,7 @@
               <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
             </div>
             <div class="formacion">
-             <span class="especialidad" th:text="${logueado.rol}">Full Stack</span>
+             <span class="especialidad" th:text="${logueado.rol}">Rol</span>
             </div>
           </div>
           <img
@@ -72,16 +72,6 @@
               <div>Menu</div>
             </button>
             <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='admin-principal')}">
-                  <img
-                          class="icono"
-                          src="/images/borrar-cuenta.png"
-                          alt="icono volver"
-                  />
-                  Dar de baja
-                </a>
-              </li>
               <li>
                 <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
                 <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">

@@ -1,12 +1,20 @@
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ltpitt/java-spring-thymeleaf-chat/blob/master/LICENSE)
+[![Total Commits](https://img.shields.io/github/last-commit/Raul1978x/BillMyCode_1.0)](https://github.com/Raul1978x/BillMyCode_1.0/commits)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/4w/Raul1978x/BillMyCode_1.0?foo=bar)](https://github.com/Raul1978x/BillMyCode_1.0/commits)
 # BillMyCode_1.0
 
-Nuestro proyecto se enfoca en proporcionar herramientas, comparaciones de salario y conocimientos legales necesarios para que los desarrolladores
+> Nuestro proyecto desarrollado en Java Spring se enfoca en proporcionar herramientas, comparaciones de salario y conocimientos legales necesarios para que los desarrolladores
 puedan realizar su trabajo sin complicaciones y dudas, tambien facilitando su conexion con contadores especializados, para que puedan brindarles
 asistencia personalizada.
 
-## Instalación
+## Requisitos previos
 
-1. Clona el repositorio: `git clone https://github.com/Raul1978x/BillMyCode_1.0.git
+- Descargar e instalar [Intellij IDEA](https://www.jetbrains.com/idea/download)
+
+## Como Usar
+
+- Clona el repositorio: "git clone https://github.com/Raul1978x/BillMyCode_1.0.git"
+- Abrir el projecto con IntelliJ IDEA
 
 ## Estructura de directorios
 
@@ -52,12 +60,19 @@ asistencia personalizada.
 
 ## Licencia
 
-- Este proyecto se distribuye bajo la Licencia MIT
+- Este proyecto se distribuye bajo la Licencia MIT. Mira ``LICENSE`` para mas informacion.
 
-## Contacto
+## Contactos
 
-- gomez.raul.1978.rg@gmail.com
+Raul Gomez - gomez.raul.1978.rg@gmail.com
+
+Brian Uryn - brianuryn2000@gmail.com
+
+## Repositorio
+
+[BillMyCode](https://github.com/Raul1978x/BillMyCode_1.0.git)
 
 ## Historial de cambios
 
 - BillMyCode 1.0 Version de desarrollo
+
