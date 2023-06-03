@@ -127,6 +127,7 @@ public class AccountantService  {
         Accountant contador = searchAccounterById(id);
         String cryptPassword = passwordEncoder.encode(password);
 
+
         if (contador != null && contador.getId().equals(id)) {
             validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
 
@@ -145,9 +146,15 @@ public class AccountantService  {
             contador.setEspecializacion(especializacion);
             contador.setStatus(true);
             contador.setRol(Rol.ACCOUNTANT);
-            Image image = imageService.save(archivo);
+            if (archivo.isEmpty()){
+            Image image = imageService.buscarImagenById(contador.getImage().getId());
 
             contador.setImage(image);
+            }else {
+                Image image = imageService.save(archivo);
+
+                contador.setImage(image);
+            }
             repositorio.save(contador);
 
         } else {
@@ -205,13 +212,14 @@ public class AccountantService  {
         if (newpassword.isEmpty() || (!newpassword.equals(password))) {
             throw new MiException("Las contraseñas no coinciden");
         }
-        if (fechaNacimiento==null){
+        if (fechaNacimiento==null || fechaNacimiento.toString()==""){
             throw new MiException("Error, fecha incorrecta");
         }
         if (especializacion == null) {
             throw new MiException("La especialización no puede estar vacía.");
         }
     }
+
     @Transactional
     public void bajaAccountant(Long id) {
         Accountant contador = searchAccounterById(id);

@@ -65,7 +65,7 @@ public class ContactService {
                               String email,
                               String telefono,
                               String password,
-                              String newpassword,
+                              String newpassword
 
     ) throws MiException {
 
