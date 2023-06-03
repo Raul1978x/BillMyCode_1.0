@@ -194,8 +194,17 @@ public class DeveloperService {
             result.setComentario(comment);
             result.setRol(Rol.DEV);
 
-            if (archivo != null) {
+//            if (archivo != null) {
+//                Image image = imageService.save(archivo);
+//                result.setImage(image);
+//            }
+            if (archivo.isEmpty()){
+                Image image = imageService.buscarImagenById(result.getImage().getId());
+
+                result.setImage(image);
+            }else {
                 Image image = imageService.save(archivo);
+
                 result.setImage(image);
             }
 

@@ -26,7 +26,7 @@ public class AdminService {
     private IAdminRepository repositorio;
 
     @Autowired
-    private ImageService imagenServicio;
+    private ImageService imageService;
 
 
     /**
@@ -93,7 +93,7 @@ public class AdminService {
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
         admin.setStatus(true);
-        Image image = imagenServicio.save(archivo);
+        Image image = imageService.save(archivo);
 
         admin.setImage(image);
 
@@ -137,8 +137,17 @@ public class AdminService {
             admin.setTelefono(telefono);
             admin.setRol(Rol.ADMIN);
 
-            if (archivo != null) {
-                Image image = imagenServicio.save(archivo);
+/*            if (archivo == null) {
+                Image image = imageService.save(archivo);
+                admin.setImage(image);
+            }*/
+            if (archivo.isEmpty()){
+                Image image = imageService.buscarImagenById(admin.getImage().getId());
+
+                admin.setImage(image);
+            }else {
+                Image image = imageService.save(archivo);
+
                 admin.setImage(image);
             }
 
