@@ -119,7 +119,8 @@ public class UserController {
 
         if (roles.contains("ROLE_ADMIN")){
             Admin logueado = adminService.searchAdminById(id);
-            model.addAttribute("logueado", logueado);
+            model.put("logueado", logueado);
+            model.put("dir","admin-principal");
             return "admin-editarperfil";
         }else if (roles.contains("ROLE_DEV")){
             Developer logueado = developerService.searchDeveloperById(id);

@@ -143,7 +143,6 @@ public class AccountantService  {
             contador.setMatricula(matricula);
             contador.setHonorarios(honorarios);
             contador.setEspecializacion(especializacion);
-            contador.setStatus(true);
             contador.setRol(Rol.ACCOUNTANT);
             Image image = imageService.save(archivo);
 
