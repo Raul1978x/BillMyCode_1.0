@@ -121,10 +121,13 @@ public class DeveloperService {
         developer.setComentario(comentario);
         developer.setRol(Rol.DEV);
         developer.setStatus(true);
-        Image image = imageService.save(archivo);
-
-        developer.setImage(image);
-
+        if (archivo != null && !archivo.isEmpty()) {
+            Image image = imageService.save(archivo);
+            developer.setImage(image);
+        } else {
+            Image defaultImage = imageService.saveDefaultImage();
+            developer.setImage(defaultImage);
+        }
         repositorio.save(developer);
     }
 
