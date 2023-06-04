@@ -95,8 +95,8 @@
             th:action="@{/thymeleaf/create-developers}"
             method="POST">
 
-        <details>
-            <summary th:each="developer : '${@{/api/developerByAccountant/5}}'">
+        <details th:each="developer : ${developerList}">
+            <summary >
                 <span th:text="${developer.nombre}"></span>
                 ¿Cómo puedo registrarme en la plataforma?</summary>
             <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta">

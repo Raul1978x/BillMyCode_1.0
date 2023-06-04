@@ -285,8 +285,8 @@ public class DeveloperService {
     }
 
     @Transactional(readOnly = true)
-    public Developer searchDeveloperByAccountantId(Long accountantId) {
-        return developerRepository.searchDeveloperByAccountant(accountantId);
+    public List<Developer> searchDeveloperByAccountantId(Long accountantId) {
+        return developerRepository.searchAllDevelopersByAccountant(accountantId);
     }
 
     @Transactional
