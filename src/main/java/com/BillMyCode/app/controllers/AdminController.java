@@ -58,7 +58,7 @@ public class AdminController {
      * @throws: MiException
      */
     @PostMapping("/create-Admin")
-    public String registrarAdministrador(@RequestParam MultipartFile archivo,
+    public String registrarAdministrador(@RequestParam (required = false) MultipartFile archivo,
                                          @RequestParam String nombre,
                                          @RequestParam String apellido,
                                          @RequestParam String email,

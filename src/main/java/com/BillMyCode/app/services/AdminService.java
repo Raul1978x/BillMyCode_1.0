@@ -93,10 +93,13 @@ public class AdminService {
         admin.setRol(Rol.ADMIN);
         admin.setTelefono(telefono);
         admin.setStatus(true);
-        Image image = imageService.save(archivo);
-
-        admin.setImage(image);
-
+        if (archivo != null && !archivo.isEmpty()) {
+            Image image = imageService.save(archivo);
+            admin.setImage(image);
+        } else {
+            Image defaultImage = imageService.saveDefaultImage();
+            admin.setImage(defaultImage);
+        }
         repositorio.save(admin);
     }
 
@@ -137,10 +140,6 @@ public class AdminService {
             admin.setTelefono(telefono);
             admin.setRol(Rol.ADMIN);
 
-/*            if (archivo == null) {
-                Image image = imageService.save(archivo);
-                admin.setImage(image);
-            }*/
             if (archivo.isEmpty()){
                 Image image = imageService.buscarImagenById(admin.getImage().getId());
 

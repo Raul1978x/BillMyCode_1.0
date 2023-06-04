@@ -94,9 +94,13 @@ public class AccountantService  {
         contador.setHonorarios(honorarios);
         contador.setStatus(true);
         contador.setRol(Rol.ACCOUNTANT);
-        Image image = imageService.save(archivo);
-
-        contador.setImage(image);
+        if (archivo != null && !archivo.isEmpty()) {
+            Image image = imageService.save(archivo);
+            contador.setImage(image);
+        } else {
+            Image defaultImage = imageService.saveDefaultImage();
+            contador.setImage(defaultImage);
+        }
         repositorio.save(contador);
 
 
