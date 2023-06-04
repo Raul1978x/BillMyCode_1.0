@@ -1,0 +1,29 @@
+<div th:fragment="select-seniority">
+  <select
+          id="gdes"
+          name="seniority"
+          class="form-control"
+          th:value="${logueado.seniority}"
+          value="${seniority}"
+  >
+    <option th:selected="${logueado.seniority == null}" value="" disabled selected>Grado de Seniority</option>
+    <option th:selected="${logueado.seniority == 'Trainee'}" value="Trainee">Trainee</option>
+    <option th:selected="${logueado.seniority == 'Junior'}" value="Junior">Junior</option>
+    <option th:selected="${logueado.seniority == 'Senior'}" value="Senior">Senior</option>
+    <option th:selected="${logueado.seniority == 'Super Senior'}" value="Super Senior">Super Senior</option>
+  </select>
+</div>
+<div th:fragment="select-seniority-create">
+  <select
+          id="gdes"
+          name="seniority"
+          class="form-control"
+          value="${seniority}"
+  >
+    <option value="">Grado de Seniority</option>
+    <option value="Trainee">Trainee</option>
+    <option value="Junior">Junior</option>
+    <option value="Senior">Senior</option>
+    <option value="Super Senior">Super Senior</option>
+  </select>
+</div>
