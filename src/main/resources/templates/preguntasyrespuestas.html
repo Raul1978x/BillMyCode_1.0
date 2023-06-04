@@ -88,7 +88,7 @@
 <section id="seccion-2a" class="section seccion-2"></section>
 <section>
     <div class="wrapper">
-        <h2>FAQ - PREGUNTAS FRECUENTES</h2>
+        <h2>Consultas de Developers</h2>
     </div>
     <form
             id="accountsform"
@@ -96,12 +96,14 @@
             method="POST">
 
         <details>
-            <summary>¿Cómo puedo registrarme en la plataforma?</summary>
+            <summary th:each="developer : '${@{/api/developerByAccountant/5}}'">
+                <span th:text="${developer.nombre}"></span>
+                ¿Cómo puedo registrarme en la plataforma?</summary>
             <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta">
 
         </textarea>
             <div>
-                <button class="button" type="submit">
+                <button class="button-send" type="submit">
                     RESPONDER
                 </button>
             </div>

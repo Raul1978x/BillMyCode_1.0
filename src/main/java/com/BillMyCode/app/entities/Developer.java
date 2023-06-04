@@ -26,5 +26,5 @@ public class Developer extends User {
     @ManyToMany
     protected List<Company> empresas;
     @OneToOne
-    protected Accountant contador;
+    protected Accountant accountant;
 }

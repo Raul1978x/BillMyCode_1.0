@@ -244,4 +244,14 @@ public class AccountantController {
 
 
     }
+
+    @GetMapping("accountant/get-answer")
+    public String getViewQuestAndAnswer(HttpSession request, ModelMap model) {
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+//        Developer developer = developerService.searchDeveloperByAccountantId(logueado.getId());
+//        model.put("developer",developer);
+        return "preguntasyrespuestas";
+
+    }
 }
