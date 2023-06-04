@@ -10,7 +10,7 @@ asistencia personalizada.
 ## Requisitos previos
 
 - Descargar e instalar [Intellij IDEA](https://www.jetbrains.com/idea/download)
-- (Opcional) Descargar e instalar [MySQL Workbench] (https://www.mysql.com/downloads/)
+- (Opcional) Descargar e instalar [MySQL Workbench](https://www.mysql.com/downloads/)
 
 ## Como Usar
 
