@@ -62,11 +62,12 @@
 
         <div th:replace="/fragments/select-country.html :: select-country"></div>
 
+
         <input
                 type="date"
                 id="start"
                 name="fechaNacimiento"
-                value="fecha"
+                th:value="${#dates.format(logueado.fechaNacimiento, 'yyyy-MM-dd')}"
                 min="1920-01-01"
                 max="2005-12-31"
                 class="form-control"

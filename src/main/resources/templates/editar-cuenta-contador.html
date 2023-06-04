@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="/css/shared.css"/>
     <link rel="shortcut icon" href="/images/billmycodelogosimp.png"/>
     <title>Editar Cuenta</title>
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=511WoUhMEB7hEoBDpa0rTHTxXD2jGHEwxvKrXxCcpJFivrVHfoNeW0zI0AnI2YQJTBV-jIDPlbasWinm0hxtFBTzQ0qS0BWYFOF5_OeLYyf3QCCmpupTpaV_tQv3bDnFiUGtPocuMWfhtY1DiCIv0PA7thDkMS14hmniTNR6QvI" charset="UTF-8"></script></head>
-
 <body>
 <header>
     <div class="logo-container">
@@ -24,20 +22,6 @@
     <nav>
         <a href="#seccion-2">UNITE A BILL MY CODE</a>
     </nav>
-    <div>
-        <div th:if="${exito}!=null" class="card borrarcarta text-white bg-success mb-3 mt-3 mensajeExito">
-            <div class="card-body">
-                <h5 class="card-title">Exito</h5>
-                <p class="card-text" th:text="${exito}"></p>
-            </div>
-        </div>
-        <div th:if="${error}!=null" class="card borrarcarta text-white bg-danger mb-3 mensajeError">
-            <div class="card-body">
-                <h5 class="card-title">Error</h5>
-                <p class="card-text" th:text="${error}"></p>
-            </div>
-        </div>
-    </div>
 
 </header>
 
@@ -52,14 +36,12 @@
                     <h4>EDITA TU CUENTA</h4>
                 </div>
             </div>
-            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
-                <div class="card-body">
-                    <h5 class="card-title">Exito!</h5>
-                    <p class="card-text" th:text="${exito}"></p>
-                </div>
-            </div>
             <form id="accountsform" th:action="@{/thymeleaf/updateAccountant/{id}(id=${logueado.id})}" method="POST"
                   enctype="multipart/form-data">
+                <div class="alert alert-danger" id="errorCard" th:if="${error != null}" th:text="${error}">
+                </div>
+                <div class="alert alert-success" id="successCard" th:if="${exito != null}" th:text="${exito}">
+                </div>
                 <input type="hidden" name="id" th:value="${logueado.id}"/>
                 <input type="text" name="nombre" placeholder="Nombres" th:value="${logueado.nombre}" required/>
 
@@ -79,7 +61,7 @@
                         type="date"
                         id="start"
                         name="fechaNacimiento"
-                        value="${logueado.fecha_nacimiento}"
+                        th:value="${#dates.format(logueado.fechaNacimiento, 'yyyy-MM-dd')}"
                         min="1920-01-01"
                         max="2005-12-31"
                         class="form-control"
