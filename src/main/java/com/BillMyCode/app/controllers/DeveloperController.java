@@ -235,5 +235,14 @@ public class DeveloperController {
         }
     }
 
+    @GetMapping("/select-accountant/{id}")
+    public String selectAccountantByAccountantId(long id, HttpSession request, ModelMap model){
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+        Accountant myAccountant = developerService.selectAccountantByAccountantId(id);
+        logueado.setAccountant(myAccountant);
+        developerService.saveAccountant(myAccountant, logueado.getId());
+        return "myaccountant";
+    }
 
 }

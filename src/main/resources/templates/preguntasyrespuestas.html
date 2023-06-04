@@ -17,7 +17,7 @@
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
         <div class="logo-container">
-            <a th:href="@{/thymeleaf/principal-developers}">
+            <a th:href="@{/thymeleaf/principal-accountant}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
         </div>
@@ -97,11 +97,19 @@
 
         <details th:each="developer : ${developerList}">
             <summary >
-                <span th:text="${developer.nombre}"></span>
-                ¿Cómo puedo registrarme en la plataforma?</summary>
-            <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta">
-
-        </textarea>
+                <span th:each="quest : ${developer.questList}">
+                    <span th:text="${quest.quest}"> </span>
+                <div class="text-dark fst-italic d-flex float-end">
+                <span th:text="${developer.nombre}+'-'"> </span>
+                <span th:text="${developer.apellido}+'-'"> </span>
+                <span th:text="${developer.seniority}+'-'"> </span>
+                <span th:text="${developer.especialidad}+'-'"> </span>
+                <span th:text="${quest.fecha}"> </span>
+                </div>
+                </span>
+<!--              ¿Cómo puedo registrarme en la plataforma?-->
+            </summary>
+            <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta"></textarea>
             <div>
                 <button class="button-send" type="submit">
                     RESPONDER

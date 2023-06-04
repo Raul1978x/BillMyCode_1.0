@@ -1,5 +1,6 @@
 package com.BillMyCode.app.services;
 
+import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Image;
@@ -28,6 +29,9 @@ public class DeveloperService {
     private IDeveloperRepository developerRepository;
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private AccountantService accountantService;
 
     /**
      * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
@@ -293,6 +297,18 @@ public class DeveloperService {
     public void altaDeveloper(Long id){
         Developer developer = searchDeveloperById(id);
         developer.setStatus(true);
+        developerRepository.save(developer);
+    }
+
+    @Transactional
+    public Accountant selectAccountantByAccountantId(Long AccountantId){
+        return accountantService.searchAccounterById(AccountantId);
+    }
+
+    @Transactional
+    public void saveAccountant(Accountant accountant, Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setAccountant(accountant);
         developerRepository.save(developer);
     }
 }
