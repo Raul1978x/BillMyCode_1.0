@@ -244,5 +244,10 @@ public class DeveloperController {
         developerService.saveAccountant(myAccountant, logueado.getId());
         return "myaccountant";
     }
-
+    @GetMapping("/consultas-developers")
+    public String getViewQuestDeveloper(HttpSession request, ModelMap model) {
+        Developer logueado= (Developer) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+        return "myaccountant";
+    }
 }

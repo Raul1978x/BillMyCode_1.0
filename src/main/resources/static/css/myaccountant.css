@@ -1,0 +1,304 @@
+* {
+    margin: 0px;
+    padding: 0;
+    text-align: justify;
+  }
+  body {
+    font-family: monospace;
+    color: rgb(255, 255, 255);
+    background-color: #1f2430;
+  }
+  
+  
+   section{
+      width: 1070px;
+      /* background: rgb(235, 235, 235); */
+      margin: auto;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      
+     
+   }
+   
+   summary{
+      background:  #255faa;
+      color: white;
+      padding: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 20px;
+   }
+   p{
+      padding: 10px;
+      background: white;
+      color: rgb(61, 61, 61);
+      border-radius: 20px;
+  
+   }
+  
+  .wrapper {
+    max-width: 75%;
+    margin: auto;
+    color: antiquewhite;
+  }
+  
+  a {
+     text-decoration: none;
+     color: white;
+   }
+   
+   .text-area{
+     width: max-content;
+   }
+  
+   .section-container {
+     width: 100%;
+     /* height: 700px; */
+     margin: 0 auto;
+     padding: 56px 16px;
+   }
+   /*Navbar*/
+  
+   .dropdown-button {
+     background: none;
+     border: none;
+     cursor: pointer;
+   }
+  
+   .dropdown-menu {
+     display: none;
+     position: absolute;
+     top: 100%;
+     left: 0;
+     background-color: #ffffff;
+     padding: 0;
+     list-style-type: none;
+     margin: 0;
+     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   }
+  
+   .dropdown-button:focus + .dropdown-menu,
+   .dropdown-menu:hover {
+     display: block;
+   }
+  
+   .dropdown-item {
+     padding: 8px;
+     text-decoration: none;
+     display: block;
+     color: #000000;
+   }
+  
+   .bill_my_code {
+     color: white;
+     width: 100%;
+     height: 100px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     z-index: 2;
+     background-color: #080808;
+     padding: 16px;
+   }
+  
+   .bmcLogo {
+     width: 5rem;
+   }
+  
+   .centrar {
+     display: flex;
+     align-items: center;
+   }
+  
+   .titulo {
+     display: inline-block;
+     margin-right: 16px;
+     color: white;
+     text-decoration: none;
+   }
+  
+   .perfil-menu {
+     display: flex;
+     align-items: center;
+     position: relative;
+   }
+  
+   .perfil-foto {
+     width: 42px;
+     height: 42px;
+     border-radius: 50%;
+     margin-right: 8px;
+   }
+  
+   .icono {
+     width: 24px;
+     height: 24px;
+   }
+   .dropdown-menu {
+     right: 0;
+     left: auto;
+   }
+  
+   .containers {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+  
+  
+   /*--------------------*/
+   /* 
+   VISTA CONSULTAS */
+   .consulta{
+    max-width: fit-content;
+    background:  #ffffff;
+    color: black;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+  
+  }
+  
+  .button {
+    padding: 8px;
+    /* border: 2px solid white; */
+    border-radius: 8px;
+    color: white;
+    background-color: orange;
+    margin: 0 4px;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+  
+  
+    &:hover {
+      background-color: rgb(182, 131, 37);
+    }
+  }
+  
+   /*--------------------*/
+  
+   .container__cards{
+    width:100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-85%, -50%);
+  }
+  
+  .card{
+    width: 350px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 300ms;
+  }
+  
+  .card:hover{
+    transform: translateY(-10px);
+  }
+  
+  .card:hover .cover__card img{
+    transform: scale(1.1);
+  }
+  
+  .cover__card{
+    width: 100%;
+    height: 180px;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  
+  .cover__card img{
+    width: 110%;
+    transition: all 300ms;
+  }
+  
+  .card h2{
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 20px;
+    color: #ffffff;
+  }
+  
+  .card p{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: transparent;
+  }
+  
+  .card hr{
+    margin-top: 30px;
+    border: none;
+    height: 0.2px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .footer__card{
+    margin-top: 10px;
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+  }
+  
+  .footer__card h3{
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+   /*------------------------*/
+  
+   /*footer*/
+   footer {
+    width: 100%;
+    height: 150px;
+    align-items: end;
+  }
+  
+  .caja_footer > a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .iconos_redes {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .icono-container {
+    width: 48px;
+    height: 48px;
+    margin: 8px;
+  }
+  
+  .icono-container:hover {
+    transform: scale(1.2);
+  }
+  
+  .copyright {
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+  }
+  
