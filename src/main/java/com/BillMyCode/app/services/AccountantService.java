@@ -26,6 +26,8 @@ public class AccountantService  {
     @Autowired
     private IAccountantRepository repositorio;
     @Autowired
+    private DeveloperService developerService;
+    @Autowired
     private ImageService imageService;
 
     /**
@@ -239,11 +241,7 @@ public class AccountantService  {
         contador.setStatus(true);
         repositorio.save(contador);
     }
-    @GetMapping("/accountant/get-answer")
-    public String getViewQuestAndAnswer(HttpSession request, ModelMap model){
-        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
-        List<Developer> developerList = developerService
-    }
+
+
 }
 
