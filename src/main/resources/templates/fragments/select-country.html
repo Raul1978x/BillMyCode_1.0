@@ -1,0 +1,617 @@
+<div th:fragment="select-country">
+<select
+        id="country"
+        name="nacionalidad"
+        th:value="${logueado?.nacionalidad}"
+        class="form-control"
+        value="${nacionalidad}"
+>
+  <option th:selected="${logueado == null || logueado?.genero == null}" disabled selected>Seleccione Pais</option>
+  <option th:selected="${logueado.nacionalidad == 'Afghanistan'}" value="Afghanistan">Afghanistan</option>
+  <option th:selected="${logueado.nacionalidad == 'Åland Islands'}" value="Åland Islands">Åland Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Albania'}" value="Albania">Albania</option>
+  <option th:selected="${logueado.nacionalidad == 'Algeria'}" value="Algeria">Algeria</option>
+  <option th:selected="${logueado.nacionalidad == 'American Samoa'}" value="American Samoa">American Samoa</option>
+  <option th:selected="${logueado.nacionalidad == 'Andorra'}" value="Andorra">Andorra</option>
+  <option th:selected="${logueado.nacionalidad == 'Angola'}" value="Angola">Angola</option>
+  <option th:selected="${logueado.nacionalidad == 'Anguilla'}" value="Anguilla">Anguilla</option>
+  <option th:selected="${logueado.nacionalidad == 'Antarctica'}" value="Antarctica">Antarctica</option>
+  <option th:selected="${logueado.nacionalidad == 'Antigua and Barbuda'}" value="Antigua and Barbuda">Antigua and Barbuda</option>
+  <option th:selected="${logueado.nacionalidad == 'Argentina'}" value="Argentina">Argentina</option>
+  <option th:selected="${logueado.nacionalidad == 'Armenia'}" value="Armenia">Armenia</option>
+  <option th:selected="${logueado.nacionalidad == 'Aruba'}" value="Aruba">Aruba</option>
+  <option th:selected="${logueado.nacionalidad == 'Australia'}" value="Australia">Australia</option>
+  <option th:selected="${logueado.nacionalidad == 'Austria'}" value="Austria">Austria</option>
+  <option th:selected="${logueado.nacionalidad == 'Azerbaijan'}" value="Azerbaijan">Azerbaijan</option>
+  <option th:selected="${logueado.nacionalidad == 'Bahamas'}" value="Bahamas">Bahamas</option>
+  <option th:selected="${logueado.nacionalidad == 'Bahrain'}" value="Bahrain">Bahrain</option>
+  <option th:selected="${logueado.nacionalidad == 'Bahrain'}" value="Bahrain">Bangladesh</option>
+  <option th:selected="${logueado.nacionalidad == 'Barbados'}" value="Barbados">Barbados</option>
+  <option th:selected="${logueado.nacionalidad == 'Belarus'}" value="Belarus">Belarus</option>
+  <option th:selected="${logueado.nacionalidad == 'Belgium'}" value="Belgium">Belgium</option>
+  <option th:selected="${logueado.nacionalidad == 'Belize'}" value="Belize">Belize</option>
+  <option th:selected="${logueado.nacionalidad == 'Benin'}" value="Benin">Benin</option>
+  <option th:selected="${logueado.nacionalidad == 'Bermuda'}" value="Bermuda">Bermuda</option>
+  <option th:selected="${logueado.nacionalidad == 'Bhutan'}" value="Bhutan">Bhutan</option>
+  <option th:selected="${logueado.nacionalidad == 'Bolivia'}" value="Bolivia">Bolivia</option>
+  <option th:selected="${logueado.nacionalidad == 'Bosnia and Herzegovina'}" value="Bosnia and Herzegovina">
+    Bosnia and Herzegovina
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Botswana'}" value="Botswana">Botswana</option>
+  <option th:selected="${logueado.nacionalidad == 'Bouvet Island'}" value="Bouvet Island">Bouvet Island</option>
+  <option th:selected="${logueado.nacionalidad == 'Brazil'}" value="Brazil">Brazil</option>
+  <option th:selected="${logueado.nacionalidad == 'British Indian Ocean Territory'}" value="British Indian Ocean Territory">
+    British Indian Ocean Territory
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Brunei Darussalam'}" value="Brunei Darussalam">Brunei Darussalam</option>
+  <option th:selected="${logueado.nacionalidad == 'Bulgaria'}" value="Bulgaria">Bulgaria</option>
+  <option th:selected="${logueado.nacionalidad == 'Burkina Faso'}" value="Burkina Faso">Burkina Faso</option>
+  <option th:selected="${logueado.nacionalidad == 'Burundi'}" value="Burundi">Burundi</option>
+  <option th:selected="${logueado.nacionalidad == 'Cambodia'}" value="Cambodia">Cambodia</option>
+  <option th:selected="${logueado.nacionalidad == 'Cameroon'}" value="Cameroon">Cameroon</option>
+  <option th:selected="${logueado.nacionalidad == 'Canada'}" value="Canada">Canada</option>
+  <option th:selected="${logueado.nacionalidad == 'Cape Verde'}" value="Cape Verde">Cape Verde</option>
+  <option th:selected="${logueado.nacionalidad == 'Cayman Islands'}" value="Cayman Islands">Cayman Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Central African Republic'}" value="Central African Republic">
+    Central African Republic
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Chad'}" value="Chad">Chad</option>
+  <option th:selected="${logueado.nacionalidad == 'Chile'}" value="Chile">Chile</option>
+  <option th:selected="${logueado.nacionalidad == 'China'}" value="China">China</option>
+  <option th:selected="${logueado.nacionalidad == 'Christmas Island'}" value="Christmas Island">Christmas Island</option>
+  <option th:selected="${logueado.nacionalidad == 'Cocos (Keeling) Islands'}" value="Cocos (Keeling) Islands">
+    Cocos (Keeling) Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Colombia'}" value="Colombia">Colombia</option>
+  <option th:selected="${logueado.nacionalidad == 'Comoros'}" value="Comoros">Comoros</option>
+  <option th:selected="${logueado.nacionalidad == 'Congo'}" value="Congo">Congo</option>
+  <option th:selected="${logueado.nacionalidad == 'Congo, The Democratic Republic of The'}" value="Congo, The Democratic Republic of The">
+    Congo, The Democratic Republic of The
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Cook Islands'}" value="Cook Islands">Cook Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Costa Rica'}" value="Costa Rica">Costa Rica</option>
+  <option th:selected="${logueado.nacionalidad == 'Cote D´ivoire'}" value="Cote D'ivoire">Cote D'ivoire</option>
+  <option th:selected="${logueado.nacionalidad == 'Croatia'}" value="Croatia">Croatia</option>
+  <option th:selected="${logueado.nacionalidad == 'Cuba'}" value="Cuba">Cuba</option>
+  <option th:selected="${logueado.nacionalidad == 'Cyprus'}" value="Cyprus">Cyprus</option>
+  <option th:selected="${logueado.nacionalidad == 'Czech Republic'}" value="Czech Republic">Czech Republic</option>
+  <option th:selected="${logueado.nacionalidad == 'Denmark'}" value="Denmark">Denmark</option>
+  <option th:selected="${logueado.nacionalidad == 'Djibouti'}" value="Djibouti">Djibouti</option>
+  <option th:selected="${logueado.nacionalidad == 'Dominica'}" value="Dominica">Dominica</option>
+  <option th:selected="${logueado.nacionalidad == 'Dominican Republic'}" value="Dominican Republic">Dominican Republic</option>
+  <option th:selected="${logueado.nacionalidad == 'Ecuador'}" value="Ecuador">Ecuador</option>
+  <option th:selected="${logueado.nacionalidad == 'Egypt'}" value="Egypt">Egypt</option>
+  <option th:selected="${logueado.nacionalidad == 'El Salvador'}" value="El Salvador">El Salvador</option>
+  <option th:selected="${logueado.nacionalidad == 'Equatorial Guinea'}" value="Equatorial Guinea">Equatorial Guinea</option>
+  <option th:selected="${logueado.nacionalidad == 'Eritrea'}" value="Eritrea">Eritrea</option>
+  <option th:selected="${logueado.nacionalidad == 'Estonia'}" value="Estonia">Estonia</option>
+  <option th:selected="${logueado.nacionalidad == 'Ethiopia'}" value="Ethiopia">Ethiopia</option>
+  <option th:selected="${logueado.nacionalidad == 'Falkland Islands (Malvinas)'}" value="Falkland Islands (Malvinas)">
+    Falkland Islands (Malvinas)
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Faroe Islands'}" value="Faroe Islands">Faroe Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Fiji'}" value="Fiji">Fiji</option>
+  <option th:selected="${logueado.nacionalidad == 'Finland'}" value="Finland">Finland</option>
+  <option th:selected="${logueado.nacionalidad == 'France'}" value="France">France</option>
+  <option th:selected="${logueado.nacionalidad == 'French Guiana'}" value="French Guiana">French Guiana</option>
+  <option th:selected="${logueado.nacionalidad == 'French Polynesia'}" value="French Polynesia">French Polynesia</option>
+  <option th:selected="${logueado.nacionalidad == 'French Southern Territories'}" value="French Southern Territories">
+    French Southern Territories
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Gabon'}" value="Gabon">Gabon</option>
+  <option th:selected="${logueado.nacionalidad == 'Gambia'}" value="Gambia">Gambia</option>
+  <option th:selected="${logueado.nacionalidad == 'Georgia'}" value="Georgia">Georgia</option>
+  <option th:selected="${logueado.nacionalidad == 'Germany'}" value="Germany">Germany</option>
+  <option th:selected="${logueado.nacionalidad == 'Ghana'}" value="Ghana">Ghana</option>
+  <option th:selected="${logueado.nacionalidad == 'Gibraltar'}" value="Gibraltar">Gibraltar</option>
+  <option th:selected="${logueado.nacionalidad == 'Greece'}" value="Greece">Greece</option>
+  <option th:selected="${logueado.nacionalidad == 'Greenland'}" value="Greenland">Greenland</option>
+  <option th:selected="${logueado.nacionalidad == 'Grenada'}" value="Grenada">Grenada</option>
+  <option th:selected="${logueado.nacionalidad == 'Guadeloupe'}" value="Guadeloupe">Guadeloupe</option>
+  <option th:selected="${logueado.nacionalidad == 'Guam'}" value="Guam">Guam</option>
+  <option th:selected="${logueado.nacionalidad == 'Guatemala'}" value="Guatemala">Guatemala</option>
+  <option th:selected="${logueado.nacionalidad == 'Guernsey'}" value="Guernsey">Guernsey</option>
+  <option th:selected="${logueado.nacionalidad == 'Guinea'}" value="Guinea">Guinea</option>
+  <option th:selected="${logueado.nacionalidad == 'Guinea-bissau'}" value="Guinea-bissau">Guinea-bissau</option>
+  <option th:selected="${logueado.nacionalidad == 'Guyana'}" value="Guyana">Guyana</option>
+  <option th:selected="${logueado.nacionalidad == 'Haiti'}" value="Haiti">Haiti</option>
+  <option th:selected="${logueado.nacionalidad == 'Heard Island and Mcdonald Islands'}" value="Heard Island and Mcdonald Islands">
+    Heard Island and Mcdonald Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Holy See (Vatican City State)'}" value="Holy See (Vatican City State)">
+    Holy See (Vatican City State)
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Honduras'}" value="Honduras">Honduras</option>
+  <option th:selected="${logueado.nacionalidad == 'Hong Kong'}" value="Hong Kong">Hong Kong</option>
+  <option th:selected="${logueado.nacionalidad == 'Hungary'}" value="Hungary">Hungary</option>
+  <option th:selected="${logueado.nacionalidad == 'Iceland'}" value="Iceland">Iceland</option>
+  <option th:selected="${logueado.nacionalidad == 'India'}" value="India">India</option>
+  <option th:selected="${logueado.nacionalidad == 'Indonesia'}" value="Indonesia">Indonesia</option>
+  <option th:selected="${logueado.nacionalidad == 'Iran, Islamic Republic of'}" value="Iran, Islamic Republic of">
+    Iran, Islamic Republic of
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Iraq'}" value="Iraq">Iraq</option>
+  <option th:selected="${logueado.nacionalidad == 'Ireland'}" value="Ireland">Ireland</option>
+  <option th:selected="${logueado.nacionalidad == 'Isle of Man'}" value="Isle of Man">Isle of Man</option>
+  <option th:selected="${logueado.nacionalidad == 'Israel'}" value="Israel">Israel</option>
+  <option th:selected="${logueado.nacionalidad == 'Italy'}" value="Italy">Italy</option>
+  <option th:selected="${logueado.nacionalidad == 'Jamaica'}" value="Jamaica">Jamaica</option>
+  <option th:selected="${logueado.nacionalidad == 'Japan'}" value="Japan">Japan</option>
+  <option th:selected="${logueado.nacionalidad == 'Jersey'}" value="Jersey">Jersey</option>
+  <option th:selected="${logueado.nacionalidad == 'Jordan'}" value="Jordan">Jordan</option>
+  <option th:selected="${logueado.nacionalidad == 'Kazakhstan'}" value="Kazakhstan">Kazakhstan</option>
+  <option th:selected="${logueado.nacionalidad == 'Kenya'}" value="Kenya">Kenya</option>
+  <option th:selected="${logueado.nacionalidad == 'Kiribati'}" value="Kiribati">Kiribati</option>
+  <option th:selected="${logueado.nacionalidad == 'Korea, Democratic People´s Republic of'}" value="Korea, Democratic People's Republic of">
+    Korea, Democratic People's Republic of
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Korea, Republic of'}" value="Korea, Republic of">Korea, Republic of</option>
+  <option th:selected="${logueado.nacionalidad == 'Kuwait'}" value="Kuwait">Kuwait</option>
+  <option th:selected="${logueado.nacionalidad == 'Kyrgyzstan'}" value="Kyrgyzstan">Kyrgyzstan</option>
+  <option th:selected="${logueado.nacionalidad == 'Lao People´s Democratic Republic'}" value="Lao People's Democratic Republic">
+    Lao People's Democratic Republic
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Latvia'}" value="Latvia">Latvia</option>
+  <option th:selected="${logueado.nacionalidad == 'Lebanon'}" value="Lebanon">Lebanon</option>
+  <option th:selected="${logueado.nacionalidad == 'Lesotho'}" value="Lesotho">Lesotho</option>
+  <option th:selected="${logueado.nacionalidad == 'Liberia'}" value="Liberia">Liberia</option>
+  <option th:selected="${logueado.nacionalidad == 'Libyan Arab Jamahiriya'}" value="Libyan Arab Jamahiriya">
+    Libyan Arab Jamahiriya
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Liechtenstein'}" value="Liechtenstein">Liechtenstein</option>
+  <option th:selected="${logueado.nacionalidad == 'Lithuania'}" value="Lithuania">Lithuania</option>
+  <option th:selected="${logueado.nacionalidad == 'Luxembourg'}" value="Luxembourg">Luxembourg</option>
+  <option th:selected="${logueado.nacionalidad == 'Macao'}" value="Macao">Macao</option>
+  <option th:selected="${logueado.nacionalidad == 'Macedonia, The Former Yugoslav Republic of'}" value="Macedonia, The Former Yugoslav Republic of">
+    Macedonia, The Former Yugoslav Republic of
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Madagascar'}" value="Madagascar">Madagascar</option>
+  <option th:selected="${logueado.nacionalidad == 'Malawi'}" value="Malawi">Malawi</option>
+  <option th:selected="${logueado.nacionalidad == 'Malaysia'}" value="Malaysia">Malaysia</option>
+  <option th:selected="${logueado.nacionalidad == 'Maldives'}" value="Maldives">Maldives</option>
+  <option th:selected="${logueado.nacionalidad == 'Mali'}" value="Mali">Mali</option>
+  <option th:selected="${logueado.nacionalidad == 'Malta'}" value="Malta">Malta</option>
+  <option th:selected="${logueado.nacionalidad == 'Marshall Islands'}" value="Marshall Islands">Marshall Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Martinique'}" value="Martinique">Martinique</option>
+  <option th:selected="${logueado.nacionalidad == 'Mauritania'}" value="Mauritania">Mauritania</option>
+  <option th:selected="${logueado.nacionalidad == 'Mauritius'}" value="Mauritius">Mauritius</option>
+  <option th:selected="${logueado.nacionalidad == 'Mayotte'}" value="Mayotte">Mayotte</option>
+  <option th:selected="${logueado.nacionalidad == 'Mexico'}" value="Mexico">Mexico</option>
+  <option th:selected="${logueado.nacionalidad == 'Micronesia, Federated States of'}" value="Micronesia, Federated States of">
+    Micronesia, Federated States of
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Moldova, Republic of'}" value="Moldova, Republic of">Moldova, Republic of</option>
+  <option th:selected="${logueado.nacionalidad == 'Monaco'}" value="Monaco">Monaco</option>
+  <option th:selected="${logueado.nacionalidad == 'Mongolia'}" value="Mongolia">Mongolia</option>
+  <option th:selected="${logueado.nacionalidad == 'Montenegro'}" value="Montenegro">Montenegro</option>
+  <option th:selected="${logueado.nacionalidad == 'Montserrat'}" value="Montserrat">Montserrat</option>
+  <option th:selected="${logueado.nacionalidad == 'Morocco'}" value="Morocco">Morocco</option>
+  <option th:selected="${logueado.nacionalidad == 'Mozambique'}" value="Mozambique">Mozambique</option>
+  <option th:selected="${logueado.nacionalidad == 'Myanmar'}" value="Myanmar">Myanmar</option>
+  <option th:selected="${logueado.nacionalidad == 'Namibia'}" value="Namibia">Namibia</option>
+  <option th:selected="${logueado.nacionalidad == 'Nauru'}" value="Nauru">Nauru</option>
+  <option th:selected="${logueado.nacionalidad == 'Nepal'}" value="Nepal">Nepal</option>
+  <option th:selected="${logueado.nacionalidad == 'Netherlands'}" value="Netherlands">Netherlands</option>
+  <option th:selected="${logueado.nacionalidad == 'Netherlands Antilles'}" value="Netherlands Antilles">Netherlands Antilles</option>
+  <option th:selected="${logueado.nacionalidad == 'New Caledonia'}" value="New Caledonia">New Caledonia</option>
+  <option th:selected="${logueado.nacionalidad == 'New Zealand'}" value="New Zealand">New Zealand</option>
+  <option th:selected="${logueado.nacionalidad == 'Nicaragua'}" value="Nicaragua">Nicaragua</option>
+  <option th:selected="${logueado.nacionalidad == 'Niger'}" value="Niger">Niger</option>
+  <option th:selected="${logueado.nacionalidad == 'Nigeria'}" value="Nigeria">Nigeria</option>
+  <option th:selected="${logueado.nacionalidad == 'Niue'}" value="Niue">Niue</option>
+  <option th:selected="${logueado.nacionalidad == 'Norfolk Island'}" value="Norfolk Island">Norfolk Island</option>
+  <option th:selected="${logueado.nacionalidad == 'Northern Mariana Islands'}" value="Northern Mariana Islands">
+    Northern Mariana Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Norway'}" value="Norway">Norway</option>
+  <option th:selected="${logueado.nacionalidad == 'Oman'}" value="Oman">Oman</option>
+  <option th:selected="${logueado.nacionalidad == 'Pakistan'}" value="Pakistan">Pakistan</option>
+  <option th:selected="${logueado.nacionalidad == 'Palau'}" value="Palau">Palau</option>
+  <option th:selected="${logueado.nacionalidad == 'Palestinian Territory, Occupied'}" value="Palestinian Territory, Occupied">
+    Palestinian Territory, Occupied
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Panama'}" value="Panama">Panama</option>
+  <option th:selected="${logueado.nacionalidad == 'Papua New Guinea'}" value="Papua New Guinea">Papua New Guinea</option>
+  <option th:selected="${logueado.nacionalidad == 'Paraguay'}" value="Paraguay">Paraguay</option>
+  <option th:selected="${logueado.nacionalidad == 'Peru'}" value="Peru">Peru</option>
+  <option th:selected="${logueado.nacionalidad == 'Philippines'}" value="Philippines">Philippines</option>
+  <option th:selected="${logueado.nacionalidad == 'Pitcairn'}" value="Pitcairn">Pitcairn</option>
+  <option th:selected="${logueado.nacionalidad == 'Poland'}" value="Poland">Poland</option>
+  <option th:selected="${logueado.nacionalidad == 'Portugal'}" value="Portugal">Portugal</option>
+  <option th:selected="${logueado.nacionalidad == 'Puerto Rico'}" value="Puerto Rico">Puerto Rico</option>
+  <option th:selected="${logueado.nacionalidad == 'Qatar'}" value="Qatar">Qatar</option>
+  <option th:selected="${logueado.nacionalidad == 'Reunion'}" value="Reunion">Reunion</option>
+  <option th:selected="${logueado.nacionalidad == 'Romania'}" value="Romania">Romania</option>
+  <option th:selected="${logueado.nacionalidad == 'Russian Federation'}" value="Russian Federation">Russian Federation</option>
+  <option th:selected="${logueado.nacionalidad == 'Rwanda'}" value="Rwanda">Rwanda</option>
+  <option th:selected="${logueado.nacionalidad == 'Saint Helena'}" value="Saint Helena">Saint Helena</option>
+  <option th:selected="${logueado.nacionalidad == 'Saint Kitts and Nevis'}" value="Saint Kitts and Nevis">
+    Saint Kitts and Nevis
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Saint Lucia'}" value="Saint Lucia">Saint Lucia</option>
+  <option th:selected="${logueado.nacionalidad == 'Saint Pierre and Miquelon'}" value="Saint Pierre and Miquelon">
+    Saint Pierre and Miquelon
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Saint Vincent and The Grenadines'}" value="Saint Vincent and The Grenadines">
+    Saint Vincent and The Grenadines
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Samoa'}" value="Samoa">Samoa</option>
+  <option th:selected="${logueado.nacionalidad == 'San Marino'}" value="San Marino">San Marino</option>
+  <option th:selected="${logueado.nacionalidad == 'Sao Tome and Principe'}" value="Sao Tome and Principe">
+    Sao Tome and Principe
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Saudi Arabia'}" value="Saudi Arabia">Saudi Arabia</option>
+  <option th:selected="${logueado.nacionalidad == 'Senegal'}" value="Senegal">Senegal</option>
+  <option th:selected="${logueado.nacionalidad == 'Serbia'}" value="Serbia">Serbia</option>
+  <option th:selected="${logueado.nacionalidad == 'Seychelles'}" value="Seychelles">Seychelles</option>
+  <option th:selected="${logueado.nacionalidad == 'Sierra Leone'}" value="Sierra Leone">Sierra Leone</option>
+  <option th:selected="${logueado.nacionalidad == 'Singapore'}" value="Singapore">Singapore</option>
+  <option th:selected="${logueado.nacionalidad == 'Slovakia'}" value="Slovakia">Slovakia</option>
+  <option th:selected="${logueado.nacionalidad == 'Slovenia'}" value="Slovenia">Slovenia</option>
+  <option th:selected="${logueado.nacionalidad == 'Solomon Islands'}" value="Solomon Islands">Solomon Islands</option>
+  <option th:selected="${logueado.nacionalidad == 'Somalia'}" value="Somalia">Somalia</option>
+  <option th:selected="${logueado.nacionalidad == 'South Africa'}" value="South Africa">South Africa</option>
+  <option th:selected="${logueado.nacionalidad == 'South Georgia and The South Sandwich Islands'}" value="South Georgia and The South Sandwich Islands">
+    South Georgia and The South Sandwich Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Spain'}" value="Spain">Spain</option>
+  <option th:selected="${logueado.nacionalidad == 'Sri Lanka'}" value="Sri Lanka">Sri Lanka</option>
+  <option th:selected="${logueado.nacionalidad == 'Sudan'}" value="Sudan">Sudan</option>
+  <option th:selected="${logueado.nacionalidad == 'Suriname'}" value="Suriname">Suriname</option>
+  <option th:selected="${logueado.nacionalidad == 'Svalbard and Jan Mayen'}" value="Svalbard and Jan Mayen">
+    Svalbard and Jan Mayen
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Swaziland'}" value="Swaziland">Swaziland</option>
+  <option th:selected="${logueado.nacionalidad == 'Sweden'}" value="Sweden">Sweden</option>
+  <option th:selected="${logueado.nacionalidad == 'Switzerland'}" value="Switzerland">Switzerland</option>
+  <option th:selected="${logueado.nacionalidad == 'Syrian Arab Republic'}" value="Syrian Arab Republic">Syrian Arab Republic</option>
+  <option th:selected="${logueado.nacionalidad == 'Taiwan'}" value="Taiwan">Taiwan</option>
+  <option th:selected="${logueado.nacionalidad == 'Tajikistan'}" value="Tajikistan">Tajikistan</option>
+  <option th:selected="${logueado.nacionalidad == 'Tanzania, United Republic of'}" value="Tanzania, United Republic of">
+    Tanzania, United Republic of
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Thailand'}" value="Thailand">Thailand</option>
+  <option th:selected="${logueado.nacionalidad == 'Timor-leste'}" value="Timor-leste">Timor-leste</option>
+  <option th:selected="${logueado.nacionalidad == 'Togo'}" value="Togo">Togo</option>
+  <option th:selected="${logueado.nacionalidad == 'Tokelau'}" value="Tokelau">Tokelau</option>
+  <option th:selected="${logueado.nacionalidad == 'Tonga'}" value="Tonga">Tonga</option>
+  <option th:selected="${logueado.nacionalidad == 'Trinidad and Tobago'}" value="Trinidad and Tobago">Trinidad and Tobago</option>
+  <option th:selected="${logueado.nacionalidad == 'Tunisia'}" value="Tunisia">Tunisia</option>
+  <option th:selected="${logueado.nacionalidad == 'Turkey'}" value="Turkey">Turkey</option>
+  <option th:selected="${logueado.nacionalidad == 'Turkmenistan'}" value="Turkmenistan">Turkmenistan</option>
+  <option th:selected="${logueado.nacionalidad == 'Turks and Caicos Islands'}" value="Turks and Caicos Islands">
+    Turks and Caicos Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Tuvalu'}" value="Tuvalu">Tuvalu</option>
+  <option th:selected="${logueado.nacionalidad == 'Uganda'}" value="Uganda">Uganda</option>
+  <option th:selected="${logueado.nacionalidad == 'Ukraine'}" value="Ukraine">Ukraine</option>
+  <option th:selected="${logueado.nacionalidad == 'United Arab Emirates'}" value="United Arab Emirates">United Arab Emirates</option>
+  <option th:selected="${logueado.nacionalidad == 'United Kingdom'}" value="United Kingdom">United Kingdom</option>
+  <option th:selected="${logueado.nacionalidad == 'United States'}" value="United States">United States</option>
+  <option th:selected="${logueado.nacionalidad == 'United States Minor Outlying Islands'}" value="United States Minor Outlying Islands">
+    United States Minor Outlying Islands
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Uruguay'}" value="Uruguay">Uruguay</option>
+  <option th:selected="${logueado.nacionalidad == 'Uzbekistan'}" value="Uzbekistan">Uzbekistan</option>
+  <option th:selected="${logueado.nacionalidad == 'Vanuatu'}" value="Vanuatu">Vanuatu</option>
+  <option th:selected="${logueado.nacionalidad == 'Venezuela'}" value="Venezuela">Venezuela</option>
+  <option th:selected="${logueado.nacionalidad == 'Viet Nam'}" value="Viet Nam">Viet Nam</option>
+  <option th:selected="${logueado.nacionalidad == 'Virgin Islands, British'}" value="Virgin Islands, British">
+    Virgin Islands, British
+  </option>
+  <option th:selected="${logueado.nacionalidad == 'Virgin Islands, U.S.'}" value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+  <option th:selected="${logueado.nacionalidad == 'Wallis and Futuna'}" value="Wallis and Futuna">Wallis and Futuna</option>
+  <option th:selected="${logueado.nacionalidad == 'Western Sahara'}" value="Western Sahara">Western Sahara</option>
+  <option th:selected="${logueado.nacionalidad == 'Yemen'}" value="Yemen">Yemen</option>
+  <option th:selected="${logueado.nacionalidad == 'Zambia'}" value="Zambia">Zambia</option>
+  <option th:selected="${logueado.nacionalidad == 'Zimbabwe'}" value="Zimbabwe">Zimbabwe</option>
+</select>
+</div>
+<div th:fragment="select-country-create">
+  <select
+          id="country"
+          name="nacionalidad"
+          class="form-control"
+          value="${nacionalidad}"
+  >
+    <option value="">Seleccione Pais</option>
+    <option value="Afghanistan">Afghanistan</option>
+    <option value="Åland Islands">Åland Islands</option>
+    <option value="Albania">Albania</option>
+    <option value="Algeria">Algeria</option>
+    <option value="American Samoa">American Samoa</option>
+    <option value="Andorra">Andorra</option>
+    <option value="Angola">Angola</option>
+    <option value="Anguilla">Anguilla</option>
+    <option value="Antarctica">Antarctica</option>
+    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+    <option value="Argentina">Argentina</option>
+    <option value="Armenia">Armenia</option>
+    <option value="Aruba">Aruba</option>
+    <option value="Australia">Australia</option>
+    <option value="Austria">Austria</option>
+    <option value="Azerbaijan">Azerbaijan</option>
+    <option value="Bahamas">Bahamas</option>
+    <option value="Bahrain">Bahrain</option>
+    <option value="Bangladesh">Bangladesh</option>
+    <option value="Barbados">Barbados</option>
+    <option value="Belarus">Belarus</option>
+    <option value="Belgium">Belgium</option>
+    <option value="Belize">Belize</option>
+    <option value="Benin">Benin</option>
+    <option value="Bermuda">Bermuda</option>
+    <option value="Bhutan">Bhutan</option>
+    <option value="Bolivia">Bolivia</option>
+    <option value="Bosnia and Herzegovina">
+      Bosnia and Herzegovina
+    </option>
+    <option value="Botswana">Botswana</option>
+    <option value="Bouvet Island">Bouvet Island</option>
+    <option value="Brazil">Brazil</option>
+    <option value="British Indian Ocean Territory">
+      British Indian Ocean Territory
+    </option>
+    <option value="Brunei Darussalam">Brunei Darussalam</option>
+    <option value="Bulgaria">Bulgaria</option>
+    <option value="Burkina Faso">Burkina Faso</option>
+    <option value="Burundi">Burundi</option>
+    <option value="Cambodia">Cambodia</option>
+    <option value="Cameroon">Cameroon</option>
+    <option value="Canada">Canada</option>
+    <option value="Cape Verde">Cape Verde</option>
+    <option value="Cayman Islands">Cayman Islands</option>
+    <option value="Central African Republic">
+      Central African Republic
+    </option>
+    <option value="Chad">Chad</option>
+    <option value="Chile">Chile</option>
+    <option value="China">China</option>
+    <option value="Christmas Island">Christmas Island</option>
+    <option value="Cocos (Keeling) Islands">
+      Cocos (Keeling) Islands
+    </option>
+    <option value="Colombia">Colombia</option>
+    <option value="Comoros">Comoros</option>
+    <option value="Congo">Congo</option>
+    <option value="Congo, The Democratic Republic of The">
+      Congo, The Democratic Republic of The
+    </option>
+    <option value="Cook Islands">Cook Islands</option>
+    <option value="Costa Rica">Costa Rica</option>
+    <option value="Cote D'ivoire">Cote D'ivoire</option>
+    <option value="Croatia">Croatia</option>
+    <option value="Cuba">Cuba</option>
+    <option value="Cyprus">Cyprus</option>
+    <option value="Czech Republic">Czech Republic</option>
+    <option value="Denmark">Denmark</option>
+    <option value="Djibouti">Djibouti</option>
+    <option value="Dominica">Dominica</option>
+    <option value="Dominican Republic">Dominican Republic</option>
+    <option value="Ecuador">Ecuador</option>
+    <option value="Egypt">Egypt</option>
+    <option value="El Salvador">El Salvador</option>
+    <option value="Equatorial Guinea">Equatorial Guinea</option>
+    <option value="Eritrea">Eritrea</option>
+    <option value="Estonia">Estonia</option>
+    <option value="Ethiopia">Ethiopia</option>
+    <option value="Falkland Islands (Malvinas)">
+      Falkland Islands (Malvinas)
+    </option>
+    <option value="Faroe Islands">Faroe Islands</option>
+    <option value="Fiji">Fiji</option>
+    <option value="Finland">Finland</option>
+    <option value="France">France</option>
+    <option value="French Guiana">French Guiana</option>
+    <option value="French Polynesia">French Polynesia</option>
+    <option value="French Southern Territories">
+      French Southern Territories
+    </option>
+    <option value="Gabon">Gabon</option>
+    <option value="Gambia">Gambia</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Germany">Germany</option>
+    <option value="Ghana">Ghana</option>
+    <option value="Gibraltar">Gibraltar</option>
+    <option value="Greece">Greece</option>
+    <option value="Greenland">Greenland</option>
+    <option value="Grenada">Grenada</option>
+    <option value="Guadeloupe">Guadeloupe</option>
+    <option value="Guam">Guam</option>
+    <option value="Guatemala">Guatemala</option>
+    <option value="Guernsey">Guernsey</option>
+    <option value="Guinea">Guinea</option>
+    <option value="Guinea-bissau">Guinea-bissau</option>
+    <option value="Guyana">Guyana</option>
+    <option value="Haiti">Haiti</option>
+    <option value="Heard Island and Mcdonald Islands">
+      Heard Island and Mcdonald Islands
+    </option>
+    <option value="Holy See (Vatican City State)">
+      Holy See (Vatican City State)
+    </option>
+    <option value="Honduras">Honduras</option>
+    <option value="Hong Kong">Hong Kong</option>
+    <option value="Hungary">Hungary</option>
+    <option value="Iceland">Iceland</option>
+    <option value="India">India</option>
+    <option value="Indonesia">Indonesia</option>
+    <option value="Iran, Islamic Republic of">
+      Iran, Islamic Republic of
+    </option>
+    <option value="Iraq">Iraq</option>
+    <option value="Ireland">Ireland</option>
+    <option value="Isle of Man">Isle of Man</option>
+    <option value="Israel">Israel</option>
+    <option value="Italy">Italy</option>
+    <option value="Jamaica">Jamaica</option>
+    <option value="Japan">Japan</option>
+    <option value="Jersey">Jersey</option>
+    <option value="Jordan">Jordan</option>
+    <option value="Kazakhstan">Kazakhstan</option>
+    <option value="Kenya">Kenya</option>
+    <option value="Kiribati">Kiribati</option>
+    <option value="Korea, Democratic People's Republic of">
+      Korea, Democratic People's Republic of
+    </option>
+    <option value="Korea, Republic of">Korea, Republic of</option>
+    <option value="Kuwait">Kuwait</option>
+    <option value="Kyrgyzstan">Kyrgyzstan</option>
+    <option value="Lao People's Democratic Republic">
+      Lao People's Democratic Republic
+    </option>
+    <option value="Latvia">Latvia</option>
+    <option value="Lebanon">Lebanon</option>
+    <option value="Lesotho">Lesotho</option>
+    <option value="Liberia">Liberia</option>
+    <option value="Libyan Arab Jamahiriya">
+      Libyan Arab Jamahiriya
+    </option>
+    <option value="Liechtenstein">Liechtenstein</option>
+    <option value="Lithuania">Lithuania</option>
+    <option value="Luxembourg">Luxembourg</option>
+    <option value="Macao">Macao</option>
+    <option value="Macedonia, The Former Yugoslav Republic of">
+      Macedonia, The Former Yugoslav Republic of
+    </option>
+    <option value="Madagascar">Madagascar</option>
+    <option value="Malawi">Malawi</option>
+    <option value="Malaysia">Malaysia</option>
+    <option value="Maldives">Maldives</option>
+    <option value="Mali">Mali</option>
+    <option value="Malta">Malta</option>
+    <option value="Marshall Islands">Marshall Islands</option>
+    <option value="Martinique">Martinique</option>
+    <option value="Mauritania">Mauritania</option>
+    <option value="Mauritius">Mauritius</option>
+    <option value="Mayotte">Mayotte</option>
+    <option value="Mexico">Mexico</option>
+    <option value="Micronesia, Federated States of">
+      Micronesia, Federated States of
+    </option>
+    <option value="Moldova, Republic of">Moldova, Republic of</option>
+    <option value="Monaco">Monaco</option>
+    <option value="Mongolia">Mongolia</option>
+    <option value="Montenegro">Montenegro</option>
+    <option value="Montserrat">Montserrat</option>
+    <option value="Morocco">Morocco</option>
+    <option value="Mozambique">Mozambique</option>
+    <option value="Myanmar">Myanmar</option>
+    <option value="Namibia">Namibia</option>
+    <option value="Nauru">Nauru</option>
+    <option value="Nepal">Nepal</option>
+    <option value="Netherlands">Netherlands</option>
+    <option value="Netherlands Antilles">Netherlands Antilles</option>
+    <option value="New Caledonia">New Caledonia</option>
+    <option value="New Zealand">New Zealand</option>
+    <option value="Nicaragua">Nicaragua</option>
+    <option value="Niger">Niger</option>
+    <option value="Nigeria">Nigeria</option>
+    <option value="Niue">Niue</option>
+    <option value="Norfolk Island">Norfolk Island</option>
+    <option value="Northern Mariana Islands">
+      Northern Mariana Islands
+    </option>
+    <option value="Norway">Norway</option>
+    <option value="Oman">Oman</option>
+    <option value="Pakistan">Pakistan</option>
+    <option value="Palau">Palau</option>
+    <option value="Palestinian Territory, Occupied">
+      Palestinian Territory, Occupied
+    </option>
+    <option value="Panama">Panama</option>
+    <option value="Papua New Guinea">Papua New Guinea</option>
+    <option value="Paraguay">Paraguay</option>
+    <option value="Peru">Peru</option>
+    <option value="Philippines">Philippines</option>
+    <option value="Pitcairn">Pitcairn</option>
+    <option value="Poland">Poland</option>
+    <option value="Portugal">Portugal</option>
+    <option value="Puerto Rico">Puerto Rico</option>
+    <option value="Qatar">Qatar</option>
+    <option value="Reunion">Reunion</option>
+    <option value="Romania">Romania</option>
+    <option value="Russian Federation">Russian Federation</option>
+    <option value="Rwanda">Rwanda</option>
+    <option value="Saint Helena">Saint Helena</option>
+    <option value="Saint Kitts and Nevis">
+      Saint Kitts and Nevis
+    </option>
+    <option value="Saint Lucia">Saint Lucia</option>
+    <option value="Saint Pierre and Miquelon">
+      Saint Pierre and Miquelon
+    </option>
+    <option value="Saint Vincent and The Grenadines">
+      Saint Vincent and The Grenadines
+    </option>
+    <option value="Samoa">Samoa</option>
+    <option value="San Marino">San Marino</option>
+    <option value="Sao Tome and Principe">
+      Sao Tome and Principe
+    </option>
+    <option value="Saudi Arabia">Saudi Arabia</option>
+    <option value="Senegal">Senegal</option>
+    <option value="Serbia">Serbia</option>
+    <option value="Seychelles">Seychelles</option>
+    <option value="Sierra Leone">Sierra Leone</option>
+    <option value="Singapore">Singapore</option>
+    <option value="Slovakia">Slovakia</option>
+    <option value="Slovenia">Slovenia</option>
+    <option value="Solomon Islands">Solomon Islands</option>
+    <option value="Somalia">Somalia</option>
+    <option value="South Africa">South Africa</option>
+    <option value="South Georgia and The South Sandwich Islands">
+      South Georgia and The South Sandwich Islands
+    </option>
+    <option value="Spain">Spain</option>
+    <option value="Sri Lanka">Sri Lanka</option>
+    <option value="Sudan">Sudan</option>
+    <option value="Suriname">Suriname</option>
+    <option value="Svalbard and Jan Mayen">
+      Svalbard and Jan Mayen
+    </option>
+    <option value="Swaziland">Swaziland</option>
+    <option value="Sweden">Sweden</option>
+    <option value="Switzerland">Switzerland</option>
+    <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+    <option value="Taiwan">Taiwan</option>
+    <option value="Tajikistan">Tajikistan</option>
+    <option value="Tanzania, United Republic of">
+      Tanzania, United Republic of
+    </option>
+    <option value="Thailand">Thailand</option>
+    <option value="Timor-leste">Timor-leste</option>
+    <option value="Togo">Togo</option>
+    <option value="Tokelau">Tokelau</option>
+    <option value="Tonga">Tonga</option>
+    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+    <option value="Tunisia">Tunisia</option>
+    <option value="Turkey">Turkey</option>
+    <option value="Turkmenistan">Turkmenistan</option>
+    <option value="Turks and Caicos Islands">
+      Turks and Caicos Islands
+    </option>
+    <option value="Tuvalu">Tuvalu</option>
+    <option value="Uganda">Uganda</option>
+    <option value="Ukraine">Ukraine</option>
+    <option value="United Arab Emirates">United Arab Emirates</option>
+    <option value="United Kingdom">United Kingdom</option>
+    <option value="United States">United States</option>
+    <option value="United States Minor Outlying Islands">
+      United States Minor Outlying Islands
+    </option>
+    <option value="Uruguay">Uruguay</option>
+    <option value="Uzbekistan">Uzbekistan</option>
+    <option value="Vanuatu">Vanuatu</option>
+    <option value="Venezuela">Venezuela</option>
+    <option value="Viet Nam">Viet Nam</option>
+    <option value="Virgin Islands, British">
+      Virgin Islands, British
+    </option>
+    <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+    <option value="Wallis and Futuna">Wallis and Futuna</option>
+    <option value="Western Sahara">Western Sahara</option>
+    <option value="Yemen">Yemen</option>
+    <option value="Zambia">Zambia</option>
+    <option value="Zimbabwe">Zimbabwe</option>
+  </select>
+</div>

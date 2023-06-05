@@ -121,10 +121,13 @@ public class DeveloperService {
         developer.setComentario(comentario);
         developer.setRol(Rol.DEV);
         developer.setStatus(true);
-        Image image = imageService.save(archivo);
-
-        developer.setImage(image);
-
+        if (archivo != null && !archivo.isEmpty()) {
+            Image image = imageService.save(archivo);
+            developer.setImage(image);
+        } else {
+            Image defaultImage = imageService.saveDefaultImage();
+            developer.setImage(defaultImage);
+        }
         repositorio.save(developer);
     }
 
@@ -194,8 +197,17 @@ public class DeveloperService {
             result.setComentario(comment);
             result.setRol(Rol.DEV);
 
-            if (archivo != null) {
+//            if (archivo != null) {
+//                Image image = imageService.save(archivo);
+//                result.setImage(image);
+//            }
+            if (archivo.isEmpty()){
+                Image image = imageService.buscarImagenById(result.getImage().getId());
+
+                result.setImage(image);
+            }else {
                 Image image = imageService.save(archivo);
+
                 result.setImage(image);
             }
 
