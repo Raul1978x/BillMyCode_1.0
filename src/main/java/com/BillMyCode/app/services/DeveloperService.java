@@ -131,7 +131,7 @@ public class DeveloperService {
             Image defaultImage = imageService.saveDefaultImage();
             developer.setImage(defaultImage);
         }
-        repositorio.save(developer);
+        developerRepository.save(developer);
 
     }
 
