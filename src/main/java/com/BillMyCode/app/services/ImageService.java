@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Optional;
 
 @Service
@@ -86,6 +88,24 @@ public class ImageService {
             }
         } else {
             throw new RuntimeException("El archivo de imagen es nulo");
+        }
+    }
+    public Image ImagenNoticia(){
+        try {
+            String defaultImagePath = "src/main/resources/static/images/defaultnoticia.jpg";
+            File defaultImageFile = new File(defaultImagePath);
+            byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
+
+            Image defaultImage = new Image();
+            defaultImage.setMime("image/jpg");
+            defaultImage.setNombre("defaultnoticia.jpg");
+            defaultImage.setContenido(defaultImageData);
+
+            repository.save(defaultImage);
+
+            return defaultImage;
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo cargar la imagen predeterminada.", e);
         }
     }
 }

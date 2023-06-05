@@ -9,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/thymeleaf")
@@ -30,26 +26,38 @@ public class NoticiaController {
         Developer logueado = (Developer) request.getAttribute("sessionuser");
         model.put("logueado", logueado);
 
-        List<Noticia> noticia = noticiaServicio.ListarNoticia();
+        List<Noticia> noticia = noticiaServicio.listarNoticia();
         model.addAttribute("noticia", noticia);
 
         return "Noticia.html";
     }
+@GetMapping("/crear-noticia")
+public String creaNoticia(ModelMap model, HttpSession request){
+    Developer logueado = (Developer) request.getAttribute("sessionuser");
+    model.put("logueado", logueado);
 
-    @GetMapping("/crear-noticia{id}")
-    public String CrearNoticia(@PathVariable Long id,
-                               @RequestParam ("titulo")String titulo,
-                               @RequestParam ("contenido")String contenido ,ModelMap modelo) {
+    return "crear-noticia.html";
+}
+    @PostMapping("/crear-noticia")
+    public String CrearNoticia(@RequestParam (required = false)MultipartFile archivo,
+                               @RequestParam String titulo,
+                               @RequestParam String contenido, ModelMap modelo) {
 
-//        Path directorioImagenes = Paths.get("src//main//resources//static/images");
-//        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 
-//        byte[] bytesImg = imagen.getBytes();
-//        Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-//        Files.write(rutaCompleta, bytesImg);
+        LocalDateTime horaSubida = LocalDateTime.now();
+        noticiaServicio.crearNoticia(archivo,titulo, contenido, horaSubida);
 
-        noticiaServicio.CrearNoticia( id, titulo, contenido);
-        modelo.put("Exito", "La noticia fue creada con Ã©xito");
-         return "crear-noticia.html";
+        modelo.put("Exito", "La noticia fue creada con éxito");
+        return "redirect:/thymeleaf/Noticia";
     }
+    @GetMapping("/mostrar-noticia/{id}")
+    public String verNoticia(@PathVariable("id") Long id, ModelMap modelo) {
+
+    Noticia noticia = noticiaServicio.searchNoticiaId(id);
+
+        modelo.addAttribute("noticia", noticia);
+
+        return "mostrar-noticia.html";
+    }
+
 }

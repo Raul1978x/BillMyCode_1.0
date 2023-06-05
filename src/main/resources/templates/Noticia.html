@@ -81,25 +81,45 @@
         </nav>
     </nav>
 </navbar>
+<h5 class="titulo">Portal de noticias</h5>
+<tbody th:each="noticia: ${noticia}"class="noticia">
 
-<ul> <li class="noticia"> <div class="titulo">Título de la noticia 1</div> <img class="imagen" src="ruta_de_la_imagen_1.jpg" alt="Imagen 1"> <div class="contenido">Vista previa del contenido de la noticia 1...</div> </li> <li class="noticia"> <div class="titulo">Título de la noticia 2</div> <img class="imagen" src="ruta_de_la_imagen_2.jpg" alt="Imagen 2"> <div class="contenido">Vista previa del contenido de la noticia 2...</div> </li> <li class="noticia"> <div class="titulo">Título de la noticia 3</div> <img class="imagen" src="ruta_de_la_imagen_3.jpg" alt="Imagen 3"> <div class="contenido">Vista previa del contenido de la noticia 3...</div> </li> </ul>
-<!--<h1 class="titulo">Portal de noticias</h1>-->
 
-<!--<div class="row m-3 gap-5 ">-->
-<!--    <div class="noticia" style="width: 500px;">-->
-<!--        <div class="col-sm-10 ">-->
-<!--            <div class="card-body text-center">-->
-<!--                <tbody th:each="noticia, ${noticia}">-->
-<!--&lt;!&ndash;                <img class="img-fluid rounded-start" th:if="${noticia.imagen == null}">&ndash;&gt;-->
-<!--&lt;!&ndash;                <img class="img-fluid rounded-start" th:unless="${noticia.imagen == null}" th:src="@{'/images/' + ${noticia.imagen}}">&ndash;&gt;-->
-<!--                <h5 class="card-title"th:text="${noticia.titulo}"></h5>-->
-<!--                <p class="card-text"  th:text="${noticia.contenido}"></p>-->
-<!--&lt;!&ndash;                <a target="_self" th:href= "@{/inicio/}" class="btn btn-primary">Volver</a>&ndash;&gt;-->
-<!--                </tbody>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<ul>
+
+    <li class="noticia">
+        <a th:href="@{/thymeleaf/mostrar-noticia/{id}(id=${noticia.id})}">
+        <div th:text="${noticia.titulo}"> </div>
+    <img class="imagen" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}">
+    <div class="contenido"th:text="${noticia.contenido}"></div>
+        <div class="horaSubida" th:text="${noticia.horaSubida}"></div>
+        </a>
+    </li>
+
+</ul>
+</tbody>
+
+
+<!--<div class="row m-3 gap-5 ">
+    <div class="noticia" style="width: 500px;">
+        <div class="col-sm-10 ">
+            <div class="card-body text-center">
+                <tbody  th:each="noticia: ${noticia}"class="noticia">
+
+                <li class="noticia">
+                    <a th:href="@{/thymeleaf/mostrar-noticia/{id}(id=${noticia.id})}">
+                    <div th:text="${noticia.titulo}"> </div>
+                    <img class="imagen" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}">
+                    <div class="contenido"th:text="${noticia.contenido}"></div>
+                    <div class="horaSubida" th:text="${noticia.horaSubida}"></div>
+                    </a>
+                </li>
+
+                </tbody>
+            </div>
+        </div>
+    </div>
+</div>&ndash;&gt;-->
 
 
 
@@ -127,6 +147,7 @@
                                                                      alt=""></a>
         </div>
     </div>
+    <a target="_self" th:href= "@{/thymeleaf/principal-developers}" class="btn btn-primary">Volver</a>
     <div class="caja_footer copyright">
         <h7>Todos los derechos reservados. Copyright 2023</h7>
     </div>
