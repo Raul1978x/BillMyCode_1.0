@@ -236,6 +236,7 @@ public class AccountantController {
         return "preguntasyrespuestas";
     }
 
+
     @GetMapping("/accountant/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
         accountantService.deleteAccounterById(id);
@@ -250,5 +251,6 @@ public class AccountantController {
         }
 
 
+
+        }
     }
-}

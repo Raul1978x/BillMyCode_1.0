@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: justify;
+}
+
+body {
+  font-family: monospace;
+  color: #fff;
+  background-color: #1f2430;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: #263043;
+  color: #fff;
+  border: none;
+  width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(5, 47, 237, 0.3);
+  text-align: center;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-text,
+.card-title {
+  text-align: center;
+}
+
+.footer {
+  background-color: #1f2430;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconos_redes {
+  display: flex;
+  align-items: center;
+}
+
+.icono-container {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.caja_footer h7 {
+  font-size: 14px;
+}
+
+
