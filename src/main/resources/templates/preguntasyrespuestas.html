@@ -97,8 +97,8 @@
             th:action="@{/thymeleaf/accountant/get-answer}"
             method="POST">
 
-        <details th:each="developer : ${developerList}">
-            <summary >
+        <details >
+            <summary th:each="developer : ${developerList}">
                 <span th:each="quest : ${developer.questList}">
                     <span th:text="${quest.quest}"> </span>
                 <div class="text-dark fst-italic d-flex float-end">
