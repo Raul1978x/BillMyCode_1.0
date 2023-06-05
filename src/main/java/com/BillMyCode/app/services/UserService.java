@@ -175,7 +175,6 @@ public class UserService{
                          String genero,
                          String telefono,
                          String nacionalidad) {
-
         if (nombre.isBlank() || nombre == "") {
             System.out.println("El nombre no puede ser nulo o estar vacio");
         }

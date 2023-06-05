@@ -94,13 +94,13 @@ public class ImageService {
 
     public Image saveDefaultImage(){
         try {
-            String defaultImagePath = "src/main/resources/static/images/default.jpg";
+            String defaultImagePath = "src/main/resources/static/images/default.png";
             File defaultImageFile = new File(defaultImagePath);
             byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
 
             Image defaultImage = new Image();
-            defaultImage.setMime("image/jpg");
-            defaultImage.setNombre("default.jpg");
+            defaultImage.setMime("image/png");
+            defaultImage.setNombre("default.png");
             defaultImage.setContenido(defaultImageData);
 
             repository.save(defaultImage);

@@ -25,6 +25,9 @@ public class AccountantService  {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private LoginService loginService;
+
     /**
      * Metodo searchAllAccounters() devuelve la lista de todos los Contadores.
      *
@@ -201,22 +204,25 @@ public class AccountantService  {
     public void validate (String nombre, String apellido, String email, String password,
                            String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
         if (nombre.isEmpty() || nombre.isBlank()){
-            throw new MiException("Error, el campo Nombre no puede estar vacio");
+            throw new MiException("El campo Nombre no puede estar vacio");
         }
         if (apellido.isEmpty() || apellido.isBlank()){
-            throw new MiException("Error, el campo Apellido no puede estar vacio");
+            throw new MiException("El campo Apellido no puede estar vacio");
         }
         if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
-            throw new MiException("Error, el campo Email debe tener ingresado un correo valido");
+            throw new MiException("El campo Email debe tener ingresado un correo valido");
+        }
+        if (loginService.validarEmail(email)){
+            throw new MiException("El Email ingresado ya se encuentra registrado");
         }
         if (password.isEmpty() || password.isBlank()){
-            throw new MiException("Error, el campo Contrasela no puede estar vacio");
+            throw new MiException("El campo Contrasela no puede estar vacio");
         }
         if (newpassword.isEmpty() || (!newpassword.equals(password))) {
             throw new MiException("Las contraseñas no coinciden");
         }
         if (fechaNacimiento==null || fechaNacimiento.toString()==""){
-            throw new MiException("Error, fecha incorrecta");
+            throw new MiException("Fecha incorrecta");
         }
         if (especializacion == null) {
             throw new MiException("La especialización no puede estar vacía.");

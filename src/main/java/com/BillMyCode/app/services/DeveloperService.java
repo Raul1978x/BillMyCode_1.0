@@ -30,6 +30,9 @@ public class DeveloperService {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private LoginService loginService;
+
     /**
      * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
      *
@@ -256,8 +259,11 @@ public class DeveloperService {
         if (apellido.isBlank() || apellido.isEmpty()) {
             throw new MiException("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isBlank() || email.isEmpty()) {
-            throw new MiException("El email no puede ser nulo o estar vacio");
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("El campo Email debe tener ingresado un correo valido");
+        }
+        if (loginService.validarEmail(email)){
+            throw new MiException("El Email ingresado ya se encuentra registrado");
         }
         if (password.isBlank() || password.isEmpty()) {
             throw new MiException("La contraseña no puede ser nula o estar vacia");
@@ -278,7 +284,6 @@ public class DeveloperService {
         if (telefono.isBlank() || telefono.isEmpty()) {
             throw new MiException("El telefono no puede ser nulo o estar vacio");
         }
-
         if (salario == null) {
             throw new MiException("El salario no puede ser nulo o estar vacio");
         }

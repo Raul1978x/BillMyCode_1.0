@@ -16,6 +16,7 @@ asistencia personalizada.
 
 - Clona el repositorio: "git clone https://github.com/Raul1978x/BillMyCode_1.0.git"
 - Abrir el projecto con IntelliJ IDEA
+- (Opcional) Abrir (Script bill_my_code.sql) con MySQL Workbench
 
 ## Estructura de directorios
 

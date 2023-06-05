@@ -3,6 +3,7 @@ package com.BillMyCode.app.services;
 import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Developer;
+import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
 import com.BillMyCode.app.repositories.IAdminRepository;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
@@ -100,4 +101,23 @@ public class LoginService implements UserDetailsService {
             }
         }
     }
+    public Boolean validarEmail (String email){
+        Developer developer = developerRepository.seachByEmail(email);
+        if (developer != null) {
+            return true;
+        } else {
+            Accountant accountant = accountantRepository.seachByEmail(email);
+            if (accountant != null){
+                return true;
+            }else {
+                Admin admin = adminRepository.searchByEmail(email);
+                if (admin != null){
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+    }
+
 }

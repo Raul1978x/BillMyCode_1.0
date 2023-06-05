@@ -28,6 +28,9 @@ public class AdminService {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private LoginService loginService;
+
 
     /**
      * Metodo deleteAdminById(params) elimina un "Admin" segun "ID" que se pase por parametro.
@@ -182,8 +185,11 @@ public class AdminService {
         if (apellido.isBlank() || apellido.isEmpty()) {
             throw new MiException("El apellido no puede ser nulo o estar vacio");
         }
-        if (email.isBlank() || email.isEmpty()) {
-            throw new MiException("El email no puede ser nulo o estar vacio");
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("El campo Email debe tener ingresado un correo valido");
+        }
+        if (loginService.validarEmail(email)){
+            throw new MiException("El Email ingresado ya se encuentra registrado");
         }
         if (password.isBlank() || password.isEmpty()) {
             throw new MiException("La contraseña no puede ser nula o estar vacia");
