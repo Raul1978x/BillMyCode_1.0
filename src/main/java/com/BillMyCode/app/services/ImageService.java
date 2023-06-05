@@ -3,12 +3,15 @@ package com.BillMyCode.app.services;
 import com.BillMyCode.app.entities.Image;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IImageRepository;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Optional;
 
 @Service
@@ -53,7 +56,7 @@ public class ImageService {
                 Image image = new Image();
 
                 image.setMime(archivo.getContentType());
-                image.setNombre(archivo.getName());
+                image.setNombre(archivo.getOriginalFilename());
                 image.setContenido(archivo.getBytes());
 
                 repository.save(image);
@@ -74,7 +77,7 @@ public class ImageService {
                     Image image = optionalImage.get();
 
                     image.setMime(archivo.getContentType());
-                    image.setNombre(archivo.getName());
+                    image.setNombre(archivo.getOriginalFilename());
                     image.setContenido(archivo.getBytes());
 
                     return repository.save(image);
@@ -88,4 +91,47 @@ public class ImageService {
             throw new RuntimeException("El archivo de imagen es nulo");
         }
     }
+
+
+    public Image saveDefaultImage(){
+        try {
+            String defaultImagePath = "src/main/resources/static/images/default.jpg";
+
+            File defaultImageFile = new File(defaultImagePath);
+            byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
+
+            Image defaultImage = new Image();
+            defaultImage.setMime("image/jpg");
+
+            defaultImage.setNombre("default.jpg");
+
+            defaultImage.setContenido(defaultImageData);
+
+            repository.save(defaultImage);
+
+            return defaultImage;
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo cargar la imagen predeterminada.", e);
+        }
+    }
+  
+  public Image ImagenNoticia(){
+        try {
+            String defaultImagePath = "src/main/resources/static/images/defaultnoticia.jpg";
+          File defaultImageFile = new File(defaultImagePath);
+            byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
+
+            Image defaultImage = new Image();
+            defaultImage.setMime("image/jpg");
+           defaultImage.setNombre("defaultnoticia.jpg");
+            defaultImage.setContenido(defaultImageData);
+
+            repository.save(defaultImage);
+
+            return defaultImage;
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo cargar la imagen predeterminada.", e);
+        }
+    }
+
 }

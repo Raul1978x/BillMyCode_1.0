@@ -139,12 +139,19 @@ public class DeveloperController {
                                      ModelMap model
     ) throws MiException, ParseException {
         try {
-
             Comment comment = commentService.createComment(comentario);
 
             developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento, password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
             model.put("exito", "El Developer fue creado exitosamente");
-            return "login.html";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List<String> roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            if (roles.contains("ROLE_ADMIN")) {
+                return "redirect:/thymeleaf/admin-lista-developer";
+            }else {
+                return "login.html";
+            }
         } catch (MiException e) {
             model.put("error", e.getMessage());
             return "crear-cuenta-desarrollador.html";
@@ -214,7 +221,6 @@ public class DeveloperController {
     ) throws MiException, ParseException {
 
         try {
-            model.put("exito", "el developer fue editado exitosamente");
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

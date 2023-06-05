@@ -58,7 +58,7 @@ public class AdminController {
      * @throws: MiException
      */
     @PostMapping("/create-Admin")
-    public String registrarAdministrador(@RequestParam MultipartFile archivo,
+    public String registrarAdministrador(@RequestParam (required = false) MultipartFile archivo,
                                          @RequestParam String nombre,
                                          @RequestParam String apellido,
                                          @RequestParam String email,
@@ -101,14 +101,10 @@ public class AdminController {
             adminService.updateAdmin(id, nombre, apellido, email, nacionalidad, password, newpassword, genero, fechaNacimiento,
                     telefono, archivo);
             model.put("exito","El Administrador fue actualizado exitosamente");
-
-            System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAA "+ dir);
-
             return "redirect:/thymeleaf/"+dir;
-
         } catch (MiException e) {
             Admin logueado = adminService.searchAdminById(id);
-            model.addAttribute("logueado", logueado);
+            model.put("logueado", logueado);
             model.put("error", e.getMessage());
             return "admin-editarperfil.html";
 

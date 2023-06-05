@@ -1,0 +1,22 @@
+<!--
+<div th:fragment="select-genero">
+  <select id="sex"
+          name="genero"
+          class="form-control"
+          th:value="${logueado?.genero}">
+
+    <option th:selected="${logueado.genero == null}" disabled selected>Seleccione Género</option>
+    <option th:selected="${logueado.genero == 'Masculino'}" value="Masculino">Masculino</option>
+    <option th:selected="${logueado.genero == 'Femenino'}" value="Femenino">Femenino</option>
+    <option th:selected="${logueado.genero == 'Otro'}" value="Otro">Otro</option>
+
+  </select>
+</div>-->
+<div th:fragment="select-genero">
+  <select id="sex" name="genero" class="form-control" th:value="${logueado?.genero}">
+    <option th:selected="${logueado == null || logueado?.genero == null}" disabled selected>Seleccione Género</option>
+    <option th:selected="${logueado?.genero == 'Masculino'}" value="Masculino">Masculino</option>
+    <option th:selected="${logueado?.genero == 'Femenino'}" value="Femenino">Femenino</option>
+    <option th:selected="${logueado?.genero == 'Otro'}" value="Otro">Otro</option>
+  </select>
+</div>

@@ -1,0 +1,29 @@
+<div th:fragment="select-especialidad">
+  <select
+          id="esp"
+          name="especialidad"
+          class="form-control"
+          th:value="${logueado?.especialidad}"
+  >
+    <option th:selected="${logueado == null || logueado?.genero == null}" disabled selected>Especialidad</option>
+    <option th:selected="${logueado.especialidad == 'Frontend'}" value="Frontend">Frontend</option>
+    <option th:selected="${logueado.especialidad == 'Backend'}" value="Backend">Backend</option>
+    <option th:selected="${logueado.especialidad == 'Full Stack'}" value="Full Stack">Full Stack</option>
+    <option th:selected="${logueado.especialidad == 'Q.A.'}" value="Q.A.">Q.A.</option>
+  </select>
+</div>
+
+<div th:fragment="select-especialidad-create">
+  <select
+          id="esp"
+          name="especialidad"
+          class="form-control"
+          value="${especialidad}"
+  >
+    <option value="">Especialidad</option>
+    <option value="Frontend">Frontend</option>
+    <option value="Backend">Backend</option>
+    <option value="Full Stack">Full Stack</option>
+    <option value="Q.A">Q.A</option>
+  </select>
+</div>

@@ -179,3 +179,10 @@ color: blue;
   box-shadow: 2px 2px 25px rgb(11, 121, 172);
 
 }
+
+.ancho{
+ width: 35%;
+ position: absolute;
+ left: 50%;
+ transform: translateX(-50%);
+}

@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/thymeleaf")
 public class AccountantController {
 
-
     @Autowired
     private AccountantService accountantService;
     @Autowired
@@ -97,13 +96,21 @@ public class AccountantController {
                                    @RequestParam(required = false) List<Developer> developers,
                                    ModelMap model
     ) throws MiException, ParseException {
+
         try {
 
             accountantService.crearContador(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     genero, telefono, password, newpassword, especializacion, matricula, honorarios);
-
             model.put("exito", "El Contador fue creado exitosamente");
-            return "login.html";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            List<String> roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            if (roles.contains("ROLE_ADMIN")) {
+                return "redirect:/thymeleaf/admin-lista-accountant";
+            }else {
+                return "login.html";
+            }
         } catch (MiException e) {
             model.put("error", e.getMessage());
             return "crear-cuenta-contador.html";
@@ -164,7 +171,6 @@ public class AccountantController {
         try {
             accountantService.updateAccountant(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
                     genero, telefono, password, newpassword, especializacion, matricula, honorarios);
-            model.put("exito", "El Contador fue creado exitosamente");
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -191,11 +197,11 @@ public class AccountantController {
     }
 
     @GetMapping("/lista-developers")
-    public String listDeveloper(HttpSession request, ModelMap model){
+    public String listDeveloper(HttpSession request, ModelMap model) {
         List<Developer> developerList = developerService.listDevelopers();
         model.put("developerList", developerList);
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.addAttribute("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.addAttribute("logueado", logueado);
         return "listadedevelopers";
     }
 
@@ -203,21 +209,21 @@ public class AccountantController {
     public String editAccountant(@PathVariable Long id, ModelMap model) {
         Accountant logueado = accountantService.searchAccounterById(id);
         model.put("logueado", logueado);
-        model.put("dir","admin-lista-developer");
+        model.put("dir", "admin-lista-developer");
         return "editar-cuenta-contador";
     }
 
     @GetMapping("accountant/normativa-impuestos")
     public String getViewNormativaImpuestos(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
         return "normativa-impuestos";
     }
 
     @GetMapping("accountant/monotributo")
     public String getViewMonotributo(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
         return "monotributo";
 
     }
@@ -229,6 +235,8 @@ public class AccountantController {
         model.put("logueado", logueado);
         return "preguntasyrespuestas";
     }
+
+
     @GetMapping("/accountant/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
         accountantService.deleteAccounterById(id);
@@ -238,10 +246,9 @@ public class AccountantController {
                 .collect(Collectors.toList());
         if (roles.contains("ROLE_ADMIN")) {
             return "redirect:/thymeleaf/admin-lista-accountant";
-        }else {
+        } else {
             return "redirect:/thymeleaf/lista-developers";
         }
-
 
     }
 
@@ -257,3 +264,6 @@ public class AccountantController {
 
     }
 }
+
+
+ 
