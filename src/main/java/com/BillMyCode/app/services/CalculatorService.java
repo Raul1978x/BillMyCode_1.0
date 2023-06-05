@@ -17,36 +17,9 @@ public class CalculatorService {
      * @param  facturacionAnual
      */
     public Double CalcularMonotributo (Double facturacionAnual){
-        double impuesto=0.0;
+        Double impuesto=0.0;
         String opcion="";
-
-
-        if(facturacionAnual<= 999657.23){
-            opcion="A";
-
-        }else if(facturacionAnual<= 1485976.96){
-            opcion="B";
-
-        }else if(facturacionAnual<=2080367.73){
-            opcion="C";
-        }else if(facturacionAnual<= 2583720.42){
-            opcion="D";
-        }else if(facturacionAnual<= 3042435.05){
-            opcion="E";
-        }else if(facturacionAnual<= 3803043.82){
-            opcion="F";
-        }else if(facturacionAnual<= 4563652.57){
-            opcion="G";
-        }else if(facturacionAnual<= 5650236.51){
-            opcion="H";
-        }else if(facturacionAnual<= 6323918.55){
-            opcion="I";
-        }else if(facturacionAnual<= 7247514.92){
-            opcion="J";
-        }else if(facturacionAnual<= 8040721.19){
-            opcion="K";
-        }
-
+        opcion=tipoMonotributo(opcion,facturacionAnual);
 
         switch (opcion){
             case "A":
@@ -85,7 +58,36 @@ public class CalculatorService {
                 impuesto= 50717.92;
                 break;
         }
+
         return impuesto;
+    }
+    public String tipoMonotributo(String opcion, Double facturacionAnual){
+        if(facturacionAnual<= 999657.23){
+            opcion="A";
+
+        }else if(facturacionAnual<= 1485976.96){
+            opcion="B";
+
+        }else if(facturacionAnual<=2080367.73){
+            opcion="C";
+        }else if(facturacionAnual<= 2583720.42){
+            opcion="D";
+        }else if(facturacionAnual<= 3042435.05){
+            opcion="E";
+        }else if(facturacionAnual<= 3803043.82){
+            opcion="F";
+        }else if(facturacionAnual<= 4563652.57){
+            opcion="G";
+        }else if(facturacionAnual<= 5650236.51){
+            opcion="H";
+        }else if(facturacionAnual<= 6323918.55){
+            opcion="I";
+        }else if(facturacionAnual<= 7247514.92){
+            opcion="J";
+        }else if(facturacionAnual<= 8040721.19){
+            opcion="K";
+        }
+return opcion;
     }
 
     /**
@@ -100,16 +102,18 @@ public class CalculatorService {
     public String comparacionPromedio(Double salario,List<Developer> developers,String seniority,String especialidad){
 
         String valoracionSalario="";
-       Double promedio=calcularPromedio(developers, seniority, especialidad);
+       Double promedio= Double.valueOf(calcularPromedio(developers,seniority,especialidad));
 
         if (promedio<salario){
             valoracionSalario=" encima";
         }else {
             valoracionSalario=" debajo";
         }
-       return valoracionSalario;
-        // tu salario se encuentra por encima/ debajo del promedio
+        String mensaje=" "+ valoracionSalario+" del promedio";
+       return mensaje;
+//       return   "tu salario se encuentra por encima/ debajo del promedio";
     }
+
 
     /**
      * Metodo calcularPromedio() calcula el promedio segun el nivel de seniority y su especialidad
@@ -130,8 +134,32 @@ public class CalculatorService {
                 }
             }
         }
+        promedio=promedio/count;
+  /*      String mensaje="segun los developers, "+ seniority+", con especialidad en "+especialidad
+                +" el salario promedio de entre "+count+ " es de: "+promedio;*/
+        return promedio ;
+    }
+    /**
+     * Metodo calcularPromedio() calcula el promedio segun el nivel de seniority y su especialidad
+     *
+     *
+     * @param  seniority
+     * @param  especialidad
+     * @param  developers
+     */
+    public int countDevSeniorityEspecialidad(List<Developer> developers,String seniority,String especialidad){
+        int count=0;
+        for(Developer dev: developers){
+            if(dev.getSeniority().equals(seniority)){
+                if(dev.getEspecialidad().equals(especialidad)){
 
-        return  promedio=promedio/count;
+                    count=count+1;
+                }
+            }
+        }
+
+
+        return count ;
     }
 
     /**
@@ -142,7 +170,7 @@ public class CalculatorService {
      * @param  especialidad
      * @param  developers
      */
-    public Double buscarElSueldoMasAlto(List<Developer> developers,String seniority,String especialidad){
+    public String buscarElSueldoMasAlto(List<Developer> developers,String seniority,String especialidad){
         Double sueldoMasAlto=0.0;
         for(Developer dev: developers) {
             if (dev.getSeniority().equals(seniority)) {
@@ -153,7 +181,8 @@ public class CalculatorService {
                 }
             }
         }
-        return sueldoMasAlto;
+        String mensaje= " "+sueldoMasAlto;
+        return mensaje;
     }
 
 
