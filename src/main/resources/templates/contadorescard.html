@@ -116,7 +116,7 @@
                                     <li class="list-item py-0">Honorarios: U$S <a
                                             th:text="${accountant.honorarios}"></a></li>
                                 </ul>
-                                <button class="mb-5 text-center"> <a th:href="@{/thymeleaf/consultas-developers}" > Contactar</a> </button>
+                                <button class="mb-5 text-center btn btn-success"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Elegir y consultar</a> </button>
                             </div>
                         </div>
                     </div>

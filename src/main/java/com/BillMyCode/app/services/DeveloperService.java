@@ -1,12 +1,10 @@
 package com.BillMyCode.app.services;
 
-import com.BillMyCode.app.entities.Accountant;
-import com.BillMyCode.app.entities.Comment;
-import com.BillMyCode.app.entities.Developer;
-import com.BillMyCode.app.entities.Image;
+import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
+import com.BillMyCode.app.repositories.IQuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +25,8 @@ public class DeveloperService {
     private CommentService commentService;
     @Autowired
     private IDeveloperRepository developerRepository;
+    @Autowired
+    private IQuestRepository questRepository;
     @Autowired
     private ImageService imageService;
 
@@ -314,14 +314,17 @@ public class DeveloperService {
     }
 
     @Transactional
-    public Accountant selectAccountantByAccountantId(Long AccountantId){
-        return accountantService.searchAccounterById(AccountantId);
+    public void saveAccountant(Accountant myAccountant, Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setAccountant(myAccountant);
+        developerRepository.save(developer);
     }
 
     @Transactional
-    public void saveAccountant(Accountant accountant, Long id){
-        Developer developer = searchDeveloperById(id);
-        developer.setAccountant(accountant);
-        developerRepository.save(developer);
+    public Quest createQuest(String pregunta){
+        Quest quest = new Quest();
+        quest.setQuest(pregunta);
+        quest.setFecha(new Date());
+        return questRepository.save(quest);
     }
 }

@@ -60,6 +60,8 @@ public class AccountantController {
         return accountantService.searchAccounterById(id);
     }
 
+
+
     /**
      * Metodo registrarDeveloper: Crea un nuevo usuario Contador
      *
@@ -252,7 +254,7 @@ public class AccountantController {
 
     }
 
-    @GetMapping("/accountant/get-answer")
+/*    @GetMapping("/accountant/get-answer")
     public String getViewQuestAndAnswer(HttpSession request, ModelMap model) {
         Accountant logueado= (Accountant) request.getAttribute("sessionuser");
         model.put("logueado",logueado);
@@ -262,7 +264,9 @@ public class AccountantController {
         model.put("developerList",developerList);
         return "preguntasyrespuestas";
 
-    }
+    }*/
+
+
 }
 
 

@@ -4,11 +4,14 @@ import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -235,6 +238,12 @@ public class AccountantService  {
         Accountant contador = searchAccounterById(id);
         contador.setStatus(true);
         repositorio.save(contador);
+    }
+    @GetMapping("/accountant/get-answer")
+    public String getViewQuestAndAnswer(HttpSession request, ModelMap model){
+        Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+        List<Developer> developerList = developerService
     }
 }
 
