@@ -254,18 +254,6 @@ public class AccountantController {
 
     }
 
-    @GetMapping("/accountant/get-answer")
-    public String getViewQuestAndAnswer(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
-
-        List<Developer> developerList = developerService.searchDeveloperByAccountantId(logueado.getId());
-        System.out.println(logueado.getId()+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        System.out.println(developerList+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        model.put("developerList",developerList);
-        return "preguntasyrespuestas";
-
-    }
 
 
 }

@@ -26,7 +26,7 @@ public class Comment {
     @Lob
     private String comentario;
     @OneToMany
-    private List<Answer> respuestas;
+    private List<AnswerAndQuestion> respuestas;
     @Temporal(TemporalType.DATE)
     private Date fecha;
 

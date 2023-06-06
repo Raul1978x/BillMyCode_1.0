@@ -2,6 +2,7 @@ package com.BillMyCode.app.controllers;
 
 import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.exceptions.MiException;
+import com.BillMyCode.app.repositories.IAnswerAndQuestionRepository;
 import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.CommentService;
 import com.BillMyCode.app.services.DeveloperService;
@@ -13,13 +14,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +39,9 @@ public class DeveloperController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private IAnswerAndQuestionRepository answerAndQuestionRepository;
 
 
     @GetMapping("/principal-developers")
@@ -85,6 +88,7 @@ public class DeveloperController {
         };
         return "normativa-impuestos";
     }
+
     @GetMapping("/card-accountant")
     public String callCardAccountant(HttpSession request, ModelMap model) {
         Developer logueado= (Developer) request.getAttribute("sessionuser");
@@ -93,6 +97,7 @@ public class DeveloperController {
         model.put("accountants", accountants);
         return "contadorescard";
     }
+
     @GetMapping("/login-bmc")
     public String login() {
         return "login.html";
@@ -239,30 +244,6 @@ public class DeveloperController {
         }
     }
 
-    @GetMapping("/select-accountant/{id}")
-    public String selectAccountantByAccountantId(@PathVariable Long id, HttpSession request, ModelMap model){
-        Developer logueado= (Developer) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
-        Accountant myAccountant = accountantService.searchAccounterById(id);
-        model.put("myAccountant",myAccountant);
-        developerService.saveAccountant(myAccountant, logueado.getId());
 
-        return "myaccountant";
-    }
-
-    @PostMapping("/create-developer-quest")
-    public String createDeveloperQuest(@RequestParam String pregunta, HttpSession request, ModelMap model){
-        Developer logueado= (Developer) request.getAttribute("sessionuser");
-        Quest quest =developerService.createQuest(pregunta);
-        List<Quest> preguntas = new ArrayList<>();
-        preguntas.add(quest);
-        logueado.setQuestList(preguntas);
-        Accountant myAccountant = logueado.getAccountant();
-        model.put("myAccountant" ,myAccountant);
-        model.put("quest",quest);
-        model.put("logueado",logueado);
-
-        return "myaccountant";
-    }
 
 }
