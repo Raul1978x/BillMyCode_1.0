@@ -212,9 +212,32 @@ input:checked ~ label::before {
 }
 
 .button {
-  font-size: 25px;
-  color: orange;
-  line-height: 80px;
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: #255faa;
+  background-color: orange;
+  margin: 0 4px;
+  font-weight: bold;
+  width: 150px;
+
+  &:hover {
+    background-color: rgb(182, 131, 37);
+  }
+}
+.button-verde {
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: #255faa;
+  background-color: green;
+  margin: 0 4px;
+  font-weight: bold;
+  width: 150px;
+
+  &:hover {
+    background-color: rgb(29, 59, 26);
+  }
 }
 
 footer {
@@ -280,7 +303,6 @@ ul {
   align-items: center;
   gap: 1rem;
 }
-
 
 li {
   list-style-type: none;

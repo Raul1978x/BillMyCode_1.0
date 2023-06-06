@@ -58,12 +58,18 @@ public class AnswerAndQuestController {
     }
 
     @GetMapping("/select-accountant/{id}")
-    public String selectAccountantByAccountantId(@PathVariable Long id, HttpSession request){
+    public String selectAccountantByAccountantId(@PathVariable Long id, HttpSession request, ModelMap model){
         Developer logueado= (Developer) request.getAttribute("sessionuser");
-        Accountant myAccountant = accountantService.searchAccounterById(id);
-        developerService.saveAccountant(myAccountant, logueado.getId());
-        request.setAttribute("sessionuser",developerService.searchDeveloperById(logueado.getId()));
+        if(logueado.getAccountant()==null) {
+            Accountant myAccountant = accountantService.searchAccounterById(id);
+            developerService.saveAccountant(myAccountant, logueado.getId());
+            request.setAttribute("sessionuser", developerService.searchDeveloperById(logueado.getId()));
         return "redirect:/thymeleaf/get-myaccountant";
+        }else {
+            model.put("logueado", logueado);
+            model.put("mensaje", "Ya ha elegido su Contador, si desea cambiarlo contactenos por nuetros canal de comunicación");
+        return "redirect:/thymeleaf/get-myaccountant";
+        }
     }
 
     @GetMapping("/get-myaccountant")
