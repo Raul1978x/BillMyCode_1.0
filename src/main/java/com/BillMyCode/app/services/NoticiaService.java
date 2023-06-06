@@ -1,16 +1,19 @@
 package com.BillMyCode.app.services;
 
 
-import com.BillMyCode.app.entities.Image;
-import com.BillMyCode.app.entities.Noticia;
+import com.BillMyCode.app.entities.*;
+import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.INoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoticiaService {
@@ -53,5 +56,55 @@ if(archivo != null && !archivo.isEmpty()) {
 
     public Noticia searchNoticiaId(Long id) {
         return noticiaRepository.findById(id).get();
+    }
+    public void eliminarNoticia(Long id) {
+        noticiaRepository.deleteById(id);
+    }
+    @Transactional
+    public void editNoticia(Long id,
+                                MultipartFile archivo,
+                                String titulo,
+                                String contenido
+
+
+    ) throws MiException, ParseException {
+
+        Optional<Noticia> respuesta = noticiaRepository.findById(id);
+
+        validate(titulo,contenido);
+        if (respuesta.isPresent()) {
+            Noticia result = respuesta.get();
+
+
+
+            result.setTitulo(titulo);
+            result.setContenido(contenido);
+            result.setHoraSubida( LocalDateTime.now());
+
+
+
+            if (archivo != null) {
+                Image image = imageService.save(archivo);
+                result.setImage(image);
+            }
+
+            noticiaRepository.save(result);
+        }
+    }
+    public void validate(
+                         String contenido,
+                         String titulo
+
+
+    ) throws MiException {
+
+        if (titulo.isBlank() || titulo.isEmpty()) {
+            throw new MiException("El titulo no puede ser nulo o estar vacio");
+        }
+        if (contenido.isBlank() || contenido.isEmpty()) {
+            throw new MiException("El contenido no puede ser nulo o estar vacio");
+        }
+
+
     }
 }
