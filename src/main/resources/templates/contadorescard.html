@@ -21,6 +21,10 @@
             </a>
         </div>
         <nav class="header-nav centrar">
+            <div class="alert alert-danger" id="mensaje" th:if="${mensaje != null}" th:text="${mensaje}">
+                <a class="button" th:value="Contacta a contador: ${logueado.accountant.apellido}"></a>
+
+            </div>
             <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
             <a class="titulo" href="#seccion-3">Normativa</a>
             <a class="titulo" href="#seccion-4">Impuestos</a>
@@ -64,9 +68,6 @@
                         </li>
                         <li>
                             <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
-                                <!--
-                                                                <input type="hidden" name="id" th:value="${developer.id}"/>
-                                -->
                                 <img
                                         class="icono"
                                         src="/images/update.png"
@@ -97,7 +98,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div th:each="accountant: ${accountants}" class="col-md-4">
-            <section id="seccion-2" class="">
+            <section id="seccion-2" class="" th:if="${logueado.accountant != null}">
                 <div class="">
                     <div class="container__card">
                         <div class="card c1">
@@ -116,7 +117,36 @@
                                     <li class="list-item py-0">Honorarios: U$S <a
                                             th:text="${accountant.honorarios}"></a></li>
                                 </ul>
-                                <button class="mb-5 text-center btn btn-success"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Elegir y consultar</a> </button>
+                                <span th:if="${logueado.accountant.id == accountant.id}">
+                                <button class="mb-5 text-center button-verde"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >consultar</a> </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="seccion-2a" class="" th:if="${logueado.accountant == null}">
+                <div class="">
+                    <div class="container__card">
+                        <div class="card c1">
+                            <div class="cardimag">
+                                <i class="fab fa-html5"></i>
+                                <img class="foto" width="50em"
+                                     th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}" alt="Imagen 1"/>
+                            </div>
+                            <div class="info__description text-center">
+                                <ul class="list-group pt-0">
+                                    <li class="list-item py-0">Contador: <a th:text="${accountant.nombre}"></a> <a
+                                            th:text="${accountant.apellido}"></a></li>
+                                    <li class="list-item py-0">Matricula: <a th:text="${accountant.matricula}"></a></li>
+                                    <li class="list-item p-0">Especialidad: <a
+                                            th:text="${accountant.especializacion}"></a></li>
+                                    <li class="list-item py-0">Honorarios: U$S <a
+                                            th:text="${accountant.honorarios}"></a></li>
+                                </ul>
+                                <span th:if="${logueado.accountant == null}">
+                                <button class="mb-5 text-center button"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Elegir y consultar</a> </button>
+                                </span>
                             </div>
                         </div>
                     </div>

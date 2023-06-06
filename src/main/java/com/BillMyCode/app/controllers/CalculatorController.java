@@ -31,6 +31,12 @@ public class CalculatorController {
         model.put("logueado", logueado);
         return("pedido_de_datos.html");
     }
+    @GetMapping("/calculadoraCargado")
+    public String calculatorRespuesta(HttpSession request, ModelMap model) throws MiException {
+        Developer logueado= (Developer)  request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
+        return "calculator.html";
+    }
     @PostMapping("/CalculadoraRespuesta")
     public String calculatorResults( @RequestParam Double facturacionAnual, HttpSession request,  ModelMap model) throws MiException {
         Developer logueado= (Developer)  request.getAttribute("sessionuser");
@@ -54,7 +60,7 @@ public class CalculatorController {
         String categoria=calculatorService.tipoMonotributo(opcion,facturacionAnual);
         model.put("categoria",categoria);
 
-        return("calculator.html");
+        return "calculator.html";
     }
 
     @GetMapping("/answerTwoNewData")

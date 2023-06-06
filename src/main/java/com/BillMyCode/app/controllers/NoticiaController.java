@@ -64,8 +64,9 @@ public class NoticiaController {
     }
 
     @GetMapping("/mostrar-noticia/{id}")
-    public String verNoticia(@PathVariable("id") Long id, ModelMap modelo) {
-
+    public String verNoticia(@PathVariable("id") Long id, ModelMap modelo, HttpSession request) {
+        Developer logueado = (Developer) request.getAttribute("sessionuser");
+        modelo.put("logueado", logueado);
         Noticia noticia = noticiaServicio.searchNoticiaId(id);
 
         modelo.addAttribute("noticia", noticia);
