@@ -52,6 +52,10 @@ public class LoginController {
             }
         }
         model.put("error","La cuenta ingresada esta dada de baja");
+
+        if (request != null) {
+            request.invalidate();
+        }
         return "login";
     }
 
