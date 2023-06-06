@@ -29,7 +29,7 @@ public class CalculatorController {
     public String calculator(HttpSession request, ModelMap model) throws MiException {
         Developer logueado= (Developer)  request.getAttribute("sessionuser");
         model.put("logueado", logueado);
-        return("calculator.html");
+        return("pedido_de_datos.html");
     }
     @PostMapping("/CalculadoraRespuesta")
     public String calculatorResults( @RequestParam Double facturacionAnual, HttpSession request,  ModelMap model) throws MiException {
@@ -48,23 +48,46 @@ public class CalculatorController {
         model.put("respuesta3", respuesta3);
         model.put("respuesta4", respuesta4);
 
+        String count= ""+ calculatorService.contarPromedio(developers, logueado.getSeniority(), logueado.getEspecialidad());
+        model.put("count",count);
+        String opcion="";
+        String categoria=calculatorService.tipoMonotributo(opcion,facturacionAnual);
+        model.put("categoria",categoria);
+
         return("calculator.html");
     }
+
+    @GetMapping("/answerTwoNewData")
+    public String getViewNewData (HttpSession request, ModelMap model){
+
+        Developer logueado= (Developer)  request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
+        return "CalculatorNewData.html";
+    }
     @PostMapping("/respuestaNewData")
-    public String calculatorResultsNewData( @RequestParam ("facturacionAnual") Double facturacionAnual, @RequestParam ("salario") Double salario,
-                                            @RequestParam ("seniority") String seniority, @RequestParam ("especialidad") String especialidad, ModelMap model) throws MiException {
+    public String calculatorResultsNewData( @RequestParam Double facturacionAnual, @RequestParam Double salario, HttpSession request,
+                                            @RequestParam String seniority, @RequestParam String especialidad, ModelMap model) throws MiException {
+
+        Developer logueado= (Developer)  request.getAttribute("sessionuser");
+        model.put("logueado", logueado);
 
         List<Developer> developers= developerService.listDevelopers();
-        String respuesta1= calculatorService.buscarElSueldoMasAlto(developers,seniority,especialidad);
-        String respuesta2= ""+ calculatorService.CalcularMonotributo(facturacionAnual);
+        String respuesta1= calculatorService.buscarElSueldoMasAltoNewData(developers,seniority,especialidad,salario).toString();
+        String respuesta2= calculatorService.CalcularMonotributo(facturacionAnual).toString();
         String respuesta3= calculatorService.calcularPromedio(developers, seniority,especialidad).toString();
         String respuesta4= calculatorService.comparacionPromedio(salario, developers,  seniority,especialidad);
 
-        model.addAttribute("respuesta1", respuesta1);
-        model.addAttribute("respuesta2", respuesta2);
-        model.addAttribute("respuesta3", respuesta3);
-        model.addAttribute("respuesta4", respuesta4);
+        model.put("respuesta1", respuesta1);
+        model.put("respuesta2", respuesta2);
+        model.put("respuesta3", respuesta3);
+        model.put("respuesta4", respuesta4);
 
-        return("calculator.html");
+        String count= ""+ calculatorService.contarPromedio(developers, seniority, especialidad);
+        model.put("count",count);
+        String opcion="";
+        String categoria=calculatorService.tipoMonotributo(opcion,facturacionAnual);
+        model.put("categoria",categoria);
+
+        return "CalculatorNewData.html";
     }
 }

@@ -94,11 +94,11 @@
     </div>
     <form
             id="accountsform"
-            th:action="@{/thymeleaf/create-developers}"
+            th:action="@{/thymeleaf/accountant/get-answer}"
             method="POST">
 
-        <details th:each="developer : ${developerList}">
-            <summary >
+        <details >
+            <summary th:each="developer : ${developerList}">
                 <span th:each="quest : ${developer.questList}">
                     <span th:text="${quest.quest}"> </span>
                 <div class="text-dark fst-italic d-flex float-end">
@@ -112,16 +112,16 @@
 <!--              ¿Cómo puedo registrarme en la plataforma?-->
             </summary>
             <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta"></textarea>
-
-        <details>
+        </details>
+ <!--       <details>
             <summary>
-                <span th:text="${developerQuestion.nombre}"></span>
-                <span th:text="${developerQuestion.apellido}"></span>
+              &lt;!&ndash;  <span th:text="${developerQuestion.nombre}"></span>
+                <span th:text="${developerQuestion.apellido}"></span>&ndash;&gt;
 
                 ¿Cómo puedo registrarme en la plataforma?</summary>
             <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta">
 
-        </textarea>
+        </textarea>-->
 
             <div>
                 <button class="button-send" type="submit">

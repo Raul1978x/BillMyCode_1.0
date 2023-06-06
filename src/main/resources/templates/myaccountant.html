@@ -89,40 +89,43 @@
 
 
 <div>
+    <h2 class="text-center">Consultas a Mi Contador</h2>
 <main class="container d-flex float-end">
 
-    <div class="container__cards">
+    <div class="">
         <div class="card">
             <div class="cover__card">
-                <img src="/images/contadora2.png" alt="">
+                <img th:src="@{/api/imagen/perfil-accountant/__${myAccountant.id}__}" alt="">
             </div>
-            <h2>Sabemos cómo aumentar los beneficios</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui sunt eius dolore pariatur. Error, provident et similique sunt voluptate odit eos facere expedita, culpa at officia magnam quia vel eius!</p>
-            <hr>
+            <ul class="list-group p-1 text-warning">
+                <li class="list-item py-0">Contador: <a th:text="${myAccountant.nombre}"></a> <a
+                        th:text="${myAccountant.apellido}"></a></li>
+                <li class="list-item py-0">Matricula: <a th:text="${myAccountant.matricula}"></a></li>
+                <li class="list-item p-0">Especialidad: <a
+                        th:text="${myAccountant.especializacion}"></a></li>
+                <li class="list-item py-0">Honorarios: U$S <a
+                        th:text="${myAccountant.honorarios}"></a></li>
+            </ul>
             <div class="footer__card">
-                <h3 class="user__name">Brian Uryn</h3>
+                <h3 class="user__name" th:text="${logueado.nombre}+ ' ' + ${logueado.apellido}">Brian Uryn</h3>
                 <i>08 Marzo</i>
             </div>
         </div>
     </div>
 
-    <section id="seccion-2a" class="section seccion-2"></section>
-    <section>
-        <div class="wrapper">
-            <h2>Consultas a Mi Contador</h2>
-        </div>
+
         <form
+                class="ml-2"
         id="accountsform"
-        th:action="@{/thymeleaf/create-developers}"
+        th:action="@{/thymeleaf/create-developer-quest}"
         method="POST" >
-        <textarea rows="4" id="consulta" name="quest"  class="consulta" placeholder="Ingrese Su Consulta"></textarea>
-        <div>
-        <button class="button" type="submit">
+        <textarea rows="4" id="consulta" name="pregunta"  class="consulta form-control mt-2" placeholder="Ingrese Su Consulta"></textarea>
+        <div class="m-1">
+        <button class="button d-flex float-end" type="submit">
             CONSULTAR
             </button>
         </div>
     </form>
-    </section>
 </main>
 </div>
 

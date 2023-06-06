@@ -4,11 +4,14 @@ import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IAccountantRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ public class AccountantService  {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private IAccountantRepository repositorio;
+    @Autowired
+    private DeveloperService developerService;
     @Autowired
     private ImageService imageService;
 
@@ -242,5 +247,7 @@ public class AccountantService  {
         contador.setStatus(true);
         repositorio.save(contador);
     }
+
+
 }
 

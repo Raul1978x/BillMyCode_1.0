@@ -1,9 +1,6 @@
 package com.BillMyCode.app.controllers;
 
-import com.BillMyCode.app.entities.Accountant;
-import com.BillMyCode.app.entities.Comment;
-import com.BillMyCode.app.entities.Developer;
-import com.BillMyCode.app.entities.User;
+import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.services.AccountantService;
 import com.BillMyCode.app.services.CommentService;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -242,18 +240,29 @@ public class DeveloperController {
     }
 
     @GetMapping("/select-accountant/{id}")
-    public String selectAccountantByAccountantId(long id, HttpSession request, ModelMap model){
+    public String selectAccountantByAccountantId(@PathVariable Long id, HttpSession request, ModelMap model){
         Developer logueado= (Developer) request.getAttribute("sessionuser");
         model.put("logueado",logueado);
-        Accountant myAccountant = developerService.selectAccountantByAccountantId(id);
-        logueado.setAccountant(myAccountant);
+        Accountant myAccountant = accountantService.searchAccounterById(id);
+        model.put("myAccountant",myAccountant);
         developerService.saveAccountant(myAccountant, logueado.getId());
+
         return "myaccountant";
     }
-    @GetMapping("/consultas-developers")
-    public String getViewQuestDeveloper(HttpSession request, ModelMap model) {
+
+    @PostMapping("/create-developer-quest")
+    public String createDeveloperQuest(@RequestParam String pregunta, HttpSession request, ModelMap model){
         Developer logueado= (Developer) request.getAttribute("sessionuser");
+        Quest quest =developerService.createQuest(pregunta);
+        List<Quest> preguntas = new ArrayList<>();
+        preguntas.add(quest);
+        logueado.setQuestList(preguntas);
+        Accountant myAccountant = logueado.getAccountant();
+        model.put("myAccountant" ,myAccountant);
+        model.put("quest",quest);
         model.put("logueado",logueado);
+
         return "myaccountant";
     }
+
 }

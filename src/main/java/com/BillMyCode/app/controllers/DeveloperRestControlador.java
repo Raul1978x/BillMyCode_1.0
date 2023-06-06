@@ -35,7 +35,7 @@ public class DeveloperRestControlador {
     /**
      * Metodo listaDevelopers: Devuelve la lista de todos los Developers
      *
-     * @return: ResponseEntity<List<Developer>>
+     * @return: ResponseEntity<List < Developer>>
      */
     @GetMapping("/developers")
     public ResponseEntity<List<Developer>> listaDevelopers() {
@@ -46,7 +46,6 @@ public class DeveloperRestControlador {
      * Metodo developerById: Devuelve el Developer según una id
      *
      * @param id
-     *
      * @return: Developer
      */
     @GetMapping("/developers/{id}")
@@ -71,7 +70,6 @@ public class DeveloperRestControlador {
      * @param especialidad
      * @param descripcion
      * @param comentario
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -96,7 +94,7 @@ public class DeveloperRestControlador {
         Comment comment = commentService.createComment(comentario);
 
         developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                password,newpassword,genero,telefono,salario,seniority,especialidad,descripcion,comment);
+                password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
 
     }
 
@@ -129,7 +127,6 @@ public class DeveloperRestControlador {
      * @param descripcion
      * @param comentario
      * @param model
-     *
      * @throws: MiException
      * @throws: ParseException
      */
@@ -168,7 +165,6 @@ public class DeveloperRestControlador {
      * developers con el mismo grado de seniority
      *
      * @param seniority
-     *
      * @return: List<Developer>
      */
     @GetMapping("/developer/{seniority}")
@@ -180,14 +176,14 @@ public class DeveloperRestControlador {
      * Metodo getDevelopersByEmail: Busca un developer segun un email
      *
      * @param email
-     *
      * @return: Developer
      */
     @GetMapping("/developerEmail/{email}")
     public Developer getDevelopersByEmail(@PathVariable String email) {
         return repository.seachByEmail(email);
     }
- @GetMapping("/developerByAccountant/{accountantId}")
+
+    @GetMapping("/developerByAccountant/{accountantId}")
     public List<Developer> searchDeveloperByAccountantId(@PathVariable Long accountantId) {
         return repository.searchAllDevelopersByAccountant(accountantId);
     }

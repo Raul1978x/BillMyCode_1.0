@@ -15,6 +15,7 @@ public class Noticia {
     private Long id;
     private String titulo ;
     @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String contenido;
     @OneToOne
     private Image image;
