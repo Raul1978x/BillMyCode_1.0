@@ -94,24 +94,25 @@
     </div>
     <form
             id="accountsform"
-            th:action="@{/thymeleaf/accountant/get-answer}"
+            th:action="@{/thymeleaf/create-answer}"
             method="POST">
 
         <details >
             <summary th:each="developer : ${developerList}">
                 <span th:each="quest : ${developer.questList}">
-                    <span th:text="${quest.quest}"> </span>
+                    <span th:if="${!quest.status}" th:text="${quest.quest}"> </span>
                 <div class="text-dark fst-italic d-flex float-end">
-                <span th:text="${developer.nombre}+'-'"> </span>
-                <span th:text="${developer.apellido}+'-'"> </span>
-                <span th:text="${developer.seniority}+'-'"> </span>
-                <span th:text="${developer.especialidad}+'-'"> </span>
-                <span th:text="${quest.fecha}"> </span>
+                <span th:if="${!quest.status}" th:text="${developer.nombre}+'-'"> </span>
+                <span th:if="${!quest.status}" th:text="${developer.apellido}+'-'"> </span>
+                <span th:if="${!quest.status}" th:text="${developer.seniority}+'-'"> </span>
+                <span th:if="${!quest.status}" th:text="${developer.especialidad}+'-'"> </span>
+                <span th:if="${!quest.status}" th:text="${quest.fechaQuest}"> </span>
+                    <input type="hidden" name="id" th:if="${!quest.status}" th:value="${quest.id}"/>
                 </div>
                 </span>
 <!--              ¿Cómo puedo registrarme en la plataforma?-->
             </summary>
-            <textarea rows="4" id="respuesta" name="repuesta" class="respuesta" placeholder="Ingrese Su Respuesta"></textarea>
+            <textarea rows="4" id="respuesta" name="respuesta" class="respuesta" placeholder="Ingrese Su Respuesta" th:required="true" minlength="1"></textarea>
         </details>
  <!--       <details>
             <summary>

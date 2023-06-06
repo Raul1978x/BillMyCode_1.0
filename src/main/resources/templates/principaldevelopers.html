@@ -26,7 +26,10 @@
             <a th:href="@{/thymeleaf/principal-developers}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
+
         </div>
+        <a th:if="${logueado.accountant != null}" th:href="@{/thymeleaf/get-myaccountant}" class="titulo me-auto"  style="margin-left: 15px;">Mi Contador</a>
+
         <div>
             <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
                 <div class="card-body">
@@ -42,10 +45,6 @@
             </div>
         </div>
         <nav class="header-nav centrar">
-            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
-            <a class="titulo" href="#seccion-3">Normativa</a>
-            <a class="titulo" href="#seccion-4">Impuestos</a>
-            <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
                 <div class="containers me-3" >
                 <div class="nombres">
@@ -64,11 +63,6 @@
                 />
                 <div class="dropdown">
                     <button class="dropdown-button">
-                        <!-- <img
-                                 class="icono"
-                                 src="/images/billmycodelogosimp.png"
-                                 alt="icono menu"
-                         />-->
                         <div>Menu</div>
                     </button>
                     <ul class="dropdown-menu">
@@ -83,11 +77,7 @@
                             </a>
                         </li>
                         <li>
-                            <!--<a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">-->
                             <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
-                                <!--
-                                                                <input type="hidden" name="id" th:value="${developer.id}"/>
-                                -->
                                 <img
                                         class="icono"
                                         src="/images/update.png"

@@ -154,17 +154,17 @@
    /*--------------------*/
    /* 
    VISTA CONSULTAS */
-   .consulta{
-    width: 550px;
-    max-width: 100%;
-    background:  #ffffff;
-    color: black;
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 20px;
-  
-  }
+   .consulta {
+       width: 550px;
+       max-width: 100%;
+       background: #ffffff;
+       color: black;
+       padding: 10px;
+       cursor: pointer;
+       font-weight: bold;
+       border-radius: 20px;
+       margin: 5px; /* Ajusta el margen exterior */
+   }
   
   .button {
     padding: 8px;
@@ -301,4 +301,13 @@
     width: 100%;
     padding: 8px;
   }
-  
+
+ /*#respuesta {
+         text-align: right;
+         direction: rtl;
+     }
+
+     #respuesta::placeholder {
+         text-align: left;
+         direction: ltr;
+     }*/

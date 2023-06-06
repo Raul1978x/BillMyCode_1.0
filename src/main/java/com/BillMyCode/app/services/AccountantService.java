@@ -248,6 +248,13 @@ public class AccountantService  {
         repositorio.save(contador);
     }
 
+    @Transactional
+    public void setAnswer(List<AnswerAndQuestion> respuestas, Long id){
+        Accountant contador = searchAccounterById(id);
+        respuestas.addAll(contador.getAnswerList());
+        contador.setAnswerList(respuestas);
+        repositorio.save(contador);
+    }
 
 }
 

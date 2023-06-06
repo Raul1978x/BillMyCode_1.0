@@ -4,7 +4,6 @@ import com.BillMyCode.app.entities.*;
 import com.BillMyCode.app.enumerations.Rol;
 import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IDeveloperRepository;
-import com.BillMyCode.app.repositories.IQuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,8 +24,7 @@ public class DeveloperService {
     private CommentService commentService;
     @Autowired
     private IDeveloperRepository developerRepository;
-    @Autowired
-    private IQuestRepository questRepository;
+
     @Autowired
     private ImageService imageService;
 
@@ -327,10 +325,23 @@ public class DeveloperService {
     }
 
     @Transactional
-    public Quest createQuest(String pregunta){
-        Quest quest = new Quest();
-        quest.setQuest(pregunta);
-        quest.setFecha(new Date());
-        return questRepository.save(quest);
+    public void setQuest(List<AnswerAndQuestion> preguntas, Long id) {
+        Developer developer = searchDeveloperById(id);
+        preguntas.addAll(developer.getQuestList());
+        developer.setQuestList(preguntas);
+        developerRepository.save(developer);
     }
+
+    @Transactional
+    public List<AnswerAndQuestion> getAnQ(Long id){
+        Developer developer = searchDeveloperById(id);
+        return developer.getQuestList();
+    }
+
+    @Transactional
+    public Accountant getAccountant(Long id){
+        Developer developer = searchDeveloperById(id);
+        return developer.getAccountant();
+    }
+
 }

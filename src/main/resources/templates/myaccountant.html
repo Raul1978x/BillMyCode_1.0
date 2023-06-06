@@ -11,12 +11,7 @@
     <link rel="shortcut icon" href="/images/billmycodelogosimp.png">
     <link rel="stylesheet" href="/css/myaccountant.css">
 
-
- 
-
-
-
-<body><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=DGsBxEzszcl9rEjlBjfoQ9qZcmMWmKchZFbs3hHGEV4ITQ2xe4KAiePikB5CXj_QxB96bYJhgINInsqEhl0kk79U-T3zn1tm-Uhfa65uVoisg6o72WZ9taJFREpUYt5H5JeoHlj6es_66ZMYoYOs9gE_25lOGMy-AXJdbRNC0DA" charset="UTF-8"></script>
+<body>
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
         <div class="logo-container">
@@ -25,10 +20,6 @@
             </a>
         </div>
         <nav class="header-nav centrar">
-            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
-            <a class="titulo" href="#seccion-3">Normativa</a>
-            <a class="titulo" href="#seccion-4">Impuestos</a>
-            <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
                 <div class="perfil-menu">
                     <div class="containers me-3" >
@@ -49,19 +40,11 @@
                     />
                 <div class="dropdown">
                     <button class="dropdown-button">
-                        <!-- <img
-                                 class="icono"
-                                 src="/images/billmycodelogosimp.png"
-                                 alt="icono menu"
-                         />-->
                         <div>Menu</div>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
-                                <!--
-                                                                <input type="hidden" name="id" th:value="${developer.id}"/>
-                                -->
                                 <img
                                         class="icono"
                                         src="/images/update.png"
@@ -113,23 +96,17 @@
         </div>
     </div>
 
-
-        <form
-                class="ml-2"
-        id="accountsform"
-        th:action="@{/thymeleaf/create-developer-quest}"
-        method="POST" >
-        <textarea rows="4" id="consulta" name="pregunta"  class="consulta form-control mt-2" placeholder="Ingrese Su Consulta"></textarea>
+    <div>
+        <textarea rows="10" id="respuesta" name="respuesta" class="consulta form-control mt-2" placeholder="Consultas y Respuestas" readonly style="cursor: default;">[[${listaElementos}]]</textarea>
+    <form class="ml-2" id="accountsform" th:action="@{/thymeleaf/create-quest}" method="POST">
+        <textarea rows="3" id="consulta" name="pregunta" class="consulta form-control mt-2" placeholder="Ingrese Su Consulta" th:required="true" minlength="1"></textarea>
         <div class="m-1">
-        <button class="button d-flex float-end" type="submit">
-            CONSULTAR
-            </button>
+            <button class="button d-flex float-end" type="submit">CONSULTAR</button>
         </div>
     </form>
+    </div>
 </main>
 </div>
-
-
    <footer class="mt-5">
        <div class="caja_footer div-icono_container">
            <div class="iconos_redes">
