@@ -92,15 +92,41 @@ public class ImageService {
         }
     }
 
+
     public Image saveDefaultImage(){
         try {
+
             String defaultImagePath = "src/main/resources/static/images/default.png";
+
             File defaultImageFile = new File(defaultImagePath);
             byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
 
             Image defaultImage = new Image();
+
             defaultImage.setMime("image/png");
             defaultImage.setNombre("default.png");
+
+
+            defaultImage.setContenido(defaultImageData);
+
+            repository.save(defaultImage);
+
+            return defaultImage;
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo cargar la imagen predeterminada.", e);
+        }
+    }
+  
+  public Image ImagenNoticia(){
+        try {
+            String defaultImagePath = "src/main/resources/static/images/defaultnoticia.jpg";
+          File defaultImageFile = new File(defaultImagePath);
+            byte[] defaultImageData = Files.readAllBytes(defaultImageFile.toPath());
+
+            Image defaultImage = new Image();
+            defaultImage.setMime("image/jpg");
+           defaultImage.setNombre("defaultnoticia.jpg");
+
             defaultImage.setContenido(defaultImageData);
 
             repository.save(defaultImage);

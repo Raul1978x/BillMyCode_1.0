@@ -32,4 +32,11 @@ public interface IDeveloperRepository extends JpaRepository<Developer, Long> {
     public Developer seachByEmail(@Param("email") String email);
 
 
+//    @Query("SELECT d FROM Developer d WHERE d.accountant.id = :accountantId")
+//    public Developer searchDeveloperByAccountant(@Param("accountantId") Long accountantId);
+
+    @Query("SELECT d FROM Developer d WHERE d.accountant.id = :accountantId")
+    public List<Developer> searchAllDevelopersByAccountant(@Param("accountantId") Long accountantId);
+
+
 }

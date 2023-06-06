@@ -4,17 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
-public class Quest {
+public class Noticia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String titulo ;
     @Lob
-    private String quest;
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-
+    private String contenido;
+    @OneToOne
+    private Image image;
+    @Column(name = "hora_subida")
+    private LocalDateTime horaSubida;
 }

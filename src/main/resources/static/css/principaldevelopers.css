@@ -13,8 +13,13 @@ html {
 body {
   min-height: 100vh;
   width: 100%;
-  background-color: #1F2430;
+  /*background-color: #1F2430;*/
   font-style: arial;
+  background-image: url("/images/fondo1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+background-origin: content-box;
 }
 .section-container h2 {
   padding: 0;

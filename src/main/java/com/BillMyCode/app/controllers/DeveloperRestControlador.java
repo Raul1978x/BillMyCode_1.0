@@ -187,5 +187,9 @@ public class DeveloperRestControlador {
     public Developer getDevelopersByEmail(@PathVariable String email) {
         return repository.seachByEmail(email);
     }
+ @GetMapping("/developerByAccountant/{accountantId}")
+    public List<Developer> searchDeveloperByAccountantId(@PathVariable Long accountantId) {
+        return repository.searchAllDevelopersByAccountant(accountantId);
+    }
 
 }

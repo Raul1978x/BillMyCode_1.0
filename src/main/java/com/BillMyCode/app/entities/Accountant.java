@@ -24,5 +24,7 @@ public class Accountant extends User {
     @OneToMany
     private List<Comment> comments;
     @OneToMany
+    private List<Answer> answerList;
+    @OneToMany
     private List<Developer> developers;
 }

@@ -236,6 +236,7 @@ public class AccountantController {
         return "preguntasyrespuestas";
     }
 
+
     @GetMapping("/accountant/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
         accountantService.deleteAccounterById(id);
@@ -249,6 +250,20 @@ public class AccountantController {
             return "redirect:/thymeleaf/lista-developers";
         }
 
+    }
+
+    @GetMapping("/accountant/get-answer")
+    public String getViewQuestAndAnswer(HttpSession request, ModelMap model) {
+        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
+        model.put("logueado",logueado);
+        List<Developer> developerList = developerService.searchDeveloperByAccountantId(logueado.getId());
+        System.out.println(logueado.getId()+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(developerList+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        model.put("developerList",developerList);
+        return "preguntasyrespuestas";
 
     }
 }
+
+
+ 

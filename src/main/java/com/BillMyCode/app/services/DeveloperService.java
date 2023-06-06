@@ -1,6 +1,6 @@
 package com.BillMyCode.app.services;
 
-import com.BillMyCode.app.entities.Admin;
+import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Image;
@@ -26,12 +26,16 @@ public class DeveloperService {
     @Autowired
     private CommentService commentService;
     @Autowired
-    private IDeveloperRepository repositorio;
+    private IDeveloperRepository developerRepository;
     @Autowired
     private ImageService imageService;
 
     @Autowired
+
     private LoginService loginService;
+
+   /* private AccountantService accountantService;*/
+
 
     /**
      * Metodo listDevelopers(): Devuelve la lista de todos los Developers.
@@ -40,7 +44,7 @@ public class DeveloperService {
      */
     @Transactional(readOnly = true)
     public List<Developer> listDevelopers() {
-        return repositorio.findAll();
+        return developerRepository.findAll();
     }
 
     /**
@@ -51,7 +55,7 @@ public class DeveloperService {
      */
     @Transactional(readOnly = true)
     public Developer searchDeveloperById(Long id) {
-        return repositorio.findById(id).get();
+        return developerRepository.findById(id).get();
     }
 
     /**
@@ -61,7 +65,7 @@ public class DeveloperService {
      */
     @Transactional
     public void deleteDeveloperById(Long id) {
-        repositorio.deleteById(id);
+        developerRepository.deleteById(id);
     }
 
     /**
@@ -103,7 +107,7 @@ public class DeveloperService {
     ) throws MiException {
 
 
-        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
+        validate(nombre, apellido, email, password, newpassword, fechaNacimiento, genero, telefono, nacionalidad, salario, seniority, especialidad);
 
         String cryptPassword = passwordEncoder.encode(password);
 
@@ -131,7 +135,8 @@ public class DeveloperService {
             Image defaultImage = imageService.saveDefaultImage();
             developer.setImage(defaultImage);
         }
-        repositorio.save(developer);
+        developerRepository.save(developer);
+
     }
 
     /**
@@ -174,7 +179,7 @@ public class DeveloperService {
                                 String comentario
     ) throws MiException, ParseException {
 
-        Optional<Developer> respuesta = repositorio.findById(id);
+        Optional<Developer> respuesta = developerRepository.findById(id);
         String cryptPassword = passwordEncoder.encode(password);
 
         validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
@@ -214,7 +219,7 @@ public class DeveloperService {
                 result.setImage(image);
             }
 
-            repositorio.save(result);
+            developerRepository.save(result);
         }
     }
 
@@ -228,7 +233,7 @@ public class DeveloperService {
      */
     @Transactional(readOnly = true)
     public List<Developer> getDevelopersBySeniority(String seniority) {
-        return repositorio.searchBySeniority(seniority);
+        return developerRepository.searchBySeniority(seniority);
     }
 
     /**
@@ -294,17 +299,35 @@ public class DeveloperService {
             throw new MiException("La especialidad no puede ser nula o estar vacia");
         }
     }
+
     @Transactional
-    public void bajaDeveloper(Long id){
+    public void bajaDeveloper(Long id) {
         Developer developer = searchDeveloperById(id);
         developer.setStatus(false);
-        repositorio.save(developer);
+        developerRepository.save(developer);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Developer> searchDeveloperByAccountantId(Long accountantId) {
+        return developerRepository.searchAllDevelopersByAccountant(accountantId);
     }
 
     @Transactional
     public void altaDeveloper(Long id){
         Developer developer = searchDeveloperById(id);
         developer.setStatus(true);
-        repositorio.save(developer);
+        developerRepository.save(developer);
+    }
+
+    @Transactional
+    public Accountant selectAccountantByAccountantId(Long AccountantId){
+        return accountantService.searchAccounterById(AccountantId);
+    }
+
+    @Transactional
+    public void saveAccountant(Accountant accountant, Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setAccountant(accountant);
+        developerRepository.save(developer);
     }
 }
