@@ -9,7 +9,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
     />
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Ix60tjsSK2WNNm0FjpH0KDBst3MiuPurKYxPJQX1qtVHrWtFERNLTj8PDb-D8jigfyzpLQmHUXM6QYuPmPhUV9S39mnEti6jg_nINtEE5Mu3NRY0ZD7B1xyEFhtR_8Vi3nxeXJzEBEq6kD1Ye8XtbQ" charset="UTF-8"></script><script
+    <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"
@@ -100,17 +100,68 @@
 </navbar>
 
 <br>
-<div class="section-container">
-    <form class="calcu-dev"  th:action="@{/calculadora/CalculadoraRespuesta}" method="POST">
+<div class="container">
+
+
+    <form th:action="@{/calculadora/respuestaNewData}" method="POST" class="calcu-dev">
+
         <br>
-        <h3>Indique su facturación anual:</h3> <!--del año anterior -->
-        <input  type="number" name="facturacionAnual" required>
-        <button class="bt bt-warning" type="submit">calcular</button>
-        <br>
-        <h3>Su nivel de monotributo es: <h3 th:text=${respuesta2} ></h3></h3> <!--//hacer que aparezca despues de que ingrese la facturacion anual-->
+        <input
+                type="number"
+                name="salario"
+                placeholder="Ingrese su salario"
+                required/>
+
+        <select
+                id="gdes"
+                name="seniority"
+                class="form-control"
+                value="${seniority}">
+            <option value="" disabled selected>Grado de Seniority</option>
+            <option value="Trainee">Trainee</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+            <option value="Super Senior">Super Senior</option>
+        </select>
         <br>
 
-        <h3>Su salario se encuentra por:
+        <select
+                id="esp"
+                name="especialidad"
+                class="form-control"
+                value="${especialidad}">
+            <option value="" disabled selected>Especialidad</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Full Stack">Full Stack</option>
+            <option value="Q.A">Q.A</option>
+        </select>
+        <br>
+        <h3>Indique su facturación anual:</h3> <!--del año anterior -->
+        <input  type="number" name="facturacionAnual">
+        <br>
+        <button class="dropdown-button" type="submit" >
+            <div>Enviar</div >
+        </button >
+    </form>
+</div>
+
+<div class="section-container">
+
+        <h3>Por su facturación anual en pesos usted se encuentra en la categoría:
+            <h3 th:text="${categoria}"></h3>
+
+            <br>
+
+            El impuesto a abonar correspondiente a su categoria es:
+            <h3 th:text=${respuesta2} ></h3>
+
+        </h3>
+
+
+        <br>
+
+        <h3>Su salario se encuentra por
             <h3 th:text="${respuesta4}"></h3>
         </h3> <!--//encima o debajo-->
         <br>
@@ -119,8 +170,9 @@
             <h3 th:text="${respuesta1}"></h3>
         </h3>
 
-            <br>
-    </form>
+        <br>
+
+
 </div>
 
 <footer >

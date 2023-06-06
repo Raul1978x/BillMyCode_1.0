@@ -139,6 +139,20 @@ return opcion;
                 +" el salario promedio de entre "+count+ " es de: "+promedio;*/
         return promedio ;
     }
+/** cuenta cantidad de developers con el mism seniority y especialidad*/
+    public int contarPromedio(List<Developer> developers,String seniority,String especialidad){
+
+        int count=0;
+        for(Developer dev: developers){
+            if(dev.getSeniority().equals(seniority)){
+                if(dev.getEspecialidad().equals(especialidad)){
+                    count=count+1;
+                }
+            }
+        }
+
+        return count ;
+    }
     /**
      * Metodo calcularPromedio() calcula el promedio segun el nivel de seniority y su especialidad
      *
@@ -185,7 +199,23 @@ return opcion;
         return mensaje;
     }
 
+    public Double buscarElSueldoMasAltoNewData(List<Developer> developers,String seniority,String especialidad, Double salario){
+        Double sueldoMasAlto=0.0;
+        for(Developer dev: developers) {
+            if (dev.getSeniority().equals(seniority)) {
+                if (dev.getEspecialidad().equals(especialidad)) {
+                    if (dev.getSalario() > sueldoMasAlto) {
+                        sueldoMasAlto = dev.getSalario();
+                    }
+                }
+            }
+        }
+        if(sueldoMasAlto < salario){
+            sueldoMasAlto = salario;
+        }
 
+        return sueldoMasAlto;
+    }
 
 
 
