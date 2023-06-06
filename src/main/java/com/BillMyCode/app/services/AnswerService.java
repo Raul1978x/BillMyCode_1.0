@@ -26,16 +26,16 @@ public class AnswerService {
         return answerRepository.findById(id).get();
     }
 
-/*    @Transactional
+   @Transactional
     public Answer createAnswer(String respuesta){
         Answer answer = new Answer();
-        answer.setRespuesta(respuesta);
+        answer.setAnswer(respuesta);
         answer.setFecha(new Date());
         answerRepository.save(answer);
         return answer;
     }
 
-    @Transactional
+/*    @Transactional
     public Answer updateAnswer(Long id, String respuesta){
        Answer result = answerRepository.findById(id).get();
        if (result != null){

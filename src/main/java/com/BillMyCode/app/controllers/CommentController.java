@@ -30,28 +30,5 @@ public class CommentController {
     @Autowired
     public DeveloperService developerService;
 
-    @GetMapping("/get-answer")
-    public String getAnswer(HttpSession request, ModelMap model) {
-        Accountant logueado= (Accountant) request.getAttribute("sessionuser");
-        model.put("logueado",logueado);
-        return "answer";
-    }
 
-    @PostMapping("/create-answer")
-    public String createAnswer(@RequestParam String respuesta, Long id, ModelMap model) {
-        Developer developer = developerService.searchDeveloperById(id);
-        model.put("developer", developer);
-       /* Comment comentario = commentService.searchCommentById(developer.getComentario().getId());*/
-        Comment comentario = new Comment();
-        comentario.setComentario("Como liquido mi sueldo en dolares");
-        comentario.setId(1L);
-        comentario.setFecha(new Date());
-        System.out.println("---------------------------------------------------------------------------------");
-        System.out.println(comentario.getComentario());
-        System.out.println("---------------------------------------------------------------------------------");
-        model.put("comentario", comentario);
-       /* Answer answer = answerService.createAnswer(respuesta);
-        model.put("answer", answer);*/
-        return "principalaccounter";
-    }
 }

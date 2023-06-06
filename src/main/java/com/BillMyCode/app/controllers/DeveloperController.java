@@ -256,7 +256,7 @@ public class DeveloperController {
         Quest quest =developerService.createQuest(pregunta);
         List<Quest> preguntas = new ArrayList<>();
         preguntas.add(quest);
-        logueado.setQuestList(preguntas);
+        developerService.agregarQuest(preguntas,logueado.getId());
         Accountant myAccountant = logueado.getAccountant();
         model.put("myAccountant" ,myAccountant);
         model.put("quest",quest);

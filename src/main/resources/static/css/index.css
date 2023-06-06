@@ -60,6 +60,7 @@ body {
   z-index: 2;
   background-color: #080808;
   padding: 16px;
+  position: fixed;
 }
 
 .bmcLogo {

@@ -212,9 +212,17 @@ input:checked ~ label::before {
 }
 
 .button {
-  font-size: 25px;
-  color: orange;
-  line-height: 80px;
+     padding: 10px 40px;
+       margin-top: 16px;
+       font-size: 12px;
+       cursor: pointer;
+       border: none;
+       color: white;
+       background: orange;
+       box-shadow: 1px 1px 30px -5px white;
+       border-radius: 10px;
+       transition: box-shadow 600ms;
+       margin-bottom: 0;
 }
 
 footer {

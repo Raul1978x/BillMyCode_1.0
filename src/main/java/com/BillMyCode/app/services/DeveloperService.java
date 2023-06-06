@@ -327,4 +327,10 @@ public class DeveloperService {
         quest.setFecha(new Date());
         return questRepository.save(quest);
     }
+    @Transactional
+    public void agregarQuest(List<Quest> preguntas, Long id){
+        Developer developer = searchDeveloperById(id);
+        developer.setQuestList(preguntas);
+        developerRepository.save(developer);
+    }
 }
