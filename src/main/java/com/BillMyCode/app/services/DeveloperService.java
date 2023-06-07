@@ -82,7 +82,6 @@ public class DeveloperService {
      * @param seniority
      * @param especialidad
      * @param descripcion
-     * @param comentario
      * @throws: MiException
      * @throws: ParseException
      */
@@ -100,8 +99,7 @@ public class DeveloperService {
                                 Double salario,
                                 String seniority,
                                 String especialidad,
-                                String descripcion,
-                                Comment comentario
+                                String descripcion
     ) throws MiException {
 
 
@@ -123,7 +121,6 @@ public class DeveloperService {
         developer.setSeniority(seniority);
         developer.setEspecialidad(especialidad);
         developer.setDescripcion(descripcion);
-        developer.setComentario(comentario);
         developer.setRol(Rol.DEV);
         developer.setStatus(true);
         if (archivo != null && !archivo.isEmpty()) {
@@ -154,7 +151,6 @@ public class DeveloperService {
      * @param seniority
      * @param especialidad
      * @param descripcion
-     * @param comentario
      * @throws: MiException
      * @throws: ParseException
      */
@@ -173,8 +169,7 @@ public class DeveloperService {
                                 Double salario,
                                 String seniority,
                                 String especialidad,
-                                String descripcion,
-                                String comentario
+                                String descripcion
     ) throws MiException, ParseException {
 
         Optional<Developer> respuesta = developerRepository.findById(id);
@@ -185,8 +180,6 @@ public class DeveloperService {
 
         if (respuesta.isPresent()) {
             Developer result = respuesta.get();
-
-            Comment comment = commentService.updateComment(result.getComentario().getId(), comentario);
 
             result.setNombre(nombre);
             result.setApellido(apellido);
@@ -200,7 +193,6 @@ public class DeveloperService {
             result.setSeniority(seniority);
             result.setEspecialidad(especialidad);
             result.setDescripcion(descripcion);
-            result.setComentario(comment);
             result.setRol(Rol.DEV);
 
 //            if (archivo != null) {
@@ -342,6 +334,14 @@ public class DeveloperService {
     public Accountant getAccountant(Long id){
         Developer developer = searchDeveloperById(id);
         return developer.getAccountant();
+    }
+
+    @Transactional
+    public void setComentario(List<Comment> comentario, Long id) {
+        Developer developer = searchDeveloperById(id);
+        comentario.addAll(developer.getComentario());
+        developer.setComentario(comentario);
+        developerRepository.save(developer);
     }
 
 }

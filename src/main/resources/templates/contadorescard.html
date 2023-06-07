@@ -98,7 +98,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div th:each="accountant: ${accountants}" class="col-md-4">
-            <section id="seccion-2" class="" th:if="${logueado.accountant != null}">
+            <!--<section id="seccion-2" class="" th:if="${logueado.accountant != null}">
                 <div class="">
                     <div class="container__card">
                         <div class="card c1">
@@ -124,8 +124,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section id="seccion-2a" class="" th:if="${logueado.accountant == null}">
+            </section>-->
+            <section id="seccion-2a" class="">
                 <div class="">
                     <div class="container__card">
                         <div class="card c1">
@@ -145,7 +145,11 @@
                                             th:text="${accountant.honorarios}"></a></li>
                                 </ul>
                                 <span th:if="${logueado.accountant == null}">
-                                <button class="mb-5 text-center button"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Elegir y consultar</a> </button>
+                                    <button  class="mb-5 text-center button"> <a th:href="@{/thymeleaf/ver-perfil-accountant/{id}(id=${accountant.id})}" >Ver Perfil</a> </button>
+                                </span>
+                                <span th:if="${logueado.accountant != null}">
+                                    <button th:if="${logueado.accountant.id == accountant.id}" class="mb-5 text-center button-verde"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Consultar</a> </button>
+                                    <button th:if="${logueado.accountant.id != accountant.id}"  class="mb-5 text-center button"> <a th:href="@{/thymeleaf/ver-perfil-accountant/{id}(id=${accountant.id})}" >Ver Perfil</a> </button>
                                 </span>
                             </div>
                         </div>

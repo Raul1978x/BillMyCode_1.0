@@ -22,9 +22,9 @@ public class Accountant extends User {
     private String especializacion;
     private Double honorarios;
     @OneToMany
-    private List<Comment> comments;
-    @OneToMany
     private List<Developer> developers;
+    @OneToMany
+    private List<Comment> comments;
     @OneToMany
     private List<AnswerAndQuestion> answerList;
 }

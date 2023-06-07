@@ -1,5 +1,6 @@
 package com.BillMyCode.app.controllers;
 
+import com.BillMyCode.app.entities.Accountant;
 import com.BillMyCode.app.entities.Admin;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.entities.Noticia;
@@ -33,8 +34,17 @@ public class NoticiaController {
 
     @GetMapping("/Noticia")
     public String mostrarNoticia(ModelMap model, HttpSession request) {
-        Developer logueado = (Developer) request.getAttribute("sessionuser");
-        model.put("logueado", logueado);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        if (roles.contains("ROLE_DEV")) {
+            Developer logueado = (Developer) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        }else{
+            Accountant logueado = (Accountant) request.getAttribute("sessionuser");
+            model.put("logueado", logueado);
+        }
 
         List<Noticia> noticia = noticiaServicio.listarNoticia();
         model.addAttribute("noticia", noticia);

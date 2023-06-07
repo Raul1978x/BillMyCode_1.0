@@ -119,7 +119,6 @@ public class DeveloperController {
      * @param seniority
      * @param especialidad
      * @param descripcion
-     * @param comentario
      * @throws: MiException
      * @throws: ParseException
      */
@@ -138,13 +137,10 @@ public class DeveloperController {
                                      @RequestParam String seniority,
                                      @RequestParam String especialidad,
                                      @RequestParam(required = false) String descripcion,
-                                     @RequestParam(required = false) String comentario,
                                      ModelMap model
     ) throws MiException, ParseException {
         try {
-            Comment comment = commentService.createComment(comentario);
-
-            developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento, password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+            developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento, password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion);
             model.put("exito", "El Developer fue creado exitosamente");
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<String> roles = authentication.getAuthorities().stream()
@@ -219,13 +215,12 @@ public class DeveloperController {
                                   @RequestParam(required = false) String seniority,
                                   @RequestParam(required = false) String especialidad,
                                   @RequestParam(required = false) String descripcion,
-                                  @RequestParam(required = false) String comentario,
                                   ModelMap model
     ) throws MiException, ParseException {
 
         try {
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
+                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)

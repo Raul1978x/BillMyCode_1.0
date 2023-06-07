@@ -1,5 +1,6 @@
 package com.BillMyCode.app.services;
 
+import com.BillMyCode.app.entities.AnswerAndQuestion;
 import com.BillMyCode.app.entities.Comment;
 import com.BillMyCode.app.entities.Developer;
 import com.BillMyCode.app.repositories.ICommentRepository;
@@ -31,7 +32,7 @@ public class CommentService {
         if (respuesta.isPresent()) {
             Comment result = respuesta.get();
             result.setComentario(comentario);
-            result.setFecha(new Date());
+            result.setFechaComentario(new Date());
             return commentRepository.save(result);
         }
         return null;
@@ -48,7 +49,7 @@ public class CommentService {
     public Comment createComment(String comentario) {
         Comment comment = new Comment();
         comment.setComentario(comentario);
-        comment.setFecha(new Date());
+        comment.setFechaComentario(new Date());
         return commentRepository.save(comment);
     }
 
@@ -80,5 +81,38 @@ public class CommentService {
     @Transactional(readOnly = true)
     public Comment searchCommentById(long id){
         return commentRepository.findById(id).get();
+    }
+
+    @Transactional
+    public List<Comment> getAllComentarios(){
+        List<Comment> comentarios = commentRepository.findAll();
+        return comentarios;
+    }
+
+    @Transactional
+    public List<Comment> getAccountantComment(Long id){
+        List<Comment> comentarios = commentRepository.searchAllCommentByAccountant(id);
+        return comentarios;
+    }
+
+    @Transactional
+    public Comment crearComentario(String comentario, String nombreDev, String nombreAcc, Long idDev, Long idAcc){
+        Comment comment = new Comment();
+        comment.setComentario(comentario);
+        comment.setFechaComentario(new Date());
+        comment.setNombreDev(nombreDev);
+        comment.setNombreAccountant(nombreAcc);
+        comment.setDevId(idDev);
+        comment.setAccountantId(idAcc);
+        return commentRepository.save(comment);
+    }
+
+    @Transactional
+    public Comment crearRespuesta(String respuesta, Long id){
+        Comment res = commentRepository.findById(id).get();
+        res.setComentario(respuesta);
+        res.setFechaRespuesta(new Date());
+        res.setStatus(true);
+        return commentRepository.save(res);
     }
 }

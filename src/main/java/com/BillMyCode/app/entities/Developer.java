@@ -21,12 +21,12 @@ public class Developer extends User {
     protected String especialidad;
     @Lob
     protected String descripcion;
-    @OneToOne
-    protected Comment comentario;
     @ManyToMany
     protected List<Company> empresas;
     @OneToOne
     protected Accountant accountant;
+    @OneToMany
+    protected List<Comment> comentario;
     @OneToMany
     protected List<AnswerAndQuestion> questList;
 }
