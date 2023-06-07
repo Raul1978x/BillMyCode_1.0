@@ -49,7 +49,7 @@
             <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
 
-                <div class="containers me-3" >
+                <div class="containers me-3">
                     <div class="nombres">
                         <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
                         <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
@@ -75,7 +75,8 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='card-accountant')}">
+                            <a class="dropdown-item"
+                               th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='card-accountant')}">
                                 <img
                                         class="icono"
                                         src="/images/borrar-cuenta.png"
@@ -113,86 +114,76 @@
     </nav>
 </navbar>
 
-<section>
-<br>
-<div class="container">
+<main class="d-flex float-center justify-content-between align-items-center">
+
+    <div class="container">
 
 
-    <form th:action="@{/calculadora/respuestaNewData}" method="POST" class="calcu-dev">
+        <form th:action="@{/calculadora/respuestaNewData}" method="POST" class="calcu-dev">
 
-        <br>
-        <input
-                class="form-control mb-4"
-                type="number"
-                name="salario"
-                placeholder="Ingrese su salario"
-                required/>
+            <br>
+            <input
+                    class="form-control mb-4"
+                    type="number"
+                    name="salario"
+                    placeholder="Ingrese su salario"
+                    required/>
 
-        <select
-                id="gdes"
-                name="seniority"
-                class="form-control"
-                value="${seniority}">
-            <option value="" disabled selected>Grado de Seniority</option>
-            <option value="Trainee">Trainee</option>
-            <option value="Junior">Junior</option>
-            <option value="Senior">Senior</option>
-            <option value="Super Senior">Super Senior</option>
-        </select>
-        <br>
+            <select
+                    id="gdes"
+                    name="seniority"
+                    class="form-control"
+                    required
+                    value="${seniority}">
+                <option value="" disabled selected>Grado de Seniority</option>
+                <option value="Trainee">Trainee</option>
+                <option value="Junior">Junior</option>
+                <option value="Senior">Senior</option>
+                <option value="Super Senior">Super Senior</option>
+            </select>
+            <br>
 
-        <select
-                id="esp"
-                name="especialidad"
-                class="form-control"
-                value="${especialidad}">
-            <option value="" disabled selected>Especialidad</option>
-            <option value="Frontend">Frontend</option>
-            <option value="Backend">Backend</option>
-            <option value="Full Stack">Full Stack</option>
-            <option value="Q.A">Q.A</option>
-        </select>
-        <br>
-        <h4>Indique su facturación anual:</h4> <!--del año anterior -->
-        <input class="form-control" type="number" name="facturacionAnual" placeholder="Ingrese su facturación anual">
-        <br>
-        <button class="button" type="submit">ENVIAR</button>
-            <!-- <div>ENVIAR</div > -->
+            <select
+                    id="esp"
+                    name="especialidad"
+                    class="form-control"
+                    required
+                    value="${especialidad}">
+                <option value="" disabled selected>Especialidad</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Full Stack">Full Stack</option>
+                <option value="Q.A">Q.A</option>
+            </select>
+            <br>
 
-        </button >
-    </form>
+            <button class="button-orange" type="submit">
+                <div>Enviar</div>
+            </button>
+        </form>
+    </div>
 
-    
-</div>
-</section>
+    <div class="container">
+        <div class="calcu-dev text-center">
+            <div>
+                <p>Por su facturación anual en pesos</p>
+                <p>usted se encuentra en la categoría: $ </p>
+                <span class="text-warning text-center bold" th:text="${categoria}"></span>
 
-<section>
-<div class="section-container">
-    <h4>Por su facturación anual en pesos usted se encuentra en la categoría:
-        <h3 th:text="${categoria}"></h3>
-        <br>
+                <p> El impuesto a abonar correspondiente a su categoria es:</p>
+                <span class="text-warning text-center bold" th:text="${respuesta2}"></span>
 
-        <h4> El impuesto a abonar correspondiente a su categoria es:
-        <h3 th:text=${respuesta2} ></h3>
-    </h4>
-    <br>
+                <p>Su salario se encuentra por</p>
+                <span class="text-warning bold" th:text="${respuesta4}"></span>
 
-    <h4>Su salario se encuentra por
-        <h3 th:text="${respuesta4}"></h3>
-    </h4> <!--//encima o debajo-->
-    <br>
+                <p>El sueldo mas alto para su puesto de trabajo es de: U$S </p>
+                <span class="text-warning text-center bold" th:text="${respuesta1}"></span>
+            </div>
+        </div>
+    </div>
+</main>
 
-    <h4>El sueldo mas alto para su puesto de trabajo es de:
-        <h3 th:text="${respuesta1}"></h3>
-    </h4>
-    <br>
-</div>
-</section>
-
-
-
-
-<footer >
+<footer>
     <div class="caja_footer div-icono_container mt-5">
         <div class="iconos_redes">
             <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"

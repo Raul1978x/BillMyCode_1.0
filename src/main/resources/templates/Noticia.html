@@ -14,8 +14,13 @@
 
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
-        <div class="logo-container">
+        <div class="logo-container" th:if="${logueado.rol.toString() == 'DEV'}" >
             <a th:href="@{/thymeleaf/principal-developers}">
+                <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
+            </a>
+        </div>
+        <div class="logo-container" th:if="${logueado.rol.toString() == 'ACCOUNTANT'}" >
+            <a th:href="@{/thymeleaf/principal-accountant}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
         </div>
@@ -36,8 +41,9 @@
                         <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                     </div>
                     <div class="formacion">
-                        <span class="especialidad" th:text="${logueado.especialidad}">Full Stack</span>
-                        <span class="seniority" th:text="${logueado.seniority}">Junior</span>
+                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="especialidad" th:text="${logueado.especialidad}" >Full Stack</span>
+                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="seniority" th:text="${logueado.seniority}" >Junior</span>
+                        <span th:if="${logueado.rol.toString() == 'ACCOUNTANT'}" class="especializacion" th:text="${logueado.especializacion}">Full Stack</span>
                     </div>
                 </div>
                 <img

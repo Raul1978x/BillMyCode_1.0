@@ -1,0 +1,380 @@
+body {
+  font-family: helvetica;
+  font-weight: normal;
+  color: #013b73;
+  margin: 0;
+  background-color: #1F2430;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  background-color: #080808;
+  z-index: 2;
+  padding: 16px;
+}
+
+.logo-container {
+  text-align: center;
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50px;
+}
+
+nav a {
+  text-decoration: none;
+  margin: 0 20px;
+  color: white;
+  font-weight: bold;
+  font-style: inherit;
+  font-family: helvetica;
+  letter-spacing: 2px;
+}
+
+nav a:hover {
+  color: #255faa;
+}
+
+/* efectos para el contenedor de pantalla completa */
+#contenedor {
+  display: flex;
+ /* align-items: center;*/
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+}
+
+/* contenedor del login a la izquierda */
+#contenedorcentrado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  min-width: 380px;
+  max-width: 900px;
+  width: 90%;
+  background-color: #5f6769;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 0px 5px 5px rgba(44, 75, 100, 0.15);
+  padding: 30px;
+}
+
+
+/* formulario de login */
+
+.titulo {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#login {
+  padding: 32px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pie-form a {
+  text-decoration: none;
+  color: white;
+}
+
+.pie-form a:hover {
+  color: #bbe1fa;
+}
+
+.inferior {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.inferior a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.inferior a:hover {
+  color: #bbe1fa;
+}
+
+/* formulario de crear cuenta */
+
+#accounts {
+  width: 100%;
+  padding: 30px 30px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-top: 100px;
+}
+
+#accounts a {
+  text-decoration: none;
+  color: white;
+}
+
+#accounts input::placeholder {
+  font-family: helvetica;
+  color: grey;
+}
+
+form input {
+  font-family: helvetica;
+  color: #1b262c;
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+}
+
+#accounts select::placeholder {
+  font-family: helvetica;
+  color: grey;
+}
+
+form button {
+  font-family: helvetica;
+  border: 2px solid white;
+  color: #fff;
+  width: 250px;
+  height: 40px;
+  background-color: inherit;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #0f4c75;
+  color: #bbe1fa;
+}
+
+.pie-form {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* recuperar cuenta */
+
+.titulo img {
+  width: 100px;
+  height: 100px;
+}
+
+#resetpass {
+  width: 110%;
+  padding: 50px 30px;
+  background: rgb(28,125,187);
+  background: radial-gradient(circle, rgba(28,125,187,1) 0%, rgba(43,102,172,1) 25%, rgb(48, 101, 167) 50%, rgba(15,96,131,1) 100%);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.3rem;
+
+}
+
+.div-button {
+  text-align: center;
+}
+
+.div-button p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.text-area {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.form-control {
+  margin: 16px 0;
+}
+
+.developer-boton {
+  font-size: 12px;
+}
+
+#accountsform {
+  text-align: center;
+}
+
+.pie-form ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+footer {
+  width: 100%;
+  height: 150px;
+  margin-top: 32px;
+}
+
+.caja_footer>a {
+  text-decoration: none;
+  color: #000;
+}
+
+.iconos_redes {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.icono-container {
+  width: 48px;
+  height: 48px;
+  margin: 8px;
+}
+
+.icono-container:hover {
+  transform: scale(1.2);
+}
+
+.copyright {
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 8px;
+}
+/* Animación para ocultar los carteles después de 7 segundos (7000 ms) */
+@keyframes hideCard {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    99% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Estilo inicial de los carteles */
+.borrarcarta {
+    animation: hideCard 7s forwards;
+}
+
+/*Navbar*/
+
+ .dropdown-button {
+   background: none;
+   border: none;
+   cursor: pointer;
+ }
+
+ .dropdown-menu {
+   display: none;
+   position: absolute;
+   top: 100%;
+   left: 0;
+   background-color: #ffffff;
+   padding: 0;
+   list-style-type: none;
+   margin: 0;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+ }
+
+ .dropdown-button:focus + .dropdown-menu,
+ .dropdown-menu:hover {
+   display: block;
+ }
+
+ .dropdown-item {
+   padding: 8px;
+   text-decoration: none;
+   display: block;
+   color: #000000;
+ }
+
+ .bill_my_code {
+   color: white;
+   width: 100%;
+   height: 100px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   z-index: 2;
+   background-color: #080808;
+   padding: 16px;
+ }
+
+ .bmcLogo {
+   width: 5rem;
+ }
+
+ .centrar {
+   display: flex;
+   align-items: center;
+ }
+
+ .titulo {
+   display: inline-block;
+   margin-right: 16px;
+   color: white;
+   text-decoration: none;
+ }
+
+ .perfil-menu {
+   display: flex;
+   align-items: center;
+   position: relative;
+ }
+
+ .perfil-foto {
+   width: 42px;
+   height: 42px;
+   border-radius: 50%;
+   margin-right: 8px;
+ }
+
+ .icono {
+   width: 24px;
+   height: 24px;
+ }
+ .dropdown-menu {
+   right: 0;
+   left: auto;
+ }
+
+ .containers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

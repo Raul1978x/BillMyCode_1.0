@@ -23,7 +23,18 @@
         <nav class="header-nav centrar">
             <div class="alert alert-danger" id="mensaje" th:if="${mensaje != null}" th:text="${mensaje}">
                 <a class="button" th:value="Contacta a contador: ${logueado.accountant.apellido}"></a>
+<div>
 
+</div>
+
+            <select id="gdes" name="especializacion" class="form-control">
+                <option value="" disabled selected>Especializaciones</option>
+                <option value="Contabilidad financiera">Contabilidad financiera</option>
+                <option value="Contabilidad Fiscal">Contabilidad Fiscal</option>
+                <option value="Contabilidad Analitica">Contabilidad Analitica</option>
+                <option value="Contabilidad administrativa">Contabilidad administrativa</option>
+                <option value="Auditoria">Auditoria</option>
+            </select>
             </div>
             <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
             <a class="titulo" href="#seccion-3">Normativa</a>
@@ -205,5 +216,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+<script src="/js/filtroTabla.js"></script>
 </body>
 </html>
