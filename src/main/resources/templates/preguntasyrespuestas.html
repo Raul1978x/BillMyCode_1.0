@@ -98,11 +98,11 @@
             th:action="@{/thymeleaf/create-answer}"
             method="POST">
 
-        <details >
-            <summary th:each="developer : ${developerList}">
+        <summary>
+            <div th:each="developer : ${developerList}">
                 <span th:each="quest : ${developer.questList}">
                     <span th:if="${!quest.status}" th:text="${quest.quest}"> </span>
-                <div class="text-dark fst-italic d-flex float-end">
+                <div class="text-warning fst-italic d-flex float-end">
                 <span th:if="${!quest.status}" th:text="${developer.nombre}+'-'"> </span>
                 <span th:if="${!quest.status}" th:text="${developer.apellido}+'-'"> </span>
                 <span th:if="${!quest.status}" th:text="${developer.seniority}+'-'"> </span>
@@ -112,9 +112,9 @@
                 </div>
                 </span>
 <!--              ¿Cómo puedo registrarme en la plataforma?-->
-            </summary>
+            </div>
             <textarea rows="4" id="respuesta" name="respuesta" class="respuesta" placeholder="Ingrese Su Respuesta" th:required="true" minlength="1"></textarea>
-        </details>
+        </summary>
  <!--       <details>
             <summary>
               &lt;!&ndash;  <span th:text="${developerQuestion.nombre}"></span>
