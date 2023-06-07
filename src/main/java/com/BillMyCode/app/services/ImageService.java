@@ -1,9 +1,8 @@
 package com.BillMyCode.app.services;
 
 import com.BillMyCode.app.entities.Image;
-import com.BillMyCode.app.exceptions.MiException;
 import com.BillMyCode.app.repositories.IImageRepository;
-import jdk.swing.interop.SwingInterOpUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
