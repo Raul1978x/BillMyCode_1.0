@@ -113,6 +113,7 @@
     </nav>
 </navbar>
 
+<section>
 <br>
 <div class="container">
 
@@ -152,43 +153,43 @@
             <option value="Q.A">Q.A</option>
         </select>
         <br>
-        <h3>Indique su facturación anual:</h3> <!--del año anterior -->
+        <h4>Indique su facturación anual:</h4> <!--del año anterior -->
         <input class="form-control" type="number" name="facturacionAnual" placeholder="Ingrese su facturación anual">
         <br>
-        <button class="button-orange" type="submit" >
-            <div>Enviar</div >
+        <button class="button" type="submit">ENVIAR</button>
+            <!-- <div>ENVIAR</div > -->
         </button >
     </form>
-</div>
 
+    
+</div>
+</section>
+
+<section>
 <div class="section-container">
-
-        <h3>Por su facturación anual en pesos usted se encuentra en la categoría:
-            <h3 th:text="${categoria}"></h3>
-
-            <br>
-
-            El impuesto a abonar correspondiente a su categoria es:
-            <h3 th:text=${respuesta2} ></h3>
-
-        </h3>
-
-
+    <h4>Por su facturación anual en pesos usted se encuentra en la categoría:
+        <h3 th:text="${categoria}"></h3>
         <br>
 
-        <h3>Su salario se encuentra por
-            <h3 th:text="${respuesta4}"></h3>
-        </h3> <!--//encima o debajo-->
-        <br>
+        <h4> El impuesto a abonar correspondiente a su categoria es:
+        <h3 th:text=${respuesta2} ></h3>
+    </h4>
+    <br>
 
-        <h3>El sueldo mas alto para su puesto de trabajo es de:
-            <h3 th:text="${respuesta1}"></h3>
-        </h3>
+    <h4>Su salario se encuentra por
+        <h3 th:text="${respuesta4}"></h3>
+    </h4> <!--//encima o debajo-->
+    <br>
 
-        <br>
-
-
+    <h4>El sueldo mas alto para su puesto de trabajo es de:
+        <h3 th:text="${respuesta1}"></h3>
+    </h4>
+    <br>
 </div>
+</section>
+
+
+
 
 <footer >
     <div class="caja_footer div-icono_container mt-5">
