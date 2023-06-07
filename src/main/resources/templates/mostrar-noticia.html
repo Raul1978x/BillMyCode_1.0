@@ -107,10 +107,12 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title" th:text="${noticia.titulo}"></h2>
-                <img class="card-image" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}"
+                <img class="img-fluid img-thumbnail text-center img-center" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}"
                      alt="Imagen de la noticia">
                 <p class="card-text" th:text="${noticia.contenido}"></p>
                 <p class="card-text" th:text="${noticia.horaSubida}"></p>
+
+                <a target="_self" th:href="@{/thymeleaf/Noticia}" class="btn btn-link float-end">ir a Noticias</a>
             </div>
         </div>
     </div>

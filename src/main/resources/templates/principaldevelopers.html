@@ -28,7 +28,7 @@
             </a>
 
         </div>
-        <a th:if="${logueado.accountant != null}" th:href="@{/thymeleaf/get-myaccountant}" class="titulo me-auto"  style="margin-left: 15px;">Mi Contador</a>
+        <a th:if="${logueado.accountant != null}" th:href="@{/thymeleaf/get-myaccountant}" class="titulo me-auto btn-link"  style="margin-left: 15px;">Ir a mi Contador</a>
 
         <div>
             <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">

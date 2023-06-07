@@ -14,12 +14,12 @@
 
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
-        <div class="logo-container" th:if="${logueado.rol.toString() == 'DEV'}" >
+        <div class="logo-container" th:if="${logueado.rol.toString() == 'DEV'}">
             <a th:href="@{/thymeleaf/principal-developers}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
         </div>
-        <div class="logo-container" th:if="${logueado.rol.toString() == 'ACCOUNTANT'}" >
+        <div class="logo-container" th:if="${logueado.rol.toString() == 'ACCOUNTANT'}">
             <a th:href="@{/thymeleaf/principal-accountant}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
@@ -41,9 +41,12 @@
                         <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                     </div>
                     <div class="formacion">
-                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="especialidad" th:text="${logueado.especialidad}" >Full Stack</span>
-                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="seniority" th:text="${logueado.seniority}" >Junior</span>
-                        <span th:if="${logueado.rol.toString() == 'ACCOUNTANT'}" class="especializacion" th:text="${logueado.especializacion}">Full Stack</span>
+                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="especialidad"
+                              th:text="${logueado.especialidad}">Full Stack</span>
+                        <span th:if="${logueado.rol.toString() == 'DEV'}" class="seniority"
+                              th:text="${logueado.seniority}">Junior</span>
+                        <span th:if="${logueado.rol.toString() == 'ACCOUNTANT'}" class="especializacion"
+                              th:text="${logueado.especializacion}">Full Stack</span>
                     </div>
                 </div>
                 <img
@@ -100,7 +103,7 @@
         </nav>
     </nav>
 </navbar>
-<h5 class="titulo">Portal de noticias</h5>
+<h2 class=" text-center">Portal de noticias</h2>
 <section>
     <tbody th:each="noticia: ${noticia}" class="noticia">
 
@@ -109,8 +112,9 @@
 
         <li class="noticia">
             <a th:href="@{/thymeleaf/mostrar-noticia/{id}(id=${noticia.id})}">
-                <div th:text="${noticia.titulo}"></div>
-                <img class="imagen" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}">
+                <div class="display-6" th:text="${noticia.titulo}"></div>
+                <img class="imagen img-thumbnail float-start me-4"
+                     th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}">
                 <div class="contenido" th:text="${noticia.contenido}"></div>
                 <div class="horaSubida" th:text="${noticia.horaSubida}"></div>
             </a>
@@ -119,28 +123,6 @@
     </ul>
     </tbody>
 </section>
-
-
-<!--<div class="row m-3 gap-5 ">
-    <div class="noticia" style="width: 500px;">
-        <div class="col-sm-10 ">
-            <div class="card-body text-center">
-                <tbody  th:each="noticia: ${noticia}"class="noticia">
-
-                <li class="noticia">
-                    <a th:href="@{/thymeleaf/mostrar-noticia/{id}(id=${noticia.id})}">
-                    <div th:text="${noticia.titulo}"> </div>
-                    <img class="imagen" th:src="@{/api/imagen/perfil-noticia/__${noticia.id}__}">
-                    <div class="contenido"th:text="${noticia.contenido}"></div>
-                    <div class="horaSubida" th:text="${noticia.horaSubida}"></div>
-                    </a>
-                </li>
-
-                </tbody>
-            </div>
-        </div>
-    </div>
-</div>&ndash;&gt;-->
 
 
 <footer>
@@ -166,7 +148,7 @@
                                                                      alt=""></a>
         </div>
     </div>
-    <a target="_self" th:href="@{/thymeleaf/principal-developers}" class="btn btn-primary">Volver</a>
+
     <div class="caja_footer copyright">
         <h7>Todos los derechos reservados. Copyright 2023</h7>
     </div>
