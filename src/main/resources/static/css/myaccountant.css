@@ -168,13 +168,13 @@
   
   .button {
     padding: 8px;
-    /* border: 2px solid white; */
+    border: 2px solid white;
     border-radius: 8px;
-    color: white;
+    color: #ffffff;
     background-color: orange;
-    margin: 0 8px;
+    margin: 0 4px;
     font-weight: bold;
-    width: 150px;
+    width: 100px;
     text-align: center;
 
     &:hover {

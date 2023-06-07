@@ -29,7 +29,8 @@
 
         </div>
 
-        <a th:if="${logueado.accountant != null}" th:href="@{/thymeleaf/get-myaccountant}" class="titulo me-auto"  style="margin-left: 15px;">Mi Contador</a>
+        <a th:if="${logueado.accountant != null}" th:href="@{/thymeleaf/get-myaccountant}" class="titulo me-auto btn-link"  style="margin-left: 15px;">Ir a mi Contador</a>
+
 
         <div>
             <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
@@ -103,7 +104,7 @@
         </nav>
     </nav>
 </navbar>
-<section>
+<!--<section>
     <nav class="navbar justify-content-center mb-0" data-bs-theme="dark">
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -118,7 +119,7 @@
 
         </ul>
     </nav>
-</section>
+</section>-->
 
 <section class="section-container seccion-2 mt-0">
     <main class="seccion-1">

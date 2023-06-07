@@ -37,12 +37,13 @@ if(archivo != null && !archivo.isEmpty()) {
     Image image = imageService.save(archivo);
 
     noticia.setImage(image);
+    noticiaRepository.save(noticia);
 }else{
     Image image = imageService.ImagenNoticia();
     noticia.setImage(image);
+    noticiaRepository.save(noticia);
 }
 
-        noticiaRepository.save(noticia);
 
     }
     public List<Noticia> listarNoticia(){

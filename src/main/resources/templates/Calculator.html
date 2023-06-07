@@ -114,7 +114,12 @@
 <br>
 <div class="section-container">
     <form class="calcu-dev"  th:action="@{/calculadora/CalculadoraRespuesta}" method="POST">
-        <button class="bt bt-warning" type="submit">calcular</button>
+
+        <br>
+        <h3>Indique su facturación anual:</h3> <!--del año anterior -->
+        <input  type="number" name="facturacionAnual" required>
+        <button class="button" type="submit">CALCULAR</button>
+
         <br>
         <h3>Su nivel de monotributo es: <h3 th:text=${respuesta2} ></h3></h3> <!--//hacer que aparezca despues de que ingrese la facturacion anual-->
         <br>

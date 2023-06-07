@@ -50,6 +50,9 @@ nav a:hover {
 /* efectos para el contenedor de pantalla completa */
 #contenedor {
   display: flex;
+
+ /* align-items: center;*/
+
   justify-content: center;
   min-width: 100vw;
   min-height: 100vh;

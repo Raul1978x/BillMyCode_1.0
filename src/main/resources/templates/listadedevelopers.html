@@ -11,6 +11,13 @@
                     <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
                 </a>
             </div>
+
+            <div class="input-group ancho">
+                <button onclick="filtrarTablaDev()" class="btn btn-primary">Buscar</button>
+                <input type="text" id="filtrar-tabla-dev" placeholder="Utilize (,) para separar los filtros"
+                       class="form-control" onkeydown="if(event.keyCode===13) filtrarTablaDev()">
+            </div>
+
             <nav class="header-nav centrar">
                 <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
                 <a class="titulo" href="#seccion-3">Normativa</a>
@@ -44,7 +51,8 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='lista-developers')}">
+                                    <a class="dropdown-item"
+                                       th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='lista-developers')}">
                                         <img
                                                 class="icono"
                                                 src="/images/borrar-cuenta.png"
@@ -85,84 +93,145 @@
     </navbar>
 
 
-<h4>Tabla de Developers</h4>
-                <table class="table table-dark table-striped container my-5 caja-sombra">
-                    <thead>
-                    <tr class="table-dark">
-                        <th scope="col">Imagen</th>
-                        <th scope="col">email</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Especialidad</th>
-                        <th scope="col">Seniority</th>
-                        <th scope="col">Salario</th>
-<!--                        <th scope="col">Acciones</th>-->
-                    </tr>
-                    </thead>
-                    <tbody class="">
-                    <tr class="table-dark" th:each="developer: ${developerList}">
-                        <td scope="row">
-                            <img width="50em" th:src="@{/api/imagen/perfil/__${developer.id}__}"/>
-                        </td>
-                        <td scope="row" th:text="${developer.email}">Email</td>
-                        <td scope="row" th:text="${developer.nombre}">Nombre</td>
-                        <td scope="row" th:text="${developer.apellido}">Apellido</td>
-                        <td scope="row" th:text="${developer.especialidad}">
-                            Especialidad
-                        </td>
-                        <td scope="row" th:text="${developer.seniority}">Seniority</td>
-                        <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
+    <h4>Tabla de Clientes Developers</h4>
+    <!-- <table id="tabla-developers" class="table table-dark table-striped container my-4 caja-sombra">
 
-<!--                        <td>-->
-<!--                           &lt;!&ndash; <ul class="list-unstyled">-->
-<!--                                <li list-item>-->
-<!--                                    <a th:href="@{/thymeleaf/developers/delete/__${developer.id}__}"-->
-<!--                                       class="text-dark text-decoration-none">❌</a>-->
+     <thead>
+         <tr class="table-dark">
+             <th scope="col">Imagen</th>
+             <th scope="col">email</th>
+             <th scope="col">Nombre</th>
+             <th scope="col">Apellido</th>
+             <th scope="col">Especialidad</th>
+             <th scope="col">Seniority</th>
+             <th scope="col">Salario</th>
+             &lt;!&ndash;                        <th scope="col">Acciones</th>&ndash;&gt;
+         </tr>
+         </thead>
+         <tbody class="">
+         <tr class="table-dark"th:if="${developer.accountant.id == logueado.id}" th:each="developer: ${developerList}">
+             <td scope="row">
+                 <img width="50em" th:src="@{/api/imagen/perfil/__${developer.id}__}"/>
+             </td>
+             <td scope="row" th:text="${developer.email}">Email</td>
+             <td scope="row" th:text="${developer.nombre}">Nombre</td>
+             <td scope="row" th:text="${developer.apellido}">Apellido</td>
+             <td scope="row" th:text="${developer.especialidad}">
+                 Especialidad
+             </td>
+             <td scope="row" th:text="${developer.seniority}">Seniority</td>
+             <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
 
-<!--                                    <a th:href="@{/thymeleaf/developers/edit/__${developer.id}__}"-->
-<!--                                       class="text-dark text-decoration-none">🪶</a>-->
-<!--                                </li>-->
-<!--                            </ul>&ndash;&gt;-->
-<!--                        </td>-->
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+             &lt;!&ndash;                        <td>&ndash;&gt;
+             &lt;!&ndash;                           &lt;!&ndash; <ul class="list-unstyled">&ndash;&gt;
+             &lt;!&ndash;                                <li list-item>&ndash;&gt;
+             &lt;!&ndash;                                    <a th:href="@{/thymeleaf/developers/delete/__${developer.id}__}"&ndash;&gt;
+             &lt;!&ndash;                                       class="text-dark text-decoration-none">❌</a>&ndash;&gt;
 
-  <!--      </div>
+             &lt;!&ndash;                                    <a th:href="@{/thymeleaf/developers/edit/__${developer.id}__}"&ndash;&gt;
+             &lt;!&ndash;                                       class="text-dark text-decoration-none">🪶</a>&ndash;&gt;
+             &lt;!&ndash;                                </li>&ndash;&gt;
+             &lt;!&ndash;                            </ul>&ndash;&gt;&ndash;&gt;
+             &lt;!&ndash;                        </td>&ndash;&gt;
+         </tr>
+         </tbody>
+     </table>-->
+    <table id="tabla-developers" class="table table-dark table-striped container my-4 caja-sombra">
+
+        <thead>
+        <div class="container">
+        </div>
+        <tr class="table-dark">
+            <!--<th scope="col"><a class="button" th:href="@{/thymeleaf/developer}"><img
+                    class="icono"
+                    src="/images/crear-cuenta.png"
+                    alt="icono volver"
+            />
+            </a></th>-->
+            <th scope="col">Imagen</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Seniority</th>
+            <th scope="col">Salario</th>
+            <!--  <th scope="col">Status</th>-->
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody class="">
+        <tr class="table-dark" th:each="developer: ${developerList}">
+            <!--            <td scope="col" class="text-dark text-decoration-none">️</td>-->
+            <td scope="row">
+                <img width="50em" th:src="@{/api/imagen/perfil/__${developer.id}__}"/>
+            </td>
+            <td scope="row" th:text="${developer.id}">Id</td>
+            <td scope="row" th:text="${developer.nombre}">Nombre</td>
+            <td scope="row" th:text="${developer.apellido}">Apellido</td>
+            <td scope="row" th:text="${developer.email}">Email</td>
+            <td scope="row" th:text="${developer.especialidad}">Especialidad</td>
+            <td scope="row" th:text="${developer.seniority}">Seniority</td>
+            <td scope="row" th:text="'U$S ' + ${developer.salario}">Salario</td>
+            <!-- <td th:if="${developer.status}" scope="row"   class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/baja/{id}/{rol}(id=${developer.id}, rol=${developer.rol})}"
+                                                                                                     class="text-dark text-decoration-none">🟢</a></td>
+             <td th:if="${!developer.status}" scope="row"  class="text-dark text-decoration-none"><a th:href="@{/thymeleaf/admin/alta/{id}/{rol}(id=${developer.id}, rol=${developer.rol})}"
+                                                                                                     class="text-dark text-decoration-none">🔴</a></td>
+
+             -->
+            <td>
+                <ul class="list-unstyled">
+                 <!--   <li list-item th:each="developer : ${developerList}">-->
+
+                <span th:each="quest : ${developer.questList}">
+
+                        <a class="btn btn-link" th:if="${!quest.status}"
+                           th:href="@{/thymeleaf/get-answer-accountant}">Responde</a>
+                </span>
+<!--                    </li>-->
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--      </div>
+  </div>
+  </main>-->
+
+<footer class="mt-5">
+    <div class="caja_footer div-icono_container">
+        <div class="iconos_redes">
+            <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
+                                                                                 src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
+                                                                                 alt=""></a>
+            <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
+                                                                          src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
+                                                                          alt=""></a>
+            <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
+                    class="icono-container"
+                    src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
+                    class="icono-container"
+                    src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
+            <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
+                                                                     src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
+                                                                     alt=""></a>
+        </div>
     </div>
-    </main>-->
+    <div class="caja_footer copyright">
+        <h7>Todos los derechos reservados. Copyright 2023</h7>
+    </div>
+</footer>
 
-    <footer class="mt-5">
-        <div class="caja_footer div-icono_container">
-            <div class="iconos_redes">
-                <a href="https://www.instagram.com/billmycode/" target="_blank"><img class="icono-container"
-                                                                                     src="/images/Instagram-Splash-Icon-PNG-S-09idfd.png"
-                                                                                     alt=""></a>
-                <a href="https://www.facebook.com/profile.php?id=100092744287858" target="_blank"><img
-                        class="icono-container"
-                        src="/images/Facebook-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://twitter.com/Billmycode" target="_blank"><img class="icono-container"
-                                                                              src="/images/Twitter-Splash-Icon-PNG-S-09idfd.png"
-                                                                              alt=""></a>
-                <a href="https://www.linkedin.com/in/billmycode-argentina-24a260277/" target="_blank"><img
-                        class="icono-container"
-                        src="/images/Linkedin-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://www.youtube.com/channel/UCdSb_S1SlZYujcly6ohSXzA" target="_blank"><img
-                        class="icono-container"
-                        src="/images/YouTube-Splash-Icon-PNG-S-09idfd.png" alt=""></a>
-                <a href="https://www.whatsapp.com/" target="_blank"><img class="icono-container"
-                                                                         src="/images/WhatsApp-Splash-Icon-PNG-S-09idfd.png"
-                                                                         alt=""></a>
-            </div>
-        </div>
-        <div class="caja_footer copyright">
-            <h7>Todos los derechos reservados. Copyright 2023</h7>
-        </div>
-    </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+<script src="/js/filtroTabla.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
 </body>
 </html>
