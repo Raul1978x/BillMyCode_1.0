@@ -45,6 +45,7 @@ public class NoticiaController {
             Accountant logueado = (Accountant) request.getAttribute("sessionuser");
             model.put("logueado", logueado);
         }
+
         List<Noticia> noticia = noticiaServicio.listarNoticia();
         model.addAttribute("noticia", noticia);
 

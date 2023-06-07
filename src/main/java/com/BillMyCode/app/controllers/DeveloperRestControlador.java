@@ -69,7 +69,6 @@ public class DeveloperRestControlador {
      * @param seniority
      * @param especialidad
      * @param descripcion
-     * @param comentario
      * @throws: MiException
      * @throws: ParseException
      */
@@ -87,14 +86,11 @@ public class DeveloperRestControlador {
                                    @RequestParam Double salario,
                                    @RequestParam String seniority,
                                    @RequestParam String especialidad,
-                                   @RequestParam String descripcion,
-                                   @RequestParam(required = false) String comentario
+                                   @RequestParam String descripcion
     ) throws MiException, ParseException {
 
-        Comment comment = commentService.createComment(comentario);
-
         developerService.createDeveloper(archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comment);
+                password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion);
 
     }
 
@@ -154,7 +150,7 @@ public class DeveloperRestControlador {
             model.put("exito", "el developer fue creado exitosamente");
 
             developerService.updateDeveloper(id, archivo, nombre, apellido, email, nacionalidad, fechaNacimiento,
-                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion, comentario);
+                    password, newpassword, genero, telefono, salario, seniority, especialidad, descripcion);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

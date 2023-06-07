@@ -27,7 +27,11 @@
             <a th:href="@{/thymeleaf/principal-accountant}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
+
         </div>
+
+        <a th:href="@{/thymeleaf/comentario-accountant}" class="titulo me-auto"  style="margin-left: 15px;">Mis Comentarios</a>
+
         <div>
             <div th:if="${error != null}" id="errorCard" class="borrarcarta card text-white bg-danger mb-3 mensajeError">
                 <div class="card-body">
@@ -43,72 +47,57 @@
             </div>
         </div>
         <nav class="header-nav centrar">
-            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
-            <a class="titulo" href="#seccion-3">Normativa</a>
-            <a class="titulo" href="#seccion-4">Impuestos</a>
-            <a class="titulo" href="#seccion-5">Contactanos</a> -->
             <div class="perfil-menu">
-                <div class="perfil-menu">
-                    <div class="containers me-3">
-                        <div class="nombres">
-                            <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
-                            <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
-                        </div>
-                        <div class="formacion">
-                            <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
-                        </div>
+                <div class="containers me-3" >
+                    <div class="nombres">
+                        <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                        <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
                     </div>
-                    <img
-                            class="perfil-foto"
-                            th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
-                            alt="foto de perfil"
-                    />
-                    <div class="dropdown">
-                        <button class="dropdown-button">
-                            <!-- <img
-                                     class="icono"
-                                     src="/images/billmycodelogosimp.png"
-                                     alt="icono menu"
-                             />-->
-                            <div>Menu</div>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='principal-accountant')}">
-                                    <img
-                                            class="icono"
-                                            src="/images/borrar-cuenta.png"
-                                            alt="icono volver"
-                                    />
-                                    Dar de baja
-                                </a>
-                            </li>
-                            <li>
-                                <!--<a class="dropdown-item" href="/thymeleaf/accountant/edit/{id}">-->
-                                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
-                                    <!--
-                                                                    <input type="hidden" name="id" th:value="${developer.id}"/>
-                                    -->
-                                    <img
-                                            class="icono"
-                                            src="/images/update.png"
-                                            alt="icono volver"
-                                    />
-                                    Editar Perfil
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" th:href="@{/logout}">
-                                    <img
-                                            class="icono"
-                                            src="/images/logout.png"
-                                            alt="icono logout"
-                                    />
-                                    Cerrar Sesión
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="formacion">
+                        <span class="especialidad" th:text="${logueado.especializacion}">Full Stack</span>
                     </div>
+                </div>
+                <img
+                        class="perfil-foto"
+                        th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
+                        alt="foto de perfil"
+                />
+                <div class="dropdown">
+                    <button class="dropdown-button">
+                        <div>Menu</div>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/thymeleaf/user/baja/{id}/{rol}/{dir}(id=${logueado.id}, rol=${logueado.rol}, dir='principal-developers')}">
+                                <img
+                                        class="icono"
+                                        src="/images/borrar-cuenta.png"
+                                        alt="icono volver"
+                                />
+                                Dar de baja
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
+                                <img
+                                        class="icono"
+                                        src="/images/update.png"
+                                        alt="icono volver"
+                                />
+                                Editar Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">
+                                <img
+                                        class="icono"
+                                        src="/images/logout.png"
+                                        alt="icono logout"
+                                />
+                                Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -226,7 +215,7 @@
                             <p>Calcula con precisión tu contribución. Utiliza nuestra calculadora del importe a
                                 pagar
                                 del monotributo y conoce el monto exacto que debes abonar.</p>
-                            <a class="button" th:href="@{/thymeleaf/card-accountant}">Accede a la calculadora</a>
+                            <a class="button" th:href="@{/calculadora/calcular}">Accede a la Calculadora</a>
                         </div>
                     </div>
                 </div>

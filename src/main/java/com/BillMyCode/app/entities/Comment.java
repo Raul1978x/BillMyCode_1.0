@@ -19,15 +19,23 @@ import java.util.List;
 @Setter
 @Entity
 public class Comment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Boolean status=false;
+    private Long devId;
+    private Long accountantId;
+    private String nombreDev;
+    private String nombreAccountant;
+    private Double valoracion;
     @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String comentario;
-    @OneToMany
-    private List<AnswerAndQuestion> respuestas;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String respuesta;
     @Temporal(TemporalType.DATE)
-    private Date fecha;
-
+    private Date fechaComentario;
+    @Temporal(TemporalType.DATE)
+    private Date fechaRespuesta;
 }

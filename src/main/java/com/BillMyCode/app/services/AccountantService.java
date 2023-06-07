@@ -256,5 +256,16 @@ public class AccountantService  {
         repositorio.save(contador);
     }
 
+    @Transactional
+    public void setRespuesta(List<Comment> comentario, Long id) {
+        Accountant accountant = searchAccounterById(id);
+        comentario.addAll(accountant.getComments());
+        accountant.setComments(comentario);
+        repositorio.save(accountant);
+    }
+
+    @Transactional
+    public String getAccNombre(Long id){return searchAccounterById(id).getNombre();}
+
 }
 

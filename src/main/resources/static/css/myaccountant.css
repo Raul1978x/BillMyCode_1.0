@@ -314,7 +314,8 @@
     color: black;
  }
 
-
+/*******************/
+/*Cajas de texto*/
 .consulta-text {
     background-color: #ffffff;
     padding: 10px;
@@ -327,6 +328,59 @@
     font-weight: bold;
     padding-left: 0px;
 }
+
+.caja-comentarios {
+   background-color: rgb(206, 202, 202);
+   padding: 10px;
+   border: 1px solid #cccccc;
+   border-radius: 0px;
+   overflow-y: auto;
+   width: 770px;
+   height: 173px;
+   margin: 5px auto;
+   font-weight: bold;
+   padding-left: 0px;
+ }
+
+ .comentario {
+    color: yellow;
+ }
+
+ .respuesta {
+    color: green;
+ }
+
+ .section-container {
+   width: 1070px;
+   margin: auto;
+   margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   text-align: center;
+ }
+
+
+ .form-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .consultaTwo {
+        width: 550px;
+        max-width: 100%;
+        background: #ffffff;
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 0px;
+        margin: 0;
+    }
+
+
+
 
 
 

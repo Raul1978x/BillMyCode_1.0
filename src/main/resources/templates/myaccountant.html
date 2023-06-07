@@ -96,25 +96,54 @@
             </div>
         </div>
     </div>
-
     <div>
 
         <div class="consulta-text">
             <ul class="estilo-viñeta">
-                <li th:each="elemento : ${listaElementos}" th:class="${elemento.startsWith(logueado.nombre) ? 'quest' : 'answer'}" th:text="${elemento}"></li>
+                <li th:if="${logueado.accountant != null && logueado.accountant.id == myAccountant.id}" th:each="elemento : ${listaElementos}" th:class="${elemento.startsWith(logueado.nombre) ? 'quest' : 'answer'}" th:text="${elemento}"></li>
             </ul>
         </div>
 
+        <form class="ml-2" id="accountsform" th:action="@{/thymeleaf/create-quest/{id}(id=${myAccountant.id})}" method="POST">
 
-        <form class="ml-2" id="accountsform" th:action="@{/thymeleaf/create-quest}" method="POST">
-        <textarea rows="3" id="consulta" name="pregunta" class="consulta form-control mt-2" placeholder="Ingrese Su Consulta" th:required="true" minlength="1"></textarea>
-        <div class="m-1">
-            <button class="button d-flex float-end" type="submit">CONSULTAR</button>
-        </div>
-    </form>
+              <textarea th:if="${logueado.accountant == null}" rows="3" id="vista" name="pregunta" class="consulta form-control mt-2"
+                      placeholder="Ingrese Su Consulta" th:required="true" minlength="1"></textarea>
+
+              <textarea th:if="${logueado.accountant != null}" rows="3" id="consulta" name="pregunta" class="consulta form-control mt-2"
+              placeholder="Ingrese Su Consulta" th:required="true" minlength="1"
+              th:readonly="${logueado.accountant.id != myAccountant.id}"></textarea>
+
+            <div class="m-1" th:if="${logueado.accountant == null}">
+                <button class="button d-flex float-end" type="submit">CONSULTAR</button>
+            </div>
+
+            <div class="m-1" th:if="${logueado.accountant != null}">
+                <button th:if="${logueado.accountant.id == myAccountant.id}" class="button d-flex float-end" type="submit">CONSULTAR</button>
+            </div>
+        </form>
     </div>
 </main>
 </div>
+
+<!--ZONA DE COMENTARIO-->
+<div class="section-container">
+    <div class="caja-comentarios">
+        <ul class="estilo-viñeta">
+            <li th:each="coment : ${listaComent}" th:class="${coment.startsWith(logueado.nombre) ? 'comentario' : 'respuesta'}" th:text="${coment}"></li>
+        </ul>
+    </div>
+
+    <div th:if="${logueado.accountant != null && logueado.accountant.id == myAccountant.id && !yaComento}" class="form-container">
+        <form class="ml-2" id="commentform" th:action="@{/thymeleaf/create-comment/{id}(id=${myAccountant.id})}" method="POST">
+      <textarea rows="3" id="comentario" name="comentario" class="consulta form-control"
+                placeholder="Ingrese Su Comentario" minlength="1"></textarea>
+            <div class="m-1">
+                <button class="button d-flex float-end" type="submit">CONSULTAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--ZONA DE COMENTARIO-->
    <footer class="mt-5">
        <div class="caja_footer div-icono_container">
            <div class="iconos_redes">
