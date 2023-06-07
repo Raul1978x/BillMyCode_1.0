@@ -104,13 +104,29 @@ button {
   padding: 8px;
 }
 
+.button {
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: orange;
+  margin: 0 4px;
+  font-weight: bold;
+  width: 100px;
+  text-align: center;
+
+
+  &:hover {
+    background-color: rgb(182, 131, 37);
+  }
+}
+
 /* .button {
   display: flex;
   justify-content: center;
   border-radius: 5%;
   align-items: center;
-
-  /*padding: 10px 50px;
+  padding: 10px 50px;
   margin-top: 15px;
   font-size: 12px;
   cursor: pointer;
@@ -119,8 +135,9 @@ button {
   font-size: 25px;
   color: orange;
 
-} */
-.button-orange {
+}  */
+
+/* .button-orange {
   padding: 8px;
   border: 2px solid white;
   border-radius: 8px;
@@ -134,7 +151,8 @@ button {
   &:hover {
     background-color: rgb(182, 131, 37);
   }
-}
+} */
+
 /*Navbar*/
 
 .dropdown-button {
