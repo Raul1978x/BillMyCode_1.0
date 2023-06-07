@@ -16,7 +16,7 @@ a {
 }
 
 .formulario {
-  max-width: 400px;
+  max-width: max-content;
   margin: 0 auto;
   padding: 20px;
   border: 2px solid #0b79ac;

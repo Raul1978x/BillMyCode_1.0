@@ -516,3 +516,9 @@ footer {
 }
 
 /*--------------------*/
+.ancho{
+ width: 35%;
+ position: absolute;
+ left: 50%;
+ transform: translateX(-50%);
+}
