@@ -64,10 +64,10 @@ form {
   text-align: center;
 }
 
-button {
+/*button {
   background-color: orange;
   font-size: 15px;
-}
+}*/
 
 /*footer {
   width: 100%;
@@ -137,21 +137,21 @@ button {
 
 }  */
 
-/* .button-orange {
+ .button-orange {
   padding: 8px;
   border: 2px solid white;
   border-radius: 8px;
   color: #255faa;
   background-color: orange;
-  margin: 0 4px;
+ /* margin: 0 4px;*/
   font-weight: bold;
-  width: 150px;
+  width: auto;
   text-align: center;
-  justify-content: center;
+  /*justify-content: center;*/
   &:hover {
     background-color: rgb(182, 131, 37);
   }
-} */
+}
 
 /*Navbar*/
 
