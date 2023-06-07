@@ -22,7 +22,7 @@
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
         </div>
-        <nav class="header-nav centrar">
+        <nav th:if="${logueado != null}" class="header-nav centrar">
             <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
             <a class="titulo" href="#seccion-3">Normativa</a>
             <a class="titulo" href="#seccion-4">Impuestos</a>

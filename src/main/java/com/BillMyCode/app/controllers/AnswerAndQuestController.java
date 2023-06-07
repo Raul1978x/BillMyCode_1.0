@@ -76,24 +76,18 @@ public class AnswerAndQuestController {
     public String getViewmyaccountant(HttpSession request, ModelMap model){
         Developer logueado= (Developer) request.getAttribute("sessionuser");
         model.put("logueado", logueado);
-
         Accountant myAccountant = developerService.getAccountant(logueado.getId());
         model.put("myAccountant", myAccountant);
-
-        StringBuilder stringBuilder = new StringBuilder();
-
+        List<String> listaElementos = new ArrayList<>();
         for (AnswerAndQuestion quest : developerService.getAnQ(logueado.getId())) {
-            stringBuilder.append(" -->"+logueado.getNombre()+": "+quest.getQuest()+" "+quest.getFechaQuest())
-                    .append("\n");
+            String pregunta = logueado.getNombre() + ": " + quest.getQuest() + " " + quest.getFechaQuest();
+            listaElementos.add(pregunta);
             if (quest.getAnswer() != null) {
-                stringBuilder.append(" ---->"+myAccountant.getNombre()+": "+quest.getAnswer()+" "+quest.getFechaAnswer());
+                String respuesta = myAccountant.getNombre() + ": " + quest.getAnswer() + " " + quest.getFechaAnswer();
+                listaElementos.add(respuesta);
             }
-            stringBuilder.append("\n\n");
         }
-
-        String listaConcatenada = stringBuilder.toString();
-        model.put("listaElementos", listaConcatenada);
-
+        model.put("listaElementos", listaElementos);
         return "myaccountant";
     }
 

@@ -31,6 +31,7 @@ public class CalculatorController {
         model.put("logueado", logueado);
         return("pedido_de_datos.html");
     }
+
     @GetMapping("/calculadoraCargado")
     public String calculatorRespuesta(HttpSession request, ModelMap model) throws MiException {
         Developer logueado= (Developer)  request.getAttribute("sessionuser");

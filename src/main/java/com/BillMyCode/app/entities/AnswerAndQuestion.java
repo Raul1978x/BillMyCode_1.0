@@ -16,7 +16,10 @@ public class AnswerAndQuestion {
 
     private Boolean status=false;
     @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String quest;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String answer;
     @Temporal(TemporalType.DATE)
     private Date fechaQuest;
