@@ -302,12 +302,35 @@
     padding: 8px;
   }
 
- /*#respuesta {
-         text-align: right;
-         direction: rtl;
-     }
+ .estilo-viñeta {
+     list-style-type: square;
+ }
 
-     #respuesta::placeholder {
-         text-align: left;
-         direction: ltr;
-     }*/
+ .quest {
+    color: blue;
+ }
+
+ .answer {
+    color: black;
+ }
+
+
+.consulta-text {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    overflow-y: auto;
+    width: 550px;
+    height: 273px;
+    margin: 5px;
+    font-weight: bold;
+    padding-left: 0px;
+}
+
+
+
+
+
+
+

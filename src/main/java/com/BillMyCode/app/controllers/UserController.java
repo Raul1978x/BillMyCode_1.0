@@ -45,6 +45,12 @@ public class UserController {
      *
      * @return: index
      */
+
+    @GetMapping ("/getViewNeI")
+    public String getViewNei(){
+        return "normativa-impuestos";
+    }
+
     @GetMapping("")
     public String index() {
         return "index";
@@ -176,5 +182,6 @@ public class UserController {
         }
         return "index";
     }
+
 }
 

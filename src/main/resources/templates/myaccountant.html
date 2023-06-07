@@ -66,6 +66,7 @@
                     </ul>
                 </div>
             </div>
+            </div>
         </nav>
     </nav>
 </navbar>
@@ -97,8 +98,15 @@
     </div>
 
     <div>
-        <textarea rows="10" id="respuesta" name="respuesta" class="consulta form-control mt-2" placeholder="Consultas y Respuestas" readonly style="cursor: default;">[[${listaElementos}]]</textarea>
-    <form class="ml-2" id="accountsform" th:action="@{/thymeleaf/create-quest}" method="POST">
+
+        <div class="consulta-text">
+            <ul class="estilo-viñeta">
+                <li th:each="elemento : ${listaElementos}" th:class="${elemento.startsWith(logueado.nombre) ? 'quest' : 'answer'}" th:text="${elemento}"></li>
+            </ul>
+        </div>
+
+
+        <form class="ml-2" id="accountsform" th:action="@{/thymeleaf/create-quest}" method="POST">
         <textarea rows="3" id="consulta" name="pregunta" class="consulta form-control mt-2" placeholder="Ingrese Su Consulta" th:required="true" minlength="1"></textarea>
         <div class="m-1">
             <button class="button d-flex float-end" type="submit">CONSULTAR</button>
