@@ -12,69 +12,81 @@
     <link rel="stylesheet" href="/css/crear-noticia.css">
 </head>
 <body>
+
 <navbar>
     <nav class="navbar bill_my_code" data-bs-theme="dark">
         <div class="logo-container">
-            <a th:href="@{/thymeleaf/principal-developers}">
+            <a th:href="@{/thymeleaf/admin-principal}">
                 <img class="bmcLogo" src="/images/billmycodelogo.png" alt="logo de empresa">
             </a>
         </div>
-        <nav class="header-nav centrar">
-            <!-- <a class="titulo" href="#seccion-2">Sobre la Empresa</a>
-            <a class="titulo" href="#seccion-3">Normativa</a>
-            <a class="titulo" href="#seccion-4">Impuestos</a>
-            <a class="titulo" href="#seccion-5">Contactanos</a> -->
-            <div class="perfil-menu">
-                <div class="containers me-3" >
-                    <div class="nombres">
-                        <!--                        <span class="nombre" th:text="${logueado.nombre}">Raúl</span>-->
-                        <!--                        <span class="apellido" th:text="${logueado.apellido}">Gómez</span>-->
-                    </div>
-                    <div class="formacion">
-                        <!--                        <span class="especialidad" th:text="${logueado.especialidad}">Full Stack</span>-->
-                        <!--                        <span class="seniority" th:text="${logueado.seniority}">Junior</span>-->
-                    </div>
+        <div>
+            <div th:if="${error != null}" id="errorCard"
+                 class="borrarcarta card text-white bg-danger mb-3 mensajeError">
+                <div class="card-body">
+                    <h5 class="card-title">Error!</h5>
+                    <p class="card-text" th:text="${error}"></p>
                 </div>
-                <!--                <img-->
-                <!--                        class="perfil-foto"-->
-                <!--                        th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"-->
-                <!--                        alt="foto de perfil"-->
-                <!--                />-->
-                <div class="dropdown">
-                    <button class="dropdown-button">
-                        <!-- <img
-                                 class="icono"
-                                 src="/images/billmycodelogosimp.png"
-                                 alt="icono menu"
-                         />-->
-                        <div>Menu</div>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <!--<a class="dropdown-item" href="/thymeleaf/developers/edit/{id}">-->
-                            <!--                            <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">-->
-                            <!--
-                                                            <input type="hidden" name="id" th:value="${developer.id}"/>
-                            -->
-                            <img
-                                    class="icono"
-                                    src="/images/update.png"
-                                    alt="icono volver"
-                            />
-                            Editar Perfil
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" th:href="@{/logout}">
-                                <img
-                                        class="icono"
-                                        src="/images/logout.png"
-                                        alt="icono logout"
-                                />
-                                Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
+            </div>
+            <div th:if="${exito != null}" id="successCard"
+                 class="borrarcarta card text-white bg-success mb-3 mt-3 mensajeExito">
+                <div class="card-body">
+                    <h5 class="card-title">Éxito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+        </div>
+        <nav class="header-nav centrar">
+            <div class="perfil-menu">
+                <div class="perfil-menu">
+                    <div class="containers me-3">
+                        <div class="nombres">
+                            <span class="nombre" th:text="${logueado.nombre}">Raúl</span>
+                            <span class="apellido" th:text="${logueado.apellido}">Gómez</span>
+                        </div>
+                        <div class="formacion">
+                            <span class="especialidad" th:text="${logueado.rol}">Rol</span>
+                        </div>
+                    </div>
+                    <img
+                            class="perfil-foto"
+                            th:src="@{/api/imagen/perfil-usuario/__${logueado.id}__}"
+                            alt="foto de perfil"
+                    />
+                    <div class="dropdown">
+                        <button class="dropdown-button">
+                            <!-- <img
+                                     class="icono"
+                                     src="/images/billmycodelogosimp.png"
+                                     alt="icono menu"
+                             />-->
+                            <div>Menu</div>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" th:href="@{/thymeleaf/user/edit/{id}(id=${logueado.id})}">
+
+
+                                    <img
+                                            class="icono"
+                                            src="/images/update.png"
+                                            alt="icono volver"
+                                    />
+                                    Editar Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <img
+                                            class="icono"
+                                            src="/images/logout.png"
+                                            alt="icono logout"
+                                    />
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -97,13 +109,12 @@
         <label for="image" class="form-label">Subir Nueva Imagen de la noticia</label>
         <input type="file" class="form-control" id="image" name="archivo" rows="3">
     </div>
-
-    <input type="submit" value="Editar Noticia">
+    <div class="d-flex ">
+        <input class="my-3 float-end btn" type="submit" value="Editar Noticia">
+<!--        <a class="btn btn-lnk float-end" href="javascript:history.back()">VOLVER</a>-->
+    </div>
 </form>
 
-<div class="inferior">
-    <a href="javascript:history.back()">VOLVER</a>
-</div>
 
 <footer>
     <div class="caja_footer div-icono_container">
@@ -132,7 +143,6 @@
         <h7>Todos los derechos reservados. Copyright 2023</h7>
     </div>
 </footer>
-
 
 
 </body>
