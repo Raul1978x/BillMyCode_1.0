@@ -175,7 +175,7 @@ public class DeveloperService {
         Optional<Developer> respuesta = developerRepository.findById(id);
         String cryptPassword = passwordEncoder.encode(password);
 
-        validate(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
+        validate2(nombre,apellido,email,password,newpassword,fechaNacimiento,genero,telefono,nacionalidad,salario,seniority,especialidad);
 
 
         if (respuesta.isPresent()) {
@@ -195,10 +195,6 @@ public class DeveloperService {
             result.setDescripcion(descripcion);
             result.setRol(Rol.DEV);
 
-//            if (archivo != null) {
-//                Image image = imageService.save(archivo);
-//                result.setImage(image);
-//            }
             if (archivo.isEmpty()){
                 Image image = imageService.buscarImagenById(result.getImage().getId());
 
@@ -259,6 +255,59 @@ public class DeveloperService {
         }
         if (loginService.validarEmail(email)){
             throw new MiException("El Email ingresado ya se encuentra registrado");
+        }
+        if (password.isBlank() || password.isEmpty()) {
+            throw new MiException("La contraseña no puede ser nula o estar vacia");
+        }
+
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("Las contraseñas no coinciden");
+        }
+        if (fechaNacimiento == null) {
+            throw new MiException("La fecha de nacimiento no puede estar vacia");
+        }
+        if (genero.isBlank() || genero.isEmpty()) {
+            throw new MiException("El genero no puede ser nulo o estar vacio");
+        }
+        if (nacionalidad.isBlank() || nacionalidad.isEmpty()) {
+            throw new MiException("La nacionalidad no puede ser nula o estar vacia");
+        }
+        if (telefono.isBlank() || telefono.isEmpty()) {
+            throw new MiException("El telefono no puede ser nulo o estar vacio");
+        }
+        if (salario == null) {
+            throw new MiException("El salario no puede ser nulo o estar vacio");
+        }
+        if (seniority.isBlank() || seniority == "") {
+            throw new MiException("La seniority no puede ser nula o estar vacia");
+        }
+        if (especialidad.isBlank() || especialidad == "") {
+            throw new MiException("La especialidad no puede ser nula o estar vacia");
+        }
+    }
+
+    public void validate2(String nombre,
+                         String apellido,
+                         String email,
+                         String password,
+                         String newpassword,
+                         Date fechaNacimiento,
+                         String genero,
+                         String telefono,
+                         String nacionalidad,
+                         Double salario,
+                         String seniority,
+                         String especialidad
+    ) throws MiException {
+
+        if (nombre.isBlank() || nombre.isEmpty()) {
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
+        }
+        if (apellido.isBlank() || apellido.isEmpty()) {
+            throw new MiException("El apellido no puede ser nulo o estar vacio");
+        }
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("El campo Email debe tener ingresado un correo valido");
         }
         if (password.isBlank() || password.isEmpty()) {
             throw new MiException("La contraseña no puede ser nula o estar vacia");

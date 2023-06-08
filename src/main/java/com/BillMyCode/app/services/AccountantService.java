@@ -141,7 +141,7 @@ public class AccountantService  {
 
 
         if (contador != null && contador.getId().equals(id)) {
-            validate(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
+            validate2(nombre,apellido,email,password,newpassword,fechaNacimiento,especializacion);
 
 
 
@@ -219,6 +219,31 @@ public class AccountantService  {
         }
         if (loginService.validarEmail(email)){
             throw new MiException("El Email ingresado ya se encuentra registrado");
+        }
+        if (password.isEmpty() || password.isBlank()){
+            throw new MiException("El campo Contrasela no puede estar vacio");
+        }
+        if (newpassword.isEmpty() || (!newpassword.equals(password))) {
+            throw new MiException("Las contraseñas no coinciden");
+        }
+        if (fechaNacimiento==null || fechaNacimiento.toString()==""){
+            throw new MiException("Fecha incorrecta");
+        }
+        if (especializacion == null) {
+            throw new MiException("La especialización no puede estar vacía.");
+        }
+    }
+
+    public void validate2(String nombre, String apellido, String email, String password,
+                          String newpassword,Date fechaNacimiento, String especializacion) throws MiException {
+        if (nombre.isEmpty() || nombre.isBlank()){
+            throw new MiException("El campo Nombre no puede estar vacio");
+        }
+        if (apellido.isEmpty() || apellido.isBlank()){
+            throw new MiException("El campo Apellido no puede estar vacio");
+        }
+        if (email.isEmpty() || email.isBlank() || !email.contains("@") || !email.contains(".")){
+            throw new MiException("El campo Email debe tener ingresado un correo valido");
         }
         if (password.isEmpty() || password.isBlank()){
             throw new MiException("El campo Contrasela no puede estar vacio");

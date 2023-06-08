@@ -31,6 +31,7 @@
                 <input type="text" id="filtrar-tabla-accountant" placeholder="Utilize (,) para separar los filtros"
                        class="form-control" onkeydown="if(event.keyCode===13) filtrarTablaAccountant()">
             </div>
+
             <div class="perfil-menu ">
 
                 <div class="containers me-3">
@@ -50,11 +51,6 @@
                 />
                 <div class="dropdown">
                     <button class="dropdown-button">
-                        <!-- <img
-                                 class="icono"
-                                 src="/images/billmycodelogosimp.png"
-                                 alt="icono menu"
-                         />-->
                         <div>Menu</div>
                     </button>
                     <ul class="dropdown-menu">
@@ -98,60 +94,10 @@
     </nav>
 </navbar>
 
-<div class="container" id="tabla-accountant" >
+<div class="container" id="tabla-accountant">
     <div class="row justify-content-center">
         <div th:each="accountant: ${accountants}" class="col-md-4">
-
-            <section id="seccion-2" class="" th:if="${logueado.accountant != null}">
-
-                <div class="">
-                    <div class="container__card">
-                        <div class="card c1">
-                            <div class="cardimag">
-                                <i class="fab fa-html5"></i>
-                                <img class="foto" width="50em"
-                                     th:src="@{/api/imagen/perfil-accountant/__${accountant.id}__}" alt="Imagen 1"/>
-                            </div>
-                            <div class="info__description text-center">
-                                <ul class="list-group pt-0">
-                                    <li class="list-item py-0">Contador: <a th:text="${accountant.nombre}"></a> <a
-                                            th:text="${accountant.apellido}"></a></li>
-                                    <li class="list-item py-0">Matricula: <a th:text="${accountant.matricula}"></a></li>
-                                    <li class="list-item p-0">Especialidad: <a
-                                            th:text="${accountant.especializacion}"></a></li>
-                                    <li class="list-item py-0">Honorarios: U$S <a
-                                            th:text="${accountant.honorarios}"></a></li>
-                                </ul>
-                                <form>
-                                    <div class="rating">
-                                        <input type='radio' hidden name='rate' id='rating-opt5' data-idx='0'>
-                                        <label for='rating-opt5'></label>
-
-                                        <input type='radio' hidden name='rate' id='rating-opt4' data-idx='1'>
-                                        <label for='rating-opt4'></label>
-
-                                        <input type='radio' hidden name='rate' id='rating-opt3' data-idx='2'>
-                                        <label for='rating-opt3'></label>
-
-                                        <input type='radio' hidden name='rate' id='rating-opt2' data-idx='3'>
-                                        <label for='rating-opt2'></label>
-
-                                        <input type='radio' hidden name='rate' id='rating-opt1' data-idx='4'>
-                                        <label for='rating-opt1'></label>
-                                    </div>
-                                </form>
-                                <span th:if="${logueado.accountant.id == accountant.id}">
-                                <button class="mb-5 text-center button-verde"> <a
-                                        th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}">CONSULTAR</a> </button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-            <section id="seccion-2a" class="cards-accountant" th:if="${logueado.accountant == null}">
-
+            <section id="seccion-2a" class="">
                 <div class="">
                     <div class="container__card">
                         <div class="card c1">
@@ -171,16 +117,11 @@
                                             th:text="${accountant.honorarios}"></a></li>
                                 </ul>
                                 <span th:if="${logueado.accountant == null}">
-
                                     <button  class="mb-5 text-center button"> <a th:href="@{/thymeleaf/ver-perfil-accountant/{id}(id=${accountant.id})}" >Ver Perfil</a> </button>
                                 </span>
                                 <span th:if="${logueado.accountant != null}">
                                     <button th:if="${logueado.accountant.id == accountant.id}" class="mb-5 text-center button-verde"> <a th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}" >Consultar</a> </button>
                                     <button th:if="${logueado.accountant.id != accountant.id}"  class="mb-5 text-center button"> <a th:href="@{/thymeleaf/ver-perfil-accountant/{id}(id=${accountant.id})}" >Ver Perfil</a> </button>
-
-                                <button class="mb-5 text-center button"> <a
-                                        th:href="@{/thymeleaf/select-accountant/{id}(id=${accountant.id})}">Elegir y consultar</a> </button>
-
                                 </span>
                             </div>
                         </div>
