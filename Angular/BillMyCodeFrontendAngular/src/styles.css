@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  /*box-sizing: border-box;*/
+}
+
+html {
+  font-size: 16px;
+  font-family: sans-serif;
+  color: #000;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1F2430;
+
+}
+
+body {
+  min-height: 100vh;
+  /* width: 100%; */
+  font-style: arial;
+  background-image: url("assets/images/fondo1.jpg");
+  background-color: rgba(255, 255, 255, 1.5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}
